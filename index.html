@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 4999px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+a {
+  font-size: 30px
+}
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h1 style="font-size:60px;">|-| Py Notes |-|</h1>
+<br>
+
+<div class="row">
+  <div class="column" style="background-color:powderblue;border: 1px solid black;">
+    <h2>python_org_tutorial notes:</h2>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/interpreter.html">2. Using the Python Interpreter</a>
+    <br><br>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td>The interpreter’s line-editing features</td>
+            <td>Interactive editing, history substitution and code completion
+                on systems that support the GNU Readline library.
+                ( Also: python -c command [arg] ... )
+            <br>
+            </td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Argument Passing</td>
+            <td>sys.argv, argparse</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>Source Code Encoding</td>
+            <td>By default UTF-8 (can be: # -*- coding: cp1252 -*-)</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/introduction.html">3. An Informal Introduction to Python</a>
+      <br>
+      <table>
+      <br>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td>floor div (//)</td>
+            <td>returns INT</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>raw string</td>
+            <td>r"..."</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>revert: s = "123456789"</td>
+            <td>s[-1::-1]</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>print(a, end=',')</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>iterable object</td>
+            <td>An iterable is any Python object capable of returning its members one at a time,
+                permitting it to be iterated over in a for-loop.</td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td>sequence object</td>
+            <td>The iterable objects implementing 2 specific methods: '__getitem__()', '__len__()'.<br>
+            So sequences can be Indexed/Sliced.</td>
+        </tr>
+        <tr>
+            <td>7.</td>
+            <td>Identity (id/is)</td>
+            <td>The identity tells us about place in memory.</td>
+        </tr>
+        <tr>
+            <td>8.</td>
+            <td>immutable object</td>
+            <td>Values of the object cant be changed (First order values in terms of container like tuple).<br>
+            Examples of python immutable data structures:<br>
+            - (int, float, decimal), bool, string, byte, range, tuple</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/controlflow.html">4. More Control Flow Tools</a>
+    <br>
+    <table>
+    <br>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td>Python loops</td>
+            <td> - if_elif_else loop<br>
+                 - for_else loop<br>
+                 - while_else loop<br>
+            </td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>loop related keywords</td>
+            <td>break, continue, pass</td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">4.7. More on Defining Functions</a>
+    <br>
+    <table>
+    <br>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td>function definition example1:</td>
+            <td>def funct(pos_arg1, pos_arg2=7, /, bubu1, bubu2=2, *, k_arg1, k_arg2="dwa"):</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>default value</td>
+            <td>The default value is evaluated only once - during parsing stage.</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>keywords: /, *</td>
+            <td>/ - PEP-570 (Python3.8)</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>function definition example2:</td>
+            <td>def funct(argx, argy=7, *args, **kwargs):</td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>function definition example3:</td>
+            <td>def funct(argx: str = "Empty", argy: str, *args, **kwargs) -> str:
+                <br>
+                funct.__annotations__
+            </td>
+        </tr>
+        <tr>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td>Lambda in Python:</td>
+            <td>https://github.com/DanielPalacz/Python_Tutorial/blob/main/Functions/Functions__lambda.jpg</td>
+        </tr>
+        <tr>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>7.</td>
+            <td>DocStrings in Python:</td>
+            <td>https://www.python.org/dev/peps/pep-0257/ ( __doc__ special attr.)
+            <br><br>
+            Recomendations:
+            <br>- ALL modules should normally have docstrings, and ALL functions and classes exported by a module should also have docstrings.
+            <br>- Public methods (including the __init__ constructor) should also have docstrings.
+            <br>- A package may be documented in the module docstring of the __init__.py file in the package directory.</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/datastructures.html">5. Data Structures</a>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/modules.html">6. Modules</a>
+    <br>
+    <table>
+    <br>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td>Python module search algorithm</td>
+            <td> 1. built-in modules<br>
+                 sys.path directories:<br>
+                 -- 2. current directory (from py file perspective)<br>
+                 -- 3. PYTHONPATH env directory<br>
+                 -- 4. python installation directories<br>
+            </td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>__all__ special attr.</td>
+            <td>the list of module names when 'from package import *' is encountered.</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>python -B</td>
+            <td>will not write compiled py files like: __pycache__/modx.pyc<br>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/classes.html">9. Classes</a>
+    <br><br>
+    <u style="font-size:20px;">general notes about classes:</u>
+      <p>-- When a class definition is entered, a new namespace is created, and used as the local scope</p>
+<pre>------------------------------------------------------
+class MyClass:
+    def foo(self):
+       pass
+
+x = MyClass()
+
+then:
+x.foo() is exactly equivalent to MyClass.foo(x)
+------------------------------------------------------</pre>
+<p>-- Often, the first argument of a method is called self. This is nothing more than a convention: the name self has absolutely no special meaning to Python.</p>
+<br>
+<u style="font-size:20px;">more about classes:</u><br>
+    <table>
+      <br>
+      <tr>
+        <th>Id</th>
+        <th>Question / Topic</th>
+        <th>Explanation</th>
+      </tr>
+        <tr>
+            <td>1.</td>
+            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></td>
+            <td>-- isinstance(obj, int)<br>
+            -- issubclass(float, int)
+            </td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><a style="font-size:20px;" href="https://realpython.com/python-super/">super()</a></td>
+            <td>-- technically, it is called "proxy object"<br>
+                -- allows us to avoid using the base class name explicitly<br>
+                -- working with Multiple Inheritance</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a></td>
+            <td>-- class DerivedClass(Base1, Base2, Base3)<br>
+                -- Diamond problem solved by: DerivedClass.<b>__mro__</b>
+            </td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#private-variables">Private Variables</a></td>
+            <td>-- “Classic Private” resources accessed only from inside an object don’t exist in Python.<br>
+                -- Everything about privacy in Python is "Convention":<br><br>
+                -- <b>"Protected resource"</b> starts from _ like: '_bubu'<br><br>
+                -- <b>"Pseudo-privacy resource"</b> starts from __ like: __siup are not accessible directly. But due to <em>Name Mangling</em> the given resource will be available under "_ClassX__siup"
+            </td>
+        </tr>
+    </table>
+    <br><br>
+      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#iterators">9.8 Iterators</a>
+      <br>
+      <pre>------------------------------------------------------------------------------------------------------------------
+for element in [1, 2, 3]:    # iter([1, 2, 3])
+    print(element)
+> 1
+> 2
+> 3
+
+mini_iter = iter([1, 2, 3])
+print(mini_iter)
+> 'list_iterator object at 0x7fd920b5a7c0'
+
+print(next(mini_iter))
+> 1
+print(next(mini_iter))
+> 2
+print(next(mini_iter))
+> 3
+print(next(mini_iter))
+> Traceback (most recent call last):
+> ...
+> StopIteration
+------------------------------------------------------------------------------------------------------------------</pre>
+      <ul>
+          <li>Behind the scenes, the for statement calls <b>iter()</b> builtin function on the container object. </li>
+          <li>The iter() function returns an iterator object that defines the method <b>__next__()</b> which accesses elements in the container one at a time.</li>
+          <li>When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate.</li>
+      </ul>
+    <u style="font-size:20px;">Defining your own iterator</u>
+      <ul>
+          <li>Define an <b>__iter__()</b> method which returns an object with a <b>__next__()</b> method.</li>
+          <li>If the class defines __next__(), then __iter__() can just return <b>self</b>.</li>
+      </ul>
+    <br><br>
+      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#generators">9.9 Generators</a>
+      <br>
+      <ul>
+          <li>Generator is a function which returns a generator-iterator object.</li>
+          <li>Generators are a simple and powerful tools for creating iterators.</li>
+          <li>They are written like regular functions but use the yield statement whenever they want to return data. Each time next() is called on it, the generator resumes where it left off.</li>
+          <li>Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the __iter__() and __next__() methods are created automatically.</li>
+          <li>Another key feature is that the local variables and execution state are automatically saved between calls.</li>
+          <li>In addition to automatic method creation and saving program state, when generators terminate, they automatically raise <b>StopIteration</b>. In combination, these features make it easy to create iterators with no more effort than writing a regular function.</li>
+        </ul>
+      <pre>def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+>>>
+>>> for char in reverse('golf'):
+...     print(char)
+...
+f
+l
+o
+g</pre>
+      <a style="font-size:15px;" href="https://docs.python.org/3/glossary.html#term-generator">generator-definition</a>
+    <br><br>
+      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">9.10. Generator Expressions</a>
+      <br>
+      <ul>
+          <li>Some simple generators can be coded succinctly as expressions using a syntax similar to list comprehensions but with parentheses instead of square brackets.</li>
+          <li>These expressions are designed for situations where the generator is used right away by an enclosing function.</li>
+          <li>Generator expressions are more compact but less versatile than full generator definitions and tend to be more memory friendly than equivalent list comprehensions.</li>
+        </ul>
+      <pre>>>> sum(i*i for i in range(10))                 # sum of squares
+285</pre>
+  </div>
+  <div class="column" style="background-color:powderblue;border: 1px solid black;">
+    <h2>Mixed notes:</h2>
+    <hr>
+    <p> -- whereis </p>
+    <p> -- end-of-file character (Control-D on Unix, Control-Z on Windows) </p>
+    <p> -- Unix shell’s search path (PATH env variable) </p>
+    <p> -- differences for: procedures / functions / methods </p>
+    <p> -- python Walrus operator ":=" (introduced in Python3.8)</p>
+    <p> -- python @dataclass decorator (introduced in Python3.7)</p>
+    <p> -- passing an object (when function is called) is cheap since only a pointer is passed by the impl.</p>
+    <br>
+    <hr>
+    <br>
+    <a href="https://docs.python.org/3/tutorial/errors.html">8. Errors and Exceptions</a>
+    <br>
+      <p><b><u>try / except / else / finally:</u></b></p>
+      <pre>
+        try:
+            ~ code to execute
+
+        except Error1:
+            ~ code to handle Error1
+
+        except (Error2, Error3, Error4):
+            ~ code to handle Errors2-4
+
+        except Error5 as e5:
+            ~ code to handle Error5
+            ~ print(e5.args) -> printing Exception arguments
+
+        except:
+            ~ code to handle unexpected errors
+
+        else:
+            ~ code to be executed if the try clause does not raise an exception
+
+        finally:
+            ~ code to be executed in very end
+            ~ often for cleanup activities
+            ~ ... print("Unexpected error:", sys.exc_info()[0])
+            ~ ... raise -> we can even read type of exception and handle it
+      </pre>
+      <p><b><u>raise:</u></b></p>
+      <pre>raise ExceptionName</pre>
+      If you need to determine whether an exception was raised but don’t intend to handle it:
+      <pre>try:
+  raise NameError('HiThere')
+except NameError:
+  print('An exception flew by!')
+  raise</pre>
+    <br>
+    <a style="font-size:20px;" href="https://docs.python.org/3/tutorial/errors.html#exception-chaining">8.5. Exception Chaining:</a>
+    <br>This can be useful when you are transforming exceptions.
+    <br>
+    <br>
+    <br>
+    <p>There are (at least) two distinguishable kinds of errors: syntax errors and exceptions.</p>
+    <p><b><u>Built-in Exceptions:</u></b></p>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Python Error</th>
+        <th>Id</th>
+        <th>Python Error</th>
+        <th>Id</th>
+        <th>Python Error</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>NameError</td>
+        <td>6</td>
+        <td>OSError</td>
+        <td>11</td>
+        <td>KeyboardInterrupt</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>SyntaxError (Parsing error)</td>
+        <td>7</td>
+        <td>ImportError</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>IndexError / KeyError</td>
+        <td>8</td>
+        <td>RuntimeError</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>TypeError</td>
+        <td>9</td>
+        <td>AssertionError</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>ValueError</td>
+        <td>10</td>
+        <td>ZeroDivisionError</td>
+      </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+      <a href="https://pep8.org/">PEP 8 — the Style Guide for Python Code</a>
+    <br><br>
+    <hr>
+    <br>
+    <u style="font-size:30px;">Python execution model:</u><br>
+    <table>
+    <br>
+      <tr>
+        <th>parsing stage</th>
+        <th>execution stage (runtime)</th>
+      </tr>
+        <tr>
+            <td>-- evaulating default values for functions<br>
+                1. The code is parsed (i.e., split up) into a list of pieces usually called tokens.<br>
+                2. The raw list of tokens is transformed to build an Abstract Syntax Tree.<br>
+                3. An AST is a collection of nodes which are linked together based on the grammar of the Python lang.<br>
+                4. From an AST, the interpreter can produce a lower level form of instructions called bytecode.<br>
+                <a style="font-size:20px;" href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST/Python</a>
+
+            </td>
+            <td>code execution (variables are dynamically typed)</td>
+        </tr>
+      <tr>
+        <th>more details: what happens during parsing/runtime stages?</th>
+        <th></th>
+      </tr>
+    </table>
+    <br><br>
+    <hr>
+    <br><br>
+    <u style="font-size:30px;">Namespaces in Python:</u>
+    <br><br>
+    -- namespace is the structure used to organize the symbolic names assigned to objects in a Python program.<br>
+    -- The scope is the region of a program in which that name has meaning.<br><br>
+    -- LEGB rule (can be changed by: -- global/nonlocal keywords)<br>
+    ---- LEG are implemented as dictionaries / B as module<br><br>
+    -- How to list the given Namespace members?<br>
+    ---- LE: locals(), G: globals(), dir() and dir(imported_module), B: dir(__builtins__)<br><br>
+    -- namespaces creation lifetime:<br>
+    ---- B: created when the Python interpreter starts up, and is never deleted.  It lives in a G-module; this is called builtins<br>
+    ---- G (also for module): is created when the module definition is read in; normally, module namespaces also last until the interpreter quits<br>
+    ---- LE:  is created when the function is called, and deleted when the function returns or raises an exception that is not handled within the function.
+
+    <br><br>
+    <hr>
+    <br>
+    <u>map/zip/filter/reduce (Python builtins example):</u><br>
+    -- list2 = list(map(lambda x: x*2, [1, 2, 3]))<br>
+    -- a_list = [1, 2, 3, 4], b_list = [5, 6, 7]<br>
+    -- print(list(zip(a_list, b_list))), [(1, 5), (2, 6), (3, 7)]<br>
+    -- <a style="font-size:20px;" href="https://github.com/DanielPalacz/Python_Tutorial/blob/main/Other_Python_Related_notes/BuiltinFunctions_review/map_zip_filter_reduce.py">map, zip, filter, reduce examples</a>
+    <br><br>
+    <hr>
+    <br>
+    <u>Copying</u><br>
+    -- referencing<br>
+    -- slicing <=> shallow copying <=> copy.copy()<br>
+    -- copy.deepcopy<br>
+    <br>
+    <hr>
+    <br><br>
+        <a style="font-size:30px;" href="https://docs.python.org/3/library">The Python Standard Library</a>
+    <br><br>
+    <a style="font-size:20px;" href="https://docs.python.org/3/library/functions.html">Built-in Functions (source 1)</a>
+      <br>
+    <a style="font-size:20px;" href="https://www.programiz.com/python-programming/methods/built-in">Built-in Functions  (source 2)</a>
+      <br>
+    <a style="font-size:20px;" href="https://docs.python.org/3/library/constants.html">Built-in Constants</a>
+      <br>
+    <a style="font-size:20px;" href="https://docs.python.org/3/library/stdtypes.html">Built-in Types</a>
+      <br>
+    <a style="font-size:20px;" href="https://docs.python.org/3/library/exceptions.html">Built-in Exceptions</a>
+    <br>
+    <br>
+    <br>
+    <hr>
+  </div>
+</div>
+
+</body>
+</html>
