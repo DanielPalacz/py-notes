@@ -400,10 +400,16 @@ g</pre>
     <p> -- python Walrus operator ":=" (introduced in Python3.8)</p>
     <p> -- python @dataclass decorator (introduced in Python3.7)</p>
     <p> -- passing an object (when function is called) is cheap since only a pointer is passed by the impl.</p>
+  <b>-- computational complexity of algorithms:</b>
+      <ul>
+    <li>what kind of complexity? time performance / memory performance </li>
+    <li><a style="font-size:15px;" href="https://www.samouczekprogramisty.pl/podstawy-zlozonosci-obliczeniowej/">estimation function basics 1</a></li>
+    <li><a style="font-size:15px;" href="https://typeofweb.com/zlozonosc-obliczeniowa-czasowa-pamieciowa-algorytmow/">estimation function basics 2</a></li>
+  </ul>
     <br>
     <hr>
     <br>
-    <a href="https://docs.python.org/3/tutorial/errors.html">8. Errors and Exceptions</a>
+    <a shref="https://docs.python.org/3/tutorial/errors.html">8. Errors and Exceptions</a>
     <br>
       <p><b><u>try / except / else / finally:</u></b></p>
       <pre>
@@ -569,6 +575,108 @@ except NameError:
     <br>
     <br>
     <hr>
+      <br>
+      <a style="font-size:20px;" href="https://code.tutsplus.com/tutorials/understand-how-much-memory-your-python-objects-use--cms-25609">Measuring the Memory Usage of Python Objects</a>
+        <ul>
+          <li>The standard library’s sys module provides the getsizeof() function.<br>
+          It calculates the actual memory usage for Python primitive objects:</li>
+          <br>
+    <table>
+      <tr>
+        <th>Python Object</th>
+        <th>Memory usage</th>
+        <th>Id</th>
+        <th>Python Error</th>
+      </tr>
+      <tr>
+        <td>int</td>
+        <td>sys.getsizeof(5)<br>
+            24 bytes</td>
+        <td>bytes<br>bool/False<br>True/None</td>
+        <td>sys.getsizeof(bytes())<br>
+33 bytes<br>
+sys.getsizeof(bool())<br>
+sys.getsizeof(False)<br>
+24 bytes<br>
+sys.getsizeof(True)<br>
+28 bytes<br>
+sys.getsizeof(None)<br>
+16 bytes</td>
+      </tr>
+      <tr>
+        <td>float</td>
+        <td>sys.getsizeof(5.3)<br>
+            24 bytes<br>
+        </td>
+        <td>List</td>
+        <td>sys.getsizeof([])<br>
+56 bytes<br>
+sys.getsizeof([1])<br>
+64 bytes<br>
+sys.getsizeof([1, 2])<br>
+72 bytes<br>
+sys.getsizeof(['a long string'])<br>
+64 bytes</td>
+      </tr>
+      <tr>
+        <td>Decimal</td>
+        <td>from decimal import Decimal<br>
+sys.getsizeof(Decimal(5.3))<br>
+80 bytes</td>
+        <td>Tuple</td>
+          <td>sys.getsizeof(tuple())<br>
+40 bytes<br>
+sys.getsizeof((1,))<br>
+48 bytes<br>
+sys.getsizeof((1, 2))<br>
+56 bytes</td>
+</tr>
+      <tr>
+        <td>Python Strings</td>
+        <td>sys.getsizeof('')<br>
+49 bytes<br>
+sys.getsizeof('1')<br>
+50 bytes<br>
+sys.getsizeof('1234')<br>
+53 bytes</td>
+        <td>Set</td>
+        <td>
+sys.getsizeof(set())<br>
+sys.getsizeof(set([1]))<br>
+sys.getsizeof({1, 2})<br><br>
+<b>216 bytes</b></td>
+      </tr>
+      <tr>
+        <td>Python Strings<br>
+        (are Unicode)</td>
+        <td>sys.getsizeof(u'')<br>
+49 bytes<br>
+sys.getsizeof(u'1')<br>
+50 bytes<br>
+sys.getsizeof(u'1234')<br>
+53 bytes</td>
+        <td>Dict</td>
+        <td>sys.getsizeof({})<br>
+            64 bytes
+            sys.getsizeof(dict())<br>
+            sys.getsizeof({"a": 1})<br>
+            sys.getsizeof(dict(a=1, b=2, c=3))<br><br>
+            <b>232 bytes</b>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <li>The list doesn’t contain the int objects . It just contains an 8-byte (on 64-bit versions of CPython) pointer to the actual int object.
+        64 bits (8 bytes) address bus width - says how many memory cells we can address in the system.</li>
+    <li>For more complex Py objects: drilling down recursively to calculate the actual memory usage of an object graph.</li>
+    <li>Reference Counting</li>
+    <li>Small Objects</li>
+    <li>Integers</li>
+    <li>Python Memory vs. System Memory</li>
+    <li>Memory Profiler</li>
+  </ul>
+      <p>CPython uses a lot of memory for its objects. It uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
+      <hr>
   </div>
 </div>
 
