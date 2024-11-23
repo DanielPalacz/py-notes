@@ -79,6 +79,18 @@
         background-color: #000;
     }
 
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
 </style>
 
 </head>
@@ -170,9 +182,19 @@
 
     <ul>
         <li>floor div (//) returns INT</li>
-        <li>raw string <span class="code">r"..."</span></li>
-
-
+        <li>raw string <span class="code" style="font-weight: bold;">r"..."</span> => <span></span><span><a href="https://github.com/DanielPalacz/py-notes/blob/main/general/raw_string.py" target="_blank">raw_string.py</a></span></li>
+        <li>revert: s = '123456789' =><span class="code" style="font-weight: bold;">s[-1::-1]</span></li>
+        <li><span class="code">print(a, end='X', sep=';')</span></li>
+        <li class="notion">iterable object</li>
+        <div class="notion-explanation">An iterable is any Python object capable of returning its members one at a time, permitting it to be iterated over in a for-loop.</div>
+        <li class="notion">sequence object</li>
+        <div class="notion-explanation">The iterable objects implementing 2 specific methods: '__getitem__()', '__len__()'. So sequences can be Indexed/Sliced.</div>
+        <li class="notion">immutable object</li>
+        <div class="notion-explanation">Values of the object cant be changed (First order values in terms of container like tuple).</div>
+        <div class="notion-explanation">Examples of python immutable data structures: int, float, decimal, bool, string, byte, range, tuple</div>
+        <li class="notion">mutable object</li>
+        <div class="notion-explanation">Values of the object can be changed after the object creation.</div>
+        <div class="notion-explanation">Examples of python mutable data structures: list, dict, set, custom editable classes</div>
     </ul>
 </div>
 </div>
@@ -182,253 +204,318 @@
 
 
 
+<div class="row">
+    <div class="col-md-8">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/controlflow.html">4. More Control Flow Tools</a>
+
+    <ul>
+        <li>Python loops:</li>
+        <ul>
+            <li class="code">if-elif-else, for-else, while-else</li>
+        </ul>
+    </ul>
+
+    <ul>
+        <li>Loops related keywords:</li>
+        <ul>
+            <li class="code">break, continue, pass</li>
+        </ul>
+
+    </ul>
+    <ul>
+        <li>match statement (added in 3.10):</li>
+        <pre><div class="code">def http_error(status):
+    match status:
+        case 400:
+            return "Bad request"
+        case 404:
+            return "Not found"
+        case 418:
+            return "I'm a teapot"
+        case _:
+            return "Something's wrong with the internet"</div></pre>
+        <li>Defining Functions:</li>
+        <div class="code">def funct(pos_arg1, pos_arg2=7, /, some_arg3, some_arg4=2, *, k_arg1, k_arg2="dwa")</div>
+        <div class="code">def funct(argx, argy, argz, *args, **kwargs):</div>
+        <div>default value: the default value is evaluated only once - during parsing stage</div>
+        <div class="notion">keyword '*'</div>
+        <ul>
+            <li class="notion-explanation">arguments after the keyword have to be keyword-like arguments</li>
+        </ul>
+        <div class="notion">keyword '/'</div>
+        <ul>
+            <li class="notion-explanation">arguments before the keyword have to be positional-like arguments</li>
+        </ul>
+        <li>Annotations:</li>
+         <ul>
+            <li class="code">funct(a: str, number: int, dogs: tuple[str]) -> list[str]:</li>
+            <div class="code">funct.__annotations__</div>
+            <div class="code">
+                {'a': &lt;class &quot;str&quot;&gt;, 'number': &lt;class &quot;int&quot;&gt;, 'dogs': tuple[str], 'return': list[str]}
+            </div>
+        </ul>
+        <li>Docsrings<span class="code"> (object.__doc__):</span></li>
+        <div class="notion-explanation">ALL modules should normally have docstrings, and ALL functions and classes exported by a module should also have docstrings</div>
+        <div class="notion-explanation">Public methods (including the __init__ constructor) should also have docstrings.</div>
+        <div class="notion-explanation">A package may be documented in the module docstring of the __init__.py file in the package directory.</div>
+        <a href="https://www.python.org/dev/peps/pep-0257/" target="_blank">PEP-0257</a>
+        <span>, </span>
+        <a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html" target="_blank">Google Style Python Docstrings,</a>
+    </ul>
+</div>
+</div>
+</div>
+</div>
 
 
 
-    <a href="https://docs.python.org/3/tutorial/introduction.html">3. An Informal Introduction to Python</a>
-      <br>
-      <table>
-      <br>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td>floor div (//)</td>
-            <td>returns INT</td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>raw string</td>
-            <td>r"..."</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>revert: s = "123456789"</td>
-            <td>s[-1::-1]</td>
-        </tr>
-        <tr>
-            <td>4.</td>
-            <td>print(a, end=',')</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>5.</td>
-            <td>iterable object</td>
-            <td>An iterable is any Python object capable of returning its members one at a time,
-                permitting it to be iterated over in a for-loop.</td>
-        </tr>
-        <tr>
-            <td>6.</td>
-            <td>sequence object</td>
-            <td>The iterable objects implementing 2 specific methods: '__getitem__()', '__len__()'.<br>
-            So sequences can be Indexed/Sliced.</td>
-        </tr>
-        <tr>
-            <td>7.</td>
-            <td>Identity (id/is)</td>
-            <td>The identity tells us about place in memory.</td>
-        </tr>
-        <tr>
-            <td>8.</td>
-            <td>immutable object</td>
-            <td>Values of the object cant be changed (First order values in terms of container like tuple).<br>
-            Examples of python immutable data structures:<br>
-            - (int, float, decimal), bool, string, byte, range, tuple</td>
-        </tr>
-    </table>
-    <br>
-    <hr>
-    <br>
-    <a href="https://docs.python.org/3/tutorial/controlflow.html">4. More Control Flow Tools</a>
-    <br>
-    <table>
-    <br>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td>Python loops</td>
-            <td> - if_elif_else loop<br>
-                 - for_else loop<br>
-                 - while_else loop<br>
-            </td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>loop related keywords</td>
-            <td>break, continue, pass</td>
-        </tr>
-    </table>
-    <br>
-    <hr>
-    <br>
-    <a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">4.7. More on Defining Functions</a>
-    <br>
-    <table>
-    <br>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td>function definition example1:</td>
-            <td>def funct(pos_arg1, pos_arg2=7, /, bubu1, bubu2=2, *, k_arg1, k_arg2="dwa"):</td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>default value</td>
-            <td>The default value is evaluated only once - during parsing stage.</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>keywords: /, *</td>
-            <td>/ - PEP-570 (Python3.8)</td>
-        </tr>
-        <tr>
-            <td>4.</td>
-            <td>function definition example2:</td>
-            <td>def funct(argx, argy=7, *args, **kwargs):</td>
-        </tr>
-        <tr>
-            <td>5.</td>
-            <td>function definition example3:</td>
-            <td>def funct(argx: str = "Empty", argy: str, *args, **kwargs) -> str:
-                <br>
-                funct.__annotations__
-            </td>
-        </tr>
-        <tr>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>6.</td>
-            <td>Lambda in Python:</td>
-            <td>https://github.com/DanielPalacz/Python_Tutorial/blob/main/Functions/Functions__lambda.jpg</td>
-        </tr>
-        <tr>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>7.</td>
-            <td>DocStrings in Python:</td>
-            <td>https://www.python.org/dev/peps/pep-0257/ ( __doc__ special attr.)
-            <br><br>
-            Recomendations:
-            <br>- ALL modules should normally have docstrings, and ALL functions and classes exported by a module should also have docstrings.
-            <br>- Public methods (including the __init__ constructor) should also have docstrings.
-            <br>- A package may be documented in the module docstring of the __init__.py file in the package directory.</td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <hr>
-    <br>
-    <a href="https://docs.python.org/3/tutorial/datastructures.html">5. Data Structures</a>
-    <br>
-    <br>
-    <br>
-    <hr>
-    <br>
-    <br>
-    <a href="https://docs.python.org/3/tutorial/modules.html">6. Modules</a>
-    <br>
-    <table>
-    <br>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td>Python module search algorithm</td>
-            <td> 1. built-in modules<br>
-                 sys.path directories:<br>
-                 -- 2. current directory (from py file perspective)<br>
-                 -- 3. PYTHONPATH env directory<br>
-                 -- 4. python installation directories<br>
-            </td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>__all__ special attr.</td>
-            <td>the list of module names when 'from package import *' is encountered.</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>python -B</td>
-            <td>will not write compiled py files like: __pycache__/modx.pyc<br>
-            </td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <hr>
-    <br>
-    <br>
-    <a href="https://docs.python.org/3/tutorial/classes.html">9. Classes</a>
-    <br><br>
-    <u style="font-size:20px;">general notes about classes:</u>
-      <p>-- When a class definition is entered, a new namespace is created, and used as the local scope</p>
-<pre>------------------------------------------------------
-class MyClass:
-    def foo(self):
-       pass
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/datastructures.html">5. Data Structures</a>
+                <ul>
+                    <li class="todo">TODO</li>
+                </ul>
 
-x = MyClass()
+            </div>
+</div>
+</div>
+</div>
 
-then:
-x.foo() is exactly equivalent to MyClass.foo(x)
-------------------------------------------------------</pre>
-<p>-- Often, the first argument of a method is called self. This is nothing more than a convention: the name self has absolutely no special meaning to Python.</p>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/modules.html">6. Modules</a>
+                <ul>
+                    <li>Python module search algorithm:</li>
+                    <ol>
+                        <li class="notion-explanation">built-in modules</li>
+                        <li class="notion-explanation">sys.path directories</li>
+                        <li class="notion-explanation">PYTHONPATH env directory</li>
+                        <li class="notion-explanation">Python installation directories</li>
+                    </ol>
+
+                    <li class="code">__all__</li>
+                    <ul>
+                        <li class="code">from package import *</li>
+                        <li class="notion-explanation">the list of module names when 'from package import *' is encountered.</li>
+                    </ul>
+
+                    <li class="shell">python -B [python_file]</li>
+                    <ul>
+                        <li class="notion-explanation">will not write compiled py files like: __pycache__/modx.pyc</li>
+                    </ul>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/inputoutput.html">7. Input and Output</a>
+                <ul>
+                    <li class="todo">TODO</li>
+                </ul>
+
+            </div>
+</div>
+</div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/errors.html">8. Errors and Exceptions</a>
+                <ul>
+                    <li>try / except / else / finally:</li>
+<pre class="code">
+try:
+    ~ code to execute
+except Error1:
+    ~ code to handle Error1
+except (Error2, Error3, Error4):
+    ~ code to handle Errors2-4
+except Error5 as e5:
+    ~ code to handle Error5
+    ~ print(e5.args) -> printing Exception arguments
+except:
+    ~ code to handle unexpected errors
+else:
+    ~ code to be executed if the try clause does not raise an exception
+finally:
+    ~ code to be executed in very end
+    ~ often for cleanup activities
+    ~ ... print("Unexpected error:", sys.exc_info()[0])
+    ~ ... raise -> we can even read type of exception and handle it</pre>
+
+<li class="code">raise ExceptionName</li>
 <br>
-<u style="font-size:20px;">more about classes:</u><br>
-    <table>
-      <br>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></td>
-            <td>-- isinstance(obj, int)<br>
-            -- issubclass(float, int)
-            </td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td><a style="font-size:20px;" href="https://realpython.com/python-super/">super()</a></td>
-            <td>-- technically, it is called "proxy object"<br>
-                -- allows us to avoid using the base class name explicitly<br>
-                -- working with Multiple Inheritance</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a></td>
-            <td>-- class DerivedClass(Base1, Base2, Base3)<br>
-                -- Diamond problem solved by: DerivedClass.<b>__mro__</b>
-            </td>
-        </tr>
-        <tr>
-            <td>4.</td>
-            <td><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#private-variables">Private Variables</a></td>
-            <td>-- “Classic Private” resources accessed only from inside an object don’t exist in Python.<br>
-                -- Everything about privacy in Python is "Convention":<br><br>
-                -- <b>"Protected resource"</b> starts from _ like: '_bubu'<br><br>
-                -- <b>"Pseudo-privacy resource"</b> starts from __ like: __siup are not accessible directly. But due to <em>Name Mangling</em> the given resource will be available under "_ClassX__siup"
-            </td>
-        </tr>
-    </table>
+<li>builtin exceptions, there are (at least) two distinguishable kinds of errors: syntax errors and exceptions:</li>
+<ul>
+    <li>NameError, OSError, KeyboardInterrupt, SyntaxError (Parsing error)</li>
+    <li>ImportError, IndexError, KeyError, RuntimeError</li>
+    <li>TypeError, AssertionError, ValueError, ZeroDivisionError</li>
+</ul>
+<br>
+<li>If you need to determine whether an exception was raised but don’t intend to handle it:</li>
+<pre class="code">
+try:
+  raise NameError('HiThere')
+except NameError:
+  print('An exception flew by!')
+  raise
+</pre>
+
+<li class="code">raise NewException(..) from OriginalException(..)</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/classes.html">9. Classes</a>
+                <ul>
+                    <li>When a class definition is entered, a new namespace is created, and used as the local scope.</li>
+                    <li>Class object creation flow:</li>
+                    <pre class="code">
+class MyClass:
+    def __new__(cls, *args, **kwargs):
+        print("Creating a new instance of MyClass")
+        return super().__new__(cls)
+
+    def __init__(self):
+        print("Initializing the instance of MyClass")
+
+    # Create an instance of MyClass
+obj = MyClass()</pre>
+<pre class="shell">
+$ Creating a new instance of MyClass
+$ Initializing the instance of MyClass
+</pre>
+<hr>
+<br>
+<li>
+<div class="notion"><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></div>
+<div class="code"> - isinstance(obj, int)<br> - issubclass(float, int)</div>
+</li>
+<br>
+<li>
+<a style="font-size:20px;" href="https://realpython.com/python-super/">super()</a>
+    <div class="notion-explanation"> - technically, it is called "proxy object"</div>
+    <div class="notion-explanation"> - allows us to avoid using the base class name explicitly</div>
+    <div class="notion-explanation"> - working with Multiple Inheritance</div>
+</li>
+
+<br>
+<li>
+<a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a>
+    <div class="notion-explanation"> - class DerivedClass(Base1, Base2, Base3)</div>
+    <div class="notion-explanation"> - Diamond problem solved by: DerivedClass.<b>__mro__</b></div>
+</li>
+<br>
+<li>
+<a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#private-variables">Privateness</a>
+    <div class="notion-explanation"> - “Classic Private” resources accessed only from inside an object don’t exist in Python.</div>
+    <div class="notion-explanation">  - Everything about privacy in Python is "Convention":</div>
+    <div class="notion-explanation"> - <b>"Pseudo-privacy resource"</b> starts from __ like: __siup are and not accessible directly.</div>
+    <ul>
+        <div class="notion-explanation"> - but due to <em>Name Mangling</em> the given resource will be available under "_ClassX__siup"</div>
+    </ul>
+
+    <div class="notion-explanation"> - <b>"Protected resource"</b> starts from _ like: '_bubu'</div>
+</li>
+
+<hr>
+<br>
+<li style="font-weight: bold;">Iterators:</li>
+<div class="notion-explanation">An iterator is a class that implements two special methods: __iter__() and __next__().</div>
+<ul>
+    <li class="notion-explanation">__iter__(): This method is called when an iterator is required for an object. It should return the iterator object itself.</li>
+    <li class="notion-explanation">___next__(): This method should return the next value in the iteration sequence. When there are no more items to return, it should raise the StopIteration exception.</li>
+</ul>
+<br>
+<pre class="code">
+class SquareIterator:
+    def __init__(self, limit):
+        self.limit = limit
+        self.current = 0
+
+    def __iter__(self):
+        return self  # The iterator object itself
+
+    def __next__(self):
+        if self.current < self.limit:
+            result = self.current ** 2
+            self.current += 1
+            return result
+        else:
+            raise StopIteration  # No more items to iterate over
+
+# Using the custom iterator
+square_iter = SquareIterator(5)  # Squares from 0^2 to 4^2
+
+for square in square_iter:
+    print(square)
+
+square_iter2 = SquareIterator(3)  # Squares from 0^2 to 3^2 and raises StopIteration
+print(next(square_iter2))
+print(next(square_iter2))
+print(next(square_iter2))
+print(next(square_iter2))
+</pre>
+<pre class="shell">
+0
+1
+4
+9
+16
+0
+1
+4
+Traceback (most recent call last):
+  File "PATH/iterators.py", line 22, in <module>
+    print(next(square_iter2))
+  File "PATH/iterators.py", line 15, in __next__
+    raise StopIteration  # No more items to iterate over
+StopIteration
+</pre>
+<a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a>
+
+</ul>
+<hr>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
     <br><br>
       <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#iterators">9.8 Iterators</a>
       <br>
@@ -515,96 +602,10 @@ g</pre>
     <li><a style="font-size:15px;" href="https://typeofweb.com/zlozonosc-obliczeniowa-czasowa-pamieciowa-algorytmow/">estimation function basics 2</a></li>
   </ul>
     <br>
-    <hr>
-    <br>
-    <a shref="https://docs.python.org/3/tutorial/errors.html">8. Errors and Exceptions</a>
-    <br>
-      <p><b><u>try / except / else / finally:</u></b></p>
-      <pre>
-        try:
-            ~ code to execute
 
-        except Error1:
-            ~ code to handle Error1
 
-        except (Error2, Error3, Error4):
-            ~ code to handle Errors2-4
 
-        except Error5 as e5:
-            ~ code to handle Error5
-            ~ print(e5.args) -> printing Exception arguments
 
-        except:
-            ~ code to handle unexpected errors
-
-        else:
-            ~ code to be executed if the try clause does not raise an exception
-
-        finally:
-            ~ code to be executed in very end
-            ~ often for cleanup activities
-            ~ ... print("Unexpected error:", sys.exc_info()[0])
-            ~ ... raise -> we can even read type of exception and handle it
-      </pre>
-      <p><b><u>raise:</u></b></p>
-      <pre>raise ExceptionName</pre>
-      If you need to determine whether an exception was raised but don’t intend to handle it:
-      <pre>try:
-  raise NameError('HiThere')
-except NameError:
-  print('An exception flew by!')
-  raise</pre>
-    <br>
-    <a style="font-size:20px;" href="https://docs.python.org/3/tutorial/errors.html#exception-chaining">8.5. Exception Chaining:</a>
-    <br>This can be useful when you are transforming exceptions.
-    <br>
-    <br>
-    <br>
-    <p>There are (at least) two distinguishable kinds of errors: syntax errors and exceptions.</p>
-    <p><b><u>Built-in Exceptions:</u></b></p>
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Python Error</th>
-        <th>Id</th>
-        <th>Python Error</th>
-        <th>Id</th>
-        <th>Python Error</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>NameError</td>
-        <td>6</td>
-        <td>OSError</td>
-        <td>11</td>
-        <td>KeyboardInterrupt</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>SyntaxError (Parsing error)</td>
-        <td>7</td>
-        <td>ImportError</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>IndexError / KeyError</td>
-        <td>8</td>
-        <td>RuntimeError</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>TypeError</td>
-        <td>9</td>
-        <td>AssertionError</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>ValueError</td>
-        <td>10</td>
-        <td>ZeroDivisionError</td>
-      </tr>
-    </table>
-    <br>
     <hr>
     <br>
       <a href="https://pep8.org/">PEP 8 — the Style Guide for Python Code</a>
