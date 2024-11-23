@@ -20,7 +20,7 @@
       padding: 5px;
       text-align: left;
     }
-    a {
+    .main-a {
       font-size: 30px;
 <!--      color: #000;-->
     }
@@ -66,14 +66,18 @@
     }
 
     .shell {
-    		color: #555;
+    	color: #555;
     }
 
     .code {
-    		color: green;
+    	color: green;
+    	font-style: italic;
     }
 
-
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
 
 </style>
 
@@ -106,7 +110,7 @@
     <div class="col-md-8">
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <a href="https://docs.python.org/3/tutorial/appetite.html">1. Whetting Your Appetite</a>
+                <a class="main-a" href="https://docs.python.org/3/tutorial/appetite.html">1. Whetting Your Appetite</a>
                 <ul>
                     <li>Python is just the language for you.</li>
                 </ul>
@@ -121,7 +125,7 @@
     <div class="col-md-8">
             <div class="card mb-4 box-shadow">
                 <div class="card-body">
-    <a href="https://docs.python.org/3/tutorial/interpreter.html">2. Using the Python Interpreter</a>
+    <a class="main-a"  href="https://docs.python.org/3/tutorial/interpreter.html">2. Using the Python Interpreter</a>
 
     <ul>
         <li>Invoking the Interpreter</li>
@@ -129,27 +133,57 @@
             <div class="shell">$ python3 -c 'from time import sleep;sleep(2);print("I have slept 2 seconds, wow.")'</div>
         <li>Argument Passing:</li>
         <ul>
-            <li>sys.argv / argparse module</li>
+            <li>sys.argv</li>
+            <li class="todo">argparse module TODO</li>
         </ul>
         <li>sys.stdin:</li>
         <ul>
             <li><div class="shell">$ cat sys_module/short_text_file.txt | python3 sys_module/standard_input.py</div></li>
-            <div class="shell">$ cat sys_module/short_text_file.txt | python3 sys_module/standard_input.py</div>
-
+            <a href="https://github.com/DanielPalacz/py-notes/blob/main/sys_module/standard_input.py" target="_blank">standard_input.py</a>
+            <li><pre><div class="shell">python3 sys_module/standard_input.py &lt;&lt;EOF
+> 123
+> abc
+> 233342
+>EOF</div></pre></li>
         </ul>
+        <li>Source Code Encoding: by default UTF-8</li>
+        <ul>
+            <li>To declare an encoding other than the default one, a special comment line should be added as the first line of the file. Example:</li>
+            <div class="code"># -*- coding: cp1252 -*-</div>
+            <li>One exception to the first line rule is when the source code starts with a <b>UNIX “shebang” line</b>.</li>
+            <pre><div class="code">#!/usr/bin/env python3
+# -*- coding: cp1252 -*-</div></pre
+        </ul>
+    </ul>
+</div>
+</div>
+</div>
+</div>
 
 
-        <li>Source Code Encoding: By default UTF-8 (can be: # -*- coding: cp1252 -*-</li>
+
+<div class="row">
+    <div class="col-md-8">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/introduction.html">3. An Informal Introduction to Python</a>
+
+    <ul>
+        <li>floor div (//) returns INT</li>
+        <li>raw string <span class="code">r"..."</span></li>
+
 
     </ul>
-    <br>
-    <br>
-    <hr>
-    <br>
 </div>
 </div>
 </div>
 </div>
+
+
+
+
+
+
 
     <a href="https://docs.python.org/3/tutorial/introduction.html">3. An Informal Introduction to Python</a>
       <br>
