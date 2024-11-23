@@ -2,81 +2,155 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  height: 4999px; /* Should be removed. Only for demonstration */
-}
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-  text-align: left;
-}
-a {
-  font-size: 30px
-}
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    		color: #555;
+    }
+
+    .code {
+    		color: green;
+    }
+
+
+
 </style>
 
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 style="font-size:60px;">|-| Py Notes |-|</h1>
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:80px;text-decoration: underline;font-weight: bold;">Python notes</h1>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+</div>
+</div>
+
+
+<div class="row">
+    <div class="col-8">
+    <br>
+    <div class="button-custom mb-4">
+            <a href="https://docs.python.org/3/tutorial/" class="btn btn-dark btn-lg mt-1 button-link-custom" style="font-weight: bold; text-align: center;">The Python official tutorial</a>
+    </div>
+</div>
+</div>
 <br>
 
 <div class="row">
-  <div class="column" style="background-color:powderblue;border: 1px solid black;">
-    <h2>python_org_tutorial notes:</h2>
-    <hr>
-    <br>
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a href="https://docs.python.org/3/tutorial/appetite.html">1. Whetting Your Appetite</a>
+                <ul>
+                    <li>Python is just the language for you.</li>
+                </ul>
+
+            </div>
+</div>
+</div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
     <a href="https://docs.python.org/3/tutorial/interpreter.html">2. Using the Python Interpreter</a>
-    <br><br>
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Question / Topic</th>
-        <th>Explanation</th>
-      </tr>
-        <tr>
-            <td>1.</td>
-            <td>The interpreter’s line-editing features</td>
-            <td>Interactive editing, history substitution and code completion
-                on systems that support the GNU Readline library.
-                ( Also: python -c command [arg] ... )
-            <br>
-            </td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>Argument Passing</td>
-            <td>sys.argv, argparse</td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>Source Code Encoding</td>
-            <td>By default UTF-8 (can be: # -*- coding: cp1252 -*-)</td>
-        </tr>
-    </table>
+
+    <ul>
+        <li>Invoking the Interpreter</li>
+            <div class="shell">$ whereis python3 / interactive Mode (run python3)</div>
+            <div class="shell">$ python3 -c 'from time import sleep;sleep(2);print("I have slept 2 seconds, wow.")'</div>
+        <li>Argument Passing:</li>
+        <ul>
+            <li>sys.argv / argparse module</li>
+        </ul>
+        <li>sys.stdin:</li>
+        <ul>
+            <li><div class="shell">$ cat sys_module/short_text_file.txt | python3 sys_module/standard_input.py</div></li>
+            <div class="shell">$ cat sys_module/short_text_file.txt | python3 sys_module/standard_input.py</div>
+
+        </ul>
+
+
+        <li>Source Code Encoding: By default UTF-8 (can be: # -*- coding: cp1252 -*-</li>
+
+    </ul>
     <br>
     <br>
     <hr>
     <br>
+</div>
+</div>
+</div>
+</div>
+
     <a href="https://docs.python.org/3/tutorial/introduction.html">3. An Informal Introduction to Python</a>
       <br>
       <table>
@@ -678,7 +752,7 @@ sys.getsizeof(u'1234')<br>
       <p>CPython uses a lot of memory for its objects. It uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
       <hr>
   </div>
-</div>
+<!--</div>-->
 
 </body>
 </html>
