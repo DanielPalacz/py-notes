@@ -594,6 +594,63 @@ print(next(gen))  # Output: 1
                     <li><a href="https://docs.python.org/3/tutorial/stdlib.html#command-line-arguments">10.3. Command Line Arguments</a></li>
                     <div>sys.argv</div>
                     <div>argparse module</div>
+                    <a href="https://github.com/DanielPalacz/py-notes/blob/main/general/argparse_basic.py">example</a>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#error-output-redirection-and-program-termination">10.4. Error Output Redirection and Program Termination</a></li>
+                    <div class="code">sys.stderr.write('Warning, log file not found starting a new one\n')</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#string-pattern-matching">10.5. String Pattern Matching</a></li>
+    <pre class="code">
+    import re
+    re.findall(r'\bf[a-z]*', 'which foot or hand fell fastest')
+    re.sub(r'(\b[a-z]+) \1', r'\1', 'cat in the the hat'</pre>
+
+    <pre class="shell">
+    ['foot', 'fell', 'fastest']
+    'cat in the hat'</pre>
+
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#mathematics">10.6. Mathematics</a></li>
+                    <div>modules: math, random, statistics, secrets</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#internet-access">10.7. Internet Access</a></li>
+                    <div>modules: urllib.request, smtplib</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#dates-and-times">10.8. Dates and Times</a></li>
+                    <div>modules: datetime, time</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#data-compression">10.9. Data Compression</a></li>
+                    <div>modules: zlib, bx2, lzma, zipfile, tarfile</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#performance-measurement">10.10. Performance Measurement</a></li>
+                    <div>modules: timeit, profile, pstats</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#quality-control">10.11. Quality Control</a></li>
+                    <div>modules doctests:</div>
+    <pre class="code">
+    def average(values):
+        """Computes the arithmetic mean of a list of numbers.
+
+        >>> print(average([20, 30, 70]))
+        40.0
+        """
+        return sum(values) / len(values)
+    import doctest
+    doctest.testmod()   # automatically validate the embedded tests</pre>
+                    <div>module unittest:</div>
+    <pre class="code">
+    import unittest
+
+    class TestStatisticalFunctions(unittest.TestCase):
+        def test_average(self):
+            self.assertEqual(average([20, 30, 70]), 40.0)
+            self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+            with self.assertRaises(ZeroDivisionError):
+                average([])
+            with self.assertRaises(TypeError):
+                average(20, 30, 70)
+
+    unittest.main()  # Calling from the command line invokes all tests</pre>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib.html#batteries-included">10.12. Batteries Included</a></li>
+                    <div>Python has a “batteries included” philosophy. This is best seen through the sophisticated and robust capabilities of its larger packages. For example:</div>
+                <ul>
+                    <li>The <span class="code">xmlrpc.client and xmlrpc.server</span> modules make implementing remote procedure calls into an almost trivial task.</li>
+                    <li>email, json, csv, sqlite3 modules</li>
+                    <li>XML processing is supported by the xml.etree.ElementTree, xml.dom and xml.sax packages</li>
+                    <li>Internationalization is supported by a number of modules including gettext, locale, and the codecs package.</li>
+                </ul>
                 </ul>
 
             </div>
@@ -602,6 +659,29 @@ print(next(gen))  # Output: 1
 </div>
 
 
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/tutorial/stdlib2.html">11. Brief Tour of the Standard Library — Part II</a>
+                <ul>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib2.html#output-formatting">11.1. Output Formatting</a></li>
+                    <div>reprlib, pprint, textwrap, locale</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib2.html#templating">11.2. Templating</a></li>
+                    <div>string.Template</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib2.html#working-with-binary-data-record-layouts">11.3. Working with Binary Data Record Layouts</a></li>
+                    <div>struct pack and unpack functions</div>
+                    <li><a href="https://docs.python.org/3/tutorial/stdlib2.html#multi-threading">11.4. Multi-threading</a></li>
+                    <div>threading module</div>
+                    <div class="notion-explanation">CPython implementation detail: In CPython, due to the Global Interpreter Lock, only one thread can execute Python code at once (even though certain performance-oriented libraries might overcome this limitation). If you want your application to make better use of the computational resources of multi-core machines, you are advised to use multiprocessing or concurrent.futures.ProcessPoolExecutor. However, threading is still an appropriate model if you want to run multiple I/O-bound tasks simultaneously.</div>
+                </ul>
+
+            </div>
+</div>
+</div>
+</div>
 
 
 
@@ -804,7 +884,14 @@ print(next(gen))  # Output: 1
 
 
 
+<hr>
+<br>
+
+
+
 
 
 </body>
 </html>
+
+
