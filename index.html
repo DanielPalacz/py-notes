@@ -275,10 +275,7 @@
     <div class="col-md-8">
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <a class="main-a" href="https://docs.python.org/3/tutorial/datastructures.html">5. Data Structures</a>
-                <ul>
-                    <li class="todo">TODO</li>
-                </ul>
+                <a class="main-a" href="https://docs.python.org/3/tutorial/datastructures.html">5. Data Structures (basic)</a>
 
             </div>
 </div>
@@ -311,7 +308,19 @@
                     <ul>
                         <li class="notion-explanation">will not write compiled py files like: __pycache__/modx.pyc</li>
                     </ul>
-
+                    <li>Namespaces in Python:</li>
+                    <div class="notion-explanation">namespace is the structure used to organize the symbolic names assigned to objects in a Python program</div>
+                    <div>LEGB rule (can be changed by: global/nonlocal keywords)</div>
+                    <ul>
+                        <li>LEG are implemented as dictionaries / B as module</li>
+                        <li>How to see LEGB contents? LE: locals(), G: globals(), dir() and dir(imported_module), B: dir(__builtins__)</li>
+                        <li>namespaces creation lifetime:</li>
+                    <ul>
+                        <li>B: created when the Python interpreter starts up, and is never deleted. It lives as __builtins__</li>
+                        <li>G (also for module): is created when the module definition is read in; normally, module namespaces also last until the interpreter quits</li>
+                        <li>LE: is created when the function is called, and deleted when the function returns or raises an exception that is not handled within the function.</li>
+                    </ul>
+                    </ul>
                 </ul>
 
             </div>
@@ -451,7 +460,7 @@ $ Initializing the instance of MyClass
 
 <hr>
 <br>
-<li style="font-weight: bold;">Iterators:</li>
+<li style="font-weight: bold; font-size:24px;">Iterators:</li>
 <div class="notion-explanation">An iterator is a class that implements two special methods: __iter__() and __next__().</div>
 <ul>
     <li class="notion-explanation">__iter__(): This method is called when an iterator is required for an object. It should return the iterator object itself.</li>
@@ -503,8 +512,61 @@ Traceback (most recent call last):
     raise StopIteration  # No more items to iterate over
 StopIteration
 </pre>
-<a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#multiple-inheritance">Multiple Inheritance</a>
+<a style="font-size:20px;" href="https://github.com/DanielPalacz/py-notes/blob/main/general/iterators.py">iterator class example</a>
+<hr>
+<br>
 
+
+<li style="font-weight: bold; font-size:24px;">Generators:</li>
+<div class="notion-explanation">Generators are a functions which return a generator-iterator objects.</div>
+<div class="notion-explanation">Generator-iterator objects follow Iterator protocol, because of implementing __iter__ and __next__ methods.</div>
+<div class="notion-explanation">Anything that can be done with generators can also be done with class-based iterators.</div>
+<div class="notion-explanation">What makes generators so compact is that the __iter__() and __next__() methods are created automatically.</div>
+<div class="notion-explanation">In addition to automatic method creation and saving program state, when generators terminate, they automatically raise StopIteration.</div>
+<div class="notion-explanation">These features make it easy to create iterators with no more effort than writing a regular function.</div>
+<br>
+<div>Simple generator:</div>
+<pre class="code">
+
+def reverse(data):
+    for index in range(len(data)-1, -1, -1):
+        yield data[index]
+
+for char in reverse('golf'):
+    print(char)
+</pre>
+<pre class="shell">
+f
+l
+o
+g
+</pre>
+<div style="text-decoration: underline;">Great example of usage generators - processing big file:</div>
+<pre class="code">
+def read_large_file(file_path):
+    with open(file_path) as file:
+        for line in file:
+            yield line.strip()
+
+for line in read_large_file("big_file.txt"):
+    print(line)  # Processing line without loading full file to memory.
+</pre>
+
+<div style="text-decoration: underline;">Generators advanced features:</div>
+<ul>
+    <li>sending data to generators: <span class="code">send(value)</span></li>
+    <div class="notion-explanation">Send starts generator and sends 'value' to yield expression.</div>
+    <div class="notion-explanation">First generator call has to be via next or send(None).</div>
+    <li>sending exception to generators: <span class="code">throw(Exception, 'Message')</span></li>
+    <li>closing generators by: <span class="code">close()</span></li>
+    <li>delegating to other generators by: <span class="code">yield from</span></li>
+    <li>generator expressions:</li>
+<pre class="code">
+gen = (x**2 for x in range(5))
+print(next(gen))  # Output: 0
+print(next(gen))  # Output: 1
+</pre>
+</ul>
 </ul>
 <hr>
 
@@ -515,279 +577,214 @@ StopIteration
 
 
 
-
-    <br><br>
-      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#iterators">9.8 Iterators</a>
-      <br>
-      <pre>------------------------------------------------------------------------------------------------------------------
-for element in [1, 2, 3]:    # iter([1, 2, 3])
-    print(element)
-> 1
-> 2
-> 3
-
-mini_iter = iter([1, 2, 3])
-print(mini_iter)
-> 'list_iterator object at 0x7fd920b5a7c0'
-
-print(next(mini_iter))
-> 1
-print(next(mini_iter))
-> 2
-print(next(mini_iter))
-> 3
-print(next(mini_iter))
-> Traceback (most recent call last):
-> ...
-> StopIteration
-------------------------------------------------------------------------------------------------------------------</pre>
-      <ul>
-          <li>Behind the scenes, the for statement calls <b>iter()</b> builtin function on the container object. </li>
-          <li>The iter() function returns an iterator object that defines the method <b>__next__()</b> which accesses elements in the container one at a time.</li>
-          <li>When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate.</li>
-      </ul>
-    <u style="font-size:20px;">Defining your own iterator</u>
-      <ul>
-          <li>Define an <b>__iter__()</b> method which returns an object with a <b>__next__()</b> method.</li>
-          <li>If the class defines __next__(), then __iter__() can just return <b>self</b>.</li>
-      </ul>
-    <br><br>
-      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#generators">9.9 Generators</a>
-      <br>
-      <ul>
-          <li>Generator is a function which returns a generator-iterator object.</li>
-          <li>Generators are a simple and powerful tools for creating iterators.</li>
-          <li>They are written like regular functions but use the yield statement whenever they want to return data. Each time next() is called on it, the generator resumes where it left off.</li>
-          <li>Anything that can be done with generators can also be done with class-based iterators as described in the previous section. What makes generators so compact is that the __iter__() and __next__() methods are created automatically.</li>
-          <li>Another key feature is that the local variables and execution state are automatically saved between calls.</li>
-          <li>In addition to automatic method creation and saving program state, when generators terminate, they automatically raise <b>StopIteration</b>. In combination, these features make it easy to create iterators with no more effort than writing a regular function.</li>
-        </ul>
-      <pre>def reverse(data):
-    for index in range(len(data)-1, -1, -1):
-        yield data[index]
->>>
->>> for char in reverse('golf'):
-...     print(char)
-...
-f
-l
-o
-g</pre>
-      <a style="font-size:15px;" href="https://docs.python.org/3/glossary.html#term-generator">generator-definition</a>
-    <br><br>
-      <a style="font-size:30px;" href="https://docs.python.org/3/tutorial/classes.html#generator-expressions">9.10. Generator Expressions</a>
-      <br>
-      <ul>
-          <li>Some simple generators can be coded succinctly as expressions using a syntax similar to list comprehensions but with parentheses instead of square brackets.</li>
-          <li>These expressions are designed for situations where the generator is used right away by an enclosing function.</li>
-          <li>Generator expressions are more compact but less versatile than full generator definitions and tend to be more memory friendly than equivalent list comprehensions.</li>
-        </ul>
-      <pre>>>> sum(i*i for i in range(10))                 # sum of squares
-285</pre>
-  </div>
-  <div class="column" style="background-color:powderblue;border: 1px solid black;">
-    <h2>Mixed notes:</h2>
-    <hr>
-    <p> -- whereis </p>
-    <p> -- end-of-file character (Control-D on Unix, Control-Z on Windows) </p>
-    <p> -- Unix shell’s search path (PATH env variable) </p>
-    <p> -- differences for: procedures / functions / methods </p>
-    <p> -- python Walrus operator ":=" (introduced in Python3.8)</p>
-    <p> -- python @dataclass decorator (introduced in Python3.7)</p>
-    <p> -- passing an object (when function is called) is cheap since only a pointer is passed by the impl.</p>
-  <b>-- computational complexity of algorithms:</b>
-      <ul>
-    <li>what kind of complexity? time performance / memory performance </li>
-    <li><a style="font-size:15px;" href="https://www.samouczekprogramisty.pl/podstawy-zlozonosci-obliczeniowej/">estimation function basics 1</a></li>
-    <li><a style="font-size:15px;" href="https://typeofweb.com/zlozonosc-obliczeniowa-czasowa-pamieciowa-algorytmow/">estimation function basics 2</a></li>
-  </ul>
-    <br>
+<hr>
+<br>
 
 
 
 
-    <hr>
-    <br>
-      <a href="https://pep8.org/">PEP 8 — the Style Guide for Python Code</a>
-    <br><br>
-    <hr>
-    <br>
-    <u style="font-size:30px;">Python execution model:</u><br>
-    <table>
-    <br>
-      <tr>
-        <th>parsing stage</th>
-        <th>execution stage (runtime)</th>
-      </tr>
-        <tr>
-            <td>-- evaulating default values for functions<br>
-                1. The code is parsed (i.e., split up) into a list of pieces usually called tokens.<br>
-                2. The raw list of tokens is transformed to build an Abstract Syntax Tree.<br>
-                3. An AST is a collection of nodes which are linked together based on the grammar of the Python lang.<br>
-                4. From an AST, the interpreter can produce a lower level form of instructions called bytecode.<br>
-                <a style="font-size:20px;" href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST/Python</a>
 
-            </td>
-            <td>code execution (variables are dynamically typed)</td>
-        </tr>
-      <tr>
-        <th>more details: what happens during parsing/runtime stages?</th>
-        <th></th>
-      </tr>
-    </table>
-    <br><br>
-    <hr>
-    <br><br>
-    <u style="font-size:30px;">Namespaces in Python:</u>
-    <br><br>
-    -- namespace is the structure used to organize the symbolic names assigned to objects in a Python program.<br>
-    -- The scope is the region of a program in which that name has meaning.<br><br>
-    -- LEGB rule (can be changed by: -- global/nonlocal keywords)<br>
-    ---- LEG are implemented as dictionaries / B as module<br><br>
-    -- How to list the given Namespace members?<br>
-    ---- LE: locals(), G: globals(), dir() and dir(imported_module), B: dir(__builtins__)<br><br>
-    -- namespaces creation lifetime:<br>
-    ---- B: created when the Python interpreter starts up, and is never deleted.  It lives in a G-module; this is called builtins<br>
-    ---- G (also for module): is created when the module definition is read in; normally, module namespaces also last until the interpreter quits<br>
-    ---- LE:  is created when the function is called, and deleted when the function returns or raises an exception that is not handled within the function.
 
-    <br><br>
-    <hr>
-    <br>
-    <u>map/zip/filter/reduce (Python builtins example):</u><br>
-    -- list2 = list(map(lambda x: x*2, [1, 2, 3]))<br>
-    -- a_list = [1, 2, 3, 4], b_list = [5, 6, 7]<br>
-    -- print(list(zip(a_list, b_list))), [(1, 5), (2, 6), (3, 7)]<br>
-    -- <a style="font-size:20px;" href="https://github.com/DanielPalacz/Python_Tutorial/blob/main/Other_Python_Related_notes/BuiltinFunctions_review/map_zip_filter_reduce.py">map, zip, filter, reduce examples</a>
-    <br><br>
-    <hr>
-    <br>
-    <u>Copying</u><br>
-    -- referencing<br>
-    -- slicing <=> shallow copying <=> copy.copy()<br>
-    -- copy.deepcopy<br>
-    <br>
-    <hr>
-    <br><br>
-        <a style="font-size:30px;" href="https://docs.python.org/3/library">The Python Standard Library</a>
-    <br><br>
-    <a style="font-size:20px;" href="https://docs.python.org/3/library/functions.html">Built-in Functions (source 1)</a>
-      <br>
-    <a style="font-size:20px;" href="https://www.programiz.com/python-programming/methods/built-in">Built-in Functions  (source 2)</a>
-      <br>
-    <a style="font-size:20px;" href="https://docs.python.org/3/library/constants.html">Built-in Constants</a>
-      <br>
-    <a style="font-size:20px;" href="https://docs.python.org/3/library/stdtypes.html">Built-in Types</a>
-      <br>
-    <a style="font-size:20px;" href="https://docs.python.org/3/library/exceptions.html">Built-in Exceptions</a>
-    <br>
-    <br>
-    <br>
-    <hr>
-      <br>
-      <a style="font-size:20px;" href="https://code.tutsplus.com/tutorials/understand-how-much-memory-your-python-objects-use--cms-25609">Measuring the Memory Usage of Python Objects</a>
-        <ul>
-          <li>The standard library’s sys module provides the getsizeof() function.<br>
-          It calculates the actual memory usage for Python primitive objects:</li>
-          <br>
-    <table>
-      <tr>
-        <th>Python Object</th>
-        <th>Memory usage</th>
-        <th>Id</th>
-        <th>Python Error</th>
-      </tr>
-      <tr>
-        <td>int</td>
-        <td>sys.getsizeof(5)<br>
-            24 bytes</td>
-        <td>bytes<br>bool/False<br>True/None</td>
-        <td>sys.getsizeof(bytes())<br>
-33 bytes<br>
-sys.getsizeof(bool())<br>
-sys.getsizeof(False)<br>
-24 bytes<br>
-sys.getsizeof(True)<br>
-28 bytes<br>
-sys.getsizeof(None)<br>
-16 bytes</td>
-      </tr>
-      <tr>
-        <td>float</td>
-        <td>sys.getsizeof(5.3)<br>
-            24 bytes<br>
-        </td>
-        <td>List</td>
-        <td>sys.getsizeof([])<br>
-56 bytes<br>
-sys.getsizeof([1])<br>
-64 bytes<br>
-sys.getsizeof([1, 2])<br>
-72 bytes<br>
-sys.getsizeof(['a long string'])<br>
-64 bytes</td>
-      </tr>
-      <tr>
-        <td>Decimal</td>
-        <td>from decimal import Decimal<br>
-sys.getsizeof(Decimal(5.3))<br>
-80 bytes</td>
-        <td>Tuple</td>
-          <td>sys.getsizeof(tuple())<br>
-40 bytes<br>
-sys.getsizeof((1,))<br>
-48 bytes<br>
-sys.getsizeof((1, 2))<br>
-56 bytes</td>
-</tr>
-      <tr>
-        <td>Python Strings</td>
-        <td>sys.getsizeof('')<br>
-49 bytes<br>
-sys.getsizeof('1')<br>
-50 bytes<br>
-sys.getsizeof('1234')<br>
-53 bytes</td>
-        <td>Set</td>
-        <td>
-sys.getsizeof(set())<br>
-sys.getsizeof(set([1]))<br>
-sys.getsizeof({1, 2})<br><br>
-<b>216 bytes</b></td>
-      </tr>
-      <tr>
-        <td>Python Strings<br>
-        (are Unicode)</td>
-        <td>sys.getsizeof(u'')<br>
-49 bytes<br>
-sys.getsizeof(u'1')<br>
-50 bytes<br>
-sys.getsizeof(u'1234')<br>
-53 bytes</td>
-        <td>Dict</td>
-        <td>sys.getsizeof({})<br>
-            64 bytes
-            sys.getsizeof(dict())<br>
-            sys.getsizeof({"a": 1})<br>
-            sys.getsizeof(dict(a=1, b=2, c=3))<br><br>
-            <b>232 bytes</b>
-        </td>
-      </tr>
-    </table>
-    <br>
-    <li>The list doesn’t contain the int objects . It just contains an 8-byte (on 64-bit versions of CPython) pointer to the actual int object.
-        64 bits (8 bytes) address bus width - says how many memory cells we can address in the system.</li>
-    <li>For more complex Py objects: drilling down recursively to calculate the actual memory usage of an object graph.</li>
-    <li>Reference Counting</li>
-    <li>Small Objects</li>
-    <li>Integers</li>
-    <li>Python Memory vs. System Memory</li>
-    <li>Memory Profiler</li>
-  </ul>
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">MIXED THINGS:</h4>
+                <ul>
+                    <li>Walrus operator ":=" (introduced in Python3.8)</li>
+                    <li>@dataclass decorator (introduced in Python3.7)</li>
+                    <li>map, zip, filter, reduce examples: <a href="https://github.com/DanielPalacz/Python_Tutorial/blob/main/Other_Python_Related_notes/BuiltinFunctions_review/map_zip_filter_reduce.py">Link</a></li>
+                    <li>Copying in Python:</li>
+                    <ul>
+                        <li>Referencing</li>
+                        <li>slicing = shallow copying = copy.copy()</li>
+                        <li>copy.deepcopy()</li>
+                    </ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 class="todo" style="font-weight: bold;">PEP 8 — the Style Guide for Python Code</h4>
+                <a href="https://pep8.org/">Link</a>
+                <ul>
+                    <li>note1</li>
+                    <li>note2</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Python execution model:</h4>
+                <div>Parsing stage:</div>
+                <ul>
+                    <li>Evaluating default values for functions</li>
+                    <li>The code is parsed (i.e., split up) into a list of pieces usually called tokens.</li>
+                    <li>The raw list of tokens is transformed to build an Abstract Syntax Tree.</li>
+                    <li>An AST is a collection of nodes which are linked together based on the grammar of the Python lang.</li>
+                    <li>From an AST, the interpreter can produce a lower level form of instructions called bytecode.</li>
+                    <li><a href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST in Python.</a></li>
+                </ul>
+                <div>Execution stage (runtime):</div>
+                <ul>
+                    <li>code execution (variables are dynamically typed.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Computational complexity of algorithms:</h4>
+                <ul>
+                    <li>What kind of complexity? time performance / memory performance</li>
+                    <a href="https://www.samouczekprogramisty.pl/podstawy-zlozonosci-obliczeniowej/">estimation function basics 1</a>
+                    <br>
+                    <a href="https://pl.typeofweb.com/zlozonosc-obliczeniowa-czasowa-pamieciowa-algorytmow">estimation function basics 2</a>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://code.tutsplus.com/tutorials/understand-how-much-memory-your-python-objects-use--cms-25609">Measuring the Memory Usage of Python Objects</a>
+                <div>sys module provides the getsizeof() function calculating the actual memory usage for Python objects:</div>
+
+            <div class="col">
+                <ul>
+                    <li>int</li>
+                    <div class="code">sys.getsizeof(5)</div>
+                    <div class="shell">28</div>
+                    <li>float</li>
+                    <div class="code">sys.getsizeof(5.3)</div>
+                    <div class="shell">24</div>
+                    <li>Decimal</li>
+                    <div class="code">from decimal import Decimal</div>
+                    <div class="code">sys.getsizeof(Decimal(5.3))</div>
+                    <div class="shell">104</div>
+                    <li>Python strings:</li>
+                    <div class="code">sys.getsizeof('')</div>
+                    <div class="shell">49</div>
+                    <div class="code">sys.getsizeof('1')</div>
+                    <div class="shell">50</div>
+                    <div class="code">sys.getsizeof('1234')</div>
+                    <div class="shell">53</div>
+                    <div class="code">sys.getsizeof(u'1234')</div>
+                    <div class="shell">53</div>
+                    <li>Bytes:</li>
+                    <div class="code">sys.getsizeof(bytes())</div>
+                    <div class="shell">33</div>
+                    <div class="code">sys.getsizeof(bytes(1))</div>
+                    <div class="shell">34</div>
+                    <li>Boolean values and None:</li>
+                    <div class="code">sys.getsizeof(False)</div>
+                    <div class="shell">24</div>
+                    <div class="code">sys.getsizeof(True)</div>
+                    <div class="shell">28</div>
+                    <div class="code">sys.getsizeof(None)</div>
+                    <div class="shell">16</div>
+                </ul>
+            </div>
+                <div class="col">
+                    <ul>
+                    <li>Python lists:</li>
+                    <div class="code">sys.getsizeof([])</div>
+                    <div class="shell">56</div>
+                    <div class="code">sys.getsizeof([1])</div>
+                    <div class="shell">64</div>
+                    <div class="code">sys.getsizeof([1,2])</div>
+                    <div class="shell">72</div>
+                    <div class="code">sys.getsizeof(["long string"])</div>
+                    <div class="shell">64</div>
+                    <li>Python tuples:</li>
+                    <div class="code">sys.getsizeof(tuple())</div>
+                    <div class="shell">40</div>
+                    <div class="code">sys.getsizeof((1,))</div>
+                    <div class="shell">48</div>
+                    <div class="code">sys.getsizeof((1,2))</div>
+                    <div class="shell">56</div>
+                    <li>Python sets:</li>
+                    <div class="code">sys.getsizeof(set())</div>
+                    <div class="code">sys.getsizeof((1,))</div>
+                    <div class="code">sys.getsizeof((1,2))</div>
+                    <div class="shell">216</div>
+                    <li>Python dictionaries:</li>
+                    <div class="code">sys.getsizeof(dict())</div>
+                    <div class="shell">216</div>
+                    <div class="code">sys.getsizeof({"a": 1})</div>
+                    <div class="code">sys.getsizeof(dict(a=1, b=2, c=3))</div>
+                    <div class="shell">232</div>
+                    </ul>
+                </div>
+
       <p>CPython uses a lot of memory for its objects. It uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
-      <hr>
-  </div>
-<!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a class="main-a" href="https://docs.python.org/3/library/">The Python Standard Library</a>
+                <ul>
+                    <li>Introduction</li>
+                    <li>Built-in Functions</li>
+                    <li>Built-in Constants</li>
+                    <li>Built-in Exceptions</li>
+                    <li>Text Processing Services</li>
+                    <li>Binary Data Services</li>
+                    <li>Data Types</li>
+                    <li>Numeric and Mathematical Modules</li>
+                    <li>Functional Programming Modules</li>
+                    <li>File and Directory Access</li>
+                    <li>Data Persistence</li>
+                    <li>...</li>
+                </ul>
+
+            </div>
+</div>
+</div>
+</div>
+
+
+
+
 
 </body>
 </html>
