@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+
+<hr>
+<br>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h1 style="font-weight: bold;text-decoration: underline;">Async IO in Python: A Complete Walkthrough</h1>
+                <div>To be covered:</div>
+                <ul>
+                    <li>async/await: two new Python keywords that are used to define coroutines</li>
+                    <li>await is used to pause execution of a coroutine until an awaited result is ready</li>
+                    <li>asyncio: the Python package that provides a foundation and API for running and managing coroutines</li>
+                    <li>Coroutines (specialized generator functions) are the heart of async IO in Python</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Introduction:</h4>
+                <div>Async IO is a concurrent programming design that has received dedicated support in Python, evolving rapidly from Python 3.4 through 3.7, and probably beyond. In the one sentence <b>asyncio</b> is a package to write concurrent code using the async/await syntax.</div>
+                <ul>
+                    <li>async is used to define a coroutine (an async function)</li>
+                    <li>await is used to pause execution of a coroutine until an awaited result is ready.</li>
+                </ul>
+                <div>coroutine (an async function)</div>
+                <ul>
+                    <li>it is essentially a function that can pause and resume execution. When you call a coroutine, it doesn't immediately run; it returns a coroutine object.</li>
+                </ul>
+                <div>To execute coroutine, you need to:</div>
+                <ul>
+                    <li>Use await if you're inside an async function.</li>
+                    <li>Use an event loop like asyncio.run() if you're in a synchronous context.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow yellow-this">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Note:</h4>
+                <div>In this article, I use the term <b>'async IO'</b> to denote the language-agnostic design of asynchronous IO, while <b>'asyncio'</b> refers to the Python package.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">The 10,000-Foot View of Async IO:</h4>
+                <br>
+                <div>Where Does Async IO Fit In?</div>
+                <br>
+                <ul>
+                    <li><b>Parallelism</b> consists of performing multiple operations at the same time.</li>
+                    <li><b>Multiprocessing</b> is a means to effect parallelism, and it entails spreading tasks over a computer’s central processing units (CPUs, or cores). Multiprocessing is well-suited for CPU-bound tasks: tightly bound for loops and mathematical computations usually fall into this category.</li>
+                    <li><b>Concurrency</b> is a slightly broader term than parallelism. It suggests that multiple tasks have the ability to run in an overlapping manner. (There’s a saying that concurrency does not imply parallelism.)</li>
+                    <li><b>Threading</b> is a concurrent execution model whereby multiple threads take turns executing tasks. One process can contain multiple threads. Python has a complicated relationship with threading thanks to its GIL. What’s important to know about threading is that it’s better for IO-bound tasks. While a CPU-bound task is characterized by the computer’s cores continually working hard from start to finish, an IO-bound job is dominated by a lot of waiting on input/output to complete.</li>
+                    <ul>
+                        <li>To recap the above, concurrency encompasses both multiprocessing (ideal for CPU-bound tasks) and threading (suited for IO-bound tasks). Multiprocessing is a form of parallelism, with parallelism being a specific type (subset) of concurrency. The Python standard library has offered longstanding support for both of these through its multiprocessing, threading, and concurrent.futures packages.</li>
+                    </ul>
+                    <br>
+                    <li>Other concept, <b>asynchronous IO</b> enabled through the standard library’s <b>asyncio</b> package and the new async and await language keywords:</li>
+                    <ul>
+                        <li>The asyncio package is billed by the Python documentation as a library to write concurrent code. However, async IO is not threading, nor is it multiprocessing. It is not built on top of either of these.</li>
+                        <li>In fact, async IO is a single-threaded, single-process design: it uses <b>cooperative multitasking</b>, a term that you’ll flesh out by the end of this tutorial. It has been said in other words that async IO gives a feeling of concurrency despite using a single thread in a single process. Coroutines (a central feature of async IO) can be scheduled concurrently, but they are not inherently concurrent.</li>
+                        <li>To reiterate, async IO is a style of concurrent programming, but it is not parallelism. It’s more closely aligned with threading than with multiprocessing but is very much distinct from both of these and is a standalone member in concurrency’s bag of tricks.</li>
+                        <li>That leaves one more term. What does it mean for something to be asynchronous? This isn’t a rigorous definition, but for our purposes here, I can think of two properties:</li>
+                    <ul>
+                        <li>Asynchronous routines are able to “pause” while waiting on their ultimate result and let other routines run in the meantime.</li>
+                        <li>Asynchronous code, through the mechanism above, facilitates concurrent execution. To put it differently, asynchronous code gives the look and feel of concurrency.</li>
+                    </ul>
+                    </ul>
+                </ul>
+
+                <div>Async IO Explained</div>
+                <ul>
+                    <li><b>Cooperative multitasking</b> is a fancy way of saying that a program’s event loop communicates with multiple tasks to let each take turns running at the optimal time.</li>
+                </ul>
+                <div>Async IO Is Not Easy</div>
+                <ul>
+                    <li>Python’s async model is built around concepts such as callbacks, events, transports, protocols, and futures.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+

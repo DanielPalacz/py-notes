@@ -78,6 +78,9 @@
         color: yellow;
         background-color: #000;
     }
+    .yellow-this {
+        background-color: yellow;
+    }
 
     .notion {
     	color: #9370DB;
@@ -146,7 +149,7 @@
         <li>Argument Passing:</li>
         <ul>
             <li>sys.argv</li>
-            <li class="todo">argparse module TODO</li>
+            <li>argparse module</li>
         </ul>
         <li>sys.stdin:</li>
         <ul>
@@ -512,7 +515,7 @@ Traceback (most recent call last):
     raise StopIteration  # No more items to iterate over
 StopIteration
 </pre>
-<a style="font-size:20px;" href="https://github.com/DanielPalacz/py-notes/blob/main/general/iterators.py">iterator class example</a>
+<a class="yellow-this" style="font-size:20px;" href="https://github.com/DanielPalacz/py-notes/blob/main/general/iterators.py">iterator class example</a>
 <hr>
 <br>
 
@@ -594,7 +597,7 @@ print(next(gen))  # Output: 1
                     <li><a href="https://docs.python.org/3/tutorial/stdlib.html#command-line-arguments">10.3. Command Line Arguments</a></li>
                     <div>sys.argv</div>
                     <div>argparse module</div>
-                    <a href="https://github.com/DanielPalacz/py-notes/blob/main/general/argparse_basic.py">example</a>
+                    <a class="yellow-this" href="https://github.com/DanielPalacz/py-notes/blob/main/general/argparse_basic.py">example</a>
                     <li><a href="https://docs.python.org/3/tutorial/stdlib.html#error-output-redirection-and-program-termination">10.4. Error Output Redirection and Program Termination</a></li>
                     <div class="code">sys.stderr.write('Warning, log file not found starting a new one\n')</div>
                     <li><a href="https://docs.python.org/3/tutorial/stdlib.html#string-pattern-matching">10.5. String Pattern Matching</a></li>
@@ -676,6 +679,7 @@ print(next(gen))  # Output: 1
                     <li><a href="https://docs.python.org/3/tutorial/stdlib2.html#multi-threading">11.4. Multi-threading</a></li>
                     <div>threading module</div>
                     <div class="notion-explanation">CPython implementation detail: In CPython, due to the Global Interpreter Lock, only one thread can execute Python code at once (even though certain performance-oriented libraries might overcome this limitation). If you want your application to make better use of the computational resources of multi-core machines, you are advised to use multiprocessing or concurrent.futures.ProcessPoolExecutor. However, threading is still an appropriate model if you want to run multiple I/O-bound tasks simultaneously.</div>
+                    <a href="https://github.com/DanielPalacz/py-notes/tree/main/threading_examples" target="_blank">threading examples</a>
                 </ul>
 
             </div>
@@ -886,6 +890,17 @@ print(next(gen))  # Output: 1
 
 <hr>
 <br>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <a href="asyncio.html"><h4 style="font-weight: bold;text-decoration: underline;">Python ayncio library</h4></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
