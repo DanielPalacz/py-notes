@@ -96,6 +96,12 @@
     	font-style: italic;
     }
 
+        #hiddenTekst {
+            display: none;
+        }
+        button {
+            cursor: pointer;
+        }
 
 </style>
 
@@ -111,6 +117,7 @@
         <div class="card mb-4 box-shadow">
             <div class="card-body">
                 <h1 style="font-weight: bold;text-decoration: underline;">Async IO in Python: A Complete Walkthrough</h1>
+                <a class="yellow-this" href="https://realpython.com/async-io-python/">https://realpython.com/async-io-python/</a>
                 <div>To be covered:</div>
                 <ul>
                     <li>async/await: two new Python keywords that are used to define coroutines</li>
@@ -123,8 +130,8 @@
     </div>
 </div>
 
-
-
+<hr>
+<br>
 
 <div class="row">
     <div class="col-md-8">
@@ -148,20 +155,19 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-4">
+        <div class="col-md-3">
         <div class="card mb-4 box-shadow yellow-this">
             <div class="card-body">
                 <h4 style="font-weight: bold;text-decoration: underline;">Note:</h4>
-                <div>In this article, I use the term <b>'async IO'</b> to denote the language-agnostic design of asynchronous IO, while <b>'asyncio'</b> refers to the Python package.</div>
+                <div>- the term <b>async IO</b> to denote the language-agnostic design of asynchronous IO</div>
+                <div> - while <b>asyncio</b> refers to Python package</div>
             </div>
         </div>
     </div>
 </div>
 
+
+<br>
 
 <div class="row">
     <div class="col-md-8">
@@ -432,9 +438,190 @@ if __name__ == "__main__":
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-10">
+        <div class="card mb-4 box-shadow yellow-this">
+            <div class="card-body">
+                <h1 style="font-weight: bold;text-decoration: underline;">Questions</h1>
+                <br>
+                <div><b>1a. What is Event Loop and how is created?</b></div>
+<!--                <button onclick="pokazTekst()">Show/hide answer</button></div>-->
+                <ul>
+                    <li>Main and central mechanism of asyncio package. It is responsible for managing coroutines execution and handling event in asynchronous application.</li>
+                    <li>Event loop allows to halt and start again coroutines. Because of this many tasks can be executed simultaneously.</li>
+                    <li>Commonly Event loop is created as below when it creates Event loop and trigger coroutine.</li>
+                        <b><span class="code">asyncio.run(coroutine_function())</span></b>
+                    <li>More complex way:</li>
+                    <pre class="code">loop = asyncio.get_event_loop()
+loop.run_until_complete(coroutine_function())</pre>
+                </ul>
+
+                <br>
+                <div><b>1b. How to define asynchronous function in Python?</b></div>
+                <ul>
+                    <pre class="code">
+async def fetch_data():
+    data = await some_network_request()
+    return data</pre>
+                    <li>How to trigger async function?</li>
+                    <ul>
+                    <pre class="code">
+# from other coroutine function:
+async def main():
+    result = await coroutine_funct()
+    print(result)
+
+# from synchronous context:
+asyncio.run(coroutine_funct())
+                    </pre>
+                    </ul>
+                </ul>
+
+                <div><b>2a. What is basic task for await keyword in asyncio?</b></div>
+                <ul>
+                    <li>It halts execution of current coroutine and allows other Event loop tasks to be executed. Because of this all program is not blocked.</li>
+                    <li>await also waits for finishing execution of awaitable object (other async function)</li>
+                    <li>await works only in async context in function defined by async. When used in synchronous context then SyntaxError is raised.</li>
+                </ul>
+
+
+                <div><b>2b. What happen if you forget to use await keyword when calling async function</b></div>
+                <ul>
+                    <li>Coroutine object will be created but not executed.</li>
+                    <pre class="code">
+import asyncio
+
+async def fetch_data():
+    print("Fetching data...")
+    await asyncio.sleep(2)
+    print("Data fetched!")
+
+async def main():
+    fetch_data()  # Brak await
+    print("This will print immediately")
+
+asyncio.run(main())</pre>
+                    <li>fetch_data() returns coroutine object, but will not be executed</li>
+                    <li>Also, RuntimeWarning will be triggered (starting from Python 3.8)</li>
+                    <pre class="code">
+RuntimeWarning: coroutine 'fetch_data' was never awaited</pre>
+                </ul>
 
 
 
+                <div><b>3a. How to create and start task in asyncio</b></div>
+                <ul>
+                    <li>Task it is object of class: '_asyncio.Task' created by asyncio.create_task(). It manages coroutine execution.</li>
+                    <li>When task is created then automatically coroutine is started in background.</li>
+                    <pre class="code">
+
+async def my_coroutine():
+    print("Start")
+    await asyncio.sleep(1)
+    print("End")
+
+async def main():
+    task = asyncio.create_task(my_coroutine())
+    print("Task created")
+    await task
+
+asyncio.run(main())
+</pre>
+                    <li>Differences between task and coroutine</li>
+                    <table>
+                        <thead>
+                            <th>Feature</th>
+                            <th>Coroutine</th>
+                            <th>Task</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Trigerring</td>
+                                <td>Not automatically</td>
+                                <td>Coroutine is triggered immediately in background.</td>
+                            </tr>
+                            <tr>
+                                <td>Parallelism</td>
+                                <td>Executes in the context of the current await / Event loop</td>
+                                <td>It is tool allowing coroutine to be executed parallel.</td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>Lack of self-monitoring capabilities</td>
+                                <td>Task has self-monitoring features.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ul>
+
+                <div><b>2b. What is difference beetwen asyncio.run and loop.run_until_complete?</b></div>
+<!--                <button onclick="pokazTekst()">Show/hide answer</button></div>-->
+                <div>asyncio.run()</div>
+                <ul>
+                    <li>Create new Event loop.</li>
+                    <li>Executes the given coroutine.</li>
+                    <li>When coroutine is finished it closes Event loop and clean resources.</li>
+                    <li>Event loop is automatically managed.</li>
+                    <li>Easy to use, but can be used only only once in the program.</li>
+                </ul>
+                <div>loop.run_until_complete()</div>
+                <ul>
+                    <li>More complex to use.</li>
+                </ul>
+
+                <div><b>3a. How to create and run more tasks in parallel?</b></div>
+<!--                <button onclick="pokazTekst()">Show/hide answer</button></div>-->
+                <ul>
+                    <li class="code">asyncio.gather()</li>
+                    <li class="code">asyncio.create_task()</li>
+                </ul>
+
+                <div><b>3b. What is difference between 'asyncio.gather()' and 'asyncio.create_task()'?</b></div>
+                <pre class="code">
+    import asyncio
+
+    async def task1():
+        await asyncio.sleep(1)
+        print("Task 1 done")
+
+    async def task2():
+        await asyncio.sleep(2)
+        print("Task 2 done")
+
+    async def task3():
+        await asyncio.sleep(3)
+        print("Task 3 done")
+
+    async def main():
+        # Uruchamiamy wszystkie zadania jednocześnie i czekamy na ich zakończenie
+        await asyncio.gather(task1(), task2(), task3())
+
+    # Uruchomienie event loop
+    asyncio.run(main())
+                </pre>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <script>
+        function pokazTekst() {
+            const tekst = document.getElementById('hiddenTekst');
+            if (tekst.style.display === 'none') {
+                tekst.style.display = 'block'; // Pokaż tekst
+            } else {
+                tekst.style.display = 'none'; // Schowaj tekst
+            }
+        }
+    </script>
 
 </body>
 </html>
