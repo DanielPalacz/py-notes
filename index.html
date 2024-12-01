@@ -695,45 +695,6 @@ print(next(gen))  # Output: 1
 
 
 
-<div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
-            <div class="card-body">
-                <h4 style="font-weight: bold;">MIXED THINGS:</h4>
-                <ul>
-                    <li>Walrus operator ":=" (introduced in Python3.8)</li>
-                    <li>@dataclass decorator (introduced in Python3.7)</li>
-                    <li>map, zip, filter, reduce examples: <a href="https://github.com/DanielPalacz/Python_Tutorial/blob/main/Other_Python_Related_notes/BuiltinFunctions_review/map_zip_filter_reduce.py">Link</a></li>
-                    <li>Copying in Python:</li>
-                    <ul>
-                        <li>Referencing</li>
-                        <li>slicing = shallow copying = copy.copy()</li>
-                        <li>copy.deepcopy()</li>
-                    </ul>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
-            <div class="card-body">
-                <h4 class="todo" style="font-weight: bold;">PEP 8 — the Style Guide for Python Code</h4>
-                <a href="https://pep8.org/">Link</a>
-                <ul>
-                    <li>note1</li>
-                    <li>note2</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
 <div class="row">
     <div class="col-md-8">
@@ -862,13 +823,19 @@ print(next(gen))  # Output: 1
 
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #2222;">
             <div class="card-body">
                 <a class="main-a" href="https://docs.python.org/3/library/">The Python Standard Library</a>
                 <ul>
                     <li>Introduction</li>
                     <li>Built-in Functions</li>
+                    <ul>
+                        <li>abs, aiter, all, anext, any, ascii, bin, bool, breakpoint, callable, chr, classmethod, compile, complex,</li>
+                        <li>delattr, dir, divmod, enumerate, eval, exec, filter, float, format, getattr, globals, hasattr, hash, help,</li>
+                        <li>id, input, int, isinstance, issubclass, iter, len, locals, map, max, min, next, object, oct, open, ord,</li>
+                        <li>pow, print, property, repr, reversed, round, setattr, slice, sordeted, staticmethod, sum, super, type, vars, zip, __import__</li>
+                    </ul>
                     <li>Built-in Constants</li>
                     <li>Built-in Exceptions</li>
                     <li>Text Processing Services</li>
@@ -878,7 +845,32 @@ print(next(gen))  # Output: 1
                     <li>Functional Programming Modules</li>
                     <li>File and Directory Access</li>
                     <li>Data Persistence</li>
-                    <li>...</li>
+                    <li>Data Compression and Archiving</li>
+                    <li>File Formats</li>
+                    <li>Cryptographic Services</li>
+                    <li>Generic Operating System Services</li>
+                    <li>Concurrent Execution</li>
+                    <li>Networking and Interprocess Communication</li>
+                    <li>Internet Data Handling</li>
+                    <li>Structured Markup Processing Tools</li>
+                    <li>Internet Protocols and Support</li>
+                    <li>Multimedia Services</li>
+                    <li>Internationalization</li>
+                    <li>Program Frameworks</li>
+                    <li>Graphical User Interfaces with Tk</li>
+                    <li>Development Tools</li>
+                    <li>Debugging and Profiling</li>
+                    <li>Software Packaging and Distribution</li>
+                    <li>Python Runtime Services</li>
+                    <li>Custom Python Interpreters</li>
+                    <li>Importing Modules</li>
+                    <li>Python Language Services</li>
+                    <li>MS Windows Specific Services</li>
+                    <li>Unix Specific Services</li>
+                    <li>Modules command-line interface (CLI)</li>
+                    <li>Superseded Modules</li>
+                    <li>Removed Modules</li>
+                    <li>Security Considerations</li>
                 </ul>
 
             </div>
@@ -887,14 +879,9 @@ print(next(gen))  # Output: 1
 </div>
 
 
-
-<hr>
-<br>
-
-
 <div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: yellow;">
             <div class="card-body">
                 <a href="asyncio.html"><h4 style="font-weight: bold;text-decoration: underline;">Python ayncio library</h4></a>
             </div>
@@ -903,6 +890,59 @@ print(next(gen))  # Output: 1
 </div>
 
 
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #777;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Python garbage collection (GC)</h4>
+                <div>It is process of automatically deleting not-used objects from memory. For detecting that objects Python uses:</div>
+                <ul>
+                    <li><b>Reference counting</b>, mechanism of counting how many times object is used.</li>
+                    <li><b>Cycle detection</b>, mechanism for finding object referencing each other.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #FFA500;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">SOLID</h4>
+                <div>S</div>
+                <ul>
+                    <li><b>SRP</b>, Single Responsibility Principle</li>
+                    <li>Class should only one responsibility and one reason for the change.</li>
+                </ul>
+                <div>O</div>
+                <ul>
+                    <li><b>Open-Closed Principle</b></li>
+                    <li>Class should be open for extensions, but close for modifications.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #FFC0CB;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">DESIGN PATTERNS</h4>
+                <div>Composition</div>
+                <ul>
+                    <li>It allows to create classes from smaller components helping in adding new functionalities</li>
+                </ul>
+                <div>Strategy</div>
+                <div>Decorator</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
