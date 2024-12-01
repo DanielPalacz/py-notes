@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #FFC0CB;">
+            <div class="card-body">
+                <h2 style="font-weight: bold;text-decoration: underline;">Decorator examples</h2>
+                <br>
+                <h4>Function-based decorator:</h4>
+                <ul>
+                    <li>It simply extends function behaviour.</li>
+                </ul>
+<pre class="code">
+    import functools
+
+    def decorate_funct(f):
+        """ Decorator function: start_stop104 """
+
+        @functools.wraps(f)
+        def function_wrapper_level_one(*args, **kwargs):
+            # Do something ...
+            results = f(*args, **kwargs)
+            # Do something ...
+            return results
+
+        return function_wrapper_level_one
+
+
+    @decorate_funct
+    def funct():
+        return 100
+
+
+    X = funct()
+    print(X)
+</pre>
+                <br>
+                <h4>Class-based decorator:</h4>
+                <ul>
+                    <li>It is used typically to maintain state.</li>
+                </ul>
+<pre class="code">
+    class CountCalls:
+
+        def __init__(self, func):
+            self.func = func
+            self.num_calls = 0
+
+        def __call__(self, *args, **kwargs):
+            self.num_calls += 1
+            print("Number of calls:", self.num_calls)
+            return self.func(*args, **kwargs)
+
+    @CountCalls
+    def say_hello():
+        print("hello")
+
+    say_hello()
+    say_hello()
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+
