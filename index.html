@@ -933,6 +933,8 @@ print(next(gen))  # Output: 1
         <div class="card mb-4 box-shadow" style="background-color: #FFA500;">
             <div class="card-body">
                 <h4 style="font-weight: bold;text-decoration: underline;">SOLID</h4>
+                <small>Because of SOLID programmers can develop more modular/elastic systems.</small>
+                <br></br>
                 <div>S</div>
                 <ul>
                     <li><b>SRP</b>, Single Responsibility Principle</li>
@@ -947,16 +949,29 @@ print(next(gen))  # Output: 1
                 <ul>
                     <li><b>Liskov Substitution Principle</b></li>
                     <li>A child class should be able to do everything the parent class can do, without changing the expected behavior.</li>
+                <ul>
+                    <li>Subclasses can change/extend interface already defined, but it should be done in a way that not break base class contract.</li>
+                    <li>Subclasses should be compliant with expectation coming from base class users. They should not surprise users.</li>
+                </ul>
                 </ul>
                 <div>I</div>
                 <ul>
                     <li><b>ISP</b>, Interface segregation principle</li>
-                    <li> .... </li>
+                    <li>It says about creating more precise, specialized interfaces.</li>
+                    <ul>
+                        <li>Interfaces should be split to smaller, more precise interfaces.</li>
+                        <li>Classes should not be forced to implement not needed methods.</li>
+                    </ul>
                 </ul>
                 <div>D</div>
                 <ul>
                     <li><b>DIP</b>, Dependency inversion principle</li>
-                    <li> .... </li>
+                    <li>DIP is all about reversing the traditional dependency relationship:</li>
+                    <ul>
+                        <li>High-level business logic should rely on abstractions.</li>
+                        <li>Low-level modules provide concrete implementations of those abstractions.</li>
+                        <li>This results in more flexible, modular, and maintainable code that’s easier to extend and test.</li>
+                    </ul>
                 </ul>
             </div>
         </div>
@@ -969,6 +984,12 @@ print(next(gen))  # Output: 1
         <div class="card mb-4 box-shadow" style="background-color: #FFC0CB;">
             <div class="card-body">
                 <h4 style="font-weight: bold;text-decoration: underline;">DESIGN PATTERNS</h4>
+                <div>Types of design patterns:</div>
+                <ul>
+                    <li><b>Creational Patterns</b> (deals with object creation mechanisms)</li>
+                    <li><b>Structural Patterns</b> (deals with object composition and structure)</li>
+                    <li><b>Behavioral Patterns</b> (deals with object communication and responsibility)</li>
+                </ul>
                 <div>Composition</div>
                 <ul>
                     <li>Composition is a design principle in object-oriented programming where one class is composed of one or more objects from other classes.</li>
@@ -976,6 +997,9 @@ print(next(gen))  # Output: 1
                     <a href="design_patterns/composition.html"><li style="text-decoration: underline;">Example</li></a>
                 </ul>
                 <div>Strategy</div>
+                <ul>
+                    <li>It allows you to define different ways of doing something (strategies) and let the client choose which one to use at runtime.</li>
+                </ul>
                 <div>Decorator</div>
                 <ul>
                     <a href="design_patterns/decorators.html"><li style="text-decoration: underline;">Decorator examples</li></a>
