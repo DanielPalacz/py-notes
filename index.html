@@ -896,7 +896,8 @@ print(next(gen))  # Output: 1
         <div class="card mb-4 box-shadow" style="background-color: #777;">
             <div class="card-body">
                 <h4 style="font-weight: bold;text-decoration: underline;">Python garbage collection (GC)</h4>
-                <div>It is process of automatically deleting not-used objects from memory. For detecting that objects Python uses:</div>
+                <div>It is builtin mechanism for memory management. Main goal is memory recovery.</div>
+                <div>From practical point of view it is process of auto-deleting not-used objects from memory. For detecting that objects Python uses:</div>
                 <ul>
                     <li><b>Reference counting</b>, mechanism of counting how many times object is used.</li>
                     <li><b>Cycle detection</b>, mechanism for finding object referencing each other.</li>
@@ -911,15 +912,27 @@ print(next(gen))  # Output: 1
     <div class="col-md-9">
         <div class="card mb-4 box-shadow" style="background-color: #90EE90;">
             <div class="card-body">
-                <h4 style="font-weight: bold;text-decoration: underline;">GIL</h4>
-                <div>Global Interpreter Lock</div>
+                <h4 style="font-weight: bold;text-decoration: underline;">GIL (Global Interpreter Lock)</h4>
+                <div>Global Interpreter Lock - mechanism used in CPython, it ensures that in one moment only pone thread can execute Python code.</div>
                 <ul>
-                    <li>What Problem Did the GIL Solve for Python?</li>
+                    <li>What problems GIL solves for Python?</li>
+                    <ul>
+                        <li>Multi-threading access potential issues.</li>
+                        <li>Race Conditions in Reference Counting (Garbage Collection).</li>
+                        <li>Complexity of Fine-Grained Locks. The GIL ensures safety and simplicity.</li>
+                    </ul>
                     <li>Why Was the GIL Chosen as the Solution?</li>
+                    <ul>
+                        <li>Simplicity and performance aspects.</li>
+                    </ul>
                     <li>The Impact on Multi-Threaded Python Programs.</li>
+                    <ul>
+                        <li>Multi-threading in Python doesn't achieve true parallelism on multi-core processors (except in specific cases, like I/O-bound operations or extensions written in C that release the GIL).</li>
+                    </ul>
                     <li>Why Hasn’t the GIL Been Removed Yet?</li>
-                    <li>Why Wasn’t It Removed in Python 3?</li>
-                    <li>How to Deal With Python’s GIL?</li>
+                    <ul>
+                        <li>Due to several reasons being a combination of technical complexity, backward compatibility concerns, and trade-offs in performance and simplicity.</li>
+                    </ul>
                 </ul>
             </div>
         </div>
@@ -1009,6 +1022,45 @@ print(next(gen))  # Output: 1
     </div>
 </div>
 
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #CFC0CB;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Metaprogramming / Metaclass</h4>
+                <div>Key Concepts in Metaprogramming:</div>
+                <ul>
+                    <li>Dynamic Class Creation: Creating classes at runtime.</li>
+<pre class="code">
+Foo = type('Foo', ('FooBase1', 'FooBase2'), {'attr': 100,'attr_val': lambda x : x.attr})
+</pre>
+                    <li>Decorators: Functions that modify the behavior of other functions or methods or classes.</li>
+                    <li><b>Descriptors</b> are objects that manage the access to attributes of other objects.</li>
+                    <ul>
+                        <li>E.g. objects with manipulated dunder methods: __get__, __set__, __delete__</li>
+                    </ul>
+                    <li>Magic Methods: Special methods that let you control how Python interacts with objects (e.g., __getattr__, __setattr__).</li>
+                    <li>exec() and eval(): Functions for dynamic execution of Python code.</li>
+                </ul>
+
+                <div>Other aspect of metaprogramming in Python are Custom Metaclasses:</div>
+<pre class="code">
+    class Meta(type):
+        def __new__(cls, name, bases, dct):
+            x = super().__new__(cls, name, bases, dct)
+            x.attr = 100
+            return x
+
+    class Foo(metaclass=Meta):
+        pass
+
+>>> Foo.attr
+100</pre>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>
