@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:60px;text-decoration: underline;font-weight: bold;">Programowanie i algorytmika</h1>
+</div>
+</div>
+
+
+<br>
+<h4 class="mx-4 px-2" style="font-weight: bold;">Definicja algorytmu:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Algorytm to skończony zbiór kroków, które prowadzą do rozwiązania określonego problemu.</h4>
+                <div style="font-weight: bold;">Cechy algorytmu:</div>
+                <ul>
+                    <li>Skończoność (musi mieć określoną liczbę kroków)</li>
+                    <li>Jednoznaczność (każdy krok musi być precyzyjnie określony)</li>
+                    <li>Wejście/Wyjście (przyjmuje dane wejściowe i generuje wynik)</li>
+                    <li>Efektywność (kroki powinny być wykonalne w rozsądnym czasie)</li>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Podstawowe techniki algorytmiczne:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #F00080;">
+            <div class="card-body">
+                <ul>
+                    <li>Podział na podproblemy (Divide and Conquer): Dzielimy problem na mniejsze, rozwiązujemy je i łączymy wyniki (np. sortowanie szybkie, algorytm Karatsuby).</li>
+                    <li>Dynamiczne programowanie (Dynamic Programming): Rozwiązujemy złożony problem przez zapamiętywanie wyników podproblemów, aby unikać ich powtarzania (np. problem plecakowy, ciąg Fibonacciego).</li>
+                    <li>Algorytmy zachłanne (Greedy Algorithms): Wybieramy lokalnie najlepsze rozwiązanie, oczekując, że doprowadzi do globalnego optimum (np. algorytm Kruskala, Huffmana).</li>
+                    <li>Przeszukiwanie w głąb i wszerz (DFS, BFS): Techniki eksploracji grafów i drzew.</li>
+                    <li>Metoda siłowa (Brute Force): Przetestowanie wszystkich możliwych rozwiązań.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Struktury danych wspierające algorytmy:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C1A500;">
+            <div class="card-body">
+                <ul>
+                    <li>Tablice i listy: Przechowywanie danych liniowych.</li>
+                    <li>Stosy i kolejki: Obsługa danych w kolejności LIFO i FIFO.</li>
+                    <li>Drzewa: Struktura hierarchiczna, np. drzewa binarne, drzewa wyszukiwania (BST).</li>
+                    <li>Grafy: Węzły połączone krawędziami (np. do reprezentacji sieci).</li>
+                    <li>Haszowanie: Mapowanie danych w celu szybkiego dostępu.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Złożoność algorytmów:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <ul>
+                    <li>Czasowa (Time Complexity): Liczba operacji w zależności od rozmiaru danych wejściowych, np. O(1),O(n),O(n2)O(1),O(n),O(n2).</li>
+                    <li>Pamięciowa (Space Complexity): Ilość pamięci używanej przez algorytm.</li>
+                    <li>Warto znać notację asymptotyczną:</li>
+                    <ul>
+                        <li>O (najgorszy przypadek),</li>
+                        <li>Ω (najlepszy przypadek),</li>
+                        <li>Θ (przeciętny przypadek).</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Kluczowe algorytmy do nauki na start:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #F00080;">
+            <div class="card-body">
+                <ul>
+                    <li>Sortowanie: Bąbelkowe (Bubble Sort), przez wstawianie (Insertion Sort), szybkie (Quick Sort), sortowanie przez kopcowanie (Heap Sort).</li>
+                    <li>Wyszukiwanie: Liniowe, binarne.</li>
+                    <li>Przetwarzanie grafów: BFS, DFS, Dijkstra, algorytmy na MST (Kruskal, Prim).</li>
+                    <li>Podstawowe operacje na liczbach: Algorytm Euklidesa, szybkie potęgowanie.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Praktyczne zastosowanie algorytmów:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C1A500;">
+            <div class="card-body">
+                <ul>
+                    <li>Problemy optymalizacyjne: np. znajdowanie najkrótszej ścieżki w grafie.</li>
+                    <li>Przetwarzanie dużych zbiorów danych: np. indeksowanie wyszukiwania w wyszukiwarkach.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h4 class="mx-4 px-2" style="font-weight: bold;">Narzędzia do nauki:</h4>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #41A500;">
+            <div class="card-body">
+                <ul>
+                    <li>Platformy do rozwiązywania zadań: LeetCode, HackerRank, Codeforces.</li>
+                    <li>Podstawowe książki:</li>
+                    <ul>
+                        <li>"Wprowadzenie do algorytmów" (Cormen, Leiserson, Rivest, Stein)</li>
+                        <li>"Algorytmy: Ilustrowany przewodnik" (Aditya Bhargava)</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
