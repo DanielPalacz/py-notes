@@ -184,6 +184,16 @@
                 <div>Strategy</div>
                 <ul>
                     <li>It allows you to define different ways of doing something (strategies) and let the client choose which one to use at runtime.</li>
+                    <li>It is similar to Adapter because both plays as Proxy-Agent separating Client logic from detailed implementation. However, Strategy and Adapter in general have different goals.</li>
+                    <a href="design_patterns/strategy.html"><li style="text-decoration: underline;">Strategy example</li></a>
+
+                    <li>Strategy design pattern consists of:</li>
+                        <ul>
+                            <li>Context - the class using the algorithm, but doesnt know how is implemented</li>
+                            <li>Strategy Interface - common interface for all Strategies that Context uses</li>
+                            <li>Concrete Strategies - specific Strategy implementations</li>
+
+                        </ul>
                 </ul>
                 <div>Decorator</div>
                 <ul>
