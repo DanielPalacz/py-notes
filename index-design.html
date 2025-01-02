@@ -169,19 +169,52 @@
     <div class="col-md-9">
         <div class="card mb-4 box-shadow" style="background-color: #FFC0CB;">
             <div class="card-body">
+                <span style="background-color: yellow;"><b>INTRO:</b></span>
+                <br>
+                <br>
                 <div>Types of design patterns:</div>
                 <ul>
-                    <li><b>Creational Patterns</b> (deals with object creation mechanisms)</li>
-                    <li><b>Structural Patterns</b> (deals with object composition and structure)</li>
-                    <li><b>Behavioral Patterns</b> (deals with object communication and responsibility)</li>
+                <li><b>Creational Patterns</b> (deals with object creation mechanisms)</li>
+                    <ul>
+                        <li>Singleton, Factory, Builder</li>
+                    </ul>
+                <li><b>Structural Patterns</b> (deals with object composition and structure)</li>
+                    <ul>
+                        <li>Adapter, Facade, Proxy</li>
+                    </ul>
+                <li><b>Behavioral Patterns</b> (deals with object communication and responsibility)</li>
+                    <ul>
+                        <li>Observer, Strategy, Command</li>
+                    </ul>
                 </ul>
-                <div>Composition</div>
+                <div>Python-specific design patterns:</div>
+                    <ul>
+                        <li>Decorator, Iterator, Context manager</li>
+                    </ul>
+                <div>The most popular design patterns in Python:</div>
+                    <ul>
+                        <li>Singleton (configuration or connections management)</li>
+                        <li>Factory (objects are created dynamically)</li>
+                        <li>Adapter (library integrations)</li>
+                        <li>Observer (notifications, events)</li>
+                        <li>Facade (complex API simplifying)</li>
+                        <li>Decorator (extending functionalities in runtime)</li>
+                        <li>Builder (more complex objects)</li>
+                        <li>Proxy (lazy-loading, remote calls)</li>
+                        <li>Command (task queues)</li>
+                    </ul>
+                <hr>
+                <br>
+                <span style="background-color: yellow;"><b>REVIEWING DESIGN PATTERNS:</b></span>
+                <br>
+                <br>
+                <div><b>Composition:</b></div>
                 <ul>
                     <li>Composition is a design principle in object-oriented programming where one class is composed of one or more objects from other classes.</li>
                     <li>Composition is favored over inheritance when a "has-a" relationship makes more sense than an "is-a" relationship.</li>
                     <a href="design_patterns/composition.html"><li style="text-decoration: underline;">Example</li></a>
                 </ul>
-                <div>Strategy</div>
+                <div><b>Strategy:</b></div>
                 <ul>
                     <li>It allows you to define different ways of doing something (strategies) and let the client choose which one to use at runtime.</li>
                     <li>It is similar to Adapter because both plays as Proxy-Agent separating Client logic from detailed implementation. However, Strategy and Adapter in general have different goals.</li>
@@ -195,17 +228,17 @@
 
                         </ul>
                 </ul>
-                <div>Decorator</div>
+                <div><b>Decorator:</b></div>
                 <ul>
                     <a href="design_patterns/decorators.html"><li style="text-decoration: underline;">Decorator examples</li></a>
                 </ul>
-                <div>Adapter</div>
+                <div><b>Adapter:</b></div>
                 <ul>
                     <a href="design_patterns/adapter.html"><li style="text-decoration: underline;">Adapter example</li></a>
                     <li>Adapter design pattern is component translating things between incompatible interfaces</li>
                     <li>It uses composition and activity delegation to achieve these goals</li>
                 </ul>
-                <div>Singleton</div>
+                <div><b>Singleton:</b></div>
                 <ul>
                     <li>It ensures that a class has only one instance and provides a global access point to that instance. It is used to manage a shared resource or state across the system, preventing the creation of multiple instances of the same class. Singleton is sometimes called anti-pattern. Whether it's beneficial or problematic depends on how and why it's used.</li>
                     <li>Typical Use cases:</li>
