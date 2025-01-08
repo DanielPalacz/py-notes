@@ -101,45 +101,44 @@
 
 <div class="row mb-10">
     <div class="col-8">
-    <h1 style="font-size:80px;text-decoration: underline;font-weight: bold;">Programming notes</h1>
-
+    <h1 style="font-size:60px;text-decoration: underline;font-weight: bold;">Django modele, Podstawy_004:</h1>
 </div>
 </div>
 
+
+<br>
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:25px;font-weight: bold;">Jak zmienić domyślną nazwę tabeli skorelowaną z modelem Django?</h1>
+</div>
+</div>
 
 <div class="row">
-    <div class="col-12">
-    <div class="button-custom mb-6">
-            <a href="index-tutorial.html" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Python programming notes</a>
-    </div>
-    </div>
-   <div class="col-12">
-    <div class="button-custom mb-6">
-            <a href="index-design.html" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Programming architecture / design notes </a>
-    </div>
-    </div>
-   <div class="col-12">
-    <div class="button-custom mb-6">
-            <a href="index-datastructures.html" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Programming data structures notes </a>
-    </div>
-    </div>
-   <div class="col-12">
-    <div class="button-custom mb-6">
-            <a href="index-algorithmics.html" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Programowanie i algorytmika (PL)</a>
-    </div>
-    </div>
-   <div class="col-5">
-    <div class="button-custom mb-6">
-            <a href="README_Django_models.md" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Django i DRF (README eng)</a>
-    </div>
-    </div>
-   <div class="col-5">
-    <div class="button-custom mb-6">
-            <a href="index-django-drf.html" class="btn btn-dark btn-lg m-3 p-4 button-link-custom" style="font-weight: bold; text-align: center;">Django i DRF (html pl)</a>
-    </div>
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <div>Odpowiedź:</div>
+                <ul>
+                    <li>Django automatycznie nadaje nazwę tabeli na podstawie nazwy modelu, w formacie: APP-LABEL_MODEL-NAME</li>
+                    <li>Aby zmienić domyślną nazwę tabeli, można użyć klasy 'Meta' oraz atrybutu 'db_table':</li>
+                    <pre class="code">
+class Book(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        db_table = "books_table"</pre>
+                    <li>Gdy zmienisz db_table, musisz utworzyć nową migrację, aby Django odpowiednio zmodyfikowało bazę danych.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-<br>
+
 
 
 </body>

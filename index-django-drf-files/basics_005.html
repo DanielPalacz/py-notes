@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:60px;text-decoration: underline;font-weight: bold;">Django modele, Podstawy_005:</h1>
+</div>
+</div>
+
+
+<br>
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:25px;font-weight: bold;">Istnieje typ SlugField - wyjaśnij po co jest używany.</h1>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <div>Odpowiedź:</div>
+                <ul>
+                    <li>SlugField jest typem pola w Django, które przechowuje "slug" — krótką, URL-przyjazną wersję tekstu, która najczęściej jest wykorzystywana w adresach URL.</li>
+                    <li>Slug to zazwyczaj ciąg znaków, który jest przekształcony z długiego tekstu, np. tytułu, do formy bez spacji, z myślnikami (-) zamiast spacji i małymi literami.</li>
+                    <li>Na przykład, tytuł 'Moje pierwsze wpisy blogowe' mógłby zostać przekonwertowany na slug: 'moje-pierwsze-wpisy-blogowe'.</li>
+                    <pre class="code">
+class Post(models.Model):
+    options = (
+        ("draft", "Draft"),
+        ("published", "Published")
+    )
+
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date="publish")
+    publish = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    content = models.TextField()
+    status = models.CharField(max_length=10, choices=options, default="draft")
+
+    def __str__(self):
+        return self.title</pre>
+                    <li>SlugField automatycznie "slugifikuje" wartość, która jest przypisywana do tego pola. To oznacza, że:</li>
+                    <ul>
+                        <li>Automatycznie konwertuje tekst na małe litery.</li>
+                        <li>Usuwa znaki specjalne (takie jak znaki diakrytyczne) i zamienia je na odpowiedniki (np. ą -> a).</li>
+                        <li>Zamienia spacje na myślniki (-).</li>
+                    </ul>
+                    <li>Nie trzeba ręcznie wywoływać metod takich jak clean_slug — Django automatycznie zapewnia to przez walidację na poziomie modelu.</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:25px;font-weight: bold;">Jak zaimplementować automatyczne 'slugifying' w Django?</h1>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <div>Odpowiedź:</div>
+                <ul>
+                    <li>Można to zrobić w metodzie save() modelu, która będzie sprawdzać, czy slug nie jest już ustawiony, a jeśli nie, wygeneruje go na podstawie title.</li>
+                    <pre class="code">
+from django.utils.text import slugify
+
+class Post(models.Model):
+    options = (
+        ("draft", "Draft"),
+        ("published", "Published")
+    )
+
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date="publish")
+    publish = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    content = models.TextField()
+    status = models.CharField(max_length=10, choices=options, default="draft")
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        # Jeśli slug nie jest ustawiony, generujemy go na podstawie tytułu
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        # Wywołujemy metodę save() klasy bazowej
+        super(Post, self).save(*args, **kwargs)
+                    </pre>
+                    <li>Co się tu dzieje?</li>
+                    <ul>
+                        <li><b>slugify(self.title)</b> - Używamy funkcji slugify z modułu django.utils.text, która zamienia tytuł na format "slugified" (czyli zamienia spacje na myślniki, konwertuje litery na małe, usuwa niealfanumeryczne znaki, itp.).</li>
+                        <li><b>if not self.slug:</b> - Sprawdzamy, czy pole slug jest puste (np. obiekt jest tworzony). Jeśli jest puste, generujemy wartość na podstawie title.</li>
+                        <li><b>super(Post, self).save(*args, **kwargs)</b> - Wywołujemy metodę save() klasy bazowej, aby obiekt został zapisany w bazie danych.</li>
+                    </ul>
+                    <li>Automatyczne "slugifying" działa w Django, ale musisz ręcznie przypisać wartość do pola slug, najlepiej w metodzie save().</li>
+                    <li>SlugField zapewnia walidację i "slugifying", ale musisz dostarczyć odpowiednią logikę generowania slugu, jeśli chcesz to zrobić automatycznie na podstawie innych pól, jak np. title.</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+

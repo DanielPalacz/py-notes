@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:60px;text-decoration: underline;font-weight: bold;">Django modele, Podstawy_011:</h1>
+</div>
+</div>
+
+
+<br>
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:25px;font-weight: bold;">Jak zaimplementować walidacje danych modeli Django?</h1>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <div>Odpowiedź:</div>
+                <hr>
+                <ul>
+                    <li><b>1. Walidacje wynikające z definicji pól modeli:</b></li>
+                    <pre class="code">
+
+class A(models.Model):
+    first_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+
+# W modelu A samą definicją pól narzucamy domyślne walidacje:
+#   first_name - max długość 100 znaków
+#   age - wymuszamy wartość dodatnią</pre>
+
+                    <hr>
+                    <li><b>2. Customowe walidatory:</b></li>
+                    <pre class="code">
+
+def more_than18(value: int) -> bool:
+  if value > 18:
+       return True
+  return False
+
+class B(models.Model):
+    first_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField(validators=[more_than_18])
+
+# W modelu B użyliśmy customowego walidatora 'more_than_18' na polu 'age'.
+</pre>
+                    <hr>
+                    <li><b>3. Domyślny mechanizm walidacyjny na poziomie całego obiektu:</b></li>
+                    <pre class="code">
+# Istnieje domyślny mechanizm sprawdzania danych na poziomie całego obiektu modelu, żeby go użyć należy zaimplementować metodę clean w modelu.
+# Poniżej przykład dla modelu C:
+
+class C(models.Model):
+    first_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField(validators=[more_than_18])
+
+    def clean(data:) -> bool:
+        IMPLEMENT logic
+</pre>
+
+                    <hr>
+                    <li><b>4. Walidacja przy użyciu clean_FIELDNAME:</b></li>
+                    <pre class="code">
+# Django pozwala na definiowanie metod walidacji dla poszczególnych pól modelu za pomocą metody clean_FIELDNAME.
+# Jest to bardziej granularne podejście niż implementowanie metody clean.
+
+class D(models.Model):
+    first_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+
+    def clean_age(self):
+        if self.age < 18:
+            raise ValidationError("Age must be at least 18.")
+
+# Tutaj clean_age zostanie wywołane podczas walidacji tego pola, np. w momencie wywołania metody full_clean na instancji modelu.
+
+</pre>
+
+
+                    <hr>
+                    <li><b>5. Użycie Meta.constraints dla walidacji na poziomie bazy danych.</b></li>
+                    <pre class="code">
+# Od Django 2.2 można definiować walidacje przy pomocy atrybutu constraints w klasie Meta.
+# Pozwala to na deklaratywne narzucanie ograniczeń, które są wymuszane także na poziomie bazy danych.
+
+from django.db.models import Q, CheckConstraint
+
+class E(models.Model):
+    first_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+
+    class Meta:
+        constraints = [
+            CheckConstraint(check=Q(age__gte=18), name='age_gte_18'),
+        ]
+
+# Ten mechanizm jest użyteczny w przypadku prostych reguł, takich jak wymaganie, aby wartość była większa lub równa pewnej liczbie.
+</pre>
+
+                    <br>
+                    <hr>
+                    <li><b>6. Walidacja w metodzie save</b></li>
+                    <li><b>7. Walidacja na poziomie menedżera (Managera)</b></li>
+                    <br>
+
+                    <hr>
+                    <li><b>8. Walidacja w metodach full_clean:</b></li>
+                    <pre class="code">
+# Możesz ręcznie wywołać metodę 'full_clean' przed zapisaniem obiektu.
+# Ta metoda uruchamia wszystkie poziomy walidacji (pola, metody clean_FIELDNAME oraz clean).
+
+obj = G(first_name="John", age=15)
+obj.full_clean()  # Podniesie ValidationError, jeśli warunki nie są spełnione
+obj.save()
+
+# Metoda 'full_clean' nie jest automatycznie wywoływana przy zapisie w bazie.
+# Można, natomiast wprowadzić konwencję, aby ją ręcznie wywoływać w określonych miejscach kodu.
+</pre>
+
+                    <hr>
+                    <li><b>9. Używanie walidatorów wbudowanych w Django:</b></li>
+                    <pre class="code">
+# Przykład walidatora korzystającego z wyrażeń regularnych:
+
+from django.core.validators import RegexValidator
+
+class H(models.Model):
+    phone_number = models.CharField(
+        max_length=15,
+        validators=[
+            RegexValidator(
+                regex=r'^\+?1?\d{9,15}$',
+                message="Phone number must be entered in the format: '+999999999'."
+            )
+        ]
+    )
+
+class PhoneNumber(models.Model):
+    phone_number = models.CharField(
+        max_length=15,
+        validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$')])
+</pre>
+                    <br>
+                    <hr>
+                    <li style="background-color: yellow;">Podsumowując, metody walidacji w Django można stosować na wielu poziomach: od indywidualnych pól, przez walidację całych obiektów, aż po bardziej zaawansowane podejście z użyciem constraintów bazy danych lub menedżerów. Wybór odpowiedniej metody zależy od przypadku użycia i potrzeb projektu.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
+
