@@ -115,12 +115,31 @@
             <div>Odpowiedź:</div>
                 <ul>
                     <li>Użycie <b>select_related</b> dla relacji: One-To-One i One-To-Many:</li>
-                    <pre class="code">...
-...</pre>
+                    <pre class="code">
+# Bez użycia 'select_related', tylko 'related_name' (dwa zapytania sql):
+first_autor = Author.objects.first()
+books = first_autor.books.all()
 
+# Używając 'select_related' (jedno zapytanie sql):
+books = first_autor.books.select_related('author').all()
+</pre>
+                    <br>
                     <li>Użycie <b>prefetch_related</b> dla relacji Many-To-Many:</li>
-                    <pre class="code">...
-...</pre>
+                    <pre class="code">
+
+class Book(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+    category = models.ManyToManyField(BookCategory, related_name="books")
+
+books = Book.objects.filter(author=first_autor).prefetch_related('category')
+</pre>
+                    <div>Jak działa prefetch_related?</div>
+                    <ul>
+                        <li>Wykonuje zapytanie główne (np. dla książek).</li>
+                        <li>Wykonuje osobne zapytanie dla relacji Many-to-Many (np. dla kategorii książek), aby pobrać powiązane obiekty.</li>
+                        <li>Łączy wyniki w Pythonie, co oznacza, że Django nie łączy tabel w zapytaniu SQL, ale łączy obiekty w pamięci (na poziomie aplikacji).</li>
+                    </ul>
                 </ul>
             </div>
         </div>
