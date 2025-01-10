@@ -111,7 +111,7 @@
             <div class="card-body">
                 <div style="font-weight: bold;">Podstawy:</div>
                 <ul>
-                    <li>001. Jakie jest znaczenie opcji: 'null' i 'blank' w polach modeli? Jaka jest różnica między nimi?</li>
+                    <li>001. Jakie jest znaczenie opcji: 'null' i 'blank' w polach modeli? Jaka jest różnica między nimi? Gdy pole ma przypisana wartość blank=True, to czy będzie polem opcjonalnym w Formularzu (wykorzystującym ten model)?</li>
                     <ul>
                         <li><a href="index-django-drf-files/basics_001.html">Odpowiedź</a></li>
                     </ul>
@@ -163,6 +163,15 @@
                         <li><a href="index-django-drf-files/basics_011.html">Odpowiedź</a></li>
                     </ul>
 
+                    <li>012. Jak zarejestrować model w przestrzeni administratorskiej? Jak konfiguruje się wyświetlanie/zachowanie pól modelu (w Adminie)? </li>
+                    <ul>
+                        <li><a href="index-django-drf-files/basics_012.html">Odpowiedź</a></li>
+                    </ul>
+
+                    <li>013. Czym są Queryset w Django?</li>
+                    <ul>
+                        <li><a href="index-django-drf-files/basics_013.html">Odpowiedź</a></li>
+                    </ul>
 
 
                 </ul>
@@ -221,29 +230,30 @@
 
 <div class="row">
     <div class="col-md-9">
-        <div class="card mb-4 box-shadow" style="background-color: #C1A500;">
-            <div class="card-body">
-                <div style="font-weight: bold;">Inne operacje na modelach:</div>
-                <ul>
-                    <li>201. Jak używać metody 'save'? Czy można ją nadpisać?</li>
-                    <li>202. Jak stworzyć dodatkowe indeksy kiedy chcesz szybciej filtrować dane używając specyficznych pól?</li>
-                    <li>203. Jaka jest różnica pomiędzy walidacją na poziomie pola modelu (przez np. validators) i metody modelu 'clean'?</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-md-9">
         <div class="card mb-4 box-shadow" style="background-color: #C00080;">
             <div class="card-body">
                 <div style="font-weight: bold;">Inne zaawansowane operacje na modelach:</div>
                 <ul>
-                    <li>301. Jak zdefiniować Custom Object Manager dla modelu? W czym może być pomocny? Jak to jest z 'Custom QuerySets'?</li>
-                    <li>302. Zaawansowane zapytania w Django ORM: annotate(), aggregate(), Q, F, Subqueries</li>
+                    <li>201. Jak zdefiniować Custom Object Manager dla modelu? W czym może być pomocny? Jak to jest z 'Custom QuerySets'?</li>
+                    <li>202. Jak zarejestrować Custom QuerySet w Django?</li>
+                    <ul>
+                        <li><a href="index-django-drf-files/other_advance_django_202.html">Odpowiedź</a></li>
+                    </ul>
+                    <li>203. Zaawansowane zapytania w Django ORM: annotate(), aggregate(), Q, F, Subqueries</li>
+
+                    <li>204. Jak używać metody 'save' (django.db.models.Model)? Czy można ją nadpisać?</li>
+                    <ul>
+                        <li>Odpowiedź: Patrz SlugField</li>
+                    </ul>
+                    <li>205. Jak stworzyć dodatkowe indeksy kiedy chcesz szybciej filtrować dane używając specyficznych pól?</li>
+                    <ul>
+                        <li><a href="index-django-drf-files/other_advance_django_205.html">Odpowiedź</a></li>
+                    </ul>
+                    <li>206. Jaka jest różnica pomiędzy walidacją na poziomie pola modelu (przez np. validators) i metody modelu 'clean'?</li>
+
+
+
+
                 </ul>
             </div>
         </div>
