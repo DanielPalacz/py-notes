@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:45px;text-decoration: underline;font-weight: bold;">Inne zaawansowane operacje na modelach: 205:</h1>
+</div>
+</div>
+
+
+<h5 class="mx-4 px-2" style="font-weight: bold;">207. Kiedy Custom Manager i Custom QuerySet mają sens? A kiedy mogą być przesadą?</h5>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <ul>
+                    <pre class="code">
+Kiedy Custom Manager i Custom QuerySet mają sens?
+    1. Gdy logika zapytań zaczyna się powtarzać
+    2. Gdy model wymaga specyficznych metod dostępu
+    3. Gdy projekt ma wiele modeli zależnych od siebie
+    4. Gdy projekt wymaga wielu złożonych zapytań do bazy
+    5. Gdy chcesz zwiększyć czytelność kodu
+    6. Gdy zespół pracuje nad projektem
+
+Custom Manager i Custom QuerySet istnieją, ponieważ:
+    1. Zapewniają spójność i przewidywalność w całym frameworku.
+    2. Ułatwiają separację logiki biznesowej od widoków.
+    3. Promują modularność i reużywalność kodu.
+    4. Ułatwiają skalowanie aplikacji – logika zapytań jest w jednym miejscu, co sprawia, że łatwiej ją zmieniać i testować.
+    5. Dostosowują się do bardziej złożonych projektów – w bardziej złożonych systemach pomagają zachować porządek.
+
+Kiedy Custom Manager i QuerySet mogą być przesadą?
+    1. Małe projekty
+    2. Brak powtarzalności w zapytaniach
+    3. Prototypy i aplikacje testowe
+
+Jak duży projekt potrzebuje Custom Managera i QuerySet?
+    1. Małe projekty (np. 1-3 modele, kilka widoków):
+        * Nie potrzebujesz Custom Managera ani QuerySet.
+    2. Średnie projekty (np. 5-10 modeli, złożona logika w kilku widokach):
+        * Custom Manager zaczyna mieć sens
+    3. Duże projekty (np. >10 modeli, zespół programistów, skomplikowana logika biznesowa):
+        * Custom Manager i QuerySet stają się niemal niezbędne, aby zachować czytelność, spójność i modularność kodu.
+</pre>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
