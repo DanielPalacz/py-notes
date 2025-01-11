@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h1 class="m-4" style="font-size:40px;text-decoration: underline;font-weight: bold;">Poziomy wiedzy / Django:</h1>
+<br>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow" style="background-color: #C1A500;">
+            <div class="card-body">
+                <div style="font-weight: bold;">Podstawowe pojęcia/tematy w Django (dla początkujących):</div>
+                <br>
+                <pre class="shell">
+1. Instalacja i konfiguracja Django:
+    Tworzenie projektu (django-admin startproject)
+    Tworzenie aplikacji (python manage.py startapp)
+    Struktura projektu i aplikacji Django
+
+2. Django Models:
+    Definiowanie modeli w models.py
+    Typy pól modelu (CharField, IntegerField, DateField, itp.)
+    Migracje (makemigrations, migrate)
+    Operacje CRUD w Django ORM: create, filter, get, delete, itp.
+
+3. Django Views:
+    Widoki funkcyjne (Function-Based Views – FBV)
+    Zwracanie prostych odpowiedzi HTTP (HttpResponse)
+    Widoki renderujące szablony (render())
+
+4. Django Templates:
+    Tworzenie i używanie szablonów HTML
+    Template tags i filtry (np. {% for %}, {% if %},
+    {{ variable|filter }})
+    Przekazywanie danych z widoków do szablonów
+
+5. Routing (URLs):
+    Tworzenie tras w urls.py
+    Wzorce URL i ich mapowanie do widoków
+    Dynamiczne parametry w URL (np. &lt;int:id&gt;)
+
+6. Django Admin:
+    Rejestracja modeli w panelu admina
+    Modyfikacja panelu admina (np. list_display, search_fields)
+
+7. Django Forms:
+    Tworzenie formularzy (forms.Form, forms.ModelForm)
+    Walidacja formularzy i wyświetlanie błędów
+
+8. Zarządzanie statycznymi plikami:
+    Ustawianie plików CSS, JavaScript, obrazków (STATIC_URL,
+    STATIC_ROOT).
+    Używanie {% static %} w szablonach
+    Wdrażanie plików statycznych w środowisku produkcyjnym
+    (np. collectstatic).
+
+9. Konfiguracja settings.py:
+    Baza danych (DATABASES)
+    Statyczne pliki (STATIC_URL, MEDIA_URL)
+    Middleware
+
+10. Cookies
+    Ustawianie, odczytywanie i usuwanie cookies w Django.
+    Bezpieczne przechowywanie danych w cookies
+    (HTTPONLY, SECURE, SameSite).
+
+11. Django Sessions
+    Mechanizm sesji w Django (np. request.session).
+    Konfiguracja backendu sesji (np. baza danych, pliki).
+    Przechowywanie informacji o użytkowniku
+    (np. koszyk zakupów, preferencje).
+
+12. Local Storage
+    Synchronizacja Local Storage z serwerem za pomocą API.
+    Przechowywanie nieskomplikowanych danych w aplikacji SPA.
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow" style="background-color: #41A500;">
+            <div class="card-body">
+                <div style="font-weight: bold;">Średnio-zaawansowane pojęcia/tematy w Django:</div>
+                <br>
+
+                <pre class="shell">
+Tutaj, wchodzisz głębiej  i optymalizujesz swoje aplikacje.
+
+    1. Zaawansowane operacje na Modelach:
+        Relacje między modelami: OneToOne, ForeignKey, ManyToMany
+        Custom QuerySet (Manager i QuerySet)
+        Anotacje i agregacje (annotate, aggregate)
+        Praca z transakcjami (np. atomic)
+
+    2. Widoki klasowe (Class-Based Views – CBV):
+        Generic CBV (ListView, DetailView, CreateView, itp.)
+        Modyfikacja CBV przez get_context_data lub form_valid
+
+    3. Django Middleware:
+        Czym jest middleware
+        Tworzenie własnego middleware
+
+    4. Autoryzacja i uwierzytelnianie:
+        System użytkowników (User, AbstractUser)
+        Logowanie i wylogowywanie (LoginView, LogoutView)
+        Grupy i uprawnienia
+        Dekoratory (np. @login_required)
+
+    5. Obsługa plików:
+        Przechowywanie i przetwarzanie plików
+        (np. FileField, ImageField)
+        Konfiguracja MEDIA_URL i MEDIA_ROOT
+
+    6. Przetwarzanie żądań AJAX:
+        Współpraca Django z JavaScript (np. fetch, axios)
+        Zwracanie JSON z widoków (JsonResponse)
+
+    7. Testowanie aplikacji Django:
+        Testy jednostkowe (TestCase)
+        Testy widoków, formularzy i modeli
+        Używanie Client do symulacji żądań
+
+    8. Django Signals:
+        Jak działają sygnały (pre_save, post_save)
+        Tworzenie własnych sygnałów
+
+    9. Django Celery i zadania w tle:
+        Integracja z Celery do obsługi zadań w tle
+        (np. wysyłanie e-maili, przetwarzanie plików)
+
+    10. Internationalization (I18N):
+        Tłumaczenie aplikacji na różne języki
+        Locale Middleware
+
+    11. Django File Storage:
+        Integracja z zewnętrznymi systemami przechowywania plików
+        (np. AWS S3)
+
+    12. Django Cache Framework
+        Używanie cache na poziomie widoków i zapytań do bazy d.
+        Konfiguracja różnych backendów cache (Redis, Memcached).
+        Zastosowanie cache dla optymalizacji wydajności.
+
+    13. Session Storage
+        Synchr. danych sesji przeglądarki z Django Sessions.
+        Tymczasowe przechowywanie danych w SPA i ich
+        synchronizacja z serwerem.
+
+    14. Django File Storage
+        Konfiguracja backendów przechowywania plików
+        (np. lokalny, Amazon S3).
+        Używanie pól FileField, ImageField do obsługi plików.
+        Obsługa plików multimedialnych (MEDIA_URL, MEDIA_ROOT).
+
+    15. Service Workers (Cache Storage)
+        Wprowadzenie Service Workers do cache'owania plików
+        statycznych.
+        Podstawowa integracja Django z aplikacjami PWA.
+
+</pre>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow" style="background-color: #F00080;">
+            <div class="card-body">
+                <div style="font-weight: bold;">Zaawansowane pojęcia/tematy w Django:</div>
+
+
+                <pre class="shell">
+
+Te tematy są bardziej skomplikowane i przydają się
+w dużych projektach, gdzie wydajność, bezpieczeństwo
+i skalowalność są kluczowe.
+
+    1. Zaawansowane zarządzanie bazą danych:
+        Optymalizacja zapytań w ORM
+        Użycie surowych zapytań SQL (raw())
+
+    2. Django Rest Framework (DRF):
+        Tworzenie API w Django
+        Serializatory (Serializer, ModelSerializer)
+        Widoki API (APIView, ViewSet)
+        Autoryzacja w API (JWT, OAuth)
+        Paginacja, filtrowanie i sortowanie
+
+    3. Django Channels:
+        Obsługa WebSocketów
+        Tworzenie aplikacji w czasie rzeczywistym
+        (np. czaty, powiadomienia)
+
+    4. Architektura skalowalnych aplikacji:
+        Cache w Django (np. Redis, Memcached)
+        Podział aplikacji na moduły (np. mikroserwisy)
+        Load balancing i serwery aplikacyjne
+        (np. Gunicorn, uWSGI)
+
+    5. Asynchroniczność w Django:
+        Obsługa async/await w widokach
+        Integracja z Celery i Django Channels
+
+    6. Bezpieczeństwo w Django:
+        Cross-Site Request Forgery (CSRF)
+        Cross-Site Scripting (XSS)
+        SQL Injection i inne zagrożenia
+        Zabezpieczanie aplikacji
+        (np. SECURE_SSL_REDIRECT, SECURE_HSTS_SECONDS)
+
+    7. Zaawansowane narzędzia administracyjne:
+        Tworzenie niestandardowych paneli w Django Admin
+        Integracja admina z zewnętrznymi narzędziami
+
+    8. Zarządzanie wydajnością:
+        Optymalizacja ORM (np. select_related, prefetch_related)
+        Zewnętrzne narzędzia do analizy wydajności
+        (np. Django Debug Toolbar)
+
+    9. Integracja z zewnętrznymi API:
+        Pobieranie danych z REST/SOAP API
+        Integracja z narzędziami płatności (np. Stripe, PayPal)
+
+    10. Zaawansowane wzorce projektowe:
+        Stosowanie wzorców takich jak CQRS
+        (Command Query Responsibility Segregation)
+        czy DDD (Domain-Driven Design)
+        Tworzenie repozytoriów dla modeli
+
+    11. IndexedDB
+        Projektowanie aplikacji offline-first z użyciem IndexedDB
+        Synchronizacja danych między bazą przeglądarki
+        a Django backendem.
+        Mechanizmy synchronizacji offline/online
+        (np. WebSocket, REST API).
+
+    12. Zaawansowany Cache Storage
+        Optymalizacja
+        przechowywania danych aplikacji PWA w Cache Storage.
+        Tworzenie złożonych strategii cache'owania
+        (np. "cache first", "network first").
+
+    13. Custom File Storage
+        Implementacja własnych mechanizmów przechowywania plików.
+        Integracja z zewnętrznymi systemami przechowywania danych
+        (np. Google Cloud, Azure Blob Storage).
+
+    14. PWA (Progressive Web Apps)
+        Tworzenie pełnoprawnych aplikacji PWA z trybem offline.
+        Synchronizacja danych w różnych mechanizmach storage
+        (IndexedDB, Cache Storage).
+        Współpraca Django jako backendu
+         z aplikacjami frontendowymi.
+</pre>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
