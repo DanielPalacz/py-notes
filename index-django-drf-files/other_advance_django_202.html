@@ -115,7 +115,9 @@
             <div class="card-body">
                 <div style="font-weight: bold;">Niestandardowy QuerySet:</div>
                 <ul>
+                    <div style="color: white;">W ten sposób masz dostęp do własnych metod w BookQuerySet, takich jak published(), na obiekcie Book.objects, dzięki as_manager().</div>
                     <pre class="code">
+
 from django.db import models
 
 class BookQuerySet(models.query.QuerySet):
@@ -128,7 +130,24 @@ class Book(models.Model):
     publication_date = models.DateField()
 
     objects = BookQuerySet.as_manager()  # Rejestracja niestandardowego QuerySet</pre>
-                    <div style="background-color: yellow;">W ten sposób masz dostęp do własnych metod w BookQuerySet, takich jak published(), na obiekcie Book.objects, dzięki as_manager().</div>
+
+                    <pre class="code" style="color: yellow;">
+
+Kiedy warto pisać Custom QuerySet?
+
+    Wielokrotne używanie skomplikowanych zapytań:
+    Jeśli w różnych częściach aplikacji musisz wielokrotnie pisać podobne zapytania, np. filtrowanie według stanu, daty lub statusu.
+
+    Organizacja logiki biznesowej:
+    Zamiast umieszczać złożone zapytania w widokach czy serwisach, przenieś je do Custom QuerySet, aby były łatwiejsze w utrzymaniu.
+
+    Poprawa czytelności kodu:
+    Tworzenie dedykowanych metod pozwala pisać bardziej intuicyjny kod.
+
+    Dostosowanie zachowania wbudowanych metod:
+    Jeśli potrzebujesz zmodyfikować domyślne działanie .filter(), .all() lub innych metod.
+</pre>
+
                 </ul>
             </div>
         </div>
