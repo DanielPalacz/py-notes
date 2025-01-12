@@ -230,8 +230,7 @@ class Post(models.Model):
 To, że SlugField nie waliduje automatycznie formatu danych w metodzie save(), jest zgodne z filozofią Django.
 Design Django mówi, że walidacja odbywa się w innych etapach.
     - Na poziomie formularzy.
-    - Na poziomie metod clean() i walidatorów
-      o ile wymusisz ich działanie i ęcznie wywołasz metodę full_clean.
+    - Na poziomie metod clean() i walidatorów o ile wymusisz ich działanie i ręcznie wywołasz metodę full_clean.
 
 Metoda save() w Django służy do zapisu danych do bazy, ale domyślnie nie waliduje danych.
 Django zakłada, że dane są poprawne, ponieważ zakłada się, że
