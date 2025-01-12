@@ -215,6 +215,46 @@ class Post(models.Model):
 
 
 
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:25px;font-weight: bold;">005b. Podczas zapisu obiektu modelu domyślnie pole typu SlugField nie jest walidowane co do zgodności z formatem 'Slug' - dlaczego?</h1>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+            <div class="card-body">
+                <div>Odpowiedź:</div>
+                    <pre class="shell">
+To, że SlugField nie waliduje automatycznie formatu danych w metodzie save(), jest zgodne z filozofią Django.
+Design Django mówi, że walidacja odbywa się w innych etapach.
+    - Na poziomie formularzy.
+    - Na poziomie metod clean() i walidatorów
+      o ile wymusisz ich działanie i ęcznie wywołasz metodę full_clean.
+
+Metoda save() w Django służy do zapisu danych do bazy, ale domyślnie nie waliduje danych.
+Django zakłada, że dane są poprawne, ponieważ zakłada się, że
+walidacja powinna zostać przeprowadzona wcześniej (np. w formularzach lub ręcznie przez programistę).
+                    </pre>
+
+                    <pre style="font-weight: bold;">
+Dlaczego SlugField działa w ten sposób?
+
+Django rozdziela odpowiedzialność między warstwę modelu a formularzy, aby dać większą elastyczność:
+    1. Model:
+        W modelu możesz zapisać dowolne dane, jeśli nie narzucisz dodatkowych ograniczeń.
+        Django zakłada, że programista wie, co robi.
+
+    2. Formularze i walidacja:
+        To miejsce, gdzie zazwyczaj odbywa się walidacja danych od użytkownika.
+        W przypadku SlugField, formularze automatycznie sprawdzają poprawność formatu.</pre>
+</div>
+</div>
+</div>
+</div>
+
+
 </body>
 </html>
 
