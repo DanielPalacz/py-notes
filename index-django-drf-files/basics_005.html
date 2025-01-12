@@ -226,28 +226,30 @@ class Post(models.Model):
         <div class="card mb-4 box-shadow" style="background-color: #C00080;">
             <div class="card-body">
                 <div>Odpowiedź:</div>
-                    <pre class="shell">
+                    <pre style="font-weight: bold;">
+
 To, że SlugField nie waliduje automatycznie formatu danych w metodzie save(), jest zgodne z filozofią Django.
 Design Django mówi, że walidacja odbywa się w innych etapach.
     - Na poziomie formularzy.
     - Na poziomie metod clean() i walidatorów o ile wymusisz ich działanie i ręcznie wywołasz metodę full_clean.
 
 Metoda save() w Django służy do zapisu danych do bazy, ale domyślnie nie waliduje danych.
-Django zakłada, że dane są poprawne, ponieważ zakłada się, że
-walidacja powinna zostać przeprowadzona wcześniej (np. w formularzach lub ręcznie przez programistę).
+Django przyjmuje, że dane są poprawne, ponieważ zakłada się, że walidacja powinna zostać przeprowadzona wcześniej
+(np. w formularzach lub ręcznie przez programistę).
                     </pre>
 
                     <pre style="font-weight: bold;">
 Dlaczego SlugField działa w ten sposób?
 
-Django rozdziela odpowiedzialność między warstwę modelu a formularzy, aby dać większą elastyczność:
+Django rozdziela odpowiedzialność między warstwę modelu a formularzy (i innych customych operacji), aby dać większą elastyczność:
     1. Model:
         W modelu możesz zapisać dowolne dane, jeśli nie narzucisz dodatkowych ograniczeń.
         Django zakłada, że programista wie, co robi.
 
-    2. Formularze i walidacja:
-        To miejsce, gdzie zazwyczaj odbywa się walidacja danych od użytkownika.
-        W przypadku SlugField, formularze automatycznie sprawdzają poprawność formatu.</pre>
+    2. Formularze i inne customowe operacji (jak wymuszona walidacja):
+        Formularze Django, to miejsce, gdzie zazwyczaj odbywa się walidacja danych od użytkownika.
+        W przypadku SlugField, formularze automatycznie sprawdzają poprawność formatu.
+        Można customowo wymusić wywołanie walidacji na modelu (full_clean), ale to dalej jest zgodne z założeniem, że programista wie co robi.</pre>
 </div>
 </div>
 </div>
