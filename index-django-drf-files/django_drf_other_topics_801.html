@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h2 class="m-4">801. Cookies w Django</h2>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: light-blue;">
+            <div class="card-body">
+            <ul>
+                <div style="font-weight: bold;">W Django obsługa ciasteczek jest bardzo prosta i zintegrowana z obiektami HttpRequest i HttpResponse.</div>
+            <pre>
+
+Podstawy obsługi ciasteczek w Django:
+    a) Odczytywanie ciasteczek
+       Ciasteczka w Django można odczytywać z obiektu żądania (request) za pomocą słownika request.COOKIES
+    b) Ustawianie ciasteczek
+       Ciasteczka ustawia się, modyfikując obiekt HttpResponse za pomocą metody set_cookie().
+    c) Usuwanie ciasteczek
+       Aby usunąć ciasteczko, używamy metody delete_cookie().
+
+</pre>
+
+        <div style="font-weight: bold;">Przykład kompletnego cyklu pracy z ciasteczkami:</div>
+            <pre>
+    from django.http import HttpResponse
+
+    # Ustawianie ciasteczka
+    def set_cookie(request):
+        response = HttpResponse('Ustawiam ciasteczko "username".')
+        response.set_cookie('username', 'JohnDoe', max_age=3600)  # 1 godzina
+        return response
+
+    # Odczyt ciasteczka
+    def get_cookie(request):
+        username = request.COOKIES.get('username', 'Gość')  # Domyślna wartość: "Gość"
+        return HttpResponse(f'Witaj, {username}!')
+
+    # Usuwanie ciasteczka
+    def delete_cookie(request):
+        response = HttpResponse('Usuwam ciasteczko "username".')
+        response.delete_cookie('username')
+        return response
+
+</pre>
+
+
+        <div style="font-weight: bold;">Kluczowe aspekty bezpieczeństwa przy obsłudze ciasteczek:</div>
+            <pre>
+
+a) Secure: Przesyłanie ciasteczek tylko przez HTTPS
+    - Parametr secure=True wymusza, że ciasteczko będzie przesyłane tylko przez szyfrowane połączenia HTTPS.
+    - response.set_cookie('username', 'JohnDoe', secure=True)
+
+b) HttpOnly: Ograniczenie dostępu do ciasteczka
+    - Ustawienie httponly=True oznacza, że ciasteczko nie będzie dostępne z poziomu JavaScript (chroni przed atakami XSS).
+    - response.set_cookie('username', 'JohnDoe', httponly=True)
+
+c) SameSite: Ochrona przed atakami CSRF
+    - Parametr samesite kontroluje, czy ciasteczko może być wysyłane w żądaniach z innych domen.
+    - Strict: Ciasteczko wysyłane tylko w żądaniach z tej samej domeny.
+    - Lax: Ciasteczko wysyłane w żądaniach GET z innych domen (domyślne w Django od wersji 3.1).
+    - response.set_cookie('username', 'JohnDoe', samesite='Strict')
+
+</pre>
+
+        <div style="font-weight: bold;">Konfiguracja ciasteczek w settings.py:</div>
+            <pre>
+    SESSION_COOKIE_SECURE = True       # Wymusza HTTPS dla ciasteczek sesji
+    SESSION_COOKIE_HTTPONLY = True     # Chroni ciasteczka sesji przed dostępem z JavaScript
+    SESSION_COOKIE_SAMESITE = 'Lax'    # Ochrona ciasteczek sesji przed CSRF
+    CSRF_COOKIE_SECURE = True          # Wymusza HTTPS dla ciasteczka CSRF
+    CSRF_COOKIE_HTTPONLY = False       # Ciasteczko CSRF musi być dostępne dla JavaScript
+    CSRF_COOKIE_SAMESITE = 'Lax'       # Ochrona ciasteczka CSRF
+</pre>
+
+        <br>
+        <div style="font-weight: bold;">Kiedy używać ciasteczek w Django?</div>
+            <pre>
+    a) Idealne przypadki użycia:
+
+        Dane, które muszą być dostępne po stronie klienta:
+            Preferencje użytkownika (np. język, motyw, ustawienia interfejsu).
+            Identyfikatory unikalne dla użytkownika (np. csrftoken).
+        Dane, które nie są krytyczne z punktu widzenia bezpieczeństwa.
+
+    b) Nieodpowiednie przypadki użycia:
+
+        Nie przechowuj poufnych informacji w ciasteczkach (np. haseł, tokenów dostępu).
+        Do zarządzania stanem użytkownika (np. logowanie) lepiej używać sesji Django (request.session).
+</pre>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
