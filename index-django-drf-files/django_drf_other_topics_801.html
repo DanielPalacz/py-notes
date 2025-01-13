@@ -99,17 +99,45 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h2 class="m-4">801. Cookies w Django</h2>
-
+<h2 class="m-4">801. Cookies w Django. Jak wygląda obsługa ciastek w Django?</h2>
 
 <div class="row">
     <div class="col-md-9">
-        <div class="card mb-4 box-shadow" style="background-color: light-blue;">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+
+<pre>
+Cookie / ciastko:
+    - ciąg znaków, który zawiera klucz i wartość (oraz opcjonalne parametry, jak czas wygaśnięcia, ścieżka czy domena).
+    Odpowiedź serwera (nagłówek):
+    - Set-Cookie: user_id=42; Max-Age=3600; Path=/; Domain=example.com; Secure; HttpOnly; SameSite=Lax
+    Klient / zapytanie przeglądarki (nagłówek):
+    - Cookie: sessionid=abc123
+
+Rodzaje ciastek
+    Ciasteczka sesyjne (session cookies):
+        Przechowywane tylko w pamięci przeglądarki.
+        Usuwane po zamknięciu przeglądarki.
+
+    Ciasteczka trwałe (persistent cookies):
+        Mają ustawiony czas wygaśnięcia (Expires lub Max-Age).
+        Przechowywane na dysku użytkownika i dostępne między sesjami przeglądarki.
+
+    Ciasteczka stron trzecich (third-party cookies):
+        Ustawiane przez domeny inne niż ta, którą użytkownik odwiedza (np. ciasteczka reklamowe).
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
             <div class="card-body">
             <ul>
                 <div style="font-weight: bold;">W Django obsługa ciasteczek jest bardzo prosta i zintegrowana z obiektami HttpRequest i HttpResponse.</div>
             <pre>
-
 Podstawy obsługi ciasteczek w Django:
     a) Odczytywanie ciasteczek
        Ciasteczka w Django można odczytywać z obiektu żądania (request) za pomocą słownika request.COOKIES
@@ -177,14 +205,12 @@ c) SameSite: Ochrona przed atakami CSRF
         <div style="font-weight: bold;">Kiedy używać ciasteczek w Django?</div>
             <pre>
     a) Idealne przypadki użycia:
-
         Dane, które muszą być dostępne po stronie klienta:
             Preferencje użytkownika (np. język, motyw, ustawienia interfejsu).
             Identyfikatory unikalne dla użytkownika (np. csrftoken).
         Dane, które nie są krytyczne z punktu widzenia bezpieczeństwa.
 
     b) Nieodpowiednie przypadki użycia:
-
         Nie przechowuj poufnych informacji w ciasteczkach (np. haseł, tokenów dostępu).
         Do zarządzania stanem użytkownika (np. logowanie) lepiej używać sesji Django (request.session).
 </pre>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h2 class="m-4">803. Jak działa mechanizm sesji w Django? Sesje a autentykacja w Django/DRF.</h2>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+            <div style="font-weight: bold;">Mechanizm sesji, wprowadzenie:</div>
+            <pre>
+
+Bezstanowość HTTP:
+    Protokół HTTP jest bezstanowy, co oznacza, że każde żądanie jest traktowane niezależnie od poprzednich.
+    Mechanizm sesji pozwala na przechowywanie informacji między żądaniami.
+
+Identyfikator sesji:
+    Gdy użytkownik łączy się z aplikacją, Django generuje unikalny identyfikator sesji (session ID).
+    Identyfikator ten jest przesyłany do przeglądarki użytkownika jako ciasteczko (sessionid).
+
+Przechowywanie danych sesji:
+    Dane sesji są przechowywane po stronie serwera (np. w bazie danych, plikach, cache), a przeglądarka przechowuje tylko identyfikator sesji.
+    Django domyślnie korzysta z bazy danych do przechowywania sesji.
+
+Konfiguracja sesji w Django, settings.py:
+    SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Domyślnie: przechowywanie w bazie danych
+    SESSION_COOKIE_NAME = "sessionid"  # Nazwa ciasteczka sesji
+    SESSION_COOKIE_AGE = 1209600  # Czas ważności ciasteczka (domyślnie: 2 tygodnie)
+    SESSION_SAVE_EVERY_REQUEST = False  # Czy odnawiać czas ważności ciasteczka przy każdym żądaniu
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Czy sesja wygasa po zamknięciu przeglądarki
+
+</pre>
+            <div style="font-weight: bold;">Wbudowane funkcje mechanizmu sesji:</div>
+            <pre>
+
+# Zapisywanie danych do sesji:
+    def set_session(request):
+        request.session['user_id'] = 42
+        request.session['username'] = 'john_doe'
+        return HttpResponse("Sesja ustawiona!")
+
+# Odczytywanie danych z sesji:
+    def get_session(request):
+        user_id = request.session.get('user_id')  # Zwraca None, jeśli brak klucza
+        username = request.session.get('username', 'Anonim')
+        return HttpResponse(f"Użytkownik: {username}, ID: {user_id}")
+
+# Usuwanie danych z sesji:
+    def delete_session(request):
+        del request.session['user_id']  # Usuwa tylko jeden klucz
+        request.session.flush()  # Usuwa całą sesję
+        return HttpResponse("Sesja wyczyszczona!")
+
+</pre>
+
+            <div style="font-weight: bold;">Mechanizm sesji / Django:</div>
+            <pre>
+Logowanie użytkownika:
+    Widoki z modułu django.contrib.auth.views automatycznie zapisują dane użytkownika w sesji po pomyślnym logowaniu.
+    Po zalogowaniu możesz uzyskać dostęp do danych użytkownika w widokach za pomocą request.user.
+
+    # Przykład logowania:
+    from django.contrib.auth import authenticate, login
+
+    def login_view(request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)  # Ustawia dane użytkownika w sesji
+            return HttpResponse("Zalogowano!")
+        else:
+            return HttpResponse("Niepoprawne dane logowania.")
+
+Wylogowanie użytkownika:
+    Wylogowanie usuwa dane użytkownika z sesji, przykład:
+
+    from django.contrib.auth import logout
+
+    def logout_view(request):
+        logout(request)
+        return HttpResponse("Wylogowano!")
+
+</pre>
+
+            <div style="font-weight: bold;">Mechanizm sesji / DRF:</div>
+            <pre>
+Czym jest SessionAuthentication w DRF?
+    SessionAuthentication wykorzystuje ciasteczko sesji (sessionid) do identyfikacji użytkownika.
+    Użytkownik musi być zalogowany w Django, aby wykonywać uwierzytelnione żądania w DRF.
+
+    # Konfiguracja w DRF, settings.py:
+
+    REST_FRAMEWORK = {
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+            "rest_framework.authentication.SessionAuthentication",
+        ],
+    }
+
+</pre>
+
+<pre style="color: blue;">
+Mechanizm sesji w Django jest niezwykle potężny, ale jednocześnie prosty w użyciu.
+Dzięki niemu można łatwo implementować funkcje takie jak logowanie, zapisywanie danych koszyka czy personalizowane ustawienia użytkownika.
+W DRF, klasa SessionAuthentication rozszerza ten mechanizm na API, ułatwiając autentykację w aplikacjach hybrydowych. </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
