@@ -152,8 +152,11 @@ Konfiguracja sesji w Django, settings.py:
 
 </pre>
 
-            <div style="font-weight: bold;">Mechanizm sesji / Django:</div>
+            <div style="font-weight: bold;">Mechanizm sesji / Django Login-Based Autentykacja:</div>
             <pre>
+
+W Django mechanizm sesji jest bezpośrednio zintegrowany z wbudowanymi funkcjami logowania (Login-Based Autentykacja).
+
 Logowanie użytkownika:
     Widoki z modułu django.contrib.auth.views automatycznie zapisują dane użytkownika w sesji po pomyślnym logowaniu.
     Po zalogowaniu możesz uzyskać dostęp do danych użytkownika w widokach za pomocą request.user.
@@ -182,10 +185,11 @@ Wylogowanie użytkownika:
 
 </pre>
 
-            <div style="font-weight: bold;">Mechanizm sesji / DRF:</div>
+            <div style="font-weight: bold;">Mechanizm sesji / DRF Login-Based Autentykacja:</div>
             <pre>
-Czym jest SessionAuthentication w DRF?
-    SessionAuthentication wykorzystuje ciasteczko sesji (sessionid) do identyfikacji użytkownika.
+
+Czym jest tryb SessionAuthentication w DRF?
+    To inaczej tzw. Autentykacja Login-Based. SessionAuthentication wykorzystuje ciasteczko sesji (sessionid) do identyfikacji użytkownika.
     Użytkownik musi być zalogowany w Django, aby wykonywać uwierzytelnione żądania w DRF.
 
     # Konfiguracja w DRF, settings.py:
@@ -196,11 +200,14 @@ Czym jest SessionAuthentication w DRF?
         ],
     }
 
+    # do implementacji punkty końcowe obsługujące proces logowania:
+      - np. login/, logout/, (register/)
+
 </pre>
 
 <pre style="color: blue;">
-Mechanizm sesji w Django jest niezwykle potężny, ale jednocześnie prosty w użyciu.
-Dzięki niemu można łatwo implementować funkcje takie jak logowanie, zapisywanie danych koszyka czy personalizowane ustawienia użytkownika.
+Mechanizm sesji w Django:
+    - pozwala łatwo implementować funkcje takie jak logowanie, zapisywanie danych koszyka czy personalizowane ustawienia użytkownika.
 W DRF, klasa SessionAuthentication rozszerza ten mechanizm na API, ułatwiając autentykację w aplikacjach hybrydowych. </pre>
             </div>
         </div>
