@@ -130,6 +130,14 @@ Podstawowe operacje w Local Storage:
     Czyszczenie całego Local Storage:
         localStorage.clear();
 
+    Liczba zapisanych kluczy w Local Storage:
+        console.log(localStorage.length);
+
+    Iteracja po kluczach w Local Storage:
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);  // Pobiera nazwę klucza
+            console.log(key, localStorage.getItem(key));  // Wyświetla klucz i wartość
+            }
 
 Kiedy wykorzystać Local Storage w Django?
     1. Zapisywanie danych na froncie:
@@ -141,6 +149,38 @@ Kiedy wykorzystać Local Storage w Django?
     3. Wsparcie aplikacji offline:
        - Zapisywanie danych w Local Storage w celu umożliwienia działania aplikacji bez połączenia z Internetem.
 
+</pre>
+
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+            <ul>
+            <div style="font-weight: bold;">SessionStorage:</div>
+<div class="notion" style="background-color: yellow;"> *** Django samo w sobie nie ma wbudowanej integracji z Session Storage. Do obsługi Local Storage potrzeba użyć customowo JavaScriptu.</div>
+
+<pre>
+
+Podstawowe operacje w Session Storage:
+
+    Zapisywanie danych:
+        sessionStorage.setItem('klucz', 'wartość');  // Session Storage
+
+    Odczytywanie danych:
+        const sessionValue = sessionStorage.getItem('klucz');  // Session Storage
+        console.log(sessionValue);
+
+    Usuwanie danych:
+        sessionStorage.removeItem('klucz');
+        sessionStorage.clear();  // Usuwa wszystkie dane z Session Storage
 </pre>
 
             </ul>
