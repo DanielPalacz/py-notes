@@ -112,10 +112,14 @@
     Jeden z głównych mechanizmów dostępnych poprzez Web Storage API, pozwala przechowywać dane bez określonej daty wygaśnięcia.
     Oznacza to, że dane pozostaną dostępne po opuszczeniu strony internetowej, zamknięciu karty lub przeglądarki, a nawet po wyłączeniu urządzenia.
     Dane zapisywane są w formacie klucz-wartość. Idealnie nadaje się do magazynowania niewrażliwych danych.
+</pre>
 
-Django samo w sobie nie ma wbudowanej integracji z Local Storage. Do obsługi Local Storage potrzeba użyć JavaScript.
+<div class="notion" style="background-color: yellow;"> *** Django samo w sobie nie ma wbudowanej integracji z Local Storage. Do obsługi Local Storage potrzeba użyć customowo JavaScriptu.</div>
+
+<pre>
 
 Podstawowe operacje w Local Storage:
+
     Zapisywanie danych:
         localStorage.setItem('klucz', 'wartość');
     Odczytywanie danych:

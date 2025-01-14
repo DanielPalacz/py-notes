@@ -174,14 +174,32 @@ Logowanie użytkownika:
         else:
             return HttpResponse("Niepoprawne dane logowania.")
 
-Wylogowanie użytkownika:
-    Wylogowanie usuwa dane użytkownika z sesji, przykład:
+    # Co robi funkcja login?
+        - Django doda nagłówek Set-Cookie w odpowiedzi HTTP tylko wtedy, gdy funkcja login zostanie wywołana i user zostanie pomyślnie uwierzytelniony.
+          Wtedy:
+            - Tworzy lub aktualizuje sesję w bazie danych Django, przypisując do niej dane użytkownika (zwykle jego ID).
+            - Generuje unikalny identyfikator sesji (tzw. klucz sesji).
+            - Ustawia ciasteczko sessionid w odpowiedzi HTTP przy użyciu nagłówka Set-Cookie.
+            - Set-Cookie: sessionid=&ltunikalny_klucz_sesji&gt; Path=/; HttpOnly; Secure; SameSite=Lax
+        - Jeśli użytkownik nie zostanie uwierzytelniony (np. nieprawidłowe dane logowania), Set-Cookie nie zostanie wysłany.
+
+
+    # Wylogowanie użytkownika:
+    # Wylogowanie usuwa dane użytkownika z sesji, przykład:
 
     from django.contrib.auth import logout
 
     def logout_view(request):
         logout(request)
         return HttpResponse("Wylogowano!")
+
+
+    # Co dokładnie się dzieje w logout?
+      - Metoda logout usuwa klucz sesji użytkownika (domyślnie tabela django_session) i odłącza bieżącego użytkownika od requestu.
+      - Po wywołaniu: request.user staje się instancją klasy AnonymousUser
+      Przykład nagłówka, po wylogowaniu:
+      - Set-Cookie: sessionid=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; Path=/; SameSite=Lax; HttpOnly
+
 
 </pre>
 
