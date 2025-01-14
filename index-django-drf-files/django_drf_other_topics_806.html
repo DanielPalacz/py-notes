@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h2 class="m-4">806. Jakie są możliwości Autentykacji i Autoryzacji W Django/DRF?</h2>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+            <ul>
+            <div style="font-weight: bold;">Django:</div>
+            <pre>
+
+1. Authentication (Uwierzytelnienie)
+    a) BasicAuthentication, password-based Authentication - BRAK, POTRZEBA BY NP. DODAĆ CUSTOM MIDDLEWARE
+    b) Login-Based Authentication (SessionAuthentication) - DOMYŚLNY MECHANIZM W DJANGO
+    c) Remote User Authentication (Zdalne uwierzytelnianie)
+    d) JWT Token-Based Authentication (JWT authentication token)
+    e) OAuth2 Authentication
+    f) Custom Authentication Backends (Własne backendy)
+
+2. Authorization  (Autoryzacja)
+    a) login_required Decorator
+    b) DjangoModelPermissions
+    c) DjangoObjectPermissions (extends DjangoModelPermissions, additional lib needed like: django-guardian)
+    d) Customized Role-Based Access Control (RBAC) solution
+</pre>
+
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+            <ul>
+            <div style="font-weight: bold;">DRF:</div>
+<pre>
+
+1. Authentication
+    a) BasicAuthentication, password-based Authentication
+    b) Login-Based Authentication (SessionAuthentication)
+    c) Token-Based Authentication (Simple version from DRF: TokenAuthentication)
+    d) JWT Token-Based Authentication (JWT authentication token)
+    e) OAuth2/OpenID Connect
+
+2. Authorization
+    a) Django's login_required Decorator (dedicated for Session-based typical Frontend Web APP, no good for APIs)
+    b) DRF builtin permission classes (AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly)
+    c) DjangoModelPermissions
+    d) DjangoObjectPermissions (extends DjangoModelPermissions, additional lib needed like: django-guardian)
+    e) Customized Role-Based Access Control (RBAC) solution
+</pre>
+
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
