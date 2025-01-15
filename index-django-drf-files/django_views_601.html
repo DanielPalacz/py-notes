@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:40px;text-decoration: underline;font-weight: bold;">601. Gotowe builtin widoki w Django. Czy tylko CBV?</h1>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #41A500;">
+            <div class="card-body">
+                <div style="font-weight: bold;">PODSUMOWANIE:</div>
+<pre>
+    - Nie wszystkie wbudowane widoki w Django są implementowane jako class-based views.
+    - Większość nowoczesnych widoków jest implementowana jako class-based views.
+    - Starsze i prostsze widoki, szczególnie związane z uwierzytelnianiem i adminem, mogą być function-based views.
+</pre>
+                <br>
+                <div style="font-weight: bold;">LISTA WBUDOWANYCH WIDOKÓW:</div>
+                <br>
+                <div style="font-weight: bold;"> - 1. Widoki genericzne (CBV, django.views.generic):</div>
+                <ul>
+                    <li>ListView</li>
+                        <div> - pobiera wszystkie elementy w modelu / tabeli</div>
+                    <li>DetailView</li>
+                        <div> - pobiera dokładnie jeden obiekt modelu / tabeli spełniający kryteria zdef. w url.py</div>
+                    <li>CreateView</li>
+                    <li>UpdateView</li>
+                    <li>DeleteView</li>
+                </ul>
+                <div style="font-weight: bold;"> - 2. Widoki związane z uwierzytelnianiem (CBV):</div>
+                <ul>
+                    <li>LoginView, LogoutView, PasswordResetView, PasswordChangeView</li>
+                </ul>
+                <div style="font-weight: bold;"> - 3. Widoki ogólnego przeznaczenia (CBV):</div>
+                <ul>
+                    <li>RedirectView, TemplateView</li>
+                </ul>
+                <div style="font-weight: bold;"> - 4. Function-Based Views (FBV):</div>
+                <ul>
+                    <li>Widoki związane z uwierzytelnianiem (logout_then_login, password_reset_done)</li>
+                    <li>Widoki dla admina (sporo)</li>
+                </ul>
+<pre>
+
+
+# Ad1. CBV Widoki genericzne, przykład:
+
+
+urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path('add/', views.AddView.as_view(), name='add'),
+    path('posts/', views.PostsView.as_view(), name='posts'),
+    path('&ltslug:slug&gt/', views.SingleView.as_view(), name='single'),
+    path('edit/&ltint:pk&gt/', views.EditView.as_view(), name='edit'),
+    path('delete/&ltint:pk&gt/', views.DeleteCustomView.as_view(), name='delete'),
+]
+
+
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+
+class IndexView(ListView):
+    model = Core
+    template_name = "core/index.html"
+    context_object_name = "index"
+    # context_object_name = "object_list" (default)
+
+
+class SingleView(DetailView):
+    model = Core
+    template_name = "core/single.html"
+    context_object_name = "post"
+
+
+class PostsView(ListView):
+    model = Core
+    template_name = "core/posts.html"
+    context_object_name = "post_list"
+
+
+class AddView(CreateView):
+    model = Core
+    # fields = ["title"]
+    fields = "__all__"
+    template_name = "core/add.html"
+    success_url = reverse_lazy("core:posts")
+    # context_object_name = "object_list" (default)
+
+
+class EditView(UpdateView):
+    model = Core
+    fields = "__all__"
+    template_name = "core/edit.html"
+    pk_url_kwarg = "pk"
+    success_url = reverse_lazy("core:posts")
+    # context_object_name = "object_list" (default)
+
+
+class DeleteCustomView(DeleteView):
+    model = Core
+    # fields = "__all__"
+    template_name = "core/confirm-delete.html"
+    pk_url_kwarg = "pk"
+    success_url = reverse_lazy("core:posts")
+    # context_object_name = "object_list" (default)
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
