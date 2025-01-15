@@ -99,7 +99,7 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">Jak osadzać kod JavaScript na stronie (wykorzystując tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza?</h1>
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">003. Deklaracja zmiennych: let, const, var.</h1>
 
 
 <div class="row mb-10">
@@ -108,24 +108,29 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-Jakie są możliwości?
+Deklaracje zmiennych w JavaScript:
+    let (zmienna mutowalna, blokowy zakres),
+    const (stała, blokowy zakres),
+    var (zakres funkcyjny, starszy kod)
 
-    1. Wstawianie JavaScriptu w pliku HTML (inline)
-        a) W sekcji &lthead&gt (rzadko stosowane)
-        b) W sekcji &ltbody&gt (zalecane na końcu)
+let:
+    let x = 10; // Deklaracja i przypisanie
+    x = 20;     // Zmiana wartości
+    console.log(x); // 20
+const:
+    const y = 20;
+var:
+    var z = 30;
 
-    2. Korzystanie z zewnętrznego pliku JavaScript (tag script)
 
-    3. Atrybuty asynchroniczne i opóźnienie wczytywania
-        a) defer (skrypt jest wykonywany po zakończeniu analizy całego HTML)
-            - Używaj defer dla skryptów, które muszą manipulować DOM (np. frameworki frontendowe lub logika interfejsu użytkownika
-        b) async (skrypt jest wykonywany równolegle z ładowaniem reszty dokumentu HTML)
-            - Używaj async dla skryptów niezależnych, takich jak analityka lub reklamy.
-        c) brak async i defer (skrypt jest blokujący, wczytanie i wykonanie skryptu zatrzymuje analizowanie HTML do czasu jego zakończenia)
+Zakres blokowy:
+    if (true) {
+          let y = 5; // Zmienna y istnieje tylko w tym bloku
+          console.log(y); // 5
+        }
+    console.log(y); // Błąd: y is not defined
+</pre>
 
-    4. Osadzanie kodu JS w atrybutach HTML (niezalecane)
-    </pre>
-        <b><a class="m-4" href="basics_example.html">Przykłady</a></b>
     </div>
     </div>
     </div>

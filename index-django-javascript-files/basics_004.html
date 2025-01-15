@@ -99,7 +99,7 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">Jak osadzać kod JavaScript na stronie (wykorzystując tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza?</h1>
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">004. Globalny kontekst w JavaScript.</h1>
 
 
 <div class="row mb-10">
@@ -108,24 +108,26 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-Jakie są możliwości?
+W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie. W przeglądarkach globalny kontekst to obiekt window.
+    - Każda zmienna zadeklarowana w globalnym zakresie za pomocą var (lub bez słowa kluczowego) staje się właściwością obiektu window.
+    - Zmienne zadeklarowane przez let lub const również są globalne, jeśli znajdują się poza funkcją lub blokiem, ale
+      nie są przypisywane do obiektu window.
 
-    1. Wstawianie JavaScriptu w pliku HTML (inline)
-        a) W sekcji &lthead&gt (rzadko stosowane)
-        b) W sekcji &ltbody&gt (zalecane na końcu)
+Po co 'globalny kontekst' został tak zaimplementowany w JavaScript?
+    - JavaScript został zaprojektowany jako język dla stron internetowych, który pierwotnie działał wyłącznie w przeglądarce.
+    - Wszystko w przeglądarce działa w kontekście jednej strony (lub jednego dokumentu HTML).
+    - Globalny kontekst zaprojektowano tak by skrypty mogły współdzielić ten sam kontekst (manipulować DOM, współdzielić dane globalne).
+    - Każde wykonanie kodu JavaScript na stronie internetowej (poprzez ponowne załadowanie skryptu) nie resetuje globalnego kontekstu,
+      lecz jedynie uruchamia nowy fragment kodu w istniejącym środowisku.
 
-    2. Korzystanie z zewnętrznego pliku JavaScript (tag script)
 
-    3. Atrybuty asynchroniczne i opóźnienie wczytywania
-        a) defer (skrypt jest wykonywany po zakończeniu analizy całego HTML)
-            - Używaj defer dla skryptów, które muszą manipulować DOM (np. frameworki frontendowe lub logika interfejsu użytkownika
-        b) async (skrypt jest wykonywany równolegle z ładowaniem reszty dokumentu HTML)
-            - Używaj async dla skryptów niezależnych, takich jak analityka lub reklamy.
-        c) brak async i defer (skrypt jest blokujący, wczytanie i wykonanie skryptu zatrzymuje analizowanie HTML do czasu jego zakończenia)
+Jak to obejść w JavaScript?
+    - Unikaj globalnych zmiennych
+    - Użyj modułów ES6 (import/export)
+    - Użyj oddzielnych bloków kodu
+    - Resetuj kontekst (np. przez przeładowanie strony)
+</pre>
 
-    4. Osadzanie kodu JS w atrybutach HTML (niezalecane)
-    </pre>
-        <b><a class="m-4" href="basics_example.html">Przykłady</a></b>
     </div>
     </div>
     </div>
