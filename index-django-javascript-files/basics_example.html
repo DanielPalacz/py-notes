@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Przykład osadzenia JS</title>
+  <script>
+    console.log("JavaScript w sekcji <head> 1");
+  </script>
+</head>
+<body>
+  <h1>Przykłady osadzania JS:</h1>
+  <pre>   - załączony w tagu head
+   - załączony z zewnętrznego pliku
+   - JS w atrybutach HTML</pre>
+
+  <button onclick="alert('Witaj!');console.log('JavaScript osadzony w atrybucie HTML 3');">Kliknij mnie</button>
+
+  <script src="basics_script.js"></script>
+  <script src="basics_script.js" defer></script>
+  <script src="basics_script.js" async></script>
+</body>
+</html>
