@@ -116,10 +116,6 @@
                 <div style="font-weight: bold;">Niestandardowy Object Manager:</div>
                 <ul>
                     <pre class="code">
-
-</pre>
-# Niestandardowy Object Manager:
-
     class Post(models.Model):
 
         class NewManager(models.Manager):
@@ -131,6 +127,8 @@
         newmanager = NewManager()
 
     posts = Post.newmanager.all()
+</pre>
+
                 </ul>
             </div>
         </div>
