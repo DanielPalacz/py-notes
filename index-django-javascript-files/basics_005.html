@@ -99,7 +99,7 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">003. Deklaracja zmiennych: let, const, var. Jak działa zakres blokowy?</h1>
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">005. Typy danych w JavaScript.</h1>
 
 
 <div class="row mb-10">
@@ -108,30 +108,55 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-Deklaracje zmiennych w JavaScript:
-    let (zmienna mutowalna, blokowy zakres),
-    const (stała, blokowy zakres),
-    var (zakres funkcyjny, starszy kod)
-        - specyficzne tematy na później (hoisting, zakresy i problemy z var)
+W JavaScript istnieje podział na typy prymitywne i typy referencyjne.
 
-let:
-    let x = 10; // Deklaracja i przypisanie
-    x = 20;     // Zmiana wartości
-    console.log(x); // 20
-const:
-    const y = 20;
-var:
-    var z = 30;
+Typy prymitywne (7):
+    - undefined
+        - let x; console.log(x); // undefined
+        - Wartość przypisywana zmiennej, która została zadeklarowana, ale nie została zainicjalizowana.
+
+    - null
+    - boolean
+        - Może przyjmować jedną z dwóch wartości: true lub false.
+
+    - number
+        - liczby całkowite i zmiennoprzecinkowe
+        - obejmuje również specjalne wartości jak NaN (Not-a-Number) i Infinity
+    - bigint
+        - Tworzy się je, dodając n na końcu liczby.
+
+    - string
+        - cudzysłowy pojedyncze ('), podwójne (") lub szablony tekstowe, czyli tzw 'template literals' z (`)
+        - let greeting = "Hello, World!"; let greeting = 'Hello, World!';
+        - const name = "Anna"; const age = 25; const greeting = `Cześć, mam na imię ${name} i mam ${age} lat.`;
+
+    - symbol
+        - let uniqueId = Symbol('id');
 
 
-Zakres blokowy:
-    if (true) {
-          let y = 5; // Zmienna y istnieje tylko w tym bloku
-          console.log(y); // 5
-        }
-    console.log(y); // Błąd: y is not defined
+
+Typy referencyjne (obiekty):
+
+    - Object
+        - Podstawowy typ referencyjny, od którego wywodzą się inne struktury danych.
+        - let person = { name: "John", age: 30 };
+        - console.log(person.name); // "John"
+    - Array
+        - mogą zawierać różne typy danych
+        - let numbers = [1, 2, 3];
+        - let random_arr = [1, "string", {"x": "x_value"}, [1, 2, 3, 4], generateRandomNumberFunc];
+
+    - Function
+    - Date
+    - RegExp
+    - Map, Set, WeakMap, WeakSet
+        - Struktury danych do przechowywania klucz-wartość lub unikalnych zbiorów.
+    - Error
+    - Promise
+
+
+
 </pre>
-
     </div>
     </div>
     </div>
