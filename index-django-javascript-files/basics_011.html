@@ -99,53 +99,44 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">008. Funkcje w JavaScript. Jak działają funkcje strzałkowe?</h1>
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">Jak działa słowo kluczowe 'this' w JavaScript?</h1>
 
 
 <div class="row mb-10">
-    <div class="col-9">
+    <div class="col-8">
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
+
     <pre>
-// 1. Function logging something, return nothing (undefined):
+this:
+    - słowo kluczowe odnoszące się się do obiektu, który wywołuje aktualnie wykonaną funkcję
+    - wskazywany obiekt zależy od kontekstu wywołania funkcji
+    - wartość this zmienia się w zależności od tego, w jaki sposób i gdzie funkcja jest wywoływana
 
-    function generateRandomNumber() {
-      let randomNumber = Math.floor(Math.random() * 100);
-      console.log(`Losowa liczba od 0 do 100: ${randomNumber}`);
-    }
+Różne Use Cases:
 
-    let result = generateRandomNumber();
-    console.log(result) // undefined
+    1. this w funkcjach globalnych
+        - console.log(this);  // W przeglądarkach 'this' odnosi się do obiektu window
+
+    2. this w funkcjach zwykłych
+        - funkcja jest wywoływana w sposób globalny (bez przypisania jej do jakiegoś obiektu), this odnosi się do obiektu globalnego
+          (czyli window w przeglądarkach).
+
+    3. this w metodach obiektów
+        - Kiedy funkcja jest wywoływana jako metoda obiektu, this odnosi się do obiektu, który wywołuje tę metodę.
+
+    4. this w funkcjach strzałkowych
+        - Funkcje strzałkowe różnią się od zwykłych funkcji, bo nie mają własnego this i dziedziczą this z otaczającego kontekstu.
+
+Inne Use Cases:
+    5. this w konstruktorach i klasach
+    6. this w zdarzeniach (event handlers)
+    7. this w call(), apply() i bind()
+    8. this w trybach ścisłych ('strict mode', np. w Node.js, ES Modules w przeglądarkach)
+        - każdy plik JavaScript jest traktowany jako moduł, a moduły mają własny kontekst
+        - moduł w Node.js działa w trybie "strict mode" z definicji i this nie jest przypisane do globalnego obiektu (global w Node.js).
 </pre>
-
-    <pre>
-
-// 2. Function returns smthg:
-    function multiplyByTwo(number) {
-        return number * 2;
-    }
-
-    let result = multiplyByTwo(5);
-    console.log(result);  // wynik to 10</pre>
-
-
-    <pre>
-
-// 3. Zwykła funkcja:
-    function dodaj(a, b) {
-        return a + b;
-    }
-
-// Odpowiednik, funkcja strzałkowa:
-    const dodaj = (a, b) => a + b;
-
-</pre>
-        <div>Funkcje strzałkowe:</div>
-        <ul>
-            <li>wprowadzono je w 'ECMAScript 2015' jako sposób na uproszczenie pisania funkcji w JavaScript oraz <b>poprawę zachowania w zakresie this.</b></li>
-            <li>nie mają własnego kontekstu this i obiektu arguments</b></li>
-        </ul>
     </div>
     </div>
     </div>

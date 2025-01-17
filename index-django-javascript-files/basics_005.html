@@ -120,7 +120,7 @@ Typy prymitywne (7):
         - Może przyjmować jedną z dwóch wartości: true lub false.
 
     - number
-        - liczby całkowite i zmiennoprzecinkowe
+        - liczby całkowite i zmiennoprzecinkowe - wszystko jest tak na prawdę 'float'
         - obejmuje również specjalne wartości jak NaN (Not-a-Number) i Infinity
     - bigint
         - Tworzy się je, dodając n na końcu liczby.
@@ -139,6 +139,8 @@ Typy referencyjne (obiekty):
 
     - Object
         - Podstawowy typ referencyjny, od którego wywodzą się inne struktury danych.
+        - Obiekt ma ograniczone metody, ale można używać funkcji takich jak Object.keys() lub Object.entries().
+        - Tylko stringi i symbole mogą być kluczami.
         - let person = { name: "John", age: 30 };
         - console.log(person.name); // "John"
     - Array
@@ -151,6 +153,16 @@ Typy referencyjne (obiekty):
     - RegExp
     - Map, Set, WeakMap, WeakSet
         - Struktury danych do przechowywania klucz-wartość lub unikalnych zbiorów.
+            - Map
+                - Map to wbudowana struktura danych w JavaScript, która przechowuje pary klucz-wartość, podobnie jak obiekty.
+                - Kluczami w Map mogą być dowolne typy danych (np. obiekty, funkcje, liczby, itp.).
+                - Map zachowuje porządek dodawania kluczy i posiada wbudowane metody do pracy z kluczami i wartościami  (set, get, has itp.).
+                  const map = new Map();
+                  map.set("name", "Alice");
+                  console.log(map.get("name")); // Alice
+
+            - Set
+                - const set1 = new Set(); set1.add(1);
     - Error
     - Promise
 
