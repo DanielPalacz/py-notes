@@ -99,7 +99,7 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h2 class="m-4">901. Cross-Site Request Forgery (CSRF) w Django</h2>
+<h2 class="m-4">901. Cross-Site Request Forgery (CSRF) w Django. Czym jest podatność CSRF?</h2>
 
 
 <div class="row">
@@ -117,6 +117,10 @@ Middleware django.middleware.csrf.CsrfViewMiddleware:
 
 W przypadku aplikacji korzystających z formularzy HTML ochrona CSRF jest obsługiwana bez żadnej dodatkowej pracy.
 W przypadku API (np. z AJAX), musisz ręcznie dodać token CSRF do nagłówków żądań.
+
+Czym jest podatność CSRF?
+    - jest to zmuszenie przeglądarki ofiary do wykonania pewnej nieautoryzowanej akcji (wykonania requestu HTTP)
+    - to atak na przeglądarkę (a nie część serwerową aplikacji; serwer  traktuje requesty powstałe w wyniku ataku jako legalna komunikacja z przeglądarki)
 </pre>
 
             </div>
