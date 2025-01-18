@@ -99,67 +99,43 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<div class="row mb-10">
-    <div class="col-8">
-    <h1 style="font-size:60px;text-decoration: underline;font-weight: bold;">Django modele, Podstawy_013:</h1>
-</div>
-</div>
-
-
-<br>
-
 
 <div class="row mb-10">
     <div class="col-8">
-    <h1 style="font-size:25px;font-weight: bold;">013. Queryset jest obiektem w ORM Django reprezentującym cały zestaw danych. Jakie są jego właciwości?</h1>
+    <h1 style="font-size:40px;text-decoration: underline;font-weight: bold;">603. Jak można zaimplementować widok obsługujący formularz wykorzystując wbudowane CBV w Django (użycie form_valid)?</h1>
 </div>
 </div>
 
 <div class="row">
     <div class="col-md-9">
-        <div class="card mb-4 box-shadow" style="background-color: #C00080;">
+        <div class="card mb-4 box-shadow" style="background-color: #41A500;">
             <div class="card-body">
-                <div>Odpowiedź,:</div>
-                <ul>
-                    <li>Querysety w Django to obiekty reprezentujące zapytania do bazy danych wykonywane przy użyciu Django ORM (Object-Relational Mapping). Pozwala on na tworzenie, modyfikowanie i wyciąganie danych z bazy danych w sposób bardziej zbliżony do pracy z obiektami, a nie bezpośrednio w SQL.</li>
-                    <li>Querysety są leniwe (nie wykonują zapytania, dopóki nie są wykorzystywane) i mogą być łańcuchowane, co pozwala na elastyczne tworzenie zapytań.</li>
-                    <br>
-                    <li>Jak tworzymy Queryset?</li>
-                    <pre class="code">
-# Pobiera wszystkie obiekty modelu
-queryset = MyModel.objects.all()
+                <div style="font-weight: bold;">Przykład:</div>
+<pre>
 
-# Pobiera obiekty, które spełniają określone warunki
-queryset = MyModel.objects.filter(status='active')
+    from django.shortcuts import redirect
+    from django.views.generic.edit import FormView
+    from .forms import MyForm
 
-# Pobiera jeden obiekt, który spełnia warunki
-queryset = MyModel.objects.get(id=1)
+    class MyFormView(FormView):
+        template_name = 'my_template.html'
+        form_class = MyForm
+        success_url = '/success/'
 
-# Pobiera tylko określone pola
-queryset = MyModel.objects.values('name', 'status')
+        def form_valid(self, form):
+            # W tym miejscu możemy wykonać dodatkowe operacje, np. zapisać dane w bazie
+            my_instance = form.save(commit=False)
+            my_instance.user = self.request.user
+            my_instance.save()
 
-# Pobiera obiekty posortowane według określonego pola
-queryset = MyModel.objects.order_by('created_at')
-
-# Lazy loading (leniwe ładowanie):
-# Querysety są leniwe — oznacza to, że zapytanie do bazy danych nie zostanie wykonane, dopóki nie zostanie faktycznie potrzebne.
-
-queryset = MyModel.objects.filter(status='active')
-# Queryset nie wykonuje zapytania, dopóki nie wezwiesz np. list(queryset)
-list(queryset)  # Teraz zapytanie jest wykonane
-
-
-# Łańcuchowanie zapytań
-# Optymalizacja: select_related i prefetch_related
-# Paginacja i Slicing
-# Klasa bazowa dla Queryset obiektów w Django to django.db.models.query.QuerySet.
-                    </pre>
-                </ul>
-            </div>
+            # Możemy również zmienić miejsce przekierowania
+            return redirect(self.success_url)
+</pre>
+                <br>
+             </div>
         </div>
     </div>
 </div>
-
 
 
 </body>
