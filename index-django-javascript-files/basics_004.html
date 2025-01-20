@@ -108,20 +108,20 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie. W przeglądarkach globalny kontekst to obiekt window.
+W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie. Obiekt window reprezentuje globalny kontekst w przeglądarkach.
+    - Window jest specyficzny dla przeglądarek - inne środowiska (np. Node.js) mają swój globalny obiekt (np. global w Node.js)
     - Każda zmienna zadeklarowana w globalnym zakresie za pomocą var (lub bez słowa kluczowego) staje się właściwością obiektu window.
     - Zmienne zadeklarowane przez let lub const również są globalne, jeśli znajdują się poza funkcją lub blokiem, ale
       nie są przypisywane do obiektu window.
 
-Po co 'globalny kontekst' został tak zaimplementowany w JavaScript?
+Po co 'globalny kontekst' został tak zaimplementowany w JavaScript (w taki sposób)?
     - JavaScript został zaprojektowany jako język dla stron internetowych, który pierwotnie działał wyłącznie w przeglądarce.
-    - Wszystko w przeglądarce działa w kontekście jednej strony (lub jednego dokumentu HTML).
     - Globalny kontekst zaprojektowano tak by skrypty mogły współdzielić ten sam kontekst (manipulować DOM, współdzielić dane globalne).
     - Każde wykonanie kodu JavaScript na stronie internetowej (poprzez ponowne załadowanie skryptu) nie resetuje globalnego kontekstu,
       lecz jedynie uruchamia nowy fragment kodu w istniejącym środowisku.
 
 
-Jak to obejść w JavaScript?
+Jakie są inne możliwości w JavaScript?
     - Unikaj globalnych zmiennych
     - Użyj modułów ES6 (import/export)
     - Użyj oddzielnych bloków kodu
