@@ -156,7 +156,27 @@
         print("hello")
 
     say_hello()
-    say_hello()
+
+</pre>
+
+                <h4>Function-based decorator, but for class:</h4>
+<pre class="code">
+Przykład dekoratora dla klasy:
+    def add_method(cls):
+        def new_method(self):
+            return "Nowa metoda w klasie!"
+
+        # Dodajemy metodę do klasy
+        cls.new_method = new_method
+        return cls
+
+    @add_method
+    class MyClass:
+        def __init__(self, name):
+            self.name = name
+
+        def greet(self):
+            return f"Hello, {self.name}!"
 </pre>
             </div>
         </div>
