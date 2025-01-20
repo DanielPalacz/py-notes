@@ -113,6 +113,15 @@ Hoisting
     - mechanizm w JavaScript, gdzie deklaracje (nie ich wartości) są przenoszone na początek zakresu, zanim skrypt zostanie wykonany
     - dla funkcji oznacza to, że deklaracje funkcji są dostępne w kodzie, nawet jeśli wywołujesz je przed ich faktycznym zdefiniowaniem
 
+Hoisting zmiennych
+        let, const
+            zmienne są hoistowane, ale nie są dostępne przed ich inicjalizacją
+            Kiedy próbujesz uzyskać dostęp do zmiennej przed jej przypisaniem (czyli przed jej inicjalizacją), JavaScript zgłosi błąd.
+            Jest to właśnie mechanizm temporal dead zone.
+
+        var
+             Zmienna jest hoistowana i dostępna jako undefined przed jej przypisaniem.
+
 Jak działa hoisting dla różnych sposobów definiowania funkcji?
     - Deklaracja funkcji (Function Declaration)
     - Funkcja jako wyrażenie (Function Expression)
