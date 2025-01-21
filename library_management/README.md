@@ -1,6 +1,22 @@
 
 ## LIBRARY MANAGMENT SYSTEM
- - examples of Hexagonal Architecture (Ports & Adapters)
+ - example of Hexagonal Architecture (Ports & Adapters)
+
+```
+Hexagonal Architecture:
+ - allow to create system that are testable and extendable
+ - business logic (app core) separation from: external technologies and services, user interfaces
+
+Key concepts:
+ - layers and boundaries:
+    - core
+    - ports (interfaces)
+    - adapters
+ - hexagon structure view
+ - technology independance 
+ 
+```
+
 
 ## Project structure:
 ```
