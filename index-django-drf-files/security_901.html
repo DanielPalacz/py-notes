@@ -107,20 +107,26 @@
         <div class="card mb-4 box-shadow" style="background-color: light-blue;">
             <div class="card-body">
             <pre>
-Middleware "django.middleware.csrf.CsrfViewMiddleware" jest odpowiedzialny za ochronę przed atakami typu Cross-Site Request Forgery (CSRF),
-co jest jednym z kluczowych elementów bezpieczeństwa aplikacji Django.
-
-Middleware django.middleware.csrf.CsrfViewMiddleware:
+W Django middleware 'django.middleware.csrf.CsrfViewMiddleware' jest odpowiedzialny za ochronę przed atakami typu Cross-Site Request Forgery (CSRF):
+    - w przypadku aplikacji korzystających z formularzy HTML ochrona CSRF jest obsługiwana bez żadnej dodatkowej pracy
+    - w przypadku API (np. z AJAX), trzeba ręcznie dodać token CSRF do nagłówków żądań.
+Middleware:
     1. Automatycznie obsługuje generowanie i weryfikację tokena CSRF (csrftoken).
     2. Zapewnia ochronę przed atakami CSRF, wymagając zgodności między tokenem w ciasteczku i żądaniu.
     3. Jest domyślnie włączony w Django i działa automatycznie, jeśli jest poprawnie skonfigurowany w MIDDLEWARE.
 
-W przypadku aplikacji korzystających z formularzy HTML ochrona CSRF jest obsługiwana bez żadnej dodatkowej pracy.
-W przypadku API (np. z AJAX), musisz ręcznie dodać token CSRF do nagłówków żądań.
-
-Czym jest podatność CSRF?
+Ale czym jest podatność CSRF?
     - jest to zmuszenie przeglądarki ofiary do wykonania pewnej nieautoryzowanej akcji (wykonania requestu HTTP)
     - to atak na przeglądarkę (a nie część serwerową aplikacji; serwer  traktuje requesty powstałe w wyniku ataku jako legalna komunikacja z przeglądarki)
+    - Ofiara wchodzi na spreparowaną stronę www (musi zostać do tego nakłoniona; to częsty wymóg CSRF)
+
+    Przykład:
+        - Atakujący będzie chciał zmusić przeglądarkę administratora (wykorzystać podatność CSRF) do zarejestrowania nowego konta.
+        - Aby atakujący mógł się zalogować wystarczyłoby jeszcze raz wykorzystać CSRF do wykonania np. requestu usuwającego blokadę na IP użytkownika.
+        - Możliwe są tu również: inne tagi (np ładowanie link), auto-submit formularz, JavaScript z AJAX (XMLHttpRequest lub Fetch API).
+
+
+
 </pre>
 
             </div>
