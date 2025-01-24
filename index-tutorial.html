@@ -834,6 +834,109 @@ print(next(gen))  # Output: 1
                 </div>
 
       <p>CPython uses a lot of memory for its objects. It uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
+      <br>
+      <h4>"being aware of the memory management model" - but what does it mean?</h4>
+<pre>
+Being aware of the memory management model is to know how Python uses memory : ) But not only.
+
+In Linux it proceeds to understanding below notions / aspects:
+    - all resources are eventually provided by kernel
+    - virtual memory and other memory management functions
+    - Call Stack in Python
+    - Heap memory in Python
+    - processor stack
+    - memory optimizations - like using processor cache memory for often used objects
+        - what are other processor / OS memory optimizations technics?
+            - Paging and Swapping
+            - Lazy Allocation
+            - Transparent Huge Pages
+            - Memory Overcommit
+            - Copy-on-Write (CoW)
+               - Kiedy proces tworzy kopię (np. przez fork()), Linux stosuje Copy-on-Write:
+               - Pamięć współdzielona między procesami nie jest kopiowana od razu.
+            - Kernel Same-page Merging (KSM)
+            - NUMA (Non-Uniform Memory Access)
+            - Asynchronous I/O i Direct Memory Access (DMA)
+            - Reclaiming Memory (odzyskiwanie pamięci)
+            - HugeTLB (Huge Translation Lookaside Buffer)
+            - Pamięć mapowana na pliki (Memory-Mapped Files)
+                - Linux pozwala aplikacjom na mapowanie plików bezpośrednio do pamięci (mmap)
+            -  Cgroups i limity pamięci
+            - Parametr swappiness kontroluje, jak agresywnie Linux korzysta z pamięci wymiany (swap)
+            - Linux używa technik takich jak prefetching i readahead, aby przewidywać, jakie dane mogą być potrzebne i ładować je do pamięci wcześnie
+
+        - Python memory optimization technics:
+            - object interning
+            - object sharing
+            - freelist - reuning memory - or object caching (often used objects)
+                    - empty dict are reused
+            - constant pool (for constant variables in functions)
+            - dynamic memory allocation for muted object
+            - optimization in hash tables (dicts)
+            - Lazy Evaluation i View Objects
+
+    - multithreading and multiprocessing
+
+
+    W językach niskopoziomowych, takich jak C, stos wywołań jest zarządzany bezpośrednio przez system operacyjny i procesor.
+    Natomiast w CPython stos wywołań jest zarządzany przez sam interpreter, co dodaje pewien narzut, ale umożliwia np dynamiczne zarządzanie pamięcią (np. garbage collection).
+    Jak to umożliwia dynamiczne zarządzanie pamięcią?
+     - Ramki wywołań są dynamiczne i nie muszą mieć z góry określonego rozmiaru — stos wywołań dynamicznie dopasowuje się do rozmiaru wywołań funkcji.
+     - Garbage Collector w Pythonie nie działa bezpośrednio na stosie. Gdy funkcja kończy swoje działanie, jej lokalne zmienne są usuwane natychmiast (), bez potrzeby interwencji GC.
+         - Liczniki referencji z GC pozwalają na automatyczne usuwanie obiektów, na które wskazywały referencje ze stosu.
+    Narzut związany z dynamicznym zarządzaniem pamięcią:
+        - Zarządzanie pamięcią przez licznik referencji - działanie Garbage collectora jest kosztowne pod względem czasowym
+        - Zastosowanie dynamicznych ramek wywołań również wiąże się z pewnym kosztem pamięci i czasu. Tworzenie i usuwanie ramek wywołań przy każdym wywołaniu funkcji ma swój narzut czasowy.
+
+
+Call Stack in CPython (Stos wywołań / Stos Pythonowy):
+
+    - W językach niskopoziomowych, takich jak C, stos wywołań jest zarządzany bezpośrednio przez system operacyjny i procesor.
+    - Natomiast w CPython stos wywołań jest zarządzany przez sam interpreter, co dodaje pewien narzut, ale umożliwia np dynamiczne zarządzanie pamięcią (np. garbage collection).
+
+    - dokładniej w Pythonie/OS funkcjonują dwa stosy:
+
+        - klasyczny stos procesora (nowy per proces / wątek)
+
+        - Stos Pythonowy (nowy per proces / wątek)
+            - Ramki funkcji: PyFrameObject - Include/frameobject.h
+              Kluczowe elementy struktury:
+                - f_back: Wskaźnik na poprzednią ramkę. Łączy ramki w stos wywołań
+                - f_code: Odniesienie do obiektu kodu (bytecode) odpowiadającego funkcji.
+                - f_valuestack: Wskaźnik na stos wartości używanych przez bytecode (np. zmienne, wyniki operacji).
+                - f_blockstack: Stos bloków try/except i pętli.
+
+            asyncio, korutyny:
+                - Stos Pythonowy, w przypadku korutyn (async def) działa to trochę inaczej
+                - Każda korutyna ma swój własny kontekst wykonania, który przechowuje dane lokalne i stan wywołania
+                - Zamiast typowego stosu ramek funkcji, korutyna "zamraża" swój stan w obiekcie CoroWrapper (reprezentującym korutynę w Pythonie), który jest zarządzany przez pętlę zdarzeń.
+                    - gdy korutyna "zamrażana" Pętla zdarzeń usuwa jej ramkę ze stosu pythonowego
+                    - wznowienie korutyny powoduje również przywracenie jej ramki na stos Pythonowy
+
+
+
+Call Stack in Python:
+    - in general: it LIFO queue mechanisms for references and data related to program execution
+    - handles short-living data like local variable references in function scope that are packed in Frames (when functions are called / running)
+    - Stos wywołań w Pythonie jest realizowany przy pomocy ramek wywołań (PyFrameObject) i w CPython jest zarządzany przez sam interpreter
+        - dokładnie, w CPython stos wywołań i ramki funkcji są zaimplementowane na poziomie kodu źródłowego interpretera w języku C
+        - upraszaczając Stos wywołań bazuje na polu f_back w PyFrameObject, który wskazuje na poprzednią ramkę (rodzica) - tak jest tworzona struktura stosu w Pythonie.
+        - Dzieje się to w: Python/ceval.c: głównej pętla interpretera, gdzie wykonywany jest bytecode i zarządzane są ramki.
+
+    - Każda ramka odpowiada jednemu wywołaniu funkcji (lub blokowi kodu wykonywanemu przez interpreter, np. w module, klasie, itp.).
+    - Dzięki tej konstrukcji Python śledzi historię wywołań i pozwala debugować kod (np. tracebacks w przypadku błędów).
+
+
+
+Heap memory in Python:
+    - dynamic virtual memory assigned to the given process (logically it is continual address space)
+    - used automatically when objects in Python are created
+    - global memory space (subspace of heap memory)
+
+Garbage Collector dba o zwalnianie pamięci obiektów przechowywanych na stercie.
+Kiedy obiekt jest nieosiągalny (nie ma referencji do niego), GC usuwa go z pamięci. Jest to zarządzanie dynamiczne.
+</pre>
+
             </div>
         </div>
     </div>
