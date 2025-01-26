@@ -108,21 +108,25 @@
             <div class="card-body">
             <ul>
             <pre>
-Middleware w Django to (logika) warstwy pośredniczące pomiędzy żądaniem a odpowiedzią HTTP.
-Są to klasy, które mogą przetwarzać każde żądanie i odpowiedź przychodzące do i wychodzące z aplikacji Django.
-Middleware daje możliwość dodawania globalnych funkcjonalności i modyfikowania zachowania aplikacji na poziomie całego projektu.
+Middleware w Django to (logika) / klasy, które mogą przetwarzać każde żądanie i odpowiedź przychodzące do i wychodzące z aplikacji Django.
+Daje możliwość dodawania globalnych funkcjonalności i modyfikowania zachowania aplikacji na poziomie całego projektu.
+
+Kluczowe momenty wywołań:
+    Przed widokiem:
+        process_request (opcjonalne).
+        __call__ (właściwe wejście middleware).
+
+    Podczas przetwarzania widoku:
+        Widok działa.
+        Jeśli wyjątek → process_exception.
+
+    Po widoku:
+        process_response modyfikuje odpowiedź.
 
 
-Jak działa middleware? Middleware działa w cyklu żądanie-odpowiedź:
-    Żądanie przychodzi od klienta:
-        Middleware przetwarzają żądanie zanim dotrze ono do widoku.
-        Każde middleware ma szansę modyfikować żądanie lub zatrzymać jego obsługę (np. zwracając odpowiedź przed dotarciem do widoku).
-    Widok przetwarza żądanie i generuje odpowiedź:
-        Middleware przetwarzają odpowiedź po jej wygenerowaniu przez widok, zanim zostanie odesłana do klienta.
-
-
-Tworzenie własnego middleware
-Middleware w Django to klasa, która musi zawierać co najmniej jedną z następujących metod:
+Tworzenie własnego middleware,
+    Middleware w Django to klasa, która musi zawierać co najmniej jedną z następujących metod:
+class CustomMiddleware:
     __init__(self, get_response):
         Inicjalizacja middleware. get_response to funkcja wywoływana przy każdym żądaniu.
 
