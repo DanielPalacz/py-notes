@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h2 class="m-4">809. Podstawy wnikliwiej. Czym jest aplikacja w Django? Czym jest backend w Django? Dlaczego middleware nie jest backendem?</h2>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: #87CEEB;">
+            <div class="card-body">
+            <ul>
+            <pre>
+Czy możemy powiedzieć, że w Django: backend == aplikacja?
+    Nie, w Django backend to nie to samo co aplikacja, ale czasem oba terminy mogą być używane w podobnym kontekście.
+    Dwa pojęcia się różnią i ich role w Django są różne.
+
+    Aplikacja w Django to moduł funkcjonalny projektu. Jest to folder z kodem, który realizuje określoną część logiki aplikacji,
+    np. blog, sklep internetowy czy system rezerwacji. Aplikacje mogą być:
+     - Samodzielne: Mogą działać niezależnie, np. biblioteka Django REST Framework.
+     - Zintegrowane: Mogą być częścią większego projektu Django, np. aplikacja obsługująca użytkowników (users).
+
+    Backend w Django to moduł odpowiadający za realizację konkretnej funkcji systemowej, jak obsługa cache, bazy danych czy uwierzytelniania.
+    Backend nie jest pełną aplikacją, a jedynie wymienialnym komponentem, który realizuje jedną specyficzną funkcję.
+    Zatem, jest definiowany jako moduł odpowiedzialny za realizację wymiennych mechanizmów obsługi funkcji technicznych systemu.
+    To obejmuje:
+        - Przechowywanie danych (DATABASES).
+        - Przechowywanie cache (CACHES).
+        - Mechanizmy uwierzytelniania (AUTHENTICATION_BACKENDS).
+        - Inne funkcje wymienne, np. email backend (EMAIL_BACKEND).
+
+Dlaczego middleware to nie backend w sensie Django?
+    To jest kwestia nazewnictwa i określonej umowy. Middleware ewentualnie można by nazwać Backendem.
+     - W typowym rozumieniu Django Middleware nie jest klasyfikowane jako backend.
+     - Jednakże w szerszym rozumieniu backendu, na pewno można je traktować jako element "niewidoczny" dla użytkownika, który ma na celu wspieranie
+       aplikacji i interakcję z jej zasobami, co sprawia, że middleware również może być częścią backendu w szerszym znaczeniu.
+</pre>
+
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
+
+
