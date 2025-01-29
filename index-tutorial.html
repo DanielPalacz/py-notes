@@ -99,37 +99,43 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<div class="row mb-10">
-    <div class="col-8">
-    <h1 style="font-size:80px;text-decoration: underline;font-weight: bold;">Python notes</h1>
-    <hr>
-    <hr>
-    <hr>
+<br>
+<div class="row">
+    <div class="col-md-8">
+            <div class="card mb-4 box-shadow" style="background: yellow;">
+                <h2 class="ml-2"><b><u>Python questions / observations:</u></b></h2>
+                <div class="card-body">
+
+    <ul>
+        <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
+        <br>
+        <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
+        <br>
+        <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
+        <br>
+        <li>Key difference between Iterable object and iterator object is related to dunder methods implementation? Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement (if there is no __iter__ then __getitem__ is needed). What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
+        <br>
+        <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
+        <br>
+        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Python 2 history.</li>
+        <br>
+        <li>In Python str class there are maketrans and translate methods. For what it can be used?</li>
+    </ul>
 </div>
 </div>
+</div>
+</div>
+
+
+
 
 
 <div class="row">
-    <div class="col-8">
+    <div class="col-10">
     <br>
     <div class="button-custom mb-4">
             <a href="https://docs.python.org/3/tutorial/" class="btn btn-dark btn-lg mt-1 button-link-custom" style="font-weight: bold; text-align: center;">The Python official tutorial</a>
     </div>
-</div>
-</div>
-<br>
-
-<div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
-            <div class="card-body">
-                <a class="main-a" href="https://docs.python.org/3/tutorial/appetite.html">1. Whetting Your Appetite</a>
-                <ul>
-                    <li>Python is just the language for you.</li>
-                </ul>
-
-            </div>
-</div>
 </div>
 </div>
 
@@ -714,6 +720,18 @@ print(next(gen))  # Output: 1
 
 
 
+<div class="row">
+    <div class="col-10">
+    <br>
+    <div class="button-custom mb-4">
+            <a href="" class="btn btn-dark btn-lg mt-1 button-link-custom" style="font-weight: bold; text-align: center;">Other Python notes</a>
+    </div>
+</div>
+</div>
+<br>
+
+
+
 
 <div class="row">
     <div class="col-md-8">
@@ -833,7 +851,7 @@ print(next(gen))  # Output: 1
                     </ul>
                 </div>
 
-      <p>CPython uses a lot of memory for its objects. It uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
+      <p>CPython uses a lot of memory for its objects and because of this it uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
       <br>
       <h4>"being aware of the memory management model" - but what does it mean?</h4>
 <pre>
