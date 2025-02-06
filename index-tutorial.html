@@ -107,9 +107,12 @@
                 <div class="card-body">
 
     <ul>
-        <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
-        <br>
+        <b>Generators:</b>
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
+        <li>Syntax: yield from ITERABLE_OBJECT (Generator, Iterator, Iterable). The one benefit of yield from is to allow easy refactoring of generators. But the second "performance optimization" is even more important. Simulation showed "yield from" speeds up execution about 10-30%.</li>
+        <br>
+        <br>
+        <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
         <br>
@@ -117,9 +120,43 @@
         <br>
         <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
         <br>
-        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Python 2 history.</li>
+        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
         <br>
-        <li>In Python str class there are maketrans and translate methods. For what it can be used?</li>
+        <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
+        <br>
+        <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
+        <br>
+        <li>Python class level '__slots__' mechanism - it predefines possible instance attributes (there is no __dict__ on instance level). Many instance as performance optimization Use Case. Simulation showed 150-300 MB memory saving when 1 million objects are handled.</li>
+        <br>
+        <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations.</li>
+        <li>But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
+        <br>
+        <li>dir() - there is easy explanation why dir command does not return always all attributes. Simply, it calls __dir__ underneath and __dir__ can be implemented differently. And often it is. Python documentation says "The default dir() mechanism behaves differently with different types of objects, as it attempts to produce the most relevant, rather than complete ..."</li>
+        <br>
+        <li>When obj = object() then obj is instance of class (named object), but object is class and classes are instances of type metaclass (unless you use your own new metaclass). In Python everything inherits from object class apart from type metaclass that doesn't inherit from anything.</li>
+        <br>
+        <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+        <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python</li>
+        <br>
+        <li>Descriptor protocol. Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__(). __set_name__ mechanism. Understanding descriptors is a key to a deep understanding of Python because they are the basis for many features including functions, methods, properties, class methods, static methods, and reference to super classes.</li>
+        <ul>
+            <li>Descriptor functions are get invoked by the dot operator during attribute lookup (reading / writing / deleting).</li>
+            <li>Descriptors only work when used as class variables. When put in instances, they have no effect.</li>
+            <li>The main motivation for descriptors is to provide a hook allowing objects stored in class variables to control what happens during attribute lookup.</li>
+        </ul>
+        <br>
+        <li>Every function written in Python is Descriptor (implements __get__) when C based functions not. Edge case for imports in Class.</li>
+        <br>
+        <br>
+        Attribute lookup protocol
+        <li>getattr (builtin method) / __get__ (descriptor method) / __getattr__ (when attribute doesnt exist ) / __getattribute__. Attribute lookup protocol (__getattribute__ exactly) calls __get__ and __getattr__ so can change behaviour of Descriptors and def value __getattr__.</li>
+
+        <br>
+        <li>Class object creation flow. Python sees 'class' syntax as Metaclass perspective / call. Other spot is that class syntax is executable code.</li>
+        <br>
+        <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
+        <br>
+        <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
     </ul>
 </div>
 </div>
@@ -415,24 +452,23 @@ except NameError:
             <div class="card-body">
                 <a class="main-a" href="https://docs.python.org/3/tutorial/classes.html">9. Classes</a>
                 <ul>
-                    <li>When a class definition is entered, a new namespace is created, and used as the local scope.</li>
-                    <li>Class object creation flow:</li>
-                    <pre class="code">
-class MyClass:
-    def __new__(cls, *args, **kwargs):
-        print("Creating a new instance of MyClass")
-        return super().__new__(cls)
+                    <br>
+                    <u><b>Class object creation flow:</b></u>
+                    <ul>
+                    <li>Python sees 'class MyClass' syntax as metaclass call</li>
+                    <li>Python calls __build_class__ to initiate class object creation (only standard syntax).</li>
+                    <li>First of all, a new namespace is created (dct - attribute dictionary), and used as the local scope.</li>
+                    <li>Calling type.__new__(metaclass, name, bases, namespace)</li>
+                    <ul>
+                        <li>optionally custom metaclass (by default type) can set here own logic like creating attributes, methods</li>
+                    </ul>
+                    <li>If class have descriptor methods then '__set_name__(owner, name)' is called.</li>
+                    <li>Calling type.__init__</li>
+                    <ul>
+                        <li>By default type.__init__ calls __init_subclass__ – for subclasses if Base Class defined it</li>
+                    </ul>
+                    </ul>
 
-    def __init__(self):
-        print("Initializing the instance of MyClass")
-
-    # Create an instance of MyClass
-obj = MyClass()</pre>
-<pre class="shell">
-$ Creating a new instance of MyClass
-$ Initializing the instance of MyClass
-</pre>
-<hr>
 <br>
 <li>
 <div class="notion"><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></div>
@@ -747,9 +783,13 @@ print(next(gen))  # Output: 1
                     <li>From an AST, the interpreter can produce a lower level form of instructions called bytecode.</li>
                     <li><a href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST in Python.</a></li>
                 </ul>
+                <div>Compilation stage:</div>
+                <ul>
+                    <li>Python converts AST to bytecode. Python objects like functions or classes will be created here.</li>
+                </ul>
                 <div>Execution stage (runtime):</div>
                 <ul>
-                    <li>code execution (variables are dynamically typed.</li>
+                    <li>code execution (variables are dynamically typed).</li>
                 </ul>
             </div>
         </div>
@@ -758,7 +798,7 @@ print(next(gen))  # Output: 1
 
 <div class="row">
     <div class="col-md-8">
-        <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow" style="background-color: pink;">
             <div class="card-body">
                 <h4 style="font-weight: bold;">Computational complexity of algorithms:</h4>
                 <ul>
@@ -772,7 +812,7 @@ print(next(gen))  # Output: 1
         </div>
     </div>
 </div>
-
+<br>
 
 
 
@@ -1110,7 +1150,7 @@ Foo = type('Foo', ('FooBase1', 'FooBase2'), {'attr': 100,'attr_val': lambda x : 
                     <li>Decorators: Functions that modify the behavior of other functions or methods or classes.</li>
                     <li><b>Descriptors</b> are objects that manage the access to attributes of other objects.</li>
                     <ul>
-                        <li>E.g. objects with manipulated dunder methods: __get__, __set__, __delete__</li>
+                        <li>objects with manipulated dunder methods: __get__, __set__, __delete__</li>
                     </ul>
                     <li>Magic Methods: Special methods that let you control how Python interacts with objects (e.g., __getattr__, __setattr__).</li>
                     <li>exec() and eval(): Functions for dynamic execution of Python code.</li>
@@ -1129,6 +1169,78 @@ Foo = type('Foo', ('FooBase1', 'FooBase2'), {'attr': 100,'attr_val': lambda x : 
 
 >>> Foo.attr
 100</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: light-blue;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Descriptors</h4>
+
+<pre class="code">
+Descriptors are a powerful, general purpose protocol.
+    - If an object defines __set__() or __delete__(), it is considered a data descriptor.
+    - They are the mechanism behind properties, methods, static methods, class methods, and super()
+        - If an object defines __set__() or __delete__(), it is considered a data descriptor.
+        - Descriptors that only define __get__() are called non-data descriptors (they are often used for methods but other uses are possible).
+    - Descriptor invocation logic: The mechanism for descriptors is embedded in the __getattribute__() methods for object, type, and super().
+        - Overriding __getattribute__() prevents automatic descriptor calls because all the descriptor logic is in that method.
+    - __set_name__ - Customized names - The implementation details are in type_new() and set_names() in Objects/typeobject.c
+
+Basic Descriptor protocol:
+    __get__(self, obj, objtype) – returns attribute value (can be calculated).
+    __set__(self, obj, value) – set attribute value
+    __delete__(self, obj) – delete attribute
+
+Mechanics of Descriptor invocation logic:
+    - Descriptors are invoked by the __getattribute__() method.
+    - Classes inherit this machinery from object, type, or super().
+    - object.__getattribute__() and type.__getattribute__() make different calls to __get__().
+    - All functions written in Python are descriptors (have __get__), when functions written in C are not.
+
+So, Descriptors Use Cases:
+    - mechanism behind properties, bound methods, static methods, class methods, and super()
+    also:
+    - Dynamics lookups
+    - Logged Access
+    - Custom Validators
+    - Customized attribute names
+    - data descriptors could be used to implement an ORM
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: orange;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Python protocols:</h4>
+
+<pre class="code">
+    - Can Python be named protocol oriented language?
+
+    - Class creation protocol
+    - Sequence protocol
+    - Attribute access protocol
+    - Iterable Protocol
+    - Numeric Protocol
+    - Context Manager protocol
+    - Callable protocol
+    - Descriptor protocol
+    - Buffer protocol
+    - Set protocol
+    - Async Protocols</pre>
             </div>
         </div>
     </div>
