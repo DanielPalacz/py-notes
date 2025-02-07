@@ -46,3 +46,13 @@ print(dir(f.__code__)) # PyCodeObject
 # 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_kwonlyargcount', 'co_lines',
 # 'co_linetable', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_posonlyargcount', 'co_stacksize', 'co_varnames',
 # 'replace']
+
+
+
+def is_debugger_active():
+    return sys.gettrace() is not None
+
+if is_debugger_active():
+    print("Debugger jest aktywny!")
+else:
+    print("Debugger nie jest aktywny.")
