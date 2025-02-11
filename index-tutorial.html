@@ -111,7 +111,6 @@
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
         <li>Syntax: yield from ITERABLE_OBJECT (Generator, Iterator, Iterable). The one benefit of yield from is to allow easy refactoring of generators. But the second "performance optimization" is even more important. Simulation showed "yield from" speeds up execution about 10-30%.</li>
         <br>
-        <br>
         <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
@@ -136,6 +135,7 @@
         <li>When obj = object() then obj is instance of class (named object), but object is class and classes are instances of type metaclass (unless you use your own new metaclass). In Python everything inherits from object class apart from type metaclass that doesn't inherit from anything.</li>
         <br>
         <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+        <br>
         <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python</li>
         <br>
         <li>Descriptor protocol. Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__(). __set_name__ mechanism. Understanding descriptors is a key to a deep understanding of Python because they are the basis for many features including functions, methods, properties, class methods, static methods, and reference to super classes.</li>
@@ -147,8 +147,7 @@
         <br>
         <li>Every function written in Python is Descriptor (implements __get__) when C based functions not. Edge case for imports in Class.</li>
         <br>
-        <br>
-        Attribute lookup protocol
+        Attribute lookup protocol:
         <li>getattr (builtin method) / __get__ (descriptor method) / __getattr__ (when attribute doesnt exist ) / __getattribute__. Attribute lookup protocol (__getattribute__ exactly) calls __get__ and __getattr__ so can change behaviour of Descriptors and def value __getattr__.</li>
 
         <br>
@@ -157,6 +156,10 @@
         <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
         <br>
         <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
+        <br>
+        Python Call Stack / Python Frames:
+        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution call body. Also, eval/exec can cause additional Frames are created.</li>
+
     </ul>
 </div>
 </div>
@@ -901,62 +904,60 @@ In Linux it proceeds to understanding below notions / aspects:
     - all resources are eventually provided by kernel
     - virtual memory and other memory management functions
     - multithreading and multiprocessing
-    - Call Stack in Python
-    - Heap memory in Python
-    - processor stack
+    - Call Stack in Python, Heap memory in Python / processor stack
+
     - OS level memory optimizations - like using processor cache memory for often used objects:
-        - what are other processor / OS memory optimizations technics?
-            - Paging and Swapping
-            - Lazy Allocation
-            - Transparent Huge Pages
-            - Memory Overcommit
-            - Copy-on-Write (CoW)
-               - Kiedy proces tworzy kopię (np. przez fork()), Linux stosuje Copy-on-Write:
-               - Pamięć współdzielona między procesami nie jest kopiowana od razu.
-            - Kernel Same-page Merging (KSM)
-            - NUMA (Non-Uniform Memory Access)
-            - Asynchronous I/O i Direct Memory Access (DMA)
-            - Reclaiming Memory (odzyskiwanie pamięci)
-            - HugeTLB (Huge Translation Lookaside Buffer)
-            - Pamięć mapowana na pliki (Memory-Mapped Files)
-                - Linux pozwala aplikacjom na mapowanie plików bezpośrednio do pamięci (mmap)
-            - Cgroups i limity pamięci
-            - Parametr swappiness kontroluje, jak agresywnie Linux korzysta z pamięci wymiany (swap)
-            - Linux używa technik takich jak prefetching i readahead, aby przewidywać, jakie dane mogą być potrzebne i ładować je do pamięci wcześnie
+    - what are other processor / OS memory optimizations technics?
+        - Paging and Swapping, Lazy Allocation, Transparent Huge Pages, Memory Overcommit
+        - Copy-on-Write (CoW) - kiedy proces tworzy kopię (np. fork), Linux stosuje Copy-on-Write:
+            - Pamięć współdzielona między procesami nie jest kopiowana od razu.
+        - Kernel Same-page Merging (KSM), NUMA (Non-Uniform Memory Access), Asynchronous I/O i Direct Memory Access (DMA)
+        - Reclaiming Memory (odzyskiwanie pamięci), HugeTLB (Huge Translation Lookaside Buffer),
+        - Pamięć mapowana na pliki (Memory-Mapped Files), Linux pozwala na mapowanie plików bezpośrednio do pamięci (mmap)
+        - Cgroups i limity pamięci, parametr swappiness kontroluje, jak agresywnie Linux korzysta z pamięci wymiany (swap)
+        - Linux używa technik takich jak prefetching i readahead, aby przewidywać, jakie dane mogą być potrzebne i ładować je wcześniej
 
     - Python memory optimization technics:
-        - object interning
-        - object sharing
-        - freelist - reusing memory - or object caching (often used objects)
-            - empty dict are reused
+        - object interning / object sharing
+        - freelist - reusing memory - or object caching (often used objects), empty dict are reused
         - constant pool (for constant variables in functions)
         - dynamic memory allocation for mutable objects
         - optimization in hash tables (dicts)
-        - Lazy Evaluation i View Objects
+        - Lazy Evaluation i View Objects (Python User level)
 
 
-    W językach niskopoziomowych, takich jak C, stos wywołań jest zarządzany bezpośrednio przez system operacyjny i procesor.
-    W CPython stos wywołań jest zarządzany interpreter, co dodaje pewien narzut, ale umożliwia np dynamiczne zarządzanie pamięcią (np. garbage collection).
+Python Call Stack (Pythonowy Stos wywołań):
+    - W językach niskopoziomowych, takich jak C, stos wywołań jest zarządzany bezpośrednio przez system operacyjny i procesor.
+    - W CPython stos wywołań jest zarządzany interpreter:
+        - dodaje to narzut, ale umożliwia np dynamiczne zarządzanie pamięcią (stos odpowiada za zarządzanie pamięcią przy wywoływaniu funkcji)
+
     Jak to umożliwia dynamiczne zarządzanie pamięcią?
-     - Ramki wywołań są dynamiczne i nie muszą mieć z góry określonego rozmiaru — stos wywołań dynamicznie dopasowuje się do rozmiaru wywołań funkcji.
+     - Ramki wywołań są dynamiczne i nie muszą mieć z góry określonego rozmiaru — stos wywołań dopasowuje się do rozmiaru wywołań funkcji
      - mniejsze zaangażowanie Garbage Collector
-       bo nie działa bezpośrednio na stosie. Gdy funkcja kończy swoje działanie, jej lokalne zmienne są usuwane natychmiast, bez potrzeby interwencji GC.
+         - GC nie działa bezpośrednio na stosie, gdy funkcja kończy działanie, jej lokalne zmienne są usuwane natychmiast (bez interwencji GC).
          - Liczniki referencji Garbage Collector pozwalają na automatyczne usuwanie obiektów, na które wskazywały referencje ze stosu.
     Narzut związany z dynamicznym zarządzaniem pamięcią:
         - Zarządzanie pamięcią przez licznik referencji - działanie Garbage collectora jest kosztowne pod względem czasowym
         - Zastosowanie dynamicznych ramek wywołań również wiąże się z pewnym kosztem pamięci i czasu.
           Tworzenie i usuwanie ramek wywołań przy każdym wywołaniu funkcji ma swój narzut czasowy.
 
+Heap memory in Python:
+    - dynamic virtual memory assigned to the given process (logically it is continual address space)
+    - used automatically when objects in Python are created
+    - global memory space (subspace of heap memory)
+    - Garbage Collector dba o zwalnianie pamięci obiektów przechowywanych na stercie.
+    - Kiedy obiekt jest nieosiągalny (nie ma referencji do niego), GC usuwa go z pamięci. Jest to zarządzanie dynamiczne.
 
 
-Call Stack in Python:
+More about Call Stacks in Python:
+
 - dokładniej w Pythonie/OS funkcjonują dwa stosy:
   - klasyczny stos procesora. C stack (nowy per proces / wątek)
     - Jest to stos na poziomie systemowym, zarządzany przez system operacyjny i procesor.
     - W przypadku Pythona (zwłaszcza CPython), ten stos jest używany przy wywoływaniu funkcji niskopoziomowych napisanych w C.
     - Interpreter Pythona (który jest implementowany w C w CPythonie) korzysta z tego stosu przy wykonywaniu kodu Pythona.
 
-  - Stos Pythonowy (nowy per proces / wątek)
+  - Pythonowy Stos wywołań (nowy per proces / wątek)
 
     - Stos Pythonowy jest realizowany przy pomocy ramek wywołań (PyFrameObject) - zarządzany przez interpreter
     - dokładniej, w CPython stos wywołań i ramki funkcji są zaimplementowane na poziomie kodu źródłowego interpretera w języku C
@@ -999,15 +1000,6 @@ Call Stack in Python:
                 - Zamiast typowego stosu ramek funkcji, korutyna "zamraża" swój stan w obiekcie CoroWrapper (zarządzanym przez pętlę zdarzeń)
                     - gdy korutyna jest "zamrażana" Pętla zdarzeń usuwa jej ramkę ze stosu Pythonowego
                     - wznowienie korutyny powoduje również przywrócenie jej ramki na stos Pythonowy
-
-
-Heap memory in Python:
-    - dynamic virtual memory assigned to the given process (logically it is continual address space)
-    - used automatically when objects in Python are created
-    - global memory space (subspace of heap memory)
-    - Garbage Collector dba o zwalnianie pamięci obiektów przechowywanych na stercie.
-    - Kiedy obiekt jest nieosiągalny (nie ma referencji do niego), GC usuwa go z pamięci. Jest to zarządzanie dynamiczne.
-
 </pre>
 
             </div>
