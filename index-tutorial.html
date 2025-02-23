@@ -107,17 +107,99 @@
                 <div class="card-body">
 
     <ul>
-        <b>Generators:</b>
+        <li>Key difference between Iterable object and iterator object is related to dunder methods implementation? Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement (if there is no __iter__ then __getitem__ is needed).</li>
+        <pre class="code">
+
+## List and Dict object is iterable, but is not Iterator
+
+>>> hasattr([], "__iter__")
+True
+>>> hasattr([], "__next__")
+False
+>>> hasattr([], "__getitem__")
+True
+>>> iter([1, 2, 3])
+list_iterator object at 0x7d7e054f2710
+
+>>> hasattr(dict(), "__iter__")
+True
+>>>
+>>> hasattr(dict(), "__next__")
+False
+>>>
+>>> hasattr(dict(), "__getitem__")
+True
+>>>
+>>> iter(dict())
+dict_keyiterator object at 0x7d7e055eba10</pre>
+
+<ul>
+    <li><a href="python_deepness/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
+</ul>
+
+<pre class="notion">
+    W Pythonie 3 większość wbudowanych kolekcji implementuje __iter__, ale są pewne wyjątki:
+     - Możemy ręcznie stworzyć obiekt, który implementuje tylko __getitem__, ale nie __iter__.
+     - Python nadal pozwoli na iterację przy użyciu __getitem__, ale to bardziej hack niż powszechna praktyka.
+     - W praktyce Python woli __iter__, ale obsługa __getitem__ nadal działa jako mechanizm awaryjny.</pre>
+
+        <br>
+        <li>What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
+        <ul>
+            <li>map, filter, reduce</li>
+            <pre class="code">
+>>> L = [0, 2, 4, 6, 8]
+>>>
+>>> mapped_L = map(lambda x: x + 1, L)
+>>>
+>>> mapped_L
+map object at 0x70d609f84a60
+>>>
+>>> hasattr(mapped_L, "__iter__")
+True
+>>> hasattr(mapped_L, "__next__")
+True</pre>
+        </ul>
+        <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
+        <hr>
+        <b>GENERATORS:</b>
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
+        <pre class="notion">
+ - Generatory są świetne, gdy nie znamy górnej granicy zbioru lub przetwarzamy tylko część wyników,
+   np. sekwencję Fibonacciego, liczby pierwsze czy duże pliki CSV linia po linii. Generatory są niepraktyczne, gdy
+   potrzebujemy przechowywać i przetwarzać cały zbiór naraz – np. jeśli chcemy posortować duży plik danych,
+   lepiej wczytać go do listy, bo generatory nie pozwalają na swobodny dostęp do elementów.
+ - W przeciwieństwie do zwykłych funkcji, generatory nie usuwają swojej ramki po zakończeniu wywołania yield.
+   Zamiast tego, stan wykonania (w tym zmienne lokalne i wskaźnik kodu) jest przechowywany w obiekcie generatora.
+   Mechanizm yield powoduje, że zamiast usunięcia ramki stosu (w normalnej funkcji), Python zapisuje jej stan i zawiesza wykonanie.
+   Kiedy generator jest wznawiany, ramka zostaje przywrócona na stos i kontynuuje działanie od miejsca yield.
+        </pre>
+
         <li>Syntax: yield from ITERABLE_OBJECT (Generator, Iterator, Iterable). The one benefit of yield from is to allow easy refactoring of generators. But the second "performance optimization" is even more important. Simulation showed "yield from" speeds up execution about 10-30%.</li>
         <br>
+        <li>Why and when such error happened with generators?
+            <span class="code">TypeError: can't send non-None value to a just-started generator</span></li>
+            <ul>
+                <li>It occurs when you attempt to send a non-None value into a generator that has not yet been started (i.e., before its first yield statement).</li>
+                <li>By design, the first .send(value) call must be None or the generator must be primed using next() first.</li>
+                <pre class="code">
+def accumulator():
+    total = 1
+    while True:
+        value = yield total
+        print("value:", value)
+
+        if value is None:
+            break
+        total += value
+
+gen = accumulator()
+gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started generator</pre>
+            </ul>
+        <hr>
         <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
-        <br>
+        <hr>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
-        <br>
-        <li>Key difference between Iterable object and iterator object is related to dunder methods implementation? Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement (if there is no __iter__ then __getitem__ is needed). What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
-        <br>
-        <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
         <br>
         <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
         <br>
@@ -158,7 +240,7 @@
         <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
         <br>
         Python Call Stack / Python Frames:
-        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution call body. Also, eval/exec can cause additional Frames are created.</li>
+        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
 
     </ul>
 </div>
