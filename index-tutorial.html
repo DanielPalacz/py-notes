@@ -107,10 +107,10 @@
                 <div class="card-body">
 
     <ul>
-        <li>Key difference between Iterable object and iterator object is related to dunder methods implementation? Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement (if there is no __iter__ then __getitem__ is needed).</li>
+        <li>Key difference between Iterable object and Iterator object is related to dunder methods implementation?</li>
         <pre class="code">
-
-## List and Dict object is iterable, but is not Iterator
+Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement
+(if there is no __iter__ then __getitem__ is needed). For example, List and Dict objects are Iterable, but are not Iterators.
 
 >>> hasattr([], "__iter__")
 True
@@ -162,6 +162,8 @@ True</pre>
         </ul>
         <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
         <hr>
+        <hr>
+        <hr>
         <b>GENERATORS:</b>
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
         <pre class="notion">
@@ -175,27 +177,33 @@ True</pre>
    Kiedy generator jest wznawiany, ramka zostaje przywrócona na stos i kontynuuje działanie od miejsca yield.
         </pre>
 
-        <li>Syntax: yield from ITERABLE_OBJECT (Generator, Iterator, Iterable). The one benefit of yield from is to allow easy refactoring of generators. But the second "performance optimization" is even more important. Simulation showed "yield from" speeds up execution about 10-30%.</li>
-        <br>
-        <li>Why and when such error happened with generators?
-            <span class="code">TypeError: can't send non-None value to a just-started generator</span></li>
+        <li><b>yield from ITERABLE_OBJECT</b></li>
+ <pre>
+  - The one benefit of yield from is to allow easy refactoring of generators.
+  - The second "performance optimization" is even more important. Simulation showed "yield from" speeds up execution about 10-30%.
+
+  - O tej funkcjonalności można powiedzieć sporo więcej:
+
+     -- Przykład: Rekurencyjna iteracja po strukturze drzewiastej
+     -- Przykład: Dwukierunkowa komunikacja z yield from
+
+     -- Python poszedł tu nieco pod prąd i dodał coś, czego brakuje w innych językach.
+        Można to uznać za niekonwencjonalne, ale to dobrze wpisuje się w filozofię Pythona: mniej kodu, większa czytelność.
+     -- Python często dodaje konstrukcje, które upraszczają kod, nawet jeśli wydają się „magiczne”.
+        Czasem wydaje się, że Python chce być bardziej jak DSL (Domain-Specific Language)
+        dla każdej możliwej sytuacji, a nie czysto „przewidywalnym” językiem ogólnego przeznaczenia.
+ </pre>
+
+        <li>Why and when such error happened with generators?<span> <b>TypeError: can't send non-None value to a just-started generator</b></span></li>
             <ul>
                 <li>It occurs when you attempt to send a non-None value into a generator that has not yet been started (i.e., before its first yield statement).</li>
                 <li>By design, the first .send(value) call must be None or the generator must be primed using next() first.</li>
                 <pre class="code">
-def accumulator():
-    total = 1
-    while True:
-        value = yield total
-        print("value:", value)
-
-        if value is None:
-            break
-        total += value
-
 gen = accumulator()
 gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started generator</pre>
             </ul>
+        <hr>
+        <hr>
         <hr>
         <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
         <hr>
@@ -218,7 +226,7 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <br>
         <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
         <br>
-        <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python</li>
+        <li>Python as protocol oriented language: There is set of behaviours implemented as Protocols in Python, but it is Protocol oriented language?</li>
         <br>
         <li>Descriptor protocol. Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__(). __set_name__ mechanism. Understanding descriptors is a key to a deep understanding of Python because they are the basis for many features including functions, methods, properties, class methods, static methods, and reference to super classes.</li>
         <ul>
@@ -229,7 +237,7 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <br>
         <li>Every function written in Python is Descriptor (implements __get__) when C based functions not. Edge case for imports in Class.</li>
         <br>
-        Attribute lookup protocol:
+        <b>Attribute lookup protocol:</b>
         <li>getattr (builtin method) / __get__ (descriptor method) / __getattr__ (when attribute doesnt exist ) / __getattribute__. Attribute lookup protocol (__getattribute__ exactly) calls __get__ and __getattr__ so can change behaviour of Descriptors and def value __getattr__.</li>
 
         <br>
@@ -244,12 +252,12 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
 
         <br>
-        <li>Python 'import module_A' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
+        <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
         <ul>
             <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
             <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
             <li>3. Runtime<br>
-                    - Python ładuje bytecode module_A.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
+                    - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
                     - Na koniec: Python worzy obiekt modułu i udostępnia go w sys.modules.</li>
         </ul>
 
