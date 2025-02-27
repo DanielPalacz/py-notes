@@ -1,3 +1,12 @@
+import dis
+
+def example():
+    x = 42
+    print(x)
+
+print(dis.dis(example))  # Pokazuje skompilowany bajtkod
+
+
 def def_value():
     print("def_value executed")
     return 42
@@ -14,5 +23,4 @@ def foo(a=def_value()):  # `def_value()` jest wykonywane TERAZ, podczas tworzeni
 
 print("End of script")
 
-# def ops(a=):
-#     pass
+# def ops(a=): pass

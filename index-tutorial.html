@@ -239,8 +239,19 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <br>
         <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
         <br>
-        Python Call Stack / Python Frames:
+        <br>
+        <div>Python Call Stack / Python Frames:</div>
         <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
+
+        <br>
+        <li>Python 'import module_A' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
+        <ul>
+            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
+            <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
+            <li>3. Runtime<br>
+                    - Python ładuje bytecode module_A.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
+                    - Na koniec: Python worzy obiekt modułu i udostępnia go w sys.modules.</li>
+        </ul>
 
     </ul>
 </div>
@@ -861,7 +872,6 @@ print(next(gen))  # Output: 1
                 <h4 style="font-weight: bold;">Python execution model:</h4>
                 <div>Parsing stage:</div>
                 <ul>
-                    <li>Evaluating default values for functions</li>
                     <li>The code is parsed (i.e., split up) into a list of pieces usually called tokens.</li>
                     <li>The raw list of tokens is transformed to build an Abstract Syntax Tree.</li>
                     <li>An AST is a collection of nodes which are linked together based on the grammar of the Python lang.</li>
@@ -869,6 +879,9 @@ print(next(gen))  # Output: 1
                     <li><a href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST in Python.</a></li>
                 </ul>
                 <div>Compilation stage:</div>
+                    <li>Evaluating default values for functions</li>
+                    <li>Funkcja compile() działa w </li>
+
                 <ul>
                     <li>Python converts AST to bytecode. Python objects like functions or classes will be created here.</li>
                 </ul>
