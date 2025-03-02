@@ -113,6 +113,7 @@ Deklaracje zmiennych w JavaScript:
     const (stała, blokowy zakres),
     var (zakres funkcyjny, starszy kod)
         - specyficzne tematy na później (hoisting, zakresy i problemy z var)
+    domyślnie, czyli bez let, const i var (zakres globalny)
 
 let:
     let x = 10; // Deklaracja i przypisanie
@@ -130,6 +131,13 @@ Zakres blokowy:
           console.log(y); // 5
         }
     console.log(y); // Błąd: y is not defined
+
+Nieoczywiste:
+    function test() {
+        x = 10; // Brak 'let', 'const' lub 'var' → x staje się globalne!
+    }
+    test();
+    console.log(x); // 10
 </pre>
 
     </div>

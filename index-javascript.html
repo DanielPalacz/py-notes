@@ -107,8 +107,6 @@
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
-        <div>Podstawy podstaw:</div>
-
         <ul>
             <li>001. Co to jest JavaScript i do czego służy?</li>
             <ul>
@@ -117,17 +115,20 @@
             <br>
             <li>002. Jak osadzać kod JavaScript na stronie (wykorzystując tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza?</li>
             <ul>
+                <li>002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa, bo jej stosowanie jest dozwolone tylko w trakcie ładowania HTML.
+                    defer i async powodują, że skrypt wykonuje się po załadowaniu HTML, więc document.write() jest ignorowane.</li>
+                <li>002b. Zamiast document.write() najlepsza alternatywą jest użycie innerHTML lub appendChild().</li>
                 <li><a href="index-django-javascript-files/basics_002.html">Odpowiedź</a></li>
             </ul>
             <br>
-            <li>003. Deklaracja zmiennych: let, const, var. Jak działa zakres blokowy?</li>
+            <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy?</li>
             <ul>
                 <li><a href="index-django-javascript-files/basics_003.html">Odpowiedź</a></li>
-                <li>003a. Czy domyślnie (bez użycia: let, const, var) zmienne trafiają do zakresu globalnego? Porównanie do Python.</li>
+                <li>003a. Domyślnie (bez użycia: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.</li>
                 <li>003b. Czy w Python istnieje podobny do 'const' mechanizm wymuszania, by zmienna była stała?</li>
                 <li>003c. W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak. </li>
                 <li>003d. W Pythonie brak deklaracji działa bardziej intuicyjnie – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).</li>
-                <li>003e. Tryb ścisły w JavaScript, który wprowadza bardziej rygorystyczne zasady programowania ("use strict";).</li>
+                <li>003e. Tryb ścisły w JavaScript, to konfiguracja wprowadzająca bardziej rygorystyczne zasady programowania ("use strict";).</li>
             </ul>
             <br>
             <li>004. Globalny kontekst w JavaScript. Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
