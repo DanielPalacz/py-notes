@@ -105,8 +105,8 @@
             <div class="card mb-4 box-shadow" style="background: yellow;">
                 <h2 class="ml-2"><b><u>Python questions / observations:</u></b></h2>
                 <div class="card-body">
-
     <ul>
+    <b>ITERABLES / ITERATORS / SEQUENCES:</b>
         <li>Key difference between Iterable object and Iterator object is related to dunder methods implementation?</li>
         <pre class="code">
 Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement
@@ -205,8 +205,9 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <hr>
         <hr>
         <hr>
+<b>MISCELLANEOUSNESS:</b>
         <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
-        <hr>
+        <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
         <br>
         <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
@@ -225,22 +226,51 @@ Unicode / UTF-8 example:
         <br>
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
         <br>
+        <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
+        <ul>
+            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
+            <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
+            <li>3. Runtime<br>
+                    - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
+                    - Na koniec: Python worzy obiekt modułu i udostępnia go w sys.modules.</li>
+            </ul>
+            <br>
+            <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+            <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations.</li>
+            <li>But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
+        <hr>
+        <hr>
+        <hr>
+        <div><b>Python Call Stack / Python Frames:</b></div>
+        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
+        <br>
+        <hr>
+        <hr>
+        <hr>
+
+        <div><b>CLASSES:</b></div>
         <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
         <br>
         <li>Python class level '__slots__' mechanism - it predefines possible instance attributes (there is no __dict__ on instance level). Many instance as performance optimization Use Case. Simulation showed 150-300 MB memory saving when 1 million objects are handled.</li>
-        <br>
-        <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations.</li>
-        <li>But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
         <br>
         <li>dir() - there is easy explanation why dir command does not return always all attributes. Simply, it calls __dir__ underneath and __dir__ can be implemented differently. And often it is. Python documentation says "The default dir() mechanism behaves differently with different types of objects, as it attempts to produce the most relevant, rather than complete ..."</li>
         <br>
         <li>When obj = object() then obj is instance of class (named object), but object is class and classes are instances of type metaclass (unless you use your own new metaclass). In Python everything inherits from object class apart from type metaclass that doesn't inherit from anything.</li>
         <br>
-        <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+        <li>Class object creation flow. Python sees 'class' syntax as Metaclass perspective / call. Other spot is that class syntax is executable code.</li>
         <br>
+        <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
+        <br>
+        <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
+
+        <br>
+        <div><b>PROTOCOLS:</b></div>
         <li>Python as protocol oriented language: There is set of behaviours implemented as Protocols in Python, but it is Protocol oriented language?</li>
+
         <br>
-        <li>Descriptor protocol. Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__(). __set_name__ mechanism. Understanding descriptors is a key to a deep understanding of Python because they are the basis for many features including functions, methods, properties, class methods, static methods, and reference to super classes.</li>
+
+        Descriptor protocol
+        <li>Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__(). __set_name__ mechanism. Understanding descriptors is a key to a deep understanding of Python because they are the basis for many features including functions, methods, properties, class methods, static methods, and reference to super classes.</li>
         <ul>
             <li>Descriptor functions are get invoked by the dot operator during attribute lookup (reading / writing / deleting).</li>
             <li>Descriptors only work when used as class variables. When put in instances, they have no effect.</li>
@@ -249,28 +279,11 @@ Unicode / UTF-8 example:
         <br>
         <li>Every function written in Python is Descriptor (implements __get__) when C based functions not. Edge case for imports in Class.</li>
         <br>
-        <b>Attribute lookup protocol:</b>
+        Attribute lookup protocol:
         <li>getattr (builtin method) / __get__ (descriptor method) / __getattr__ (when attribute doesnt exist ) / __getattribute__. Attribute lookup protocol (__getattribute__ exactly) calls __get__ and __getattr__ so can change behaviour of Descriptors and def value __getattr__.</li>
 
         <br>
-        <li>Class object creation flow. Python sees 'class' syntax as Metaclass perspective / call. Other spot is that class syntax is executable code.</li>
         <br>
-        <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
-        <br>
-        <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
-        <br>
-        <br>
-        <div>Python Call Stack / Python Frames:</div>
-        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
-
-        <br>
-        <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
-        <ul>
-            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
-            <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
-            <li>3. Runtime<br>
-                    - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
-                    - Na koniec: Python worzy obiekt modułu i udostępnia go w sys.modules.</li>
         </ul>
 
     </ul>
