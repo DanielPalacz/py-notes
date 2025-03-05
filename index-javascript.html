@@ -113,33 +113,48 @@
                 <li><a href="index-django-javascript-files/basics_001.html">Odpowiedź</a></li>
             </ul>
             <br>
+            Ważne podstawy podstaw:
+            <br>
+            <ul>
+                <li>001a. Pętla if w JavaScript</li>
+                <ul>
+                    <li><a href="index-django-javascript-files/basics_script_global_var_check.js">Odpowiedź</a></li>
+                </ul>
+            </ul>
+            <br>
             <li>002. Jak osadzać kod JavaScript na stronie (wykorzystując tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza?</li>
             <ul>
                 <li>002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa, bo jej stosowanie jest dozwolone tylko w trakcie ładowania HTML.
-                    defer i async powodują, że skrypt wykonuje się po załadowaniu HTML, więc document.write() jest ignorowane.</li>
-                <li>002b. Zamiast document.write() najlepsza alternatywą jest użycie innerHTML lub appendChild().</li>
+                    defer i async powodują, że skrypt wykonuje się po załadowaniu HTML, więc document.write() jest ignorowane. Zamiast document.write() najlepsza alternatywą jest użycie innerHTML lub appendChild()</li>
+                <li>002b. Osadzanie kodu JS w atrybutach HTML jest niezalecane.</li> 
                 <li><a href="index-django-javascript-files/basics_002.html">Odpowiedź</a></li>
             </ul>
             <br>
             <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy?</li>
             <ul>
-                <li><a href="index-django-javascript-files/basics_003.html">Odpowiedź</a></li>
                 <li>003a. Domyślnie (bez użycia: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.</li>
                 <li>003b. Czy w Python istnieje podobny do 'const' mechanizm wymuszania, by zmienna była stała?</li>
                 <li>003c. W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak. </li>
                 <li>003d. W Pythonie brak deklaracji działa bardziej intuicyjnie – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).</li>
                 <li>003e. Tryb ścisły w JavaScript, to konfiguracja wprowadzająca bardziej rygorystyczne zasady programowania ("use strict";).</li>
+                <li><a href="index-django-javascript-files/basics_003.html">Odpowiedź</a></li>
             </ul>
             <br>
-            <li>004. Globalny kontekst w JavaScript. Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
+            <li>004. Globalny kontekst w JavaScript (przeglądarka). Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
             <ul>
+                <li>005a. Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).</li>
+                <li>005b. Wprowadzono 'globalThis', żeby to wszystko połączyć. Użycie 'globalThis' to teraz zalecany sposób na wymuszenie globalnego kontekstu - działa na wszystkich typach środowisk.</li>
                 <li><a href="index-django-javascript-files/basics_004.html">Odpowiedź</a></li>
             </ul>
             <br>
             <li>005. Typy danych w JavaScript.</li>
             <ul>
+                <li>005a. Typy prymitywne, jest ich 7, nie mają prototypu i nie dziedziczą po Object.</li>
+                <li>005b. JS ma 1 główny typ referencyjny: Object. Poza typami prymitywnymi, prawie wszystko w JS dziedziczy po Object.</li>
+
                 <li><a href="index-django-javascript-files/basics_005.html">Odpowiedź</a></li>
             </ul>
+            <br>
             <li>006. camelCase, PascalCase, snake_case, UPPERCASE - co i kiedy się używa w JavaScript.</li>
             <li>007. Jaka jest różnica między == i === w JavaScript? Kiedy co stosować?</li>
             <li>008. Funkcje w JavaScript. Jak działają funkcje strzałkowe?</li>

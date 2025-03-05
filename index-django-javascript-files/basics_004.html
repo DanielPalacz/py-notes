@@ -109,7 +109,7 @@
     <div class="card-body">
     <pre>
 W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie. Obiekt window reprezentuje globalny kontekst w przeglądarkach.
-    - Window jest specyficzny dla przeglądarek - inne środowiska (np. Node.js) mają swój globalny obiekt (np. global w Node.js)
+    - window jest specyficzny dla przeglądarek - inne środowiska (np. Node.js) mają swój globalny obiekt (np. global w Node.js)
     - Każda zmienna zadeklarowana w globalnym zakresie za pomocą var (lub bez słowa kluczowego) staje się właściwością obiektu window.
     - Zmienne zadeklarowane przez let lub const również są globalne, jeśli znajdują się poza funkcją lub blokiem, ale
       nie są przypisywane do obiektu window.
@@ -120,7 +120,18 @@ Po co 'globalny kontekst' został tak zaimplementowany w JavaScript (w taki spos
     - Każde wykonanie kodu JavaScript na stronie internetowej (poprzez ponowne załadowanie skryptu) nie resetuje globalnego kontekstu,
       lecz jedynie uruchamia nowy fragment kodu w istniejącym środowisku.
 
-</pre>
+W JavaScript nazwy obiektów są rozróżniane pod względem wielkości liter, więc window i Window to nie to samo.
+    ✅ window – to instancja globalnego obiektu w przeglądarce.
+                Można go traktować jako konkretny obiekt reprezentujący okno przeglądarki i jego globalny kontekst wykonania.
+    ❌ Window – to nazwa konstruktora/funkcji tworzącej obiekty typu window.
+                Nie używa się jej często bezpośrednio, ale można np. sprawdzić typ window przez window instanceof Window, co zwróci true.
+    Podsumowując: w kontekście przeglądarki obiekt globalny to window, a Window to jego konstruktor.
+
+
+Użycie globalThis (zalecany sposób)
+    globalThis to uniwersalny sposób na dostęp do globalnego zakresu, działa zarówno w przeglądarce, Node.js i Web Workers
+    globalThis.globalVar = "Dostępne globalnie";
+    console.log(globalThis.globalVar); // "Dostępne globalnie"</pre>
 
     </div>
     </div>
