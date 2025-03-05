@@ -210,6 +210,18 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
         <br>
         <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
+<pre class="code">
+Unicode / UTF-8 example:
+    Unicode mapping:
+      chr(300) => Return a Unicode string of one character with ordinal i; 0 <= i <= 0x10ffff.
+      'Ĭ'
+      ord('Ĭ') => Return the Unicode code point for a one-character string.
+      300
+    UTF-8 encoding:
+      bytes('Ĭ', "UTF-8") # Zwraca bajty reprezentujące znak Ĭ w kodowaniu UTF-8.
+      b'\xc4\xac'         # 0xC4 0xAC => 11000100 10101100 => To są 2 bajty reprezentujące znak Ĭ w UTF-8.
+</pre>
+
         <br>
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
         <br>
