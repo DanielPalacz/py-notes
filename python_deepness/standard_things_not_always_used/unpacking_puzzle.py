@@ -3,7 +3,7 @@ def func():
     a, *b, c = ["Tony", "Phony", "Pony"]
     return "Phony" in [b] or a[:]
 
-OUT = func() # "Tony" as b = ["Phony"] => "Phony" in [["Phony"]] => False
+OUT = func() # "Tony" as b = ["Phony"] =>   => False
 
 
 # def func2():

@@ -105,22 +105,22 @@
             <div class="card mb-4 box-shadow" style="background: yellow;">
                 <h2 class="ml-2"><b><u>Python questions / observations:</u></b></h2>
                 <div class="card-body">
-    <ul>
-    <b>ITERABLES / ITERATORS / SEQUENCES:</b>
-        <li>Key difference between Iterable object and Iterator object is related to dunder methods implementation?</li>
+<br>
+<b style="background: #ADD8E6;">ITERABLES / ITERATORS / SEQUENCES:</b>
+<br>
+<br>
+    <ol>
+        <li>Iterator and Iterable objects implementing certain protocols. What are details of these protocols?</li>
         <pre class="code">
-Iterator needs to implement __iter__ and __next__ when Iterable object should implement __iter__, but not it is not requirement
-(if there is no __iter__ then __getitem__ is needed). For example, List and Dict objects are Iterable, but are not Iterators.
+Iterator protocol:
+ - Iterator object needs to implement __iter__ and __next__.
+   Main feature of Iterators is allowing for sequence access of data stream - no need to maintain all data in memory.
 
->>> hasattr([], "__iter__")
-True
->>> hasattr([], "__next__")
-False
->>> hasattr([], "__getitem__")
-True
->>> iter([1, 2, 3])
-list_iterator object at 0x7d7e054f2710
+Iterable protocol:
+ - Iterable object should implement __iter__, but not it is not requirement if there is no __iter__ then __getitem__ is required.
+   In the other words iter(Iterable_object) should always produce valid Iterator object.
 
+Dict objects are Iterable, but are not Iterators:
 >>> hasattr(dict(), "__iter__")
 True
 >>>
@@ -128,25 +128,26 @@ True
 False
 >>>
 >>> hasattr(dict(), "__getitem__")
-True
+True # However it is not implementing Indexing/Slicing
 >>>
 >>> iter(dict())
-dict_keyiterator object at 0x7d7e055eba10</pre>
+dict_keyiterator object at 0x7d7e055eba10
+    => dict objects are Iterables (but are not Iterators and Sequences)</pre>
 
+
+<pre class="code">
+"__getitem__ edge case":
+    In Python 3 builtin collections are generally implement __iter__. However:
+     - Still it is possible to create a class that have only __getitem__ and not __iter__ and such object will be Iterable.
+     - It is rather hack than common practice, but handling __getitem__ in Iterable protocol still works.</pre>
 <ul>
-    <li><a href="python_deepness/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
+    <li><a href="python_deepness/protocols/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
 </ul>
-
-<pre class="notion">
-    W Pythonie 3 większość wbudowanych kolekcji implementuje __iter__, ale są pewne wyjątki:
-     - Możemy ręcznie stworzyć obiekt, który implementuje tylko __getitem__, ale nie __iter__.
-     - Python nadal pozwoli na iterację przy użyciu __getitem__, ale to bardziej hack niż powszechna praktyka.
-     - W praktyce Python woli __iter__, ale obsługa __getitem__ nadal działa jako mechanizm awaryjny.</pre>
 
         <br>
         <li>What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
-        <ul>
-            <li>map, filter, reduce</li>
+        <div> - map, filter, reduce, zip - map example:</div>
+
             <pre class="code">
 >>> L = [0, 2, 4, 6, 8]
 >>>
@@ -158,13 +159,48 @@ map object at 0x70d609f84a60
 >>> hasattr(mapped_L, "__iter__")
 True
 >>> hasattr(mapped_L, "__next__")
-True</pre>
-        </ul>
-        <li>Sequence objects in Python need to implement two dunder methods (__getitem__, __len__) that are base for Indexing and slicing functionalities. And sequence objects don't require to implement __iter__ what happens for example with range(), but per convention all sequences are treated as Iterable (those without __iter__ too - as those allow to iterate through them).</li>
+True
+>>> hasattr(mapped_L, "__getitem__")
+False
+    => map objects are Iterables and Iterators (but not Sequences)
+</pre>
+
+        <li>What are details of sequence protocol in Python?</li>
+            <pre class="code">
+Sequence objects in the most basic version need to implement two dunder methods: __getitem__, __len__:
+ - __getitem__, __len__ are base for Indexing and slicing functionalities.
+ - __getitem__ from dict doesnt allow Indexing and Slicing, so having __getitem__ is not enough, implementation matters.
+ - In more complete version also methods: __contains__, __iter__, __reversed__, index and count.
+
+All Sequences are also Iterable, but not opposite.
+
+Range object example:
+>>> R = range(3)
+>>> type(R)
+&lt;class 'range'&gt;
+>>> hasattr(R, "__getitem__")
+True
+>>> hasattr(R, "__len__")
+True
+>>>
+>>> R[1]
+1
+>>> hasattr(R, "__iter__")
+True
+>>> hasattr(R, "__next__")
+False
+    => range objects are Sequences and Iterables, but not Iterators
+</pre>
+
         <hr>
         <hr>
         <hr>
-        <b>GENERATORS:</b>
+        </ol>
+<br>
+<b style="background: #ADD8E6;">GENERATORS:</b>
+<br>
+<br>
+        <ol start="4">
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
         <pre class="notion">
  - Generatory są świetne, gdy nie znamy górnej granicy zbioru lub przetwarzamy tylko część wyników,
@@ -205,7 +241,12 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <hr>
         <hr>
         <hr>
-<b>MISCELLANEOUSNESS:</b>
+</ol>
+<br>
+<b style="background: #ADD8E6;">MISCELLANEOUSNESS:</b>
+<br>
+<br>
+<ol start="7">
         <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
@@ -241,14 +282,24 @@ Unicode / UTF-8 example:
         <hr>
         <hr>
         <hr>
-        <div><b>Python Call Stack / Python Frames:</b></div>
+</ol>
+<br>
+<b style="background: #ADD8E6;">Python Call Stack / Python Frames:</b>
+<br>
+<br>
+<ol start="15">
         <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
         <br>
         <hr>
         <hr>
         <hr>
 
-        <div><b>CLASSES:</b></div>
+</ol>
+<br>
+<b style="background: #ADD8E6;">CLASSES:</b>
+<br>
+<br>
+<ol start="16">
         <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
         <br>
         <li>Python class level '__slots__' mechanism - it predefines possible instance attributes (there is no __dict__ on instance level). Many instance as performance optimization Use Case. Simulation showed 150-300 MB memory saving when 1 million objects are handled.</li>
@@ -263,8 +314,13 @@ Unicode / UTF-8 example:
         <br>
         <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
 
-        <br>
-        <div><b>PROTOCOLS:</b></div>
+
+</ol>
+<br>
+<b style="background: #ADD8E6;">PROTOCOLS:</b>
+<br>
+<br>
+<ol start="7">
         <li>Python as protocol oriented language: There is set of behaviours implemented as Protocols in Python, but it is Protocol oriented language?</li>
 
         <br>
@@ -284,7 +340,7 @@ Unicode / UTF-8 example:
 
         <br>
         <br>
-        </ul>
+        </ol>
 
     </ul>
 </div>
@@ -312,7 +368,7 @@ Unicode / UTF-8 example:
                 <div class="card-body">
     <a class="main-a"  href="https://docs.python.org/3/tutorial/interpreter.html">2. Using the Python Interpreter</a>
 
-    <ul>
+    <ol>
         <li>Invoking the Interpreter</li>
             <div class="shell">$ whereis python3 / interactive Mode (run python3)</div>
             <div class="shell">$ python3 -c 'from time import sleep;sleep(2);print("I have slept 2 seconds, wow.")'</div>
@@ -339,7 +395,7 @@ Unicode / UTF-8 example:
             <pre><div class="code">#!/usr/bin/env python3
 # -*- coding: cp1252 -*-</div></pre
         </ul>
-    </ul>
+    </ol>
 </div>
 </div>
 </div>
