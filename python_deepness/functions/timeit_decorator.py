@@ -9,8 +9,9 @@ def print_timeit(f):
         t_start = time_ns()
         results = f(*args, **kwargs)
         t_end = time_ns()
-        t = ( t_end - t_start ) / 1000
-        print(f"Function {f.__name__} execution time: {t} ms.")
+        t = ( t_end - t_start ) / 1000000000
+        t = t * 10 // 1 / 10
+        print(f"Function {f.__name__} execution time: {t} s.")
 
         return results
 

@@ -247,7 +247,7 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
 <br>
 <br>
 <ol start="7">
-        <li>Let say that you need to decide which solution will be faster: this based more on functions or this one based more than classes? How would you test and prove technically which solution is better for your Use Case. Generally you are looking for very fast and memory optimized solution and every detail is important.</li>
+        <li>If it is possible to compare Which solution will be faster: this based more on functions or this one based more than classes?</li>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
         <br>
@@ -313,6 +313,15 @@ Unicode / UTF-8 example:
         <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
         <br>
         <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
+        <br>
+        <li>What are details about class creation flow/protocol in Python?</li>
+        <br>
+        <li>When zero-cost metaclassing mechanism is exactly used during class creation flow?</li>
+ <pre class="code">
+__builtins__.__build_class__(func, name, *bases, **kwargs) waits for function as first argument
+Python represents Class body as closed function in moment 'just-before-class-building'
+</pre>
+
 
 
 </ol>
@@ -320,7 +329,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">PROTOCOLS:</b>
 <br>
 <br>
-<ol start="7">
+<ol start="23">
         <li>Python as protocol oriented language: There is set of behaviours implemented as Protocols in Python, but it is Protocol oriented language?</li>
 
         <br>
@@ -638,19 +647,23 @@ except NameError:
                 <a class="main-a" href="https://docs.python.org/3/tutorial/classes.html">9. Classes</a>
                 <ul>
                     <br>
-                    <u><b>Class object creation flow:</b></u>
+                    <u><b>Class object creation flow (without __slots__ impact):</b></u>
                     <ul>
-                    <li>Python sees 'class MyClass' syntax as metaclass call</li>
-                    <li>Python calls __build_class__ to initiate class object creation (only standard syntax).</li>
-                    <li>First of all, a new namespace is created (dct - attribute dictionary), and used as the local scope.</li>
-                    <li>Calling type.__new__(metaclass, name, bases, namespace)</li>
+                    <li>When Interpreter sees 'class' then calling __build_class__(func, name, *bases, **kwargs). Class body is treated as special-function.</li>
+                    <ul>
+                        <li>If metaclass have defined '__prepare__' then is called.</li>
+                    </ul>
+                    <li>Class body is executed and a new namespace is created and used as the local scope.</li>
+                    <li>Calling [metaclass/type].__new__(name, bases, namespace)</li>
                     <ul>
                         <li>optionally custom metaclass (by default type) can set here own logic like creating attributes, methods</li>
+                        <li>If class have descriptor methods then '__set_name__(owner, name)' is called.</li>
                     </ul>
-                    <li>If class have descriptor methods then '__set_name__(owner, name)' is called.</li>
-                    <li>Calling type.__init__</li>
+
+
+                    <li>Calling type.__init__(cls, name, bases, namespace). Here we have valid class object.</li>
                     <ul>
-                        <li>By default type.__init__ calls __init_subclass__ – for subclasses if Base Class defined it</li>
+                        <li>type.__init__ calls __init_subclass__ – for subclasses if Base Class defined it</li>
                     </ul>
                     </ul>
 

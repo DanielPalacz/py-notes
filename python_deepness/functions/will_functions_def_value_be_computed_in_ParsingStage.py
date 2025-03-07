@@ -4,23 +4,22 @@ def example():
     x = 42
     print(x)
 
-print(dis.dis(example))  # Pokazuje skompilowany bajtkod
+# print(dis.dis(example))  # Pokazuje skompilowany bajtkod
 
 
 def def_value():
     print("def_value executed")
     return 42
 
+print("Checkpoint in script.")
 
-def foo(a=def_value()):  # `def_value()` jest wykonywane TERAZ, podczas tworzenia `foo`
-    print(a)
+def foo(a=def_value()):
+    print(a)             #  a=def_value() jest uruchamiane podczas Compiling time i Runtime
+
+                         # Kompilacja: Tłumaczenie kodu źródłowego na bajtkod → nie wykonuje funkcji, tylko analizuje ich składnię.
+                         # Runtime: Wykonanie kodu, w tym obliczanie wartości domyślnych argumentów.
 
 
-# if False:
-#     def foo(a=def_value()):  # Jeśli `def_value()` wykonywałoby się w Parsing Stage, to ten kod by się wywalił
-#         print(a)
 
 
-print("End of script")
-
-# def ops(a=): pass
+# def ops(a=): pass   # (Parsing Stage) SyntaxError: invalid syntax
