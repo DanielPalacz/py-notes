@@ -1,6 +1,8 @@
 import builtins
 import dis
 
+from random import randint
+
 original_build_class = builtins.__build_class__
 
 class TypeDebug(type):
@@ -13,6 +15,8 @@ class TypeDebug(type):
 
     def __new__(cls, *args, **kwargs):
         print(f"Calling type.__new__: args={args}, kwargs={kwargs}")
+        print(" - locals:", locals())
+        print(" - locals['__class__']:", dir(locals()["__class__"]))
         return super().__new__(cls, *args, **kwargs)
 
 
@@ -29,19 +33,45 @@ def debug_build_class(*args, **kwargs):
 builtins.__build_class__ = debug_build_class
 
 
+class MagicRandomNumber:
+
+    def __get__(self, obj, objtype=None):
+        if self.method == "random.randint":
+            return randint(0, 100)
+        else:
+            raise NotImplemented("Not implemented RandomNumber generation.")
+
+    def __set_name__(self, owner, name):
+        print(f" # Calling descriptor_obj.__set_name__(self, owner, name)")
+        self.method = "random.randint"
 
 
-class A(metaclass=TypeDebug):
+
+class ClassCreationFlowReview(metaclass=TypeDebug):
+    print()
     print("Executing code of Class body - start.")
-    print(locals())
+    print(" * locals() during Class body execution", locals())
+    print("   - dir() during Class body execution", dir())
+
+
+    r = MagicRandomNumber()
     x = 10
-    print(locals())
-    print("Executing code of Class body - end.")
+
+    # @staticmethod
+    # def method():
+    #     return super()  # Using super() triggers adding __classcell__ to Namespace
+
+    print(" * locals() during Class body execution", locals())
+    print(" * Executing code of Class body - end.")
+    print()
+    super().__dict__
 
 
 
 
-# print(A().prepare)
+print()
+# print(ClassCreationFlowReview().prepare)
+print("Magic number is:", ClassCreationFlowReview().r)
 
 # class B(A):
 #     y = 20

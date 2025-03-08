@@ -267,6 +267,8 @@ Unicode / UTF-8 example:
         <br>
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
         <br>
+        <li>Ellipsis it is unique constant accessed globally in Python (instance of EllipsisType). When we can use ellipsis object?</li>
+        <br>
         <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
         <ul>
             <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
@@ -308,18 +310,27 @@ Unicode / UTF-8 example:
         <br>
         <li>When obj = object() then obj is instance of class (named object), but object is class and classes are instances of type metaclass (unless you use your own new metaclass). In Python everything inherits from object class apart from type metaclass that doesn't inherit from anything.</li>
         <br>
-        <li>Class object creation flow. Python sees 'class' syntax as Metaclass perspective / call. Other spot is that class syntax is executable code.</li>
+        <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
         <br>
         <li>'__subclasshook__' - interesting feature that allows to dynamically deduct if subclass belong to base class (even without real inheritance).</li>
         <br>
-        <li>Python 3.7 introduced a concept known as "forward references," which allows us to use the class name as a string when defining type hints. Starting from Python 3.7, you can also use the from __future__ import annotations import, which automatically treats all annotations as forward references.</li>
+        <li>What does mean that super technically can be called "proxy object"? What are details of functioning super?</li>
+            <ul>
+                <li>super only redirects lookup-calls to the correct parent class.</li>
+                <li>For this super uses Descriptor protocol - it has own implementation of __get__.</li>
+                <li>super handles creating temporary binding objects for instance and class methods (this binding is only relevant for the duration of the method call).</li>
+            <ul>
+                <li>Bound method it is object that comes from linking function and the instance of some class (instance level methods)</li>
+                <li>Class method is also Bound method object, but it is created from function and class object.</li>
+                <li>A.method(b)  <=> super().method() => where `b` is passed as `self`</li>
+            </ul>
+            </ul>
         <br>
-        <li>What are details about class creation flow/protocol in Python?</li>
+        <li>What are details about class creation flow/protocol in Python? How can it be tuned?</li>
         <br>
-        <li>When zero-cost metaclassing mechanism is exactly used during class creation flow?</li>
+        <li>What it is zero-cost metaclassing mechanism?</li>
  <pre class="code">
-__builtins__.__build_class__(func, name, *bases, **kwargs) waits for function as first argument
-Python represents Class body as closed function in moment 'just-before-class-building'
+ - PEP 697, Python 3.12 introduces a zero-cost mechanism that optimizes the way metaclasses are determined.
 </pre>
 
 
@@ -649,24 +660,32 @@ except NameError:
                     <br>
                     <u><b>Class object creation flow (without __slots__ impact):</b></u>
                     <ul>
+                    <br>
                     <li>When Interpreter sees 'class' then calling __build_class__(func, name, *bases, **kwargs). Class body is treated as special-function.</li>
                     <ul>
-                        <li>If metaclass have defined '__prepare__' then is called.</li>
+                        <li>If metaclass has defined __prepare__ (must return a mapping) then it is called else empty dict is passed further as namespace.</li>
                     </ul>
+                    <br>
                     <li>Class body is executed and a new namespace is created and used as the local scope.</li>
+                    <ul>
+                        <li>If Class body contains super/__class__ calls then Python creates a cell variable (__classcell__) with __class__ object.</li>
+                         <ul>
+                            <li>This ensures that methods inside the class can access __class__, even before the class is fully defined.</li>
+                        </ul>
+                    <br>
+                    </ul>
                     <li>Calling [metaclass/type].__new__(name, bases, namespace)</li>
                     <ul>
-                        <li>optionally custom metaclass (by default type) can set here own logic like creating attributes, methods</li>
-                        <li>If class have descriptor methods then '__set_name__(owner, name)' is called.</li>
+                        <li>custom metaclass can set here own logic like creating attributes, methods (by default type metaclass)</li>
+                        <li>If class have descriptor methods then '__set_name__(owner, name)' is called (if __set_name__ is defined).</li>
                     </ul>
-
-
-                    <li>Calling type.__init__(cls, name, bases, namespace). Here we have valid class object.</li>
+                    <br>
+                    <li>Calling type.__init__(cls, name, bases, namespace).</li>
                     <ul>
-                        <li>type.__init__ calls __init_subclass__ – for subclasses if Base Class defined it</li>
+                        <li>For subclasses: type.__init__ calls '__init_subclass__'</li>
                     </ul>
                     </ul>
-
+                    <br>
 <br>
 <li>
 <div class="notion"><a style="font-size:20px;" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></div>
