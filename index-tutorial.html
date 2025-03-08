@@ -247,9 +247,24 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
 <br>
 <br>
 <ol start="7">
-        <li>If it is possible to compare Which solution will be faster: this based more on functions or this one based more than classes?</li>
+        <li>What are some very different characteristics of Functions/Classes Nature?</li>
+<pre class="notion">
+ - classes can be seen more like containers/structures/blueprint when functions are set of instructions (executable code blocks)
+ - A class definition is a 'Declaration of a Structure', not a sequence of instructions (like functions).
+ - While you can inspect the bytecode of class methods, the class object doesnt have bytecode associated to be disassembled.
+ - Python classes are highly dynamic (add, remove, modify attributes at runtime). This flexibility comes at performance cost.
+ - Classes due protocols/hooks are very modifiable during creation time. It also costs.
+Then:
+ - In Classes Nature is to be very modifiable containers/blueprints. When Functions Nature is to be lightweight set of instructions.</pre>
+        <li>It was possible to compare some very specific solutions in terms of speed (by not realistic micro-benchmarking, but at least something). First solution based on functions and second based on classes. In the result class-based solution was 100 times slower. Why classes could be so slow? What are the biggest factors here? Additionally, in tests were seen that __slot__ classes feature did not improve speed, but tests were limited so this result could be not reliable.</li>
+<pre class="notion">
+ - Creating a function is a simpler operation than creating a class. Python's interpreter is optimized for function creation.
+ - Classes, even empty ones, have more overhead due to their inherent complexity.
+ - Class creation flow is much more complex: Metaclass handling, namespace creation or executing class body code. It all takes time.</pre>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
+        <br>
+        <li>MappingProxy / FrozenSet / NamedTuple / Arrays / Deque / SimpleNamespace - why/when these structure can be useful?</li>
         <br>
         <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
 <pre class="code">
@@ -271,11 +286,11 @@ Unicode / UTF-8 example:
         <br>
         <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
         <ul>
-            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową). </li>
+            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową).</li>
             <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
             <li>3. Runtime<br>
                     - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
-                    - Na koniec: Python worzy obiekt modułu i udostępnia go w sys.modules.</li>
+                    - Na koniec: Python tworzy obiekt modułu i udostępnia go w sys.modules.</li>
             </ul>
             <br>
             <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
@@ -363,10 +378,22 @@ Unicode / UTF-8 example:
     <b style="background: #ADD8E6;">Functions Deep Dive:</b>
     <br>
     <br>
+
     <ol start="27">
-        <li>Functions are objects, but not so-typical. What are details </li>
-            <br>
-        </ol>
+        <li>Functions are objects, but not so-typical. What makes functions not typical objects?</li>
+<pre>
+
+1. Functions local scope is built different:
+ - Function local scope exists in runtime and is built based on temporarily created Stack Frame,
+ - this Frame leverages the data from funct.__code__ for creating local scope
+ - If we have look into temporarily created Frame (named F) then:
+    - we can check that: F.f_locals is locals() => gives True
+    - so Python Frame Stack is used to build Function local scope
+2. Functions have a __code__ object storing function bytecode.
+3. Functions have a __dict__ used bit different, only for storing attributes (what is kind of specific functions behaviour).
+4. Functions support closure pattern (__closure__ remembers variables from outer scope). Fundamental mechanism for predictability.</pre>
+
+    </ol>
 
 
 
@@ -378,7 +405,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">Python 3.11:</b>
 <br>
 <ol start="28">
-        <li>Introducing except* and ExceptionGroup for handling more different exceptions.</li>
+        <li>Introducing except* / ExceptionGroup for handling more exceptions in one lot.</li>
         <br>
         </ol>
 

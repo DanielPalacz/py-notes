@@ -64,7 +64,7 @@ class ClassCreationFlowReview(metaclass=TypeDebug):
     print(" * locals() during Class body execution", locals())
     print(" * Executing code of Class body - end.")
     print()
-    super().__dict__
+    # super().__dict__
 
 
 
