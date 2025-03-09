@@ -29,3 +29,4 @@ def checking_1m_classes_with_slots_creation():
             __slots__ = []
 
 checking_1m_classes_with_slots_creation()
+

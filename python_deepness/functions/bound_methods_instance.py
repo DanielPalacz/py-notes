@@ -54,3 +54,16 @@ def funct1():
 
 def funct2():
     print("Original funct() called.")
+
+
+class X:
+    def f(self):
+        pass
+
+    @classmethod
+    def g(cls):
+        pass
+
+
+print(X().f)
+print(X().g)
