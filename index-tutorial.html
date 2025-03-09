@@ -263,6 +263,12 @@ Then:
  - Class creation flow is much more complex: Metaclass handling, namespace creation or executing class body code. It all takes time.</pre>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
+        <li>What are cases in Python where internal state (implementation details) are hidden from users?</li>
+<pre class="code">
+ - lru_cache / cached_property
+ - weakref module
+ - asyncio / threading
+</pre>
         <br>
         <li>MappingProxy / FrozenSet / NamedTuple / Arrays / Deque / SimpleNamespace - why/when these structure can be useful?</li>
         <br>
@@ -408,7 +414,7 @@ Modifiers:
     <br>
     <br>
 
-    <ol start="27">
+    <ol start="26">
         <li>Functions are objects, but not so-typical. What makes functions not typical objects?</li>
 <pre>
 
@@ -436,7 +442,7 @@ Notes:
  * A.h("xx")   - ok
  * A().g("xx") - TypeError: dumps() takes 1 positional argument but 2 were given
  * A().h("xx") - ok
- * @classmethod
+ * @classmethod impact
 </pre>
 
 </ol>
@@ -445,13 +451,74 @@ Notes:
 
 <br>
 
+<b style="background: #ADD8E6;">Testing things:</b>
+<br>
+<ol start="27">
+        <li>Mock and Stub what is the difference? Other test doubles: Dummy, Fake, Spy</li>
+<pre>
+Mock:
+  - It should be used for verifying interactions, ensuring the correct methods are called with the expected parameters.
+  - Mocks can be configured to throw exceptions, return different values for different calls, and so on (can be complex).
+Stub:
+  - this test double focuses on providing data (predefined responses) to control the test environment
+  - often used to simulate the behavior of external services or components (isolating dependencies)
+
+    => Both stubs and mocks help isolate the code under test by replacing external dependencies with controlled behavior.
+
+Dummy
+ - the simplest form of a test double. It is an object that is passed around but is never actually used (serves as a placeholder)
+ - Dummies are used when an argument is required by the code being tested, but it’s not actually used during the test.
+Fake
+ - test double that has working implementations but is simplified or not as performant as the real system
+ - Fakes are used when a real system might be too complex or slow, but you still want some kind of working implementation
+Spy
+ - more advanced type of test double that not only helps verify interactions (like a mock) but also records the calls made to it
+Fixture
+ - In the context of testing, fixtures can be considered as part of the broader test double or test setup family.
+ - Any setup or configuration required to run your tests. Ensuring that the necessary context is available for the tests to execute.
+ - Typically includes the creation of test data, that can be even related to setting up a connection to a database or web server.
+ - Fixtures are about test setup and teardown — while test doubles isolate/control behavior of components within that environment.
+
+Test Doubles (Mocks, Stubs, Fakes, etc.):
+ - Used to replace or simulate specific parts of a system, like dependencies or external services, that your code interacts with.
+ - They help isolate/control the code under test and allow you to control behaviors and verify interactions.
+
+</pre>
+        <li>Mocking frameworks: unittest.mock, when to use MagicMock and when Mock?.</li>
+<pre>
+Use Mock when:
+ - You only need to mock regular methods or attributes that are not related to magic methods (i.e., methods you define yourself).
+ - You don't need support for special behavior like indexing, iterating, or arithmetic operations.
+
+Use MagicMock when:
+ - You need to mock magic methods (__getitem__, __setitem__, __call__, __iter__, etc.) or objects involved in such operations.
+ - You deal with objects that emulate builtin containers like lists, or objects that need to support special methods in your tests.</pre>
+        <br>
+        </ol>
 
 
 
 <b style="background: #ADD8E6;">Python 3.11:</b>
 <br>
-<ol start="28">
+<ol start="27">
         <li>Introducing except* / ExceptionGroup for handling more exceptions in one lot.</li>
+        <br>
+        </ol>
+
+<b style="background: #ADD8E6;">Python 3.12:</b>
+<br>
+<ol start="28">
+        <li>Introducing Taskgroup. The introduction of TaskGroup doesn't reduce the need for asyncio but rather makes working with asyncio more intuitive and less error-prone. TaskGroup is just a higher-level abstraction built on top of asyncio.</li>
+        <br>
+        </ol>
+
+<b style="background: #ADD8E6;">TODO:</b>
+<br>
+<ol start="28">
+        <li>fastapi, pydantic</li>
+        <li>Django simple personal website</li>
+        <li>Bigger project ideas</li>
+        <li>mocking</li>
         <br>
         </ol>
 
