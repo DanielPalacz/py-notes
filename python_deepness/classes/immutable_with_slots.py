@@ -1,0 +1,15 @@
+class Immutable:
+
+    __slots__ = ('_dept', '_name')          # Replace the instance dictionary
+
+    def __init__(self, dept, name):
+        self._dept = dept                   # Store to private attribute
+        self._name = name                   # Store to private attribute
+
+    @property                               # Read-only descriptor
+    def dept(self):
+        return self._dept
+
+    @property
+    def name(self):                         # Read-only descriptor
+        return self._name

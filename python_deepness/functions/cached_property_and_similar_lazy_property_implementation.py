@@ -23,12 +23,12 @@ class DeepThought:
         time.sleep(3)
         return 42
 
-my_deep_thought_instance = DeepThought()
-
-@print_timeit
-def wrapper(obj: DeepThought):
-    print(my_deep_thought_instance.meaning_of_life)
-
-wrapper(my_deep_thought_instance)
-wrapper(my_deep_thought_instance)
-wrapper(my_deep_thought_instance)
+# my_deep_thought_instance = DeepThought()
+#
+# @print_timeit
+# def wrapper(obj: DeepThought):
+#     print(my_deep_thought_instance.meaning_of_life)
+#
+# wrapper(my_deep_thought_instance)
+# wrapper(my_deep_thought_instance)
+# wrapper(my_deep_thought_instance)

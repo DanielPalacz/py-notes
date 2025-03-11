@@ -362,34 +362,23 @@ Unicode / UTF-8 example:
 <br>
 <br>
 <ol start="23">
-        <li>Python as protocol oriented language: There is set of behaviours implemented as Protocols in Python, but it is Protocol oriented language?</li>
+        <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
 
         <br>
 
-        Descriptors protocol
-        <li>Descriptor object - any object which defines the methods __get__(), __set__(), or __delete__().</li>
+        <li>[Descriptors protocol]: Python Descriptor object is class attribute self-defining way of accessing it in instance level scope (using: __get__, __set__, __delete__).</li>
         <ul>
             <li>Python is deeply equipped with Descriptors (fe: functions, methods, properties, class methods, static methods, super).</li>
-            <li>How Descriptors objects can be named differently to highlight specific Descriptors aspects?</li>
+            <li>Descriptors only work when defined as class variables. When put in instances, they have no effect. But also descriptors DO NOT WORK for classic classes.</li>
             <ul>
-                <li>Focusing on Behavior Modification, Focusing on the Proxy Aspect, Focusing on the Computed Nature, More Abstract/Technical, </li>
-                <li>Attribute Interceptors / Behavior Injectors,  Attribute Proxies, Computed Dynamic Attributes, Attribute Customizers / Attribute Metaobjects.</li>
-            </ul>
-            <li>The main Descriptors goal is to provide a set of hooks (for objects stored in class variables) controlling attribute lookup behaviour.</li>
-            <ul>
-            <li>Then here we see that name Descriptor comes from ability that the descriptor object DESCRIBES how an attribute is accessed.</li>
-            <li>Descriptors only work when used as class variables. When put in instances, they have no effect.</li>
-            <li>__set_name__ hook is called during class creation extends capability of descriptor objects.</li>
+                <li>__set_name__ hook is called during class creation extends capability of descriptor objects.</li>
+                <li>Python Descriptors Nature is by design being "properties" (they are "attached" to instances). Descriptors control instance attributes. Metaclasses control class attributes.</li>
             </ul>
         </ul>
         <br>
-Attribute lookup protocol:
-        <br>
-        <br>
-        <li>Attribute lookup details as short as possible:</li>
-<pre style="notion">
 
-It depends on the __getattribute__ /__getattr__ implementation in type, object, and super (it can be override)
+        <li>[Attribute lookup protocol]: Attribute lookup details as short as possible:</li>
+<pre style="notion">
 
 Use Cases:
 1. Instance object executes lookup:
@@ -401,12 +390,11 @@ Use Cases:
  - from Instance object for instance/class attribute
  - from Class object for instance/class attribute
 
-Modifiers:
- - __getattribute__ /__getattr__ implementation (type, object, and super)
- - Descriptors attribute behaviour
-    - __set_name__ hook can set specific logic
-    - Data Descriptors priority over instance dictionaries (always override).
- - Metaclasses behaviours can set specific logic</pre>
+Components / Modifiers:
+ - [type, object, super] - __getattribute__ /__getattr__ implementations
+ - Descriptors impact
+ - Metaclasses modifications
+ - __slots__ functionality</pre>
 </ol>
 
 <br>
