@@ -81,33 +81,6 @@ class Validator(ABC):
 #####################################################
 
 
-# lazy_properties.py
-import time
-
-class LazyProperty:
-    def __init__(self, function):
-        self.function = function
-        self.name = function.__name__
-
-    def __get__(self, obj, type=None) -> object:
-        obj.__dict__[self.name] = self.function(obj)
-        return obj.__dict__[self.name]
-
-class DeepThought:
-
-    def __getattribute__(self, attr_val, *kwargs):
-        print("[DeepThought][__getattribute__] Getting attribute '{}' value for {} as usual.".format(attr_val, self))
-        return super().__getattribute__(attr_val)
-
-    @LazyProperty
-    def meaning_of_life(self):
-        time.sleep(3)
-        return 42
-
-# my_deep_thought_instance = DeepThought()
-# print(my_deep_thought_instance.meaning_of_life)
-# print(my_deep_thought_instance.meaning_of_life)
-# print(my_deep_thought_instance.meaning_of_life)
 
 class AccessCounter:
     class DescriptorWrapper:
