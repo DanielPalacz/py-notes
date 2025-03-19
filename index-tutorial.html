@@ -354,6 +354,11 @@ Unicode / UTF-8 example:
  - PEP 697, Python 3.12 introduces a zero-cost mechanism that optimizes the way metaclasses are determined.
 </pre>
 
+<li>Implementing metaclass __call__ method causes that this method is called during class instance creation (flow is changed).</li>
+<br>
+
+<li>The word about object class - concretely instances - and when object() structure could be useful. (Sentinel, Locks)</li>
+
 
 
 </ol>
@@ -361,7 +366,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">PROTOCOLS:</b>
 <br>
 <br>
-<ol start="23">
+<ol start="27">
         <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
 
         <br>
@@ -402,7 +407,7 @@ Components / Modifiers:
     <br>
     <br>
 
-    <ol start="26">
+    <ol start="30">
         <li>Functions are objects, but not so-typical. What makes functions not typical objects?</li>
 <pre>
 
@@ -441,7 +446,7 @@ Notes:
 
 <b style="background: #ADD8E6;">Testing things:</b>
 <br>
-<ol start="27">
+<ol start="32">
         <li>Mock and Stub what is the difference? Other test doubles: Dummy, Fake, Spy</li>
 <pre>
 Mock:
@@ -488,27 +493,25 @@ Use MagicMock when:
 
 <b style="background: #ADD8E6;">Python 3.11:</b>
 <br>
-<ol start="27">
+<ol start="34">
         <li>Introducing except* / ExceptionGroup for handling more exceptions in one lot.</li>
         <br>
         </ol>
 
 <b style="background: #ADD8E6;">Python 3.12:</b>
 <br>
-<ol start="28">
+<ol start="35">
         <li>Introducing Taskgroup. The introduction of TaskGroup doesn't reduce the need for asyncio but rather makes working with asyncio more intuitive and less error-prone. TaskGroup is just a higher-level abstraction built on top of asyncio.</li>
         <br>
         </ol>
 
 <b style="background: #ADD8E6;">TODO:</b>
 <br>
-<ol start="28">
-        <li>fastapi, pydantic</li>
-        <li>Django simple personal website</li>
-        <li>Bigger project ideas</li>
-        <li>mocking</li>
-        <br>
-        </ol>
+<pre>
+ - fastapi, pydantic
+ - Django simple personal website
+ - Bigger project ideas
+</pre>
 
 </div>
 </div>
