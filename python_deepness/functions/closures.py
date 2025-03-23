@@ -22,6 +22,7 @@ def outer_func():
 
 funct = outer_func()
 
+
 # Creating new cell/closure
 closure_ = (types.CellType("Daniel"),)
 
@@ -33,7 +34,7 @@ funct_hacked = types.FunctionType(funct.__code__, funct.__globals__, name=funct.
 
 # Achieving Encapsulation With Closures
 
-def stack():
+def closure_stack():
     _items = []
 
     def push(item):
@@ -48,3 +49,7 @@ def stack():
     closure.push = push
     closure.pop = pop
     return closure
+
+
+stack = closure_stack()
+print(stack.__closure__)
