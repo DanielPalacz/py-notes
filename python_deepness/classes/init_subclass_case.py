@@ -3,10 +3,11 @@
 class Base:
 
     def __init_subclass__(cls, **kwargs):
-        assert hasattr(Base, "boo"), "Lack of boo attribute declaration. Derived classes expect to have it, failing."
+        assert hasattr(cls, "boo"), "Lack of boo attribute declaration. Derived classes expect to have it, failing."
 
     def foo(self):
         return "foo"
+
 
 
 class Derived(Base):

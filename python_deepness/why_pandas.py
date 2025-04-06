@@ -8,7 +8,10 @@ rng = default_rng(0)
 # 3. .values?
 # 4. .reset_index
 # 5. pandas is unpredictable
+
 # numpy - speed
+
+
 # Restricted Computation Domain
 # pure python - Restricted Computation Domain - implementation domain
 # numpy - math vector representation

@@ -247,11 +247,12 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
 <br>
 <br>
 <ol start="7">
-        <li>What are some very different characteristics of Functions/Classes Nature?</li>
+        <li>What are some different characteristics of Functions/Classes Nature?</li>
 <pre class="notion">
- - classes can be seen more like containers/structures/blueprint when functions are set of instructions (executable code blocks)
+ - Classes can be seen more like containers/structures/blueprint when functions are set of instructions (executable code blocks).
  - A class definition is a 'Declaration of a Structure', not a sequence of instructions (like functions).
  - While you can inspect the bytecode of class methods, the class object doesnt have bytecode associated to be disassembled.
+    * That code can be disassembled, but it's part of the higher-level object and it is not attached to the final class object
  - Python classes are highly dynamic (add, remove, modify attributes at runtime). This flexibility comes at performance cost.
  - Classes due protocols/hooks are very modifiable during creation time. It also costs.
 Then:
@@ -272,7 +273,7 @@ Then:
         <br>
         <li>MappingProxy / FrozenSet / NamedTuple / Arrays / Deque / SimpleNamespace - why/when these structure can be useful?</li>
         <br>
-        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form. (Python 2 history)</li>
+        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form.</li>
 <pre class="code">
 Unicode / UTF-8 example:
     Unicode mapping:
@@ -300,8 +301,7 @@ Unicode / UTF-8 example:
             </ul>
             <br>
             <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
-            <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations.</li>
-            <li>But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
+            <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
         <hr>
         <hr>
         <hr>
@@ -310,7 +310,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">Python Call Stack / Python Frames:</b>
 <br>
 <br>
-<ol start="15">
+<ol start="18">
         <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
         <br>
         <hr>
@@ -322,7 +322,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">CLASSES:</b>
 <br>
 <br>
-<ol start="16">
+<ol start="19">
         <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
         <br>
         <li>Python class level '__slots__' mechanism - it predefines possible instance attributes (there is no __dict__ on instance level). Many instance as performance optimization Use Case. Simulation showed 150-300 MB memory saving when 1 million objects are handled.</li>
@@ -363,7 +363,7 @@ Unicode / UTF-8 example:
 <b style="background: #ADD8E6;">PROTOCOLS:</b>
 <br>
 <br>
-<ol start="27">
+<ol start="31">
         <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
 
         <br>
@@ -404,7 +404,7 @@ Components / Modifiers:
     <br>
     <br>
 
-    <ol start="30">
+    <ol start="34">
         <li>Functions are objects, but not so-typical. What makes functions not typical objects?</li>
 <pre>
 
@@ -443,7 +443,7 @@ Notes:
 
 <b style="background: #ADD8E6;">Testing things:</b>
 <br>
-<ol start="32">
+<ol start="36">
         <li>Mock and Stub what is the difference? Other test doubles: Dummy, Fake, Spy</li>
 <pre>
 Mock:
@@ -817,7 +817,7 @@ except NameError:
                         <li>If class have descriptor methods then '__set_name__(owner, name)' is called (if __set_name__ is defined).</li>
                     </ul>
                     <br>
-                    <li>Calling type.__init__(cls, name, bases, namespace).</li>
+                    <li>Calling type.__init__(self, name, bases, namespace).</li>
                     <ul>
                         <li>For subclasses: type.__init__ calls '__init_subclass__'</li>
                     </ul>

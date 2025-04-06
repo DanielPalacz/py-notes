@@ -50,3 +50,4 @@ CONSTANTS = {
 }
 
 CONSTANTS_CLS = immutable_class(**CONSTANTS)
+breakpoint()
