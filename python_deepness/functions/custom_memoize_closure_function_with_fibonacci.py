@@ -7,7 +7,7 @@ def memoize(funct):
     def closure(number):
         if number not in cache:
             cache[number] = funct(number)
-            return cache[number]
+        return cache[number]
     return closure
 
 
