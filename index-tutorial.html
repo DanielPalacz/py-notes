@@ -202,7 +202,7 @@ False
 <br>
         <ol start="4">
         <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
-        <pre class="notion">
+<pre class="notion">
  - Generatory są świetne, gdy nie znamy górnej granicy zbioru lub przetwarzamy tylko część wyników,
    np. sekwencję Fibonacciego, liczby pierwsze czy duże pliki CSV linia po linii. Generatory są niepraktyczne, gdy
    potrzebujemy przechowywać i przetwarzać cały zbiór naraz – np. jeśli chcemy posortować duży plik danych,
@@ -211,7 +211,18 @@ False
    Zamiast tego, stan wykonania (w tym zmienne lokalne i wskaźnik kodu) jest przechowywany w obiekcie generatora.
    Mechanizm yield powoduje, że zamiast usunięcia ramki stosu (w normalnej funkcji), Python zapisuje jej stan i zawiesza wykonanie.
    Kiedy generator jest wznawiany, ramka zostaje przywrócona na stos i kontynuuje działanie od miejsca yield.
-        </pre>
+
+ - Trzy przykłady przepływów w Generatorach:
+    1)
+        * x = yield
+        * Ta forma oznacza "czekaj na wartość z send(value)". Kiedy coroutine zostaje uruchomiona i napotka yield, "zawiesza się" i oczekuje na dane.
+    2)
+        * yield x
+        * Ta forma oznacza: Zwróć wartość x na zewnątrz — to właśnie wynik next() lub send(...)
+    3)
+        * y = yield x
+        * Mix 1 i 2.
+</pre>
 
         <li><b>yield from ITERABLE_OBJECT</b></li>
  <pre>
@@ -228,6 +239,11 @@ False
      -- Python często dodaje konstrukcje, które upraszczają kod, nawet jeśli wydają się „magiczne”.
         Czasem wydaje się, że Python chce być bardziej jak DSL (Domain-Specific Language)
         dla każdej możliwej sytuacji, a nie czysto „przewidywalnym” językiem ogólnego przeznaczenia.
+
+     y = yield from sub_generator()
+        - automatycznie iteruje przez cały sub_generator(), wszystkie yield z tamtego trafiają "na zewnątrz",
+        - a jeśli sub_generator() zakończy się return coś, to yield from zwraca tę wartość do y.
+
  </pre>
 
         <li>Why and when such error happened with generators?<span> <b>TypeError: can't send non-None value to a just-started generator</b></span></li>

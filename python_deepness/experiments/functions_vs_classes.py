@@ -7,6 +7,15 @@ def checking_100m_functions_creation():
     for _ in range(100000000): # 100 M
         def _temporary_funct():
             pass
+        # def memoize(funct):
+        #     cache = {}
+        #
+        #     def closure(number):
+        #         if number not in cache:
+        #             cache[number] = funct(number)
+        #         return cache[number]
+        #
+        #     return closure
 
 
 checking_100m_functions_creation()
