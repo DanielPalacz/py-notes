@@ -71,14 +71,14 @@ idx107 = [*'.aa.cfc.']
 s101 = Series(rng.integers(-10, +10, size=5), index=idx101)
 s107 = Series(rng.integers(-10, +10, size=len(idx107)), index=idx107)
 
-print(
-    s107,
-    "\n",
-    "\n",
-    s107[".":"c"],
-    "\n",
-    s107["f"],
-)
+# print(
+#     s107,
+#     "\n",
+#     "\n",
+#     s107[".":"c"],
+#     "\n",
+#     s107["f"],
+# )
 
 #
 # # for x in s.iteritems(): print("x:", x)
@@ -88,9 +88,9 @@ print(
 #
 #
 # print("-------------------------------------------------------------------------------")
-# df = DataFrame(rng.integers(-10, +10, size=(5, 3)), columns=[*"abc"])
-#
-# print(df)
+df = DataFrame(rng.integers(-10, +10, size=(5, 3)), columns=[*"abc"])
+
+print(df)
 # print("-------------------------------------------------------------------------------")
 # for x in df: print(f"{x = }")
 # print("-------------------------------------------------------------------------------")
@@ -98,8 +98,10 @@ print(
 # print("-------------------------------------------------------------------------------")
 # for _, x in df.items(): print(f"{x = }")
 # for x in df.itertuples(): print(f"{x = }")
-# s1 = Series(rng.integers(-10, +10, size=5), index=[1, 2, 3])
+# for x in df.itertuples(name=None): print(f"{x = }")
+# for x in df.itertuples(index=False, name=None): print(f"{x = }")
 
+# s1 = Series(rng.integers(-10, +10, size=5), index=[1, 2, 3])
 
 
 # 00:00
