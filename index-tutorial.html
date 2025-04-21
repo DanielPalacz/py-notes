@@ -301,7 +301,7 @@ Unicode / UTF-8 example:
       bytes('Ĭ', "UTF-8") # Zwraca bajty reprezentujące znak Ĭ w kodowaniu UTF-8.
       b'\xc4\xac'         # 0xC4 0xAC => 11000100 10101100 => To są 2 bajty reprezentujące znak Ĭ w UTF-8.
 </pre>
-
+        <li>Python float implements IEEE 754, so float64 precision (53 bit mantis). 2**53 is the biggest number represented accurately.</li>
         <br>
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
         <br>
@@ -370,7 +370,7 @@ Unicode / UTF-8 example:
 <li>Implementing metaclass __call__ method causes that this method is called during class instance creation (flow is changed).</li>
 <br>
 
-<li>The word about object class - concretely instances - and when object() structure could be useful. (Sentinel, Locks)</li>
+<li>The word about 'object' class - concretely instances - and when object() structure could be useful. object() doesnt have __dict__ and is immutable. (Sentinel, Locks)</li>
 
 
 
@@ -395,24 +395,49 @@ Unicode / UTF-8 example:
             </ul>
         </ul>
         <br>
+        <br>
 
-        <li>[Attribute lookup protocol]: Attribute lookup details as short as possible:</li>
+        <li>[Attribute lookup protocol]: Attribute lookup for Class, Instance, Super:</li>
 <pre style="notion">
-It is implemented in:
-    - "type, object, super" __getattribute__ methods
-    - dedicated hook which handling __getattribute__ call and also: __getattr__ case
 
-Use Cases:
-1. Instance object executes lookup: for instance attribute, for class attribute
-2. Class object executes lookup: for class attribute
-3. Super object executes lookup:
- - from Instance object for instance/class attribute
- - from Class object for instance/class attribute
+In high level it is such mechanism:
+    try:
+        [type, object, super].__getattribute__(...)
+    except AttributeError:
+        [type, object, super].__getattr__(...)
 
-Components / Modifiers:
- - Descriptors impact
- - Metaclasses modifications
+Potential modifiers:
+ - Descriptors
+ - Metaclasses
  - __slots__ functionality</pre>
+
+Use cases:
+    <table>
+        <tbody>
+        <td>
+        <pre>
+1. Instance objects
+  - lookup for instance attribute
+  - lookup for class attribute
+  - object.__getattribute__ (def)</pre>
+        </td>
+        <td>
+        <pre>
+2. Class objects:
+  - lookup for class attribute
+  - type.__getattribute__ (def)</pre>
+        </td>
+        <td>
+        <pre>
+
+3. Super object executes lookup:
+  - from Instance object for instance/class attribute
+  - from Class object for instance/class attribute
+  - by default super().__getattribute__ is taken
+        </pre>
+        </td>
+        </tbody>
+    </table>
 </ol>
 
 <br>

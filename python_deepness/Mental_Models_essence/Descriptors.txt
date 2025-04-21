@@ -1,0 +1,16 @@
+Deskryptory — plan operacyjnego opanowania (→90%)
+
+Czym są i jak działają (data / non-data / fallback)
+Model mentalny: lookup krok po kroku z deskryptorem
+__get__, __set__, __delete__ — kiedy i jak się aktywują
+Deskryptor vs zwykła instancja / property / metoda
+Deskryptor w klasie bazowej a nadpisanie w podklasie
+Deskryptory + super() + metaklasy
+Deskryptory a __set_name__, __slots__, cacheowanie
+Zastosowania: property, @classmethod, validation fields, lazy loading, ORM
+
+Natura deskryptorów:
+One są bardzo techniczne, ale mają rzadki, specjalistyczny use-case.
+Uczą się ich często osoby piszące frameworki, ORM-y, API do komponentów.
+Większość devów korzysta z efektów deskryptorów (np. @property, @classmethod, dataclass.field()...), ale nie pisze ich samodzielnie.
+
