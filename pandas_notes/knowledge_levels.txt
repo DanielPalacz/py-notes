@@ -26,47 +26,35 @@ To jest poziom "umiem się nie zgubić":
     df[df['miasto'].isin(['Kraków', 'Warszawa'])]
 
 🔹 Podstawowe operacje
-
     df['nowa'] = df['inna'] * 2
-
     df.drop(columns=['kolumna']), df.rename(columns={...})
+
 
 ✅ 1c) Przyzwoity poziom zrozumienia podstaw pandas
 
 To jest poziom "umiem coś zrobić z danymi bez googlowania co chwilę":
 
 🔹 Operacje na danych:
-
     df.sort_values(by='wiek')
-
     df.isnull().sum(), df.dropna(), df.fillna(...)
-
     df['kolumna'].apply(...) – użycie własnych funkcji
 
 🔹 Proste groupby
-
     df.groupby('miasto')['zarobki'].mean()
-
     df.groupby(['kraj', 'miasto']).size()
 
 🔹 Łączenie danych
-
     pd.concat([...])
-
     df1.merge(df2, on='id', how='left')
 
 🔹 Zmiany struktury
-
     df.set_index('id'), df.reset_index()
-
     df.pivot(index='rok', columns='kraj', values='PKB')
 
+
 ✅ 2) Co trzeba wiedzieć, żeby być produktywnym w pandas
-
 To jest poziom "szybko coś ogarniam, czyszczę dane, robię analizę":
-
 🔹 Wszystko z 1c +
-
 🔹 Agregacje i groupby z własnymi funkcjami:
 
 df.groupby('kraj').agg({
@@ -75,41 +63,30 @@ df.groupby('kraj').agg({
 })
 
 🔹 Zaawansowane filtrowanie (query, isin, str.contains, between, mask)
-
 🔹 Obsługa dat (pd.to_datetime, dt.year, dt.month, resampling)
-
 🔹 Lepsza znajomość merge’ów: inner, outer, left, right, on, left_on, right_on
-
 🔹 Pivot vs Melt:
-
     pivot_table, melt, stack, unstack
 
 ✅ 3) Produktywność + przyzwoite zrozumienie mechaniki
-
 To poziom "rozumiem co pandas robi pod spodem, czemu działa szybko/powoli":
 
 🔹 Wydajność:
-
     Vectorization: unikasz pętli for, stosujesz .apply() i operacje na całych kolumnach
-
     df.itertuples() vs df.iterrows() – różnice wydajnościowe
 
 🔹 Typy danych:
 
     df.dtypes, astype(...), Categorical, Int64 vs int64 itd.
-
     nullable types: pd.Int64Dtype(), pd.StringDtype()
 
 🔹 Indeksy:
-
     Kiedy i jak ustawiać indeks (set_index, reset_index)
-
     Praca z MultiIndex: wybieranie poziomów (.xs()), stack(), unstack()
 
 🔹 Debugowanie danych:
 
     Sprawdzanie duplicated(), nunique(), value_counts()
-
     Analiza nietypowych przypadków (df[df['kolumna'].isna()], df[df.duplicated()])
 
 🥷 4) Pandas ninja – mistrzostwo operowania na danych
@@ -117,35 +94,23 @@ To poziom "rozumiem co pandas robi pod spodem, czemu działa szybko/powoli":
 To jest poziom "działasz jak turbo-analityk/data engineer":
 
 🔸 Zaawansowane groupby().agg() z nazwanymi agregacjami (multi-output)
-
 🔸 Perfekcyjna znajomość merge + join + update
-
 🔸 Skuteczna praca z:
-
     MultiIndex
-
     time series (resample, rolling windows)
-
     categorical data (oszczędność pamięci + wydajność)
 
 🔸 Tworzenie własnych funkcji z apply, transform, pipe
 
 🔸 Praca z dużymi danymi:
-
     chunking (pd.read_csv(..., chunksize=...))
-
     dask jako rozszerzenie pandas
 
 🔸 Czyszczenie i standaryzacja brudnych danych (imputacja, regex w str.replace, fuzzy matching)
-
 🔸 Eksport/import danych:
-
     do/z wielu formatów: CSV, Excel, Parquet, SQL
 
 🔸 Triki ninja:
-
     assign(), eval(), query(), explode(), map() z dictami
-
     chaining z .pipe(), .query(), .assign()
-
     tworzenie własnych transformacji i automatyzacja pipeline’ów

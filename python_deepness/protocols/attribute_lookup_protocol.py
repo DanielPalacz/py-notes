@@ -75,6 +75,9 @@ class Person:
         self._name = name          # Regular instance attribute
 
     def __getattribute__(self, attr_val):
+        if "bound method Person.funct" in str(object.__getattribute__(self, "funct")):
+            return object.__getattribute__(self, "funct")()
+
         print("[Person][__getattribute__] Getting attribute '{}' value for {} as usual.".format(attr_val, self))
         return super().__getattribute__(attr_val)
 
@@ -82,4 +85,9 @@ class Person:
       print("[Person][__getattr__] Object '{}' does not have attribute '{}'. Not raising error as usual, returning None.".format(self, attr_val))
       return None
       # raise AttributeError(f"'Directory' object has no attribute '{attr_val}'")
+
+    def funct(self):
+        return "x1"
+
+print(Person("John").funct)
 

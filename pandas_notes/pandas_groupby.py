@@ -6,6 +6,7 @@ from pandas.core.indexes.range import RangeIndex
 data = {'Region': ['Wschód', 'Zachód', 'Wschód', 'Południe', 'Północ', 'Zachód', 'Północ'],
         'Produkt': ['A', 'B', 'A', 'C', 'B', 'C', 'A'],
         'Sprzedaż': [100, 150, 120, 200, 180, 220, 90]}
+
 df = pd.DataFrame(data)
 print(df)
 print("\n\n-----------------------------------------------------------------------------------------------------------")
@@ -22,7 +23,6 @@ regions = df['Region'].unique()
 produkty = df['Produkt'].unique()
 
 regions_product_product = list(itertools.product(regions, produkty))
-
 all_combinations = pd.DataFrame(regions_product_product, columns=['Region', 'Produkt'])
 
 

@@ -9,6 +9,7 @@ import os
 class DirectorySize:
 
     def __get__(self, obj, objtype=None):
+        print(locals())
         return len(os.listdir(obj.dirname))
 
 class Directory:
@@ -17,7 +18,6 @@ class Directory:
 
     def __init__(self, dirname):
         self.dirname = dirname          # Regular instance attribute
-
 
 
 # Managed attributes - A popular use for descriptors is managing access to instance data
@@ -53,7 +53,12 @@ class Person:
     def birthday(self):
         self.age += 1
 
-
+#     @classmethod
+#     @property
+#     def hihi(cls):
+#         return "X111"
+#
+# Person.hihi = "1"
 
 #####################################################
 

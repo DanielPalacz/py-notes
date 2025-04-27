@@ -1,0 +1,11 @@
+1. Attribute Validation / Data validation system
+
+2. Lazy Evaluation
+
+3. Access Control
+
+4. Computed Attributes
+
+5. ORM systems
+
+6. Caching needs
