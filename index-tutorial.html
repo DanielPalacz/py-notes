@@ -308,15 +308,34 @@ Unicode / UTF-8 example:
         <br>
         <li>Ellipsis it is unique constant accessed globally in Python (instance of EllipsisType). When we can use ellipsis object?</li>
         <br>
-        <li>Python 'import some_small_module' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?</li>
-        <ul>
-            <li>1. Parsing Stage (Python najpierw parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową).</li>
-            <li>2. Compilation Time (Python kompiluje go do bytecode. Dzieje się to raz dla danego modułu, a skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__). </li>
-            <li>3. Runtime<br>
-                    - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).</li>
-                    - Na koniec: Python tworzy obiekt modułu i udostępnia go w sys.modules.</li>
-            </ul>
-            <br>
+
+        <li>Python 'import module_A' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime? What if there is second the same import?</li>
+        <pre>
+
+ 1. Parsing Stage
+        - Najpierw Python czyta plik '.py' lub .pyc jeśli kod już jest skompilowany.
+        - Python następnie parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową.
+        - Jeśli więcej tych samych importów, to jedynie PIERWSZY wykonuje sprawdzanienie składni.
+
+ 2. Compilation Time/Stage
+        - Python kompiluje kod do bytecode. Dzieje się to raz dla danego-importowanego modułu,
+          skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__.
+          Kolejne importy nie wykonują tego kroku.
+
+ 3. Runtime
+        - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).
+        - Na koniec: Python tworzy obiekt modułu i udostępnia go w sys.modules (pod nazwą modułu).
+          Kolejne importy korzystają z obiektu znajdującego się w 'sys.modules'.
+
+Exception: importlib.reload()
+    - Python re-executes the module (skipping parsing/compiling if bytecode is cached and valid).
+    - All top-level code runs again, which can reset state or redefine classes/functions.
+
+import importlib
+importlib.reload(module_A)</pre>
+        <hr>
+        <hr>
+        <hr>
             <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
             <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
         <hr>
