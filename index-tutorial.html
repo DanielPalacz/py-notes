@@ -215,7 +215,8 @@ False
  - Trzy przykłady przepływów w Generatorach:
     1)
         * x = yield
-        * Ta forma oznacza "czekaj na wartość z send(value)". Kiedy coroutine zostaje uruchomiona i napotka yield, "zawiesza się" i oczekuje na dane.
+        * Ta forma oznacza "czekaj na wartość z send(value)".
+          Kiedy coroutine zostaje uruchomiona i napotka 'x = yield', wtedy "zawiesza się" i oczekuje na dane z GEN_OBJ.send(value).
     2)
         * yield x
         * Ta forma oznacza: Zwróć wartość x na zewnątrz — to właśnie wynik next() lub send(...)
@@ -529,7 +530,20 @@ Use MagicMock when:
         <br>
         </ol>
 
+<b style="background: #ADD8E6;">Concurrency things:</b>
+<br>
+<ol start="39">
+        <li>When 'race condition' situation happens?</li>
+<pre>
+ - multiple threads or processes access shared data and at least one modifies it, but the access is not properly synchronized.
+</pre>
+        <li>What means that operations are 'thread-safe'?</li>
+<pre>
+ - ensuring that only one thread can modify 'specific shared resource' at a time.
+</pre>
 
+
+</ol>
 
 <b style="background: #ADD8E6;">TODO:</b>
 <br>
