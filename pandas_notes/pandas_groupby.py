@@ -1,6 +1,6 @@
 import itertools
 import pandas as pd
-from pandas.core.indexes.range import RangeIndex
+# from pandas.core.indexes.range import RangeIndex
 
 
 data = {'Region': ['Wschód', 'Zachód', 'Wschód', 'Południe', 'Północ', 'Zachód', 'Północ'],

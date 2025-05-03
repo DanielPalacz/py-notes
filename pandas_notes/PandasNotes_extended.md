@@ -1,4 +1,4 @@
-## [NOTES - 1] - pure python vs numpy / xarray / pandas:
+## [NOTES—1]  - pure python vs numpy / xarray / pandas:
 ```
   - numpy speed comes from several factors
   - Restricted Computation Domain = implementation domain
@@ -9,16 +9,18 @@
        - fixed size / dynamic shape
        - math type
 
-  - xarray.DataArray (xarray library)
+  - xarray.DataArray (xarray library, not part of pandas)
        - xarray.DataArray = numpy ndarray + additional features
        - coordinate system
+
+  - pandas (adds powerful labeling, indexing, and data handling on top of NumPy)
 
   - pure python - classic nested lists:
        - no dimensions - no math meaning
 ```
 
 
-## [NOTES - 2] PANDAS INDICES / INDEXES
+## [NOTES—2]  PANDAS INDICES / INDEXES
 ```
    - Index = coordination system or cooperative metadata with well-defined semantics (for data operation)
    - Index it is something convertable to data - mechanism
@@ -30,20 +32,20 @@
    - what are rules of .index  (numpy / numpy promotion rules can be good introduction start)
 ```
 
-## [NOTES - 3] "index-aligned" operation impact - example
+## [NOTES—3] "index-aligned" operation impact - example
 ```
    - what happens when try to do an operation needing "index-aligned"
    - 2 basic series structures: s1 + s2 ~ 670 function calls...
 ```
 
-## [NOTES - 4] iterating through DataFrame - itertuples is the fastest:
+## [NOTES—4] iterating through DataFrame - itertuples is the fastest:
 ```
     - for x in df.itertuples(): print(f"{x = }")
     - for x in df.itertuples(name=None): print(f"{x = }")
     - for x in df.itertuples(index=False, name=None): print(f"{x = }")
 ```
 
-## [NOTES - 5] DataFrame access:
+## [NOTES—5]  DataFrame access:
 ```
     - df["col1"]
     - df.loc["row1"]
@@ -56,41 +58,40 @@
       here: 1. iloc returns series object; 2. S[1] access-lookup is based on indexes.
 ```
 
-### [NOTES - 6] Types promotion with associated loss of precision happens easily in 'pandas'. pandas sometimes too easily re-type structure to float64.
-### [NOTES - 7] Pandas indexing rules - understanding can be supported by numpy knowledge (indexing rules / broadcasting rules).
-### [NOTES - 8] INDEX ALIGNMENT RULES - it is how the indexes consider the match to "be exact".
+### [NOTES—6] Types promotion with associated loss of precision happens easily in 'pandas'. pandas sometimes too easily re-type structure to float64.
+## [NOTES—7] Pandas indexing rules - understanding can be supported by numpy knowledge (indexing rules / broadcasting rules).
+## [NOTES—8] INDEX ALIGNMENT RULES - it is how the indexes consider the match to "be exact".
 
 
-### [NOTES - 9] DataFrame - doubly-indexed structure (storing, aligning data like-indexed one-dimensional data).
-## [NOTES - 10] numpy.random.default_rng - interesting definition of DatetimeIndex:
+## [NOTES—9] DataFrame - doubly-indexed structure (storing, aligning data like-indexed one-dimensional data).
+## [NOTES—10] numpy.random.default_rng - interesting definition of DatetimeIndex:
 ```
   - idx_example = to_datetime("2000-01-01") + to_timedelta(rng.integers(0, 60*60, size=1_000).cumsum(), unit="s")  Timestamp, TimedeltaIndex, DatetimeIndex
 ```
 
-## [NOTES - 11] Having DatetimeIndex index you can resample it:
+## [NOTES—11] Having DatetimeIndex index you can resample it:
 ```
        - resample("TIME_INTERVAL") - technically, it creates new Grouped Index structure (can create new index samples with NaN as data values) with grouped data for time intervals (TIME_INTERVAL can be: "1min", "5min", "1H", "D")
        - apart from generating new index samples resample() works like groupby(), but it groups "by time" not column-values, so it can be said: "time-aware groupby" [so it works similar to: reindex + fill]
        - then after resampling (data grouping) you can use tools available for grouped data - supported operations: .sum(), .mean(), .agg(), .count(), .first(), .last(), .std()
 ```
 
-## [NOTES - 12] SettingWithCopyWarning
+## [NOTES—12] SettingWithCopyWarning
 ```
     - .loc[], query(), slicing - because pandas doesn't know if it is COPY or VIEW. iloc[] always create COPY or row and new Series object (no warnings).
     - pandas series is based on numpy.ndarray - numpy.ndarray wants memory to be contiguous - then copy is made
 ```
 
-### [NOTES - 13] df2 = df.query("score > 75") - possible SettingWithCopyWarning - to avoid: df2 = df.query("score > 75").copy()
+## [NOTES—13] df2 = df.query("score > 75") - possible SettingWithCopyWarning - to avoid: df2 = df.query("score > 75").copy()
 
-## [NOTES - 14] pandas BlockManager is very complex - but in the nutshell, it is inner pandas data structure that manages of way how data are stored in DataFrame
-## [NOTES - 15] MultiIndex and what are MultiIndex "index alignment" rules - very big topic
+## [NOTES—14]pandas BlockManager is very complex - but in the nutshell, it is inner pandas data structure that manages of way how data are stored in DataFrame
+## [NOTES—15] MultiIndex and what are MultiIndex "index alignment" rules - very big topic
 
 
-### [NOTES - 16] Indexes and Index Alignment - and mechanics coming from how they work - everything what you can do on Pandas Series/DF can be determined/explained by these two
+## [NOTES—16] Indexes and Index Alignment - and mechanics coming from how they work - everything what you can do on Pandas Series/DF can be determined/explained by these two
+## [NOTES—17] pandas groupby: Split-Apply-Combine, DataFrameGroupBy, aggregation functions: mean, sum, count, min, max, std
 
-### [NOTES - 17] pandas groupby: Split-Apply-Combine, DataFrameGroupBy, aggregation functions: mean, sum, count, min, max, std
-
-## [NOTES - 18] pandas groupby + aggregation functions
+## [NOTES—18] pandas groupby + aggregation functions
 ```
              can be used on:
                - all Series/DataFrame objects - gives single summary value
@@ -98,7 +99,7 @@
                - inside agg function - for using many aggregation functions
 ```
 
-## [NOTES - 19] pandas groupby + aggregation functions - agg
+## [NOTES—19] pandas groupby + aggregation functions - agg
 ```
     - you want new indexing based on groups
     - you can have many aggregation function inside agg
@@ -108,31 +109,33 @@
     - agg(body) waits for: single aggregation funct, list of aggregation functions, or dictionary with appropriate content
 ```
 
-## [NOTES - 20] pandas groupby + aggregation functions - perform (keep original indexing)
+## [NOTES—20] pandas groupby + aggregation functions - perform (keep original indexing)
 
-## [NOTES - 21] pandas groupby + aggregation functions - apply
+## [NOTES—21] pandas groupby + aggregation functions - apply
 ```
+    - 'apply' method is about ANY operation resulting NEW INDEX and concatenating back to pandas DataFrame layer
     - I want brand-new indexing (not like agg or perform)
-    - apply is about ANY operation resulting NEW INDEX and concatenating back to pandas DataFrame layer
     - s.groupby(...).apply(lambda df: df[df > 0].cumsum())
 ```
 
-## [NOTES - 22] pandas and align as diagnostic tool
+## [NOTES—22] pandas groupby + aggregation functions - apply pandas and align as diagnostic tool
 
-## [NOTES - 23] reset_index, sometimes the easiest solution (then RangeIndex)
+## [NOTES—23] reset_index, sometimes the easiest solution (then RangeIndex)
 
-## [NOTES - 24] How to progress with pandas?
+## [NOTES—24] How to progress with pandas?
              After every operation:
                - think on what index it works?
                - how pandas align these data?
                - for example: df + df: have the same indexes / columns
+
              Understanding Pandas Data Model
                - index it is coordinates system: the way how Pandas addresses memory - every operation = transformation(based on coordinates)
+
              Mindset 'How Pandas would do this' not 'How to do this in Pandas'
              Learn Pandas horizontally: [Find more Use Cases]
+
              Look to output of index / columns ALWAYS - every operation changes something in data structure
              Be suspicious to values / iloc - you can have not understood something in "indexing thinking"
-
 
 
 

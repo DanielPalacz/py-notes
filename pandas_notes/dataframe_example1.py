@@ -47,19 +47,6 @@ volumes = rng.integers(-50_000, +50_000, size=len(dates) * len(tickers_symbols))
 # }
 # )
 
-# pandas.core.indexes.range.RangeIndex
-
-from pandas.core.indexes.range import RangeIndex
-
-# df = DataFrame({
-#     "date": repeat(dates, len(tickers_symbols)),
-#     "ticker_symbol": tile(tickers_symbols, len(dates)),
-#     "price": prices,
-#     "volume": volumes
-# }
-# ).set_index([RangeIndex(start=0, stop=36600, step=1), "date", "ticker_symbol"])
-
-
 df = (DataFrame({
     "date": repeat(dates, len(tickers_symbols)),
     "ticker_symbol": tile(tickers_symbols, len(dates)),
@@ -67,8 +54,6 @@ df = (DataFrame({
     "volume": volumes
 }
 ))
-
-
 
 # Dodaj istniejący indeks jako kolumnę
 df["row_index"] = df.index
@@ -82,5 +67,17 @@ print(
     # df.loc[0]["ticker_symbol"],
     # df.loc[0],
     # df.loc[:, "ticker_symbol"],
+    # df[['price', 'volume']],
     sep="\n----------------------------------------------------------------------------------------------\n", end="\n\n"
 )
+
+
+# from pandas.core.indexes.range import RangeIndex
+
+# df = DataFrame({
+#     "date": repeat(dates, len(tickers_symbols)),
+#     "ticker_symbol": tile(tickers_symbols, len(dates)),
+#     "price": prices,
+#     "volume": volumes
+# }
+# ).set_index([RangeIndex(start=0, stop=36600, step=1), "date", "ticker_symbol"])

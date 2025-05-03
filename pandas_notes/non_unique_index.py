@@ -1,6 +1,6 @@
 
 from pandas import to_datetime, to_timedelta, Series, DataFrame
-from numpy import isclose
+# from numpy import isclose
 from numpy.random import default_rng
 
 rng = default_rng(0)
@@ -66,19 +66,17 @@ print(
     len(same_idx), len(common_idx), len(diff_idx)
 )
 
-
-
-#  - when you have on large dataset and another dataset:
+#  - when you have a large dataset and another dataset:
 #  - it is not uncommon to do index operations (like subset)
 #  - if you not use index then you probably operate on Raw data (there is many columns - you probably make a lot of Raw data copies - so expensive copies)
 #       - code with many for loops that nobody understands
 
-#  - Here, we test how below are differ:
+#  - here, we test how below are differ:
     # s.resample("1min").mean(),
     # s.groupby(s.index.round("1min")).mean(),
-#          1. take these two structures, figure out what indexes samples are include in each buckets
+#          1. take these two structures, figure out what indexes samples are included in each buckets
 #          2. find all cases where these indexes values are the same in these buckets
 #          3. compute all places where use the same bucket and different bucket
 #          4. go to original data to find what the corresponding calculation was for those buckets
-#          5. and then verify... in our case difference between resample vs groupby (buckets, windows, right-closed, left-closed)
+#          5. and then verify... in our case the difference between resample vs groupby (buckets, windows, right-closed, left-closed)
 
