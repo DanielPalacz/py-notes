@@ -43,6 +43,58 @@ Indexes and Index Alignment and mechanics coming from how they work - everything
 #### [NOTES—23] reset_index, sometimes the easiest solution (then RangeIndex)
 
 
+### What are basic/core pandas concepts?
+```
+    Index as a coordination system / mechanism
+    The index is pandas' internal way of aligning and referencing data—like coordinates in a grid, not just row labels.
+
+    Index alignment (and its rules)
+    When performing operations on multiple Series/DataFrames, pandas aligns data by index labels, not by position. Mismatched labels result in NaN unless handled.
+
+    Promotion and broadcasting
+    Pandas extends scalars or smaller structures (e.g., a Series) across a larger one (e.g., a DataFrame) when needed. Follows NumPy-style broadcasting rules.
+
+    Element-wise operations
+    Operations apply individually to each element—often automatically vectorized for performance.
+
+    Split–Apply–Combine (GroupBy concept)
+    A powerful framework for aggregation and transformation:
+        Split the data by group
+        Apply a function to each group
+        Combine the results into a new structure
+
+Additional Foundational Concepts:
+
+    Label-based vs. Position-based indexing
+    Understanding the difference between .loc[] (label-based) and .iloc[] (position-based) is essential for reliable data selection.
+
+    Copy vs. View
+    A subtle but critical concept: sometimes slicing returns a reference (view), other times a copy. Modifying one might affect the original unless you're careful.
+
+    Chained indexing (and why it's dangerous)
+    For example, df[df['A'] > 0]['B'] = 99 may not work reliably because of ambiguous behavior—pandas may throw a SettingWithCopyWarning.
+    For example, df[df['A'] > 0]['B'] = 99 may not work reliably because of ambiguous behavior—pandas may throw a SettingWithCopyWarning.
+
+    Data alignment along axes
+    Operations in pandas are axis-aware. For example, aggregation with .sum() defaults to axis=0 (column-wise), and you must specify axis=1 for row-wise operations.
+
+    In-place vs. non-in-place operations
+    Many methods have an inplace=True option, but pandas often returns a new object instead—understanding this affects performance and memory.
+```
+
+### What are basic/core pandas skills?
+```
+ - Selecting data, Filtering Data / Boolean Indexing
+ - Basic Arithmetic and Element-wise Operations
+ - Resetting and Setting Index
+ - Renaming Columns or Indexes
+ - Changing Data Types (type casting)
+ - Adding/Removing columns or rows
+ - Sorting data (by Columns):
+ - Detect missing values, Fill missing values, Drop missing data
+ - Grouping and aggregation
+```
+
 
 ```
 Selecting data:
