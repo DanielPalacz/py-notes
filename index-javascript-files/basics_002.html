@@ -99,31 +99,54 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">002. Jak osadzać kod JavaScript na stronie (wykorzystując tag script)?</h1> 
-
 <div class="row mb-10">
     <div class="col-8">
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-Jakie są możliwości? Kiedy skrypt jest 'blokujący' i co to oznacza?
+A. Gdzie w dokumencie HTML można deklarować/osadzać kod JS? B.Jakie są wszystkie możliwości osadzania kodu JS w HTML?
+C. Jak dodatkowo można sterować osadzaniem kodu JS w HTML? D. Kiedy skrypt jest 'blokujący' i co to oznacza?
 
-    1. Wstawianie JavaScriptu w pliku HTML (inline)
-        a) W sekcji &lthead&gt (rzadko stosowane)
-        b) W sekcji &ltbody&gt (zalecane na końcu)
+Ad.A)
+    - w sekcji head (niezalecane), w sekcji body (zalecane na końcu)
 
-    2. Korzystanie z zewnętrznego pliku JavaScript (tag script)
+Ad.B)
+    B1. Wstawianie kodu JS bezpośrednio w HTMLu, np:
+        &ltscript&gtconsole.log("To jest kod JavaScript wewnątrz HTML");&lt/script&gt
 
-    3. Atrybuty asynchroniczne i opóźnienie wczytywania
-        a) defer (skrypt jest wykonywany po zakończeniu analizy całego HTML)
-            - Używaj defer dla skryptów, które muszą manipulować DOM (np. frameworki frontendowe lub logika interfejsu użytkownika
-        b) async (skrypt jest wykonywany równolegle z ładowaniem reszty dokumentu HTML)
-            - Używaj async dla skryptów niezależnych, takich jak analityka lub reklamy.
-        c) brak async i defer: skrypt jest blokujący, wczytanie/wykonanie skryptu zatrzymuje analizowanie HTML do czasu jego zakończenia
+    B2. Wczytawanie kodu JS wykorzystując plik z kodem JS, np:
+        &ltscript src="app.js"&gt&lt/script&gt
 
-    4. Osadzanie kodu JS w atrybutach HTML (niezalecane)
-    </pre>
+    B3. Wczytawanie kodu JS jako modułu ES6 wykorzystując plik z kodem JS. Przykład:
+        &ltscript type="module"&gt
+            import { funkcja } from './modul.js';
+            funkcja();
+        &lt/script&gt
+
+    B4. Osadzanie kodu JS w atrybutach HTML (niezalecane).
+        Poniżej przycisk (tag button) z podpiętym kodem JS (atrybut onlick wewnątrz tagu button):
+        &ltbutton onclick="alert('Witaj!');"&gtTekst przycisku.&lt/button&gt
+
+Ad.C)
+Ponadto, w tagu 'script' osadzaniem kodu JS steruje się poprzez konfigurację "trybu asynchroniczności" wczytywania kodu JS.
+
+    C1. Domyślnie "tryb asynchroniczności" jest wyłączony/nieskonfigurowany:
+        wczytanie/wykonanie skryptu JS zatrzymuje analizowanie HTML do czasu jego zakończenia
+        &lt/script src="basics_script.js" >&lt/script&gt
+
+    C2. defer
+        skrypt jest wykonywany po zakończeniu analizy całego HTML, defer jest używany dla skryptów, które muszą manipulować DOM
+        &lt/script src="basics_script.js" defer>&lt/script&gt
+
+    C3. async
+        skrypt jest wykonywany równolegle z ładowaniem reszty dokumentu HTML
+        async jest używany dla skryptów niezależnych, takich jak analityka lub reklamy
+        &lt/script src="basics_script.js" async>&lt/script&gt
+
+Ad.D)
+    Mówi się, że skrypt jest blokujący, gdy tag script nie używa "trybu asynchroniczności" - defer / async nie jest ustwaiony.
+</pre>
         <b><a class="m-4" href="basics_example.html">Przykłady</a></b>
     </div>
     </div>
