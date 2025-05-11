@@ -119,6 +119,10 @@
                 <li>001b. Średniki na koncu linii. Dobrą praktyką jest dodawanie ich (chociaż JS ma mechanizm automatycznego wstawiania średników).</li>
                 <li>001c. Przyszłość JavaScript, rozwój standardów ECMAScript i innowacje za tym idące (np moduły ES6).</li>
                 <li>001d. Jak wygląda proces ładowania pliku HTML w przeglądarce?</li>
+                <li>001d. Załadowanie JS do sesji JS przeglądarki (custom Bookmarklet, CSP i ograniczenia)./li>
+                <ul>
+                    <li><a href="index-javascript-files/html_doc_loading_process.html">Odpowiedź</a></li>
+                </ul>
             </ul>
             <br>
             <li>002. Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?</li>
@@ -206,8 +210,59 @@ W ECMAScript/ES6:
             <br>
             <li>017. Prototypy to wbudowany sposób dziedziczenia, który pozwala obiektom na dziedziczenie funkcji i właściwości z innych obiektów.</li>
 
+
         </ul>
 
+<pre>
+
+
+<b>Pamięć, zmienne, przekazywanie danych, garbage collection – porównanie JS vs Python</b>
+
+Aspekt	                JavaScript	                                        Python
+
+Zarządzanie pamięcią	Automatyczne (GC + ref counting + inne heurystyki)	Automatyczne (GC + reference counting + generational GC)
+Zmienne – przypisanie	Przypisuje się referencję (prymitywy jako wartość)	Przypisuje się referencję do obiektu
+
+Przekazywanie do funkcji
+                        Zawsze przez wartość, ale:	                                Zawsze przez referencję do obiektu
+                            - dla prymitywów: wartość kopiowana	- ale obiekty można modyfikować w miejscu
+                            - dla obiektów: referencja kopiowana (więc można modyfikować)
+
+Mutowalność vs niemutowalność	Prymitywy niemutowalne, obiekty mutowalne	Tak samo
+Reprezentacja w pamięci	Prymitywy często w tzw. stacku, obiekty na heapie	Wszystko na heapie (w CPythonie)
+Scope (zakres zmiennych)	var, let, const — mają różne zakresy	Brak deklaracji zmiennej — dynamiczne przypisanie
+	let/const → blokowy zasięg	Zmienna istnieje po pierwszym przypisaniu
+Closures (domknięcia)	Tak, z przechowywaniem środowiska funkcji	Tak, z tzw. cell objects
+Ciekawostka	null i undefined to osobne rzeczy	None to pojedyncza instancja typu NoneType
+
+
+🔍 Co oznacza "przez wartość" vs "przez referencję"?
+
+W JavaScript ludzie często mówią, że:
+    prymitywy są przekazywane "przez wartość" → więc ich zmiana nie ma wpływu poza funkcją.
+    obiekty są przekazywane "przez referencję" → ale w rzeczywistości JS przekazuje kopię referencji przez wartość,
+    czyli nie da się podmienić całego obiektu, ale można zmienić jego wnętrze.
+
+Przykład JS:
+
+function mutate(obj) {
+    obj.name = "Ala";  // zmieni obiekt z zewnątrz
+    obj = { name: "Basia" };  // nie zmieni oryginalnego obiektu
+}
+
+Python – bardzo podobnie:
+
+def mutate(d):
+    d["name"] = "Ala"      # zmienia
+    d = {"name": "Basia"}  # nie zmienia oryginału
+
+📌 Podsumowanie
+Cecha	JavaScript	Python
+Zmienne	Przypisanie wartości lub referencji	Zawsze przypisanie referencji
+Funkcje	Przekazanie przez wartość (kopii referencji)	Przekazanie referencji do obiektu
+GC	Tak – złożony GC zależny od silnika JS	Tak – reference counting + GC generacyjny
+Stack vs Heap	Prymitywy zwykle w stacku, reszta w heapie	Wszystko w heapie
+</pre>
     </div>
     </div>
 
@@ -218,21 +273,68 @@ W ECMAScript/ES6:
     <div class="card-body">
         <div><u>Nauka / powtórki:</u></div>
         <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 <pre>
-Ad_001d) Ładowanie pliku HTML w przeglądarce:
- - wysłanie żądania HTTP (GET /index.html)
- - odebranie odpowiedzi HTTP (w tym treść dokumentu HTMl)
- - analiza/parsowanie HTML (budowa DOM)
- - pobieranie zasobów zewnętrznych (tagi: link, script, img, itp)
-   wysyłanie nowych żądań HTTP
- - parsowanie CSS (stworzenie CSSOM)
- - tworzenie drzewa renderowania (połączenie DOM i CSSOM)
- - layout
-   przeliczenie elementów na stronie, położenie, rozmiar
- - pomalowanie elementów
-   na podstawie drzewa renderowania
- - composite
-   uwzględnienie dodatkowych warstw, np transformacji CSS
+Ad_005) Typy danych w JavaScript
+ - JavaScript posiada type prymitywne i referencyjne.
+ - W JavaScript nie wszystko jest obiektem (w Pythonie wszystko).
+
+Typy prymitywne (Typy proste = prymitywy)
+Charakterystyka/rodzaje:
+ - Nie mają prototypu, nie dziedziczą po Object, jest ich 7.
+ - Prymitywy nie są obiektami, i nie mają właściwości ani metod.
+ - undefined, symbol, bigint, number, string, null, boolean
+
+ - Zazwyczaj są nieobiektowe - przechowują swoje wartości
+   bezpośrednio. Jednak, są od tego wyjątki, jeśli to konieczne.
+ - W pewnych sytuacjach, np kiedy próbujemy wywołać metody
+   na tych typach (np. toUpperCase() na stringu), JavaScript
+   tymczasowo "opakowuje" te wartości w odpowiednie obiekty.
+   Jest to tzw Boxing, natomiast nie wszystkie typy prymitywne
+   posiadają obiektowe wersje (String, Number, Boolean, Symbol).
+
+ - W JavaScript przypisanie prymitywu kopiowanie wartości,
+   nie referencji. Zawsze.
+
+Typy referencyjne (obiekty):
+ - Object jest podstawowym typem referencyjnym.
+
 </pre>
 
             <br>

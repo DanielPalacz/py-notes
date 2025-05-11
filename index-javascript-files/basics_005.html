@@ -99,7 +99,7 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">005. Typy danych w JavaScript.</h1>
+<h1 class="m-4" style="font-size:30px;font-weight: bold;">005. Typy danych. W JavaScript istnieje podział na typy prymitywne i typy referencyjne.</h1>
 
 
 <div class="row mb-10">
@@ -108,66 +108,68 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-W JavaScript istnieje podział na typy prymitywne i typy referencyjne.
-
 Typy prymitywne (7):
     - undefined
-        - let x; console.log(x); // undefined
-        - Wartość przypisywana zmiennej, która została zadeklarowana, ale nie została zainicjalizowana.
+      let x; console.log(x); // undefined
+      Wartość przypisywana zmiennej, która została zadeklarowana, ale nie została zainicjalizowana.
 
     - null
     - boolean
         - Może przyjmować jedną z dwóch wartości: true lub false.
 
     - number
-        - liczby całkowite i zmiennoprzecinkowe - wszystko jest tak na prawdę 'float'
-        - obejmuje również specjalne wartości jak NaN (Not-a-Number) i Infinity
+      liczby całkowite i zmiennoprzecinkowe - wszystko jest tak na prawdę 'float'
+      obejmuje również specjalne wartości jak NaN (Not-a-Number) i Infinity
     - bigint
-        - Tworzy się je, dodając n na końcu liczby.
+      Tworzy się je, dodając n na końcu liczby.
 
     - string
-        - cudzysłowy pojedyncze ('), podwójne (") lub szablony tekstowe, czyli tzw 'template literals' z (`)
-        - let greeting = "Hello, World!"; let greeting = 'Hello, World!';
-        - const name = "Anna"; const age = 25; const greeting = `Cześć, mam na imię ${name} i mam ${age} lat.`;
+      cudzysłowy pojedyncze ('), podwójne (") lub szablony tekstowe, czyli tzw 'template literals' z (`)
+      let greeting = "Hello, World!"; let greeting = 'Hello, World!';
+      const name = "Anna"; const age = 25; const greeting = `Cześć, mam na imię ${name} i mam ${age} lat.`;
 
     - symbol
-        - let uniqueId = Symbol('id');
+      let uniqueId = Symbol('id');
 
 
+Object:
+    Podstawowy typ referencyjny, od którego wywodzą się inne struktury danych.
+    Obiekt ma ograniczone metody, ale można używać funkcji takich jak Object.keys() lub Object.entries().
+    Tylko stringi i symbole mogą być kluczami.
+    let person = { name: "John", age: 30 };
+    console.log(person.name); // "John"
 
-Typy referencyjne (obiekty):
-
-    - Object
-        - Podstawowy typ referencyjny, od którego wywodzą się inne struktury danych.
-        - Obiekt ma ograniczone metody, ale można używać funkcji takich jak Object.keys() lub Object.entries().
-        - Tylko stringi i symbole mogą być kluczami.
-        - let person = { name: "John", age: 30 };
-        - console.log(person.name); // "John"
+Inne Typy referencyjne (obiekty):
     - Array
-        - mogą zawierać różne typy danych
-        - let numbers = [1, 2, 3];
-        - let random_arr = [1, "string", {"x": "x_value"}, [1, 2, 3, 4], generateRandomNumberFunc];
+      mogą zawierać różne typy danych
+      let numbers = [1, 2, 3];
+      let random_arr = [1, "string", {"x": "x_value"}, [1, 2, 3, 4], generateRandomNumberFunc];
 
     - Function
     - Date
-    - RegExp
-    - Map, Set, WeakMap, WeakSet
-        - Struktury danych do przechowywania klucz-wartość lub unikalnych zbiorów.
-            - Map
-                - Map to wbudowana struktura danych w JavaScript, która przechowuje pary klucz-wartość, podobnie jak obiekty.
-                - Kluczami w Map mogą być dowolne typy danych (np. obiekty, funkcje, liczby, itp.).
-                - Map zachowuje porządek dodawania kluczy i posiada wbudowane metody do pracy z kluczami i wartościami  (set, get, has itp.).
-                  const map = new Map();
-                  map.set("name", "Alice");
-                  console.log(map.get("name")); // Alice
 
-            - Set
-                - const set1 = new Set(); set1.add(1);
+    - Map
+      Map to wbudowana struktura danych w JavaScript, która przechowuje pary klucz-wartość, podobnie jak 'Object'.
+      Kluczami w Map mogą być dowolne typy danych (np. obiekty, funkcje, liczby, itp.).
+      Map zachowuje porządek dodawania kluczy i posiada wbudowane metody do pracy z kluczami i wartościami  (set, get, has itp.).
+      const map = new Map();
+      map.set("name", "Alice");
+      console.log(map.get("name")); // Alice
+
+    - Set
+      const set1 = new Set(); set1.add(1);
+
+    - RegExp, WeakMap, WeakSet
     - Error
     - Promise
 
 
-
+Typed Arrays (Tablice o określonym typie). Przykłady:
+    Int8Array
+    Uint8Array
+    Float32Array
+    Int32Array
+    Uint16Array
 </pre>
     </div>
     </div>
