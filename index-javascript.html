@@ -117,12 +117,19 @@
                     <li><a href="index-javascript-files/basics_script_global_var_check.js">Odpowiedź</a></li>
                 </ul>
                 <li>001b. Średniki na koncu linii. Dobrą praktyką jest dodawanie ich (chociaż JS ma mechanizm automatycznego wstawiania średników).</li>
-                <li>001c. Przyszłość JavaScript, rozwój standardów ECMAScript i innowacje za tym idące (np moduły ES6).</li>
+                <li>001c. Przyszłość JavaScript, rozwój standardów ECMAScript i innowacje za tym idące (np moduły ES6). Wersjonowanie JS.</li>
+                <ul>
+                    <li><a href="index-javascript-files/images/Python_vs_JS__versioning_difference.png">JavaScript ≠ Python (wersjonowanie).</a></li>
+                </ul>
+                <br>
                 <li>001d. Jak wygląda proces ładowania pliku HTML w przeglądarce?</li>
-                <li>001d. Załadowanie JS do sesji JS przeglądarki (custom Bookmarklet, CSP i ograniczenia)./li>
                 <ul>
                     <li><a href="index-javascript-files/html_doc_loading_process.html">Odpowiedź</a></li>
                 </ul>
+                <li>001e. Załadowanie kodu JS do sesji JS przeglądarki (custom Bookmarklet, CSP i ograniczenia).</li>
+                <br>
+                <li>001f. typeof notDefined - typeof to specjalny operator, który jako jedyny w JS nie rzuci błędu, nawet jeśli zmienna nie istnieje.  Zamiast ReferenceError daje "undefined". Reguła: Jeśli nie masz pewności, czy zmienna istnieje, użyj typeof – to bezpieczne.</li>
+                <li>001g. Tryb ścisły w JavaScript, to konfiguracja wprowadzająca bardziej rygorystyczne zasady programowania ("use strict";).</li>
             </ul>
             <br>
             <li>002. Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?</li>
@@ -147,14 +154,16 @@ W ECMAScript/ES6:
 
 <br>
 
-            <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy?</li>
+            <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy? Jakie są inne zakresy w JS?</li>
             <ul>
+                <ul>
+                    <li><a href="index-javascript-files/basics_003.html">Odpowiedź</a></li>
+                </ul>
                 <li>003a. Domyślnie (bez użycia: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.</li>
+                <br>
                 <li>003b. Czy w Python istnieje podobny do 'const' mechanizm wymuszania, by zmienna była stała?</li>
                 <li>003c. W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak. </li>
                 <li>003d. W Pythonie brak deklaracji działa bardziej intuicyjnie – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).</li>
-                <li>003e. Tryb ścisły w JavaScript, to konfiguracja wprowadzająca bardziej rygorystyczne zasady programowania ("use strict";).</li>
-                <li><a href="index-javascript-files/basics_003.html">Odpowiedź</a></li>
             </ul>
             <br>
             <li>004. Globalny kontekst w JavaScript (przeglądarka). Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
@@ -213,56 +222,6 @@ W ECMAScript/ES6:
 
         </ul>
 
-<pre>
-
-
-<b>Pamięć, zmienne, przekazywanie danych, garbage collection – porównanie JS vs Python</b>
-
-Aspekt	                JavaScript	                                        Python
-
-Zarządzanie pamięcią	Automatyczne (GC + ref counting + inne heurystyki)	Automatyczne (GC + reference counting + generational GC)
-Zmienne – przypisanie	Przypisuje się referencję (prymitywy jako wartość)	Przypisuje się referencję do obiektu
-
-Przekazywanie do funkcji
-                        Zawsze przez wartość, ale:	                                Zawsze przez referencję do obiektu
-                            - dla prymitywów: wartość kopiowana	- ale obiekty można modyfikować w miejscu
-                            - dla obiektów: referencja kopiowana (więc można modyfikować)
-
-Mutowalność vs niemutowalność	Prymitywy niemutowalne, obiekty mutowalne	Tak samo
-Reprezentacja w pamięci	Prymitywy często w tzw. stacku, obiekty na heapie	Wszystko na heapie (w CPythonie)
-Scope (zakres zmiennych)	var, let, const — mają różne zakresy	Brak deklaracji zmiennej — dynamiczne przypisanie
-	let/const → blokowy zasięg	Zmienna istnieje po pierwszym przypisaniu
-Closures (domknięcia)	Tak, z przechowywaniem środowiska funkcji	Tak, z tzw. cell objects
-Ciekawostka	null i undefined to osobne rzeczy	None to pojedyncza instancja typu NoneType
-
-
-🔍 Co oznacza "przez wartość" vs "przez referencję"?
-
-W JavaScript ludzie często mówią, że:
-    prymitywy są przekazywane "przez wartość" → więc ich zmiana nie ma wpływu poza funkcją.
-    obiekty są przekazywane "przez referencję" → ale w rzeczywistości JS przekazuje kopię referencji przez wartość,
-    czyli nie da się podmienić całego obiektu, ale można zmienić jego wnętrze.
-
-Przykład JS:
-
-function mutate(obj) {
-    obj.name = "Ala";  // zmieni obiekt z zewnątrz
-    obj = { name: "Basia" };  // nie zmieni oryginalnego obiektu
-}
-
-Python – bardzo podobnie:
-
-def mutate(d):
-    d["name"] = "Ala"      # zmienia
-    d = {"name": "Basia"}  # nie zmienia oryginału
-
-📌 Podsumowanie
-Cecha	JavaScript	Python
-Zmienne	Przypisanie wartości lub referencji	Zawsze przypisanie referencji
-Funkcje	Przekazanie przez wartość (kopii referencji)	Przekazanie referencji do obiektu
-GC	Tak – złożony GC zależny od silnika JS	Tak – reference counting + GC generacyjny
-Stack vs Heap	Prymitywy zwykle w stacku, reszta w heapie	Wszystko w heapie
-</pre>
     </div>
     </div>
 
@@ -352,56 +311,6 @@ Typy referencyjne (obiekty):
             <br>
             <br>
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
         </ul>
         </div>
     </div>
@@ -453,27 +362,24 @@ Typy referencyjne (obiekty):
 
     <pre>
 
-2. Poznaj podstawy JavaScript
-    Zacznij od prostych rzeczy:
-        Co to jest JavaScript i do czego służy?
-        Jak osadzać JS na stronie (np. script w HTML)?
-
-    Naucz się podstawowych składników języka:
-        Zmienne (let, const, var)
-        Typy danych (string, number, boolean, array, object)
-        Operatory (arytmetyczne, logiczne, porównania)
-        Instrukcje warunkowe (if, else if, switch)
-        Pętle (for, while, do...while)
-        Funkcje (definiowanie, wywoływanie, funkcje strzałkowe)
+1. Poznaj podstawy JavaScript
+    Co to jest JavaScript i do czego służy?
+    Jak osadzać JS na stronie (np. script w HTML)?
+    Zmienne (let, const, var)
+    Typy danych (string, number, boolean, array, object)
+    Operatory (arytmetyczne, logiczne, porównania)
+    Instrukcje warunkowe (if, else if, switch)
+    Pętle (for, while, do...while)
+    Funkcje (definiowanie, wywoływanie, funkcje strzałkowe)
 
 
-3. Narzędzia i środowisko pracy
+2. Narzędzia i środowisko pracy
     Edytor kodu: Pobierz edytor jak Visual Studio Code (VS Code).
     Konsola w przeglądarce: Otwórz narzędzie programistyczne w swojej przeglądarce (zwykle F12) i używaj zakładki "Console".
     Naucz się korzystać z debuggera.
 
 
-4. Manipulacja DOM
+3. Manipulacja DOM
 Dowiedz się, jak JavaScript może wpływać na HTML i CSS:
     Wybieranie elementów: document.querySelector, getElementById
     Zmiana zawartości HTML: .innerHTML, .textContent
@@ -481,7 +387,7 @@ Dowiedz się, jak JavaScript może wpływać na HTML i CSS:
     Obsługa zdarzeń: addEventListener
 
 
-5. Praktyka z projektami
+4. Praktyka z projektami
 Stwórz małe projekty, by poćwiczyć swoje umiejętności:
     Licznik czasu
     Prosty kalkulator
@@ -489,7 +395,7 @@ Stwórz małe projekty, by poćwiczyć swoje umiejętności:
     Lista zadań (To-Do List)
 
 
-6. Zrozumienie zaawansowanych koncepcji
+5. Zrozumienie zaawansowanych koncepcji
 Gdy poczujesz się pewniej, zacznij uczyć się:
     Obiektowego programowania (OOP)
     Promisów i async/await
@@ -497,11 +403,47 @@ Gdy poczujesz się pewniej, zacznij uczyć się:
     Modułów JS (np. import, export)
 
 
-7. Frameworki i biblioteki (opcjonalnie)
+6. Frameworki i biblioteki (opcjonalnie)
 Gdy dobrze opanujesz podstawy, możesz zainteresować się narzędziami, które ułatwiają pracę z JS:
     React (do budowy interfejsów)
     Vue lub Angular (alternatywne frameworki)
     Node.js (JavaScript na backendzie)
+<pre class="ml-4">
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Cecha</th>
+      <th>JavaScript</th>
+      <th>Python</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Zmienne</td>
+      <td>Przypisanie wartości lub referencji</td>
+      <td>Zawsze przypisanie referencji</td>
+    </tr>
+    <tr>
+      <td>Funkcje</td>
+      <td>Przekazanie przez wartość (kopii referencji)</td>
+      <td>Przekazanie referencji do obiektu</td>
+    </tr>
+    <tr>
+      <td>GC</td>
+      <td>Tak – złożony GC zależny od silnika JS</td>
+      <td>Tak – reference counting + GC generacyjny</td>
+    </tr>
+    <tr>
+      <td>Stack vs Heap</td>
+      <td>Prymitywy zwykle w stacku, reszta w heapie</td>
+      <td>Obiekty w stercie, referencje i ramki funkcji (lokalne zmienne) w stosie</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</pre>
 </pre>
 
 
