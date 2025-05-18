@@ -333,6 +333,9 @@ Exception: importlib.reload()
 
 import importlib
 importlib.reload(module_A)</pre>
+                <ul>
+                    <li><a href="images/import_system_details_pl.png">Details (PL). Also, Python 'Startup Stage' explained.</a></li>
+                </ul>
         <hr>
         <hr>
         <hr>
@@ -1189,28 +1192,108 @@ print(next(gen))  # Output: 1
     <div class="col-md-8">
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <h4 style="font-weight: bold;">Python execution model:</h4>
-                <div>Parsing stage:</div>
+                <h4 style="font-weight: bold;">Python interpreter, it is python-program-responsible for:</h4>
                 <ul>
-                    <li>The code is parsed (i.e., split up) into a list of pieces usually called tokens.</li>
-                    <li>The raw list of tokens is transformed to build an Abstract Syntax Tree.</li>
-                    <li>An AST is a collection of nodes which are linked together based on the grammar of the Python lang.</li>
-                    <li>From an AST, the interpreter can produce a lower level form of instructions called bytecode.</li>
-                    <li><a href="https://www.mattlayman.com/blog/2018/decipher-python-ast/">More about AST in Python.</a></li>
+                    <li>Python source code parsing</li>
+                    <li>Python source code compiling to bytecode</li>
+                    <li>Python bytecode execution.</li>
                 </ul>
-                <div>Compilation stage:</div>
+                <br>
+                <h2 style="font-weight: bold;text-decoration: underline;">Python execution model:</h2>
+                <br>
+                <b><div>Parsing stage:</div></b>
+                <div> - the goal is to create specific, custom AST structure</div>
+                <div> - Python interpreter components: Tokenizer / Lexer, Parser</div>
+                <br>
                 <ul>
-                    <li>Evaluating default values for functions</li>
-                    <li>Funkcja compile() działa w </li>
+                    <li>The first step of a parsing process is splitting up 'python code' into a list of pieces usually called tokens. (done by tokenize/tokenizer.c module).</li>
+                    <li>The raw list of tokens is input of a Parser component that transforms them to build an Abstract Syntax Tree (based on Python grammar).</li>
+                    <li>An AST is a collection of nodes which are linked together based on the grammar of the Python language.</li>
+                    <li>AST is a later input for a compiling process when a lower level form of instructions called bytecode is generated.</li>
+                </ul>
+                <br>
+                <b><div>Compilation stage:</div></b>
+                <div> - the goal is to transform AST structure to Python bytecode</div>
+                <div> - Python interpreter components: Symtable, Compiler (AST → Bytecode), Bytecode emitter, Code objects</div>
+                <br>
+                <ul>
+                    <li>During compilation, certain constant expressions, such as default argument values, are evaluated.</li>
+                    <li>This is where the compile() function works – it transforms the AST into bytecode. Python objects such as functions or classes are created at runtime, but their structure is defined during compilation.</li>
+                </ul>
 
-                </ul>
+                <br>
+                <b><div>Execution stage (runtime):</div></b>
                 <ul>
-                    <li>Python converts AST to bytecode. Python objects like functions or classes will be created here.</li>
-                </ul>
-                <div>Execution stage (runtime):</div>
-                <ul>
-                    <li>code execution (variables are dynamically typed).</li>
-                </ul>
+                    <li>Python interpreter components: Python Virtual Machine (PVM), Frame Stack / Call Stack, Namespaces: Builtins, Globals, Locals.</li>
+                    <li>PVM — conceptual layer realized by function _PyEval_EvalFrameDefault() in ceval.c (Bytecode interpreter is main part).</li>
+                </ul><br>
+<pre>
+Runtime is the phase in Python Execution model when:
+    - PVM/PVM Interpreter interprets/executes bytecode (instructions saved in stack frame)
+        - knowing that PVM / other C-Function are compiled code = machine code (inside python program) that understands bytecode
+        - then Python bytecode is read and executed "instruction after instruction" by PVM (compiled CPython machine code)
+          (*** important to see that Python source code is never translated to CPU machine code - at least in CPython)
+    + mentioned stack frame mechanism functionalities are performed
+    + other mechanisms required functions are executed: GC, exception handling, import system
+</pre>
+
+<br>
+<hr>
+<hr>
+<pre>
+
+1. Komponenty fazy parsowania (kod źródłowy Pythona -> AST)
+ - Tokenizer / Lexer, Parser
+
+
+2. Komponenty kompilacji (AST → Bytecode)
+    [AST]
+       ↓
+    [symtable.c] → tworzy mapę nazw
+       ↓
+    [compile.c] → przekształca AST do bytecode
+       ↓
+    [codeobject.c] → tworzy finalny PyCodeObject
+
+
+Bytecode w CPythonie to:
+ - zestaw instrukcji wirtualnej maszyny Pythona (PVM) [nie są kodem maszynowym CPU, więc nie są bezpośrednio wykonywane przez CPU]
+ - lecz są instrukcjami rozumianymi przez interpreter PVM (czyli część softwarej maszyny PVM).
+
+
+3. Runtime (Execution stage)
+        ┌────────────────────────┐
+        │                        │
+        │   Python VM (ceval.c)  │ ← główny silnik wykonania
+        │     ↓ eval loop        │
+        │                        │
+        └────────┬───────────────┘
+                 │
+                 │
+
+    PVM w CPythonie to funkcja _PyEval_EvalFrameDefault() z pliku ceval.c,
+     - jej zadaniem jest analiza bytecode krok po kroku, realizując go przez funkcje w C.
+     - jej podstawową częścią jest interpreter bytecode'u Pythona.
+
+                 │
+                 │
+                 │
+        ┌────────▼──────────────┐
+        │   Call Stack / Frames │ ← wykonanie funkcji, zakresy zmiennych
+        └────────┬──────────────┘
+                 │
+     ┌───────────▼─────────────┐
+     │ Memory Mgmt + GC        │ ← alokacja, refcount, GC
+     └───────────┬─────────────┘
+                 │
+        ┌────────▼─────────────┐
+        │ Namespaces & Builtins│ ← globals, locals, __builtins__
+        └──────────────────────┘
+
+
+
+</pre>
+
             </div>
         </div>
     </div>
