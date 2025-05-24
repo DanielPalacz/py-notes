@@ -313,28 +313,77 @@ Unicode / UTF-8 example:
         <pre>
 
  1. Parsing Stage
-        - Najpierw Python czyta plik '.py' lub .pyc jeśli kod już jest skompilowany.
-        - Python następnie parsuje kod źródłowy module_A.py, sprawdzając poprawność składniową.
-        - Jeśli więcej tych samych importów, to jedynie PIERWSZY wykonuje sprawdzanienie składni.
+        - Najpierw Python czyta główny plik np 'script.py' lub .pyc jeśli kod już jest skompilowany.
+        - Na tym etapie nie wykonuje import module_A tzn NIE wczytuje module_A.py i nawet nie sprawdza, czy ten plik istnieje.
+        - Linia import module_A po prostu zostaje zapisana w AST (potem bytecode) jako instrukcja do późniejszego wykonania.
+
+        - Podsumowując, na tym etapie Python NIE parsuje kodu module_A.py podczas parsowania script.py.
+          Parsowanie każdego modułu dzieje się dopiero, gdy interpreter faktycznie wykona instrukcję import w czasie Runtime.
 
  2. Compilation Time/Stage
-        - Python kompiluje kod do bytecode. Dzieje się to raz dla danego-importowanego modułu,
-          skompilowany bytecode jest zapisywany jako .pyc w katalogu __pycache__.
-          Kolejne importy nie wykonują tego kroku.
+        - Import nie jest wykonywany podczas kompilacji script.py — tylko zostaje przygotowany do wykonania.
+          Python traktuje import module_A jak zwykłą instrukcję.
+          W AST jest reprezentowana jako np. 'ast.Import'. W bytecode pojawi się instrukcja typu IMPORT_NAME.
 
  3. Runtime
-        - Python ładuje bytecode some_small_module.py i wykonuje kod na poziomie globalnym w module (np. definicje klas, funkcji).
-        - Na koniec: Python tworzy obiekt modułu i udostępnia go w sys.modules (pod nazwą modułu).
-          Kolejne importy korzystają z obiektu znajdującego się w 'sys.modules'.
+       - Gdy interpreter napotyka instrukcję 'import module_A', to wtedy jest wykonywana pełna obsługa importu modułu module_A.
+         Jej przebieg:
+         Runtime(import flow 1) - Python sprawdza sys.modules czy dany moduł jest już załadowany
+         (Nie jest.)
+         Runtime(import flow 2) - Python szuka module_A.py w sys.path
+         (Jeśli plik 'module_A.py' istnieje a .pyc jest nieaktualny lub brak.)
 
-Exception: importlib.reload()
+         Runtime(import flow 3) - Python wczytuje źródło 'module_A.py', sprawdza składnię kodu i parsuje go do AST,
+         Runtime(import flow 4) - Następnie Python kompiluje kod do bytecode`u.
+
+         Runtime(import flow 5) - Teraz Python:
+                                     Tworzy obiekt modułu (types.ModuleType)
+                                     Rejestruje go w sys.modules
+
+         Runtime(import flow 6) - W końcu Python wykonuje bytecode w namespace modułu.
+                                  To tak naprawdę uruchomienie wszystkiego, co nie jest ukryte w funkcji lub klasie.
+
+                                  Krok po kroku:
+
+                                  6a)
+                                  Wykonywany jest cały tzw. kod na poziomie globalnym modułu
+                                    definicje klas i funkcji
+                                    przypisania zmiennych
+                                    instrukcje warunkowe, pętle
+                                    dowolny kod imperatywny
+                                    blok if __name__ == "__main__"  jest ignorowany, nigdy warunek nie będzie spełniony
+
+                                  6b)
+                                  To działanie (6a) ma konkretne efekty strukturalne w Pythonie:
+                                    Tworzy się przestrzeń nazw (namespace) modułu
+                                    Wszystko, co zostanie zdefiniowane (funkcje, klasy, zmienne), trafia do mod.__dict__.
+                                    To właśnie ta przestrzeń jest potem dostępna jako module_A.some_function.
+
+                                    Tworzone są obiekty klas i funkcji
+                                    Podczas wykonywania def i class tworzony jest odpowiedni obiekt typu function lub type.
+                                    Każdy def to instancja function, a class to wywołanie metaklasy.
+
+                                    Wszystkie efekty uboczne się wykonują
+                                    Jeśli w module jest np. print("Uruchamiam się!"), to ten print się wykona.
+                                    Jeśli jest połączenie z bazą danych — ono też może się wykonać (jeśli umieszczone globalnie).
+
+                                    Importy zależne też są wykonywane
+                                    Jeśli module_A importuje inne moduły (import module_B), to zaczyna się kaskada importów.
+
+
+Other things: importlib.reload()
     - Python re-executes the module (skipping parsing/compiling if bytecode is cached and valid).
     - All top-level code runs again, which can reset state or redefine classes/functions.
 
 import importlib
 importlib.reload(module_A)</pre>
                 <ul>
-                    <li><a href="images/import_system_details_pl.png">Details (PL). Also, Python 'Startup Stage' explained.</a></li>
+                    <li><a href="images/import_system_details_pl.png">[import system] Python Execution Model and 'Python Startup Stage'.</a></li>
+                    <li><a href="images/import_system_MoreDetails_ParsingStage1_pl.png">[import system] More details, parsing stage 1.</a></li>
+                    <li><a href="images/import_system_MoreDetails_ParsingStage2_pl.png">[import system] More details, parsing stage 2 and (ast).</a></li>
+                    <li><a href="images/import_system__mainDotPy_file.png">[import system] '__main__.py' and runnable packages.</a></li>
+                    <br>
+                    <li><a href="images/import_system_AdvancedTechnics_LazyImports_optimization.png">[import system] Zaawansowane techniki importu, Lazy imports i optymalizacja importów (Python 3.7+)</a></li>
                 </ul>
         <hr>
         <hr>
