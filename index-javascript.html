@@ -112,7 +112,7 @@
             Różne:
             <br>
             <ul>
-                <li>001a. Pętla if w JavaScript</li>
+                <li>001a. Warunek if-else w JavaScript.</li>
                 <ul>
                     <li><a href="index-javascript-files/basics_script_global_var_check.js">Odpowiedź</a></li>
                 </ul>
@@ -136,11 +136,18 @@
             <ul>
                 <li><a href="index-javascript-files/basics_002.html">Odpowiedź</a></li>
                 <br>
-                <li>002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa - dlaczego?.</li>
+                <li>002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa - dlaczego?</li>
 <pre>
- - document.write jest dozwolone tylko w trakcie ładowania HTML
- - defer i async powodują, że skrypt wykonuje się po załadowaniu HTML, więc document.write() jest ignorowane.
- - zamiast document.write() najlepsza alternatywą jest użycie innerHTML lub appendChild()</pre>
+ - document.write używane w nieodpowiednich momentach może mieć destrukcyjny wpływ na zawartość strony html
+ - defer i async mają różne działanie, natomiast w obu przypadkach wykonanie <i>document.write()</i> może być zignorowane (nie musi)
+   to zależy od środowiska czy tak zdecyduje (np. przez blokadę przeglądarki ze względów bezpieczeństwa albo optymalizacji)
+ - jedyny bezpieczny kontekst dla <i>document.write()</i> to, gdy skrypt jest wstawiony bez async ani defer, czyli „zwykły” &lt;script&gt;
+
+ - zamiast document.write() lepsze jest użycie innerHTML lub manipulowanie DOM-em przez appendChild, createElement itd
+   przykład innerHTML:
+   <i>document.body.innerHTML += "&lt;p&gt;Nowy tekst&lt;/p&gt;";</i>
+
+</pre>
 
                 <li>002b. Jakie są różnice między osadzeniem zwykłego pliku js a osadzeniem pliku js jako modułu ECMAScript/ES6 (type="module")?</li>
                 <pre>
@@ -232,6 +239,8 @@ W ECMAScript/ES6:
     <div class="card-body">
         <div><u>Nauka / powtórki:</u></div>
         <br>
+        <a style="padding: 10px; background-color: #ffa500 !important; color: blue;" href="index-javascript-files/practising/questions.html">Colorful questions</a>
+
             <br>
             <br>
             <br>
@@ -284,8 +293,8 @@ Charakterystyka/rodzaje:
    bezpośrednio. Jednak, są od tego wyjątki, jeśli to konieczne.
  - W pewnych sytuacjach, np kiedy próbujemy wywołać metody
    na tych typach (np. toUpperCase() na stringu), JavaScript
-   tymczasowo "opakowuje" te wartości w odpowiednie obiekty.
-   Jest to tzw Boxing, natomiast nie wszystkie typy prymitywne
+   tymczasowo "opakowuje" te wartości w odpowiednie nowe obiekty.
+   Jest to tzw Auto-Boxing w JS, natomiast nie wszystkie typy prymitywne
    posiadają obiektowe wersje (String, Number, Boolean, Symbol).
 
  - W JavaScript przypisanie prymitywu kopiowanie wartości,
