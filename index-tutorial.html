@@ -465,6 +465,61 @@ importlib.reload(module_A)</pre>
                 <li>The mechanism for descriptors is embedded in the __getattribute__() methods for object, type, and super(). There are nuances in terms of descriptor invocation logic in these implementations. For example, Instance lookup scans through a chain of namespaces giving data descriptors the highest priority, followed by instance variables, then non-data descriptors, then class variables, and lastly __getattr__() if it is provided.</li>
                 <li>__set_name__ hook is called during class creation extends capability of descriptor objects.</li>
             </ul>
+        <pre>
+
+[***]
+Alternatywne nazewnictwo deskryptorów:
+1)
+Architekt Atrybutu
+ - dla deskryptorów jako bytów stworzonych specjalnie po to, by kontrolować zachowanie atrybutów
+   głównie dedykowane nowo-napisane deskryptory, ale też dekorator/funkcja property z biblioteki standardowej
+2)
+Inne opisowe nazwy:
+ - pewne byty w Pythonie implementują protokół deskryptora, ale jest to tylko mniejszy element ich natury
+</pre>
+
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>BYT</th>
+      <th>NAZWA</th>
+      <th>OPIS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><br><br>Własny deskryptor<br><br><br></td>
+      <td>Architekt Atrybutu<br> - Zarządca Atrybutu<br> - Modyfikator Atrybutu</td>
+      <td>Świadomie zaprojektowany jako deskryptor</td>
+    </tr>
+    <tr>
+      <td>Funkcja zdefiniowana w klasie<br>(klasa function)</td>
+      <td>Zwykła funkcja<br> - z wbudowaną funkcjonalnością:<br>&nbsp;&nbsp;'konwertowania funkcji w metodę'</td>
+      <td>Klasa function:<br> - implementuje protokół deskryptorów<br> - realizuje konwertowanie funkcji w metodę<br> - deskryptor jedynie w celu wiązania: funkcja-obiekt klasy</td>
+    </tr>
+    <tr>
+      <td>@property</td>
+      <td>Architekt Atrybutu</td>
+      <td>Tworzy całe zachowanie get/set/del</td>
+    </tr>
+    <tr>
+      <td>@classmethod</td>
+      <td>Konwerter metody (w metodę klasy)</td>
+      <td>Deskryptor wiążący metodę z klasą</td>
+    </tr>
+    <tr>
+      <td>@staticmethod</td>
+      <td>Wyłącznik wiązania obiekt-metoda/ <br>Konwerter metody (spowrotem w funkcje)</td>
+      <td>Deskryptor wyłączający wiązanie obiekt-metoda</td>
+    </tr>
+    <tr>
+      <td>Obiekty: int, str, list itd</td>
+      <td>Brak (nie są deskryptorami)</td>
+      <td>Nie mają __get__, więc są bierne</td>
+    </tr>
+  </tbody>
+</table>
         </ul>
         <br>
         <br>
