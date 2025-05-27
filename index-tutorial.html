@@ -313,8 +313,10 @@ Unicode / UTF-8 example:
         <pre>
 
  1. Parsing Stage
-        - Najpierw Python czyta główny plik np 'script.py' lub .pyc jeśli kod już jest skompilowany.
+        - Najpierw Python czyta kod źródłowy uruchamianego / głównego pliku np 'script.py'
+          (na tym etapie nawet jeśli istnieje aktualny bytecode / plik .pyc to nie jest brany pod uwagę).
         - Na tym etapie nie wykonuje import module_A tzn NIE wczytuje module_A.py i nawet nie sprawdza, czy ten plik istnieje.
+          Tj. domyślne zachowanie w CPython, ale przy innych implementach lub bardziej skomplikowanych importach może być inaczej.
         - Linia import module_A po prostu zostaje zapisana w AST (potem bytecode) jako instrukcja do późniejszego wykonania.
 
         - Podsumowując, na tym etapie Python NIE parsuje kodu module_A.py podczas parsowania script.py.
