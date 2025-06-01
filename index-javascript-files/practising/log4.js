@@ -1,0 +1,1 @@
+console.log("[DEBUG 4] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute.");

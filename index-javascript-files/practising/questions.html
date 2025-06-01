@@ -4,7 +4,26 @@
   <meta charset="UTF-8">
   <title>JS questions</title>
   <script>
-    console.log("[DEBUG] JavaScript log code in <head> before everything related to styling.");
+    console.log("[DEBUG 1] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
+  </script>
+
+  <script defer>
+    console.log("[DEBUG 2] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
+  </script>
+
+  <script src="log3.js" defer>
+  </script>
+
+  <script src="log4.js" type="text/javascript" defer>
+  </script>
+
+
+  <script type="text/javascript" defer>
+    console.log("[DEBUG 5] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
+  </script>
+
+  <script type="text/javascript">
+    console.log("[DEBUG 6] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
   </script>
 
 <style>
@@ -380,5 +399,21 @@ And finally 'document.write' is old-fashioned and not recommended to use. There 
 <!--  <script src="basics_script.js" defer></script>-->
 <!--  <script src="basics_script.js" async></script>-->
 <!--  <script src="basics_script_global_var_check.js" defer></script>-->
+
+
+<!-- The same directory and default http server run to handle it: -->
+
+<script type="module">
+    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';
+    generateRandomNumber();
+</script>
+
+<!-- CORS allowing http server run to handle it: -->
+<!--  <script type="module">-->
+<!--    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';-->
+<!--    generateRandomNumber();-->
+<!--  </script>-->
+
+
 </body>
 </html>
