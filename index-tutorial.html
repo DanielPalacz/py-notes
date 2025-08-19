@@ -99,13 +99,42 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
+<h2 class="m-2"><b><u>Python questions / observations:</u></b></h2>
+<br>
+<br>
+<br>
 <br>
 <div class="row">
     <div class="col-md-8">
             <div class="card mb-4 box-shadow" style="background: yellow;">
-                <h2 class="ml-2"><b><u>Python questions / observations:</u></b></h2>
                 <div class="card-body">
-<br>
+
+<div class="row">
+    <div class="col-md-10">
+<!--        <div class="card mb-4 box-shadow" style="background-color: #90EE90;">-->
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">Good practices:</h4>
+                <ul>
+                    <li>Czytelność vs. złożoność?</li>
+                    <ul>
+                        <li>W Pythonie zasada „Simple is better than complex” (Zen of Python) działa w 90% przypadków.
+                            Pytanie pomocnicze => Czy mogę to napisać prościej, bez utraty czytelności?</li>
+                    </ul>
+                    <li>Generator czy comprehension?</li>
+                    <ul>
+                        <li>Reguła: Jeśli nie potrzebujesz leniwego generowania → użyj comprehension.</li>
+                    </ul>
+
+                    <li><a href="images/Zen2_GPT.png">[Py Zen2] Updated Python Zen list.</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <b style="background: #ADD8E6;">ITERABLES / ITERATORS / SEQUENCES:</b>
 <br>
 <br>
@@ -216,7 +245,7 @@ False
     1)
         * x = yield
         * Ta forma oznacza "czekaj na wartość z send(value)".
-          Kiedy coroutine zostaje uruchomiona i napotka 'x = yield', wtedy "zawiesza się" i oczekuje na dane z GEN_OBJ.send(value).
+          coroutine zostaje uruchomiona i napotka 'x = yield', wtedy "zawiesza się" i oczekuje na dane z GEN_OBJ.send(value).
     2)
         * yield x
         * Ta forma oznacza: Zwróć wartość x na zewnątrz — to właśnie wynik next() lub send(...)
@@ -686,8 +715,34 @@ Use MagicMock when:
 </div>
 </div>
 </div>
-</div>
 
+
+        <div class="col-md-3">
+            <div class="card mb-4 box-shadow" style="background-color: #90EE90;">
+                <div class="card-body">
+                    <h4 style="font-weight: bold;text-decoration: underline;">Knowledge Reviews:</h4>
+<pre>
+Dobre praktyki / Clean code, co wiem?
+  PEP-8? PEP-257?
+  Jak wyświetlić Zen of Python (PEP 20)?
+
+Narzędzia lintujące (wymuszają dobre praktyki):
+  flake8 — sprawdzanie zgodności ze stylem PEP8
+  black — automatyczne formatowanie kodu
+          (według standardu)
+  pylint — bardziej szczegółowa analiza
+           jakości kodu
+  mypy — sprawdzanie poprawności typów
+
+1)
+
+2)
+3)
+</pre>
+</div>
+</div>
+</div>
+</div>
 
 
 <br>
