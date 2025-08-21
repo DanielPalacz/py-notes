@@ -101,22 +101,61 @@
 
 <br>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-7">
             <div class="card mb-4 box-shadow" style="background: #F777;">
                 <h2 class="m-0" style="background: orange;"><b><u>Python Attribute lookup:</u></b></h2>
                 <div class="card-body">
 
 <pre style="notion">
-1. In high level it is such mechanism/protocol:
+In high level it is such mechanism/protocol:
     try:
         [type, object, super].__getattribute__(...)
     except AttributeError:
         [type, object, super].__getattr__(...)
 
-2. Potential modifiers:
-    - Descriptors
-    - Metaclasses
-    - __slots__ usage
+
+Po co w ogóle istnieje Attribute Lookup w Pythonie?
+
+W skrócie:
+    To uniwersalny mechanizm znajdowania i zwracania atrybutów obiektów.
+    W Pythonie wszystko jest obiektem, a obiekty mają atrybuty (dane i metody).
+    By działało obj.attr, Python musi mieć spójny, elastyczny protokół ustalający co oznacza "attr" w danym kontekście.
+
+1️⃣ Ujednolicenie dostępu
+    W Pythonie każda klasa może mieć własne pola (obj.__dict__), ale też może dziedziczyć metody z MRO.
+    Dzięki lookupowi obj.attr zawsze działa tak samo w zapisie, niezależnie czy:
+    attr jest w instancji (obj.__dict__),
+    w klasie (cls.__dict__),
+    w rodzicu (MRO),
+    czy jest deskryptorem (property, metoda).
+    👉 To daje jednolity model obiektowy.
+
+2️⃣ Hooki i kontrola zachowania
+    Python pozwala klasom przechwytywać i modyfikować dostęp do atrybutów:
+    __getattribute__ → absolutna kontrola: zawsze wywoływane pierwsze.
+    __getattr__ → fallback: możliwość obsłużenia braków.
+    deskryptory (__get__, __set__) → np. @property, metody instancji.
+    👉 Dzięki temu można tworzyć np. dynamiczne atrybuty (leniwe ładowanie, proxye, ORM-y jak SQLAlchemy).
+
+3️⃣ Elastyczność dynamicznego języka
+    Python nie jest statycznie typowany → atrybuty mogą się pojawiać i znikać w runtime.
+    Możesz przypisać obj.new_attr = 123 w dowolnym momencie.
+    Możesz wygenerować metody w __getattr__ na żądanie.
+    Moduły też są obiektami — więc math.sin to też lookup.
+    👉 Lookup to fundament dynamiczności Pythona.
+
+4️⃣ Integracja z całym modelem obiektowym
+    Lookup umożliwia działanie metod jako „związanych z instancją” (binding przez deskryptor).
+    Dzięki temu obj.method() automatycznie dostaje self.
+    Bez lookupu, metoda byłaby tylko zwykłą funkcją w słowniku klasy.
+
+5️⃣ Podstawa do dalszych mechanizmów
+    super() → opiera się na zmodyfikowanym lookupie (przesunięcie w MRO).
+    dataclasses, attrs, ORMy → często opierają się na przechwytywaniu dostępu przez __getattr__/__getattribute__.
+    Debuggery i introspekcja (dir(), getattr(), hasattr()) → też jadą na lookupie.
+
+Podsumowanie: Attribute Lookup to klej Pythona.
+
 </pre>
         </div>
     </div>

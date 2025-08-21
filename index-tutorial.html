@@ -567,11 +567,11 @@ In high level it is such mechanism:
         [type, object, super].__getattr__(...)
 
 Potential modifiers:
- - Descriptors
- - Metaclasses
- - __slots__ functionality</pre>
+ - Descriptors, Metaclasses, __slots__
+ - re-writing: __getattribute__, __getattr__, AttributeError
+</pre>
 
-Use cases:
+Use cases (different __getattribute__):
     <table>
         <tbody>
         <td>
@@ -579,26 +579,30 @@ Use cases:
 1. Instance objects
   - lookup for instance attribute
   - lookup for class attribute
-  - object.__getattribute__ (def)</pre>
+  - object.__getattribute__</pre>
         </td>
         <td>
         <pre>
 2. Class objects:
   - lookup for class attribute
-  - type.__getattribute__ (def)</pre>
+  - type.__getattribute__</pre>
         </td>
         <td>
         <pre>
 
 3. Super object executes lookup:
-  - from Instance object for instance/class attribute
-  - from Class object for instance/class attribute
   - by default super().__getattribute__ is taken
         </pre>
         </td>
+
         </tbody>
     </table>
 </ol>
+        <pre>
+Other things:
+  - it can be said that module objects use Attribute Lookup protocol too
+  - Summary: Why Attribute Lookup is needed for Python?
+        </pre>
 
 <br>
     <b style="background: #ADD8E6;">Functions Deep Dive:</b>
