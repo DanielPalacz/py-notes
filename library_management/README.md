@@ -1,5 +1,5 @@
-
-## LIBRARY MANAGMENT SYSTEM
+````
+## LIBRARY MANAGEMENT SYSTEM
  - example of Hexagonal Architecture (Ports & Adapters)
 
 ```
@@ -13,11 +13,10 @@ Key concepts:
     - ports (interfaces)
     - adapters
  - hexagon structure view
- - technology independance 
- 
+ - technology independance
 ```
 
-
+````
 ## Project structure:
 ```
 library_management/

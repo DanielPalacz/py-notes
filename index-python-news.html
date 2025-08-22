@@ -106,7 +106,7 @@
     <div class="col-md-8">
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <h4 style="font-weight: bold;">Python10 => Python11</h4>
+                <h4 style="font-weight: bold;">Python3.10 => Python3.11</h4>
 <pre class="notion">
 
 1. Poprawa wydajności
@@ -145,15 +145,42 @@
 
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div class="card mb-4 box-shadow" style="background-color: pink;">
             <div class="card-body">
-                <h4 style="font-weight: bold;">Python11 => Python12</h4>
+                <h4 style="font-weight: bold;">Python3.11 => Python3.12</h4>
 <pre class="notion">
-1. Introducing Taskgroup.
-   The introduction of TaskGroup doesn't reduce the need for asyncio but rather makes working with asyncio more intuitive and
-   less error-prone. TaskGroup is just a higher-level abstraction built on top of asyncio.
 
+Nowości językowe i interpreter
+    F-strings z mniejszymi ograniczeniami – dzięki PEP 701 f-stringi mogą zawierać znaki cudzysłowu odpowiadających delimitatorom, znaki ucieczki (\),
+                                            komentarze i wyrażenia wielolinijkowe
+    Nowa składnia dla typów generycznych – PEP 695 wprowadza szybszy i bardziej czytelny zapis: def first[T](items: list[T]) -> T:
+    Dekorator @override – PEP 698 dodaje możliwość oznaczenia metod nadpisujących w klasach, co ułatwia debugowanie i refaktoryzację
+    Buffer protocol w Pythonie – PEP 688 zastępuje archaiczne rozwiązania, pozwalając na bezpośredni dostęp do bufferów w Pythonie
+    Debugger / Profilowanie – PEP 669 wprowadza nowe API do monitorowania i profilowania działania kodu
+    Per-interpreter GIL – PEP 684 pozwala na niezależne blokady globalne interpretera (GIL) dla sub-interpreterów (drzwi do lepszej równoległości)
+    Stabilizacja Taskgroup (dodanych na początku w 3.11).
+
+Poprawa komunikatów błędów
+    Sugestie przy literówkach – np. "Did you mean: 'pi'?" przy błędnym imporcie (import py from math)
+    Sugerowanie importu – brakujący moduł? Python zasugeruje: „Did you forget to import 'sys'?”
+    Sugestie dla AttributeError – np. NameError: name 'blech' is not defined. Did you mean: 'self.blech'?
+    Poprawione błędy składniowe przy imporcie – np. import x from y zostanie zasugerowane jako from y import x
+
+Wydajność i optymalizacje
+    Szybsze comprehensions – wyrażenia list/dict/set są teraz inline’owane, co przyspiesza ich działanie nawet do 2×
+    Zwiększona ogólna wydajność – liczne usprawnienia („quickening”, PEP 709, BOLT optimizer) dają ~5% wzrost prędkości wykonania
+
+Biblioteka standardowa i C-API
+    Usunięcie przestarzałych modułów – distutils, asynchat, asyncore, imp, smtpd, oraz komponentów takich jak gzip, hashlib, ssl, xml.etree.ElementTree
+    Zmiany w C-API – usunięto wstr z obiektów Unicode (PEP 623), co zmniejsza użycie pamięci
+    Zmiany w sqlite3 – pojawiły się metody setconfig() i getconfig(), np. do włączania/wyłączania obsługi kluczy obcych
+    Bezpieczeństwo – HMAC/SHA implementacje zostały zastąpione przez kod z formalną weryfikacją (HACL*) tam, gdzie OpenSSL jest niedostępny
+
+Inne zmiany językowe i syntaktyczne
+    Null-byte w kodzie → teraz generuje SyntaxError, co zwiększa bezpieczeństwo
+    Nieprawidłowe sekwencje ucieczki → teraz dają SyntaxWarning zamiast DeprecationWarning, wyraźniej ostrzegając przed błędami
+    Ostrzeżenia przy dużych escape’ach oktalnych – również generują SyntaxWarning
 </pre>
                 </ul>
             </div>
@@ -168,26 +195,100 @@
 
 
 
+
+
 <div class="row">
     <div class="col-md-8">
-        <div class="card mb-4 box-shadow" style="background-color: green;">
+ <div class="card mb-4 box-shadow" style="background-color: green;">
             <div class="card-body">
-                <h4 style="font-weight: bold;">Python12 => Python13</h4>
+                <h4 style="font-weight: bold;">Python3.12 => Python3.13</h4>
+<pre>
+
+Python 3.13 – najważniejsze zmiany (wydany 7 października 2024):
+
+Interpreter i REPL
+    Całkowicie nowy interaktywny interpreter (REPL) oparty na kodzie PyPy: kolorowe prompt’y i tracebacki, edycja wieloliniowa,
+        tryby F1–F3 (pomoc, historia, paste mode).
+    Śledzenie zmian w module locals(), ułatwiające narzędziom debugowania
+
+Równoległość i wydajność
+    Eksperymentalny tryb free-threaded (bez GIL), wymagający specjalnego wykonawcy (python3.13t)
+    Wsparcie dla eksperymentalnego JIT (Just-In-Time) – nie jest włączony domyślnie
+
+Typowanie
+    Domyślne wartości dla parametrów typów (TypeVar, ParamSpec, TypeVarTuple) (PEP 696)
+    Dekorator warnings.deprecated() (PEP 702), „ReadOnly” w TypedDict (PEP 705) oraz TypeIs do zawężania typów (PEP 742)
+
+Standardowa biblioteka i usunięcia
+    Usunięcie wielu przestarzałych modułów („dead batteries”, PEP 594)
+        plus lib2to3, tkinter.tix, locale.resetlocale(), typing.io, typing.re, oraz inne
+    Nowe funkcje: PythonFinalizationError w obsłudze finalizacji, możliwości deprecacji w argparse,
+        nowy backend dbm.sqlite3, funkcje w os, CLI dla random, copy.replace() i inne
+    Docstringi tracą wiodące wcięcia, oszczędzając pamięć i zmniejszając .pyc
+
+Wrażenia społeczności
+    Nowy REPL doceniany jako znaczące usprawnienie:
+        „Block-level editing… Smart pasting… history mode…”
+    Przykład speed-upu: bez-GIL na laptopie z 4 rdzeniami 3,7× szybszy
+    JIT na razie wolniejszy niż zwykły interpreter – raczej ekspertyment niż użyteczne narzędzie
+</pre>
+            </div>
+</div>
+</div>
+</div>
 
 
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow" style="background-color: yellow;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Co nowego w Python3.14?</h4>
+
+<pre>
+
+Według oficjalnej dokumentacji i aktualnych źródeł:
+    PEP 779 – Free-threaded Python:
+        oficjalne wsparcie dla builda bez GIL (Global Interpreter Lock). Nadal opcjonalny, ale teraz uznany oficjalnie
+    Nowy interpreter ("tail-call-compiled"):
+        zamiast jednego dużego switch-a w C, interpreter rozdzielony na wiele małych funkcji, co poprawia wydajność
+        — nawet do ~30 % szybszy na pewnych konfiguracjach
+    PEP 649 + 749 – Odkładane (deferred) oceny adnotacji: adnotacje są przechowywane i ocenia się je dopiero przy potrzebie,
+        co przyspiesza ładowanie modułów
+    PEP 750 – Template strings (t-strings):
+        nowa składnia t"..." umożliwia tworzenie szablonów z późnym wypełnieniem – bardziej elastycznych niż f-stringi
+    PEP 734 –
+        Wsparcie dla wielu interpreterów bez subprocess: można tworzyć subinterpreter w tym samym procesie i komunikować się między nimi
+    Nowe narzędzia standardowe i ulepszenia:
+        compression.zstd – wsparcie dla formatu Zstandard
+        Zero-overhead debugger interface – pozwala bezpiecznie przyłączyć się do działającego procesu bez wpływu na wydajność
+        Lepsze komunikaty o błędach, kolory w REPL i CLI narzędziach (unittest, argparse, json, calendar),
+        inspekcja UUID 6–8, szybsze generowanie UUID 3–5 (40% szybciej), nowe API C (PEP 741)
+    Domyślna metoda multiprocessing zmienia się z fork na forkserver poza macOS/Windows
+    Obsługa instalatorów Windows z nowym "install managerem" (z poziomu Microsoft Store)
+
+Wnioski
+    Python 3.14 to połączenie działania wydajnościowego i jakościowego — oferuje opcje (free-threading, JIT, szybki interpreter),
+        a także udoskonala pracę dewelopera (lepsze błędy, REPL, debugowanie).
+    W porównaniu z wersjami 3.11–3.13, widać kontynuację trendu:
+        po solidnych fundamentach (3.11),
+        styl i typowanie (3.12),
+        ergonomia i eksperymenty (3.13),
+        teraz skok technologiczny oraz jeszcze lepsza użyteczność (3.14).
+
+    Dla firm rozważających migrację:
+        warto już teraz testować 3.14, zwłaszcza jeśli zależy Wam na równoległości, diagnostyce w produkcji,
+        lub lepszej wydajności z minimalnymi zmianami kodu.
+</pre>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <br>
-
-
-
-
-
-
-
 
 </body>
 </html>
