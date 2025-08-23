@@ -1,0 +1,45 @@
+Plan 3 tygodnie – Python Execution Model
+
+Tydzień 1 – Closure i Scope
+
+| Dzień | Mikro-eksperyment                                                                            | Cel                                                |
+| ----- | -------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| 1     | Napisz funkcję z wewnętrzną funkcją (`def inner`) i sprawdź `f.__closure__`                  | Zrozumieć closure i co przechowuje cell            |
+| 2     | Lambda w list comprehension: `[lambda x: i*x for i in range(4)]` vs `[lambda x, i=i: i*x]`   | Late binding vs early binding                      |
+| 3     | Funkcja odczytująca zmienną globalną, lokalną i enclosing scope                              | LEGB w praktyce                                    |
+| 4     | Spróbuj `UnboundLocalError` przez przypisanie zmiennej w funkcji i odczyt przed przypisaniem | Scope rules, faza kompilacji vs runtime            |
+| 5     | Połącz wszystko: closure w funkcji z lambdą w comprehension                                  | Sprawdzenie zrozumienia late binding i scope       |
+| 6     | Mały quiz: przewiduj wynik wyrażeń z closure i lambdami, sprawdź w interpreterze             | Refleksja i automatyczne poprawienie intuicji      |
+| 7     | Powtórka + notatki                                                                           | Krótka wizualna mapa LEGB + closure + late binding |
+
+
+Tydzień 2 – Rekurencja i stack frames
+| Dzień | Mikro-eksperyment                                                       | Cel                                                   |
+| ----- | ----------------------------------------------------------------------- | ----------------------------------------------------- |
+| 8     | Napisz prostą rekurencję np. `factorial(n)` i obserwuj wynik dla `n=10` | Rozumienie wywołań funkcji i ramek                    |
+| 9     | Zwiększ `n` do wartości > `sys.getrecursionlimit()`                     | Obserwacja `RecursionError`                           |
+| 10    | Spróbuj rekurencję z modyfikacją zmiennych globalnych w środku          | Jak scope działa w rekurencji                         |
+| 11    | Zamień rekurencję na iterację i porównaj stack frames                   | Porównanie stack frames i efektywności                |
+| 12    | Napisz funkcję rekurencyjną, która tworzy closure                       | Połączenie rekurencji i closure                       |
+| 13    | Mini-quiz: przewiduj wynik i stack frames dla małych rekurencji         | Refleksja                                             |
+| 14    | Powtórka + notatki                                                      | Schemat stack frames, lokalny/global, recursion limit |
+
+
+Tydzień 3 – Wątki, GIL i atomic operations
+| Dzień | Mikro-eksperyment                                     | Cel                                                            |
+| ----- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| 15    | Napisz prosty wątek z `counter += 1` w CPythonie      | Obserwacja działania GIL                                       |
+| 16    | Dodaj drugi wątek, sprawdź wynik                      | Przeplatanie wątków i potencjalne race condition               |
+| 17    | Dodaj `threading.Lock()` i sprawdź wynik              | Synchronizacja i bezpieczeństwo danych                         |
+| 18    | Wątek CPU-heavy vs I/O-heavy (np. `sleep`)            | Obserwacja różnic w przeplatającej się pracy wątków            |
+| 19    | Mini-quiz: przewiduj wynik z różnymi wariantami locka | Refleksja i utrwalenie                                         |
+| 20    | Eksperyment z `multiprocessing` zamiast wątków        | Zrozumienie prawdziwej równoległości CPU                       |
+| 21    | Powtórka + notatki                                    | Krótka wizualizacja GIL, race condition, lock, multiprocessing |
+
+
+
+Dodatkowe wskazówki do całego planu:
+    Codzienna refleksja 2–3 minuty: „Co Python robi w runtime? Dlaczego taki wynik?”
+    Notatki: rysuj mini schematy LEGB, stack frames, closure, lock.
+    Testuj różne wersje Pythona – zwróć uwagę na różnice w komunikatach błędów (UnboundLocalError, RecursionError).
+    Małe projekty: wplatane closure, scope, wątki w realnych skryptach – wiedza utrwala się w kontekście praktyki.

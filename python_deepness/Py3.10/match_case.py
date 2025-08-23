@@ -12,3 +12,6 @@
 #     case _:
 #         raise RequestError("we couldn't get the data")
 #
+
+# Konstrukcja match / case (tzw. Structural Pattern Matching) została wprowadzona w Pythonie 3.10 (wydanym w październiku 2021).
+# Źródłem jest PEP 634, który opisuje dokładnie zasady działania tego mechanizmu.
