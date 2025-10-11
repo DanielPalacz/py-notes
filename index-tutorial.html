@@ -109,12 +109,38 @@
             <div class="card mb-4 box-shadow" style="background: yellow;">
                 <div class="card-body">
 
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python - supported paradigms.</summary>
 <div class="row">
     <div class="col-md-10">
 <!--        <div class="card mb-4 box-shadow" style="background-color: #90EE90;">-->
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <h4 style="font-weight: bold;text-decoration: underline;">Good practices:</h4>
+                <img src="images/paradigms.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+                <ul>
+<!--                    <li>...</li>-->
+<!--                    <li><a href="images/paradigms.png">Python - Wspierane paradygmaty.</a></li>-->
+<!--                    <img src="images/paradigms.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">-->
+
+                    <br>
+                    <li>Python jest językiem wysokiego poziomu (jego syntax jest zrozumiały dla ludzi).</li>
+                    <li>Python Data Model. Rules, design assumptions related to treating objects in Python.</li>
+                    <li>Object oriented programming. "Duck-typing" is Python-like-way of doing things.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</details>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python - good practices.</summary>
+<div class="row">
+    <div class="col-md-10">
+<!--        <div class="card mb-4 box-shadow" style="background-color: #90EE90;">-->
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
                 <ul>
                     <li>Czytelność vs. złożoność?</li>
                     <ul>
@@ -134,103 +160,45 @@
         </div>
     </div>
 </div>
+</details>
 
-<b style="background: #ADD8E6;">ITERABLES / ITERATORS / SEQUENCES:</b>
-<br>
-<br>
-    <ol>
-        <li>Iterator and Iterable objects implementing certain protocols. What are details of these protocols?</li>
-        <pre class="code">
-Iterator protocol:
- - Iterator object needs to implement __iter__ and __next__.
-   Main feature of Iterators is allowing for sequence access of data stream - no need to maintain all data in memory.
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python - good practices.</summary>
+<div class="row">
+    <div class="col-md-10">
+<!--        <div class="card mb-4 box-shadow" style="background-color: #90EE90;">-->
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <ul>
+                    <li>Czytelność vs. złożoność?</li>
+                    <ul>
+                        <li>W Pythonie zasada „Simple is better than complex” (Zen of Python) działa w 90% przypadków.
+                            Pytanie pomocnicze => Czy mogę to napisać prościej, bez utraty czytelności?</li>
+                    </ul>
+                    <li>Generator czy comprehension?</li>
+                    <ul>
+                        <li>Reguła: Jeśli nie potrzebujesz leniwego generowania → użyj comprehension.</li>
+                    </ul>
 
-Iterable protocol:
- - Iterable object should implement __iter__, but not it is not requirement if there is no __iter__ then __getitem__ is required.
-   In the other words iter(Iterable_object) should always produce valid Iterator object.
-
-Dict objects are Iterable, but are not Iterators:
->>> hasattr(dict(), "__iter__")
-True
->>>
->>> hasattr(dict(), "__next__")
-False
->>>
->>> hasattr(dict(), "__getitem__")
-True # However it is not implementing Indexing/Slicing
->>>
->>> iter(dict())
-dict_keyiterator object at 0x7d7e055eba10
-    => dict objects are Iterables (but are not Iterators and Sequences)</pre>
+                    <li><a href="images/Zen2_GPT.png">[Py Zen2] Updated Python Zen list.</a></li>
 
 
-<pre class="code">
-"__getitem__ edge case":
-    In Python 3 builtin collections are generally implement __iter__. However:
-     - Still it is possible to create a class that have only __getitem__ and not __iter__ and such object will be Iterable.
-     - It is rather hack than common practice, but handling __getitem__ in Iterable protocol still works.</pre>
-<ul>
-    <li><a href="python_deepness/protocols/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
-</ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</details>
 
-        <br>
-        <li>What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
-        <div> - map, filter, reduce, zip - map example:</div>
+<hr></hr>
+<hr></hr>
 
-            <pre class="code">
->>> L = [0, 2, 4, 6, 8]
->>>
->>> mapped_L = map(lambda x: x + 1, L)
->>>
->>> mapped_L
-map object at 0x70d609f84a60
->>>
->>> hasattr(mapped_L, "__iter__")
-True
->>> hasattr(mapped_L, "__next__")
-True
->>> hasattr(mapped_L, "__getitem__")
-False
-    => map objects are Iterables and Iterators (but not Sequences)
-</pre>
 
-        <li>What are details of sequence protocol in Python?</li>
-            <pre class="code">
-Sequence objects in the most basic version need to implement two dunder methods: __getitem__, __len__:
- - __getitem__, __len__ are base for Indexing and slicing functionalities.
- - __getitem__ from dict doesnt allow Indexing and Slicing, so having __getitem__ is not enough, implementation matters.
- - In more complete version also methods: __contains__, __iter__, __reversed__, index and count.
 
-All Sequences are also Iterable, but not opposite.
-
-Range object example:
->>> R = range(3)
->>> type(R)
-&lt;class 'range'&gt;
->>> hasattr(R, "__getitem__")
-True
->>> hasattr(R, "__len__")
-True
->>>
->>> R[1]
-1
->>> hasattr(R, "__iter__")
-True
->>> hasattr(R, "__next__")
-False
-    => range objects are Sequences and Iterables, but not Iterators
-</pre>
-
-        <hr>
-        <hr>
-        <hr>
-        </ol>
-<br>
-<b style="background: #ADD8E6;">GENERATORS:</b>
-<br>
-<br>
-        <ol start="4">
-        <li>The final truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Generators.</summary>
+        <ol start="1">
+        <li>The truth about generators, when they are really useful and when not? How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
 <pre class="notion">
  - Generatory są świetne, gdy nie znamy górnej granicy zbioru lub przetwarzamy tylko część wyników,
    np. sekwencję Fibonacciego, liczby pierwsze czy duże pliki CSV linia po linii. Generatory są niepraktyczne, gdy
@@ -252,6 +220,19 @@ False
     3)
         * y = yield x
         * Mix 1 i 2.
+
+
+Dwa główne sposoby patrzenia na generatory?
+    1. Jako leniwe iteratory – najczęstszy use case: wydajne generowanie wartości w pętli (for, next()).
+       np. range(), open(...).readline() w tle używają mechanizmów iteracyjnych.
+    2. Jako prymitywy współprogramowania (coroutines)
+    – dzięki send() i yield można pisać funkcje, które wymieniają dane w obie strony
+      i przypominają prymitywną formę „asynchroniczności”.
+      Właśnie na tym mechanizmie oparto async/await (to tylko rozszerzona składnia do korutyn).
+
+Ale można też dołożyć perspektywę "ramek" i tego, że generatory to nie są tylko wyjątkowe funkcje:
+    Na pocztku normalny obiekt funkcji kiedy się go wywoła zwraca obiekt generatora (nie generorwaną wartość od razu).
+    Ten obiekt generatora to właściwie "zatrzymana" ramka stosu, która może być wznowiona.
 </pre>
 
         <li><b>yield from ITERABLE_OBJECT</b></li>
@@ -288,12 +269,15 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
         <hr>
         <hr>
 </ol>
-<br>
-<b style="background: #ADD8E6;">MISCELLANEOUSNESS:</b>
-<br>
-<br>
-<ol start="7">
-        <li>What are some different characteristics of Functions/Classes Nature?</li>
+</details>
+
+
+<hr></hr>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous.</summary>
+<ol start="4">
+        <li>What are main differences in Functions/Classes nature?</li>
 <pre class="notion">
  - Classes can be seen more like containers/structures/blueprint when functions are set of instructions (executable code blocks).
  - A class definition is a 'Declaration of a Structure', not a sequence of instructions (like functions).
@@ -303,7 +287,8 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
  - Classes due protocols/hooks are very modifiable during creation time. It also costs.
 Then:
  - In Classes Nature is to be very modifiable containers/blueprints. When Functions Nature is to be lightweight set of instructions.</pre>
-        <li>It was possible to compare some very specific solutions in terms of speed (by not realistic micro-benchmarking, but at least something). First solution based on functions and second based on classes. In the result class-based solution was 100 times slower. Why classes could be so slow? What are the biggest factors here? Additionally, in tests were seen that __slot__ classes feature did not improve speed, but tests were limited so this result could be not reliable.</li>
+
+<li>It was possible to compare some very specific solutions in terms of speed (by not realistic micro-benchmarking, but at least something). First solution based on functions and second based on classes. In the result class-based solution was 100 times slower. Why classes could be so slow? What are the biggest factors here? Additionally, in tests were seen that __slot__ classes feature did not improve speed, but tests were limited so this result could be not reliable.</li>
 <pre class="notion">
  - Creating a function is a simpler operation than creating a class. Python's interpreter is optimized for function creation.
  - Classes, even empty ones, have more overhead due to their inherent complexity.
@@ -336,8 +321,17 @@ Unicode / UTF-8 example:
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
         <br>
         <li>Ellipsis it is unique constant accessed globally in Python (instance of EllipsisType). When we can use ellipsis object?</li>
-        <br>
+        <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+        <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
 
+</ol>
+</details>
+
+<br>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">'import module_A' and Python Execution model.</summary>
+<ol start="15">
         <li>Python 'import module_A' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime? What if there is second the same import?</li>
         <pre>
 
@@ -418,20 +412,15 @@ importlib.reload(module_A)</pre>
                     <li><a href="images/execution_context.png">[Py Execution Model] Utworzenie kontekstu wykonania (execution context)</a></li>
                     <li><a href="images/PyExe_advanced.png">[Py Execution Model] Bardziej dokładny model wykonania.</a></li>
                 </ul>
-        <hr>
-        <hr>
-        <hr>
-            <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
-            <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
-        <hr>
-        <hr>
-        <hr>
 </ol>
+</details>
+        <hr>
+        <hr>
 <br>
 <b style="background: #ADD8E6;">Python Call Stack / Python Frames:</b>
 <br>
 <br>
-<ol start="18">
+<ol start="16">
         <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
         <br>
         <hr>
@@ -443,7 +432,7 @@ importlib.reload(module_A)</pre>
 <b style="background: #ADD8E6;">CLASSES:</b>
 <br>
 <br>
-<ol start="19">
+<ol start="17">
         <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
         <br>
         <li>Python class level '__slots__' mechanism - it predefines possible instance attributes (there is no __dict__ on instance level). Many instance as performance optimization Use Case. Simulation showed 150-300 MB memory saving when 1 million objects are handled.</li>
@@ -484,7 +473,7 @@ importlib.reload(module_A)</pre>
 <b style="background: #ADD8E6;">PROTOCOLS:</b>
 <br>
 <br>
-<ol start="31">
+<ol start="29">
         <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
 
         <br>
@@ -609,7 +598,7 @@ Other things:
     <br>
     <br>
 
-    <ol start="34">
+    <ol start="32">
         <li>Functions are objects, but not so-typical. What makes functions not typical objects?</li>
 <pre>
 
@@ -648,7 +637,7 @@ Notes:
 
 <b style="background: #ADD8E6;">Testing things:</b>
 <br>
-<ol start="36">
+<ol start="34">
         <li>Mock and Stub what is the difference? Other test doubles: Dummy, Fake, Spy</li>
 <pre>
 Mock:
@@ -695,7 +684,7 @@ Use MagicMock when:
 
 <b style="background: #ADD8E6;">Concurrency things:</b>
 <br>
-<ol start="39">
+<ol start="37">
         <li>When 'race condition' situation happens?</li>
 <pre>
  - multiple threads or processes access shared data and at least one modifies it, but the access is not properly synchronized.
@@ -716,6 +705,96 @@ Use MagicMock when:
  - Bigger project ideas
 </pre>
 
+
+
+
+<b style="background: #ADD8E6;">ITERABLES / ITERATORS / SEQUENCES:</b>
+<br>
+<br>
+<ol start="101">
+        <li>Iterator and Iterable objects implementing certain protocols. What are details of these protocols?</li>
+        <pre class="code">
+Iterator protocol:
+ - Iterator object needs to implement __iter__ and __next__.
+   Main feature of Iterators is allowing for sequence access of data stream - no need to maintain all data in memory.
+
+Iterable protocol:
+ - Iterable object should implement __iter__, but not it is not requirement if there is no __iter__ then __getitem__ is required.
+   In the other words iter(Iterable_object) should always produce valid Iterator object.
+
+Dict objects are Iterable, but are not Iterators:
+>>> hasattr(dict(), "__iter__")
+True
+>>>
+>>> hasattr(dict(), "__next__")
+False
+>>>
+>>> hasattr(dict(), "__getitem__")
+True # However it is not implementing Indexing/Slicing
+>>>
+>>> iter(dict())
+dict_keyiterator object at 0x7d7e055eba10
+    => dict objects are Iterables (but are not Iterators and Sequences)</pre>
+
+
+<pre class="code">
+"__getitem__ edge case":
+    In Python 3 builtin collections are generally implement __iter__. However:
+     - Still it is possible to create a class that have only __getitem__ and not __iter__ and such object will be Iterable.
+     - It is rather hack than common practice, but handling __getitem__ in Iterable protocol still works.</pre>
+<ul>
+    <li><a href="python_deepness/protocols/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
+</ul>
+
+        <br>
+        <li>What are builtin Iterable data structures that are also Iterators (have __next__ and __iter__)?</li>
+        <div> - map, filter, reduce, zip - map example:</div>
+
+            <pre class="code">
+>>> L = [0, 2, 4, 6, 8]
+>>>
+>>> mapped_L = map(lambda x: x + 1, L)
+>>>
+>>> mapped_L
+map object at 0x70d609f84a60
+>>>
+>>> hasattr(mapped_L, "__iter__")
+True
+>>> hasattr(mapped_L, "__next__")
+True
+>>> hasattr(mapped_L, "__getitem__")
+False
+    => map objects are Iterables and Iterators (but not Sequences)
+</pre>
+
+        <li>What are details of sequence protocol in Python?</li>
+            <pre class="code">
+Sequence objects in the most basic version need to implement two dunder methods: __getitem__, __len__:
+ - __getitem__, __len__ are base for Indexing and slicing functionalities.
+ - __getitem__ from dict doesnt allow Indexing and Slicing, so having __getitem__ is not enough, implementation matters.
+ - In more complete version also methods: __contains__, __iter__, __reversed__, index and count.
+
+All Sequences are also Iterable, but not opposite.
+
+Range object example:
+>>> R = range(3)
+>>> type(R) #
+&lt;class 'range'&gt;
+>>> hasattr(R, "__getitem__")
+True
+>>> hasattr(R, "__len__")
+True
+>>> R[1]
+1
+>>> hasattr(R, "__iter__")
+True
+>>> hasattr(R, "__next__")
+False
+    => range objects are Sequences and Iterables, but not Iterators
+</pre>
+
+</ol>
+
 </div>
 </div>
 </div>
@@ -724,11 +803,9 @@ Use MagicMock when:
         <div class="col-md-3">
             <div class="card mb-4 box-shadow" style="background-color: #90EE90;">
                 <div class="card-body">
-                    <h4 style="font-weight: bold;text-decoration: underline;">Knowledge Reviews:</h4>
+<!--                    <h4 style="font-weight: bold;text-decoration: underline;">Knowledge Reviews:</h4>-->
 <pre>
-Dobre praktyki / Clean code, co wiem?
-  PEP-8? PEP-257?
-  Jak wyświetlić Zen of Python (PEP 20)?
+import this # PEP 20, Zen of Python
 
 Narzędzia lintujące (wymuszają dobre praktyki):
   flake8 — sprawdzanie zgodności ze stylem PEP8
@@ -738,10 +815,25 @@ Narzędzia lintujące (wymuszają dobre praktyki):
            jakości kodu
   mypy — sprawdzanie poprawności typów
 
-1)
 
-2)
-3)
+1. Stosuj PEP 8, PEP 20
+2. Czytelność ważniejsza niż spryt
+3. Używaj typów i adnotacji
+4. List/dict/set comprehensions
+   zamiast pętli budujących listy
+5. Enumerate zamiast ręcznego licznika
+6. Zip do łączenia list
+7. Unpacking
+8. Context manager (with)
+   zamiast ręcznego otwierania/zamykania
+9. Małe, czytelne funkcje –
+   każda powinna robić jedną rzecz.
+10. Docstringi, PEP-257
+11. „DRY” – don’t repeat yourself.
+12. Testy jednostkowe (moduł unittest/pytest).
+13. Zasada EAFP:
+    „Easier to Ask for Forgiveness than
+    Permission”
 </pre>
 </div>
 </div>
@@ -749,6 +841,7 @@ Narzędzia lintujące (wymuszają dobre praktyki):
 </div>
 
 
+<br>
 <br>
 
 <div class="row">
