@@ -1,0 +1,63 @@
+
+1 - Stworzenie nowego brancha dla konkretnej wersji (from main)
+2 - faza alpha
+3 - faza beta (No new features beyond this point.)
+4 - faza RC = Release Candidates
+5 - New Stable Python version - final release)
+
+
+
+1 - Stworzenie nowego brancha dla konkretnej wersji
+PEP 745 – Python 3.14 Release Schedule.
+ - 3.14 development begins: Wednesday, 2024-05-08
+ - W dniu rozpoczęcia developmentu nowej wersji (PEP 745, 8 maja 2024) ktoś robi po prostu:
+     git checkout main
+     git checkout -b 3.14
+
+        Od tego momentu:
+            Wszystkie nowe funkcje 3.14 są wprowadzane tylko w branchu 3.14.
+            main może dalej przyjmować poprawki i przygotowywać kod do przyszłych wersji (np. 3.15).
+
+     Branch 3.14 jest czasem nazywany „development branch” lub „feature branch” dla tej wersji.
+
+
+
+1b) Co dzieje się przed pierwszą alfą?
+
+Planowanie	Akceptacja PEP-ów, prototypowanie	Wyznaczenie zakresu nowej wersji
+Commitowanie zmian	Dodawanie nowych funkcji, modyfikacje istniejących	Przygotowanie kodu do pierwszej alfa
+Przygotowanie testów	Tworzenie testów jednostkowych, CI	Zapewnienie, że kod będzie testowalny
+Dokumentacja	Pierwsze szkice dokumentacji	Rozpoczęcie „What’s New” i PEP Notes
+
+
+
+2 - faza alpha:
+    3.14.0 alpha 1: Tuesday, 2024-10-15
+    3.14.0 alpha 2: Tuesday, 2024-11-19
+    3.14.0 alpha 3: Tuesday, 2024-12-17
+    3.14.0 alpha 4: Tuesday, 2025-01-14
+    3.14.0 alpha 5: Tuesday, 2025-02-11
+    3.14.0 alpha 6: Friday, 2025-03-14
+    3.14.0 alpha 7: Tuesday, 2025-04-08
+
+
+
+3 - faza beta:
+    3.14.0 beta 1: Wednesday, 2025-05-07 (No new features beyond this point.)
+    3.14.0 beta 2: Monday, 2025-05-26
+    3.14.0 beta 3: Tuesday, 2025-06-17
+    3.14.0 beta 4: Tuesday, 2025-07-08
+
+
+4 - faza RC (Release Candidate):
+    3.14.0 candidate 1: Tuesday, 2025-07-22
+    3.14.0 candidate 2: Thursday, 2025-08-14
+    3.14.0 candidate 3: Thursday, 2025-09-18
+
+
+5 - stabilne wydanie (final release):
+    3.14.0 final: Tuesday, 2025-10-07
+
+    Oznacza to, że wersja 3.14 przeszła przez wszystkie fazy alfa, beta i RC (release candidate),
+    i teraz jest oficjalnie dostępna jako produkcyjna wersja Pythona.
+

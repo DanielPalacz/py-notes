@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<div class="row mb-10">
+    <div class="col-8">
+    <h1 style="font-size:80px;text-decoration: underline;font-weight: bold;">Security</h1>
+</div>
+</div>
+
+
+
+<div class="row mb-10">
+    <div class="col-8">
+    <br>
+    <br>
+    <h2 style="font-size:40px;font-weight: bold;">OWASP Top 10 (2021):</h2>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow" style="background-color: #11A500;">
+            <div class="card-body">
+<pre>
+A01:2021 – Broken Access Control
+    Najczęstszy i najbardziej krytyczny problem.
+    Obejmuje błędy w kontroli dostępu: np. brak walidacji ról, możliwość odwoływania się do zasobów innych użytkowników (IDOR),
+        brak ograniczeń w operacjach API.
+
+A02:2021 – Cryptographic Failures (wcześniej: Sensitive Data Exposure)
+    Dotyczy błędów w szyfrowaniu i przechowywaniu danych.
+    Przykłady: użycie przestarzałych algorytmów, brak HTTPS, brak szyfrowania haseł.
+
+A03:2021 – Injection
+    Klasyczna podatność (np. SQL Injection, NoSQL Injection, OS Command Injection).
+    Atakujący „wstrzykuje” dane interpretowane jako kod przez backend.
+
+A04:2021 – Insecure Design (nowa kategoria w 2021)
+    Problemy wynikające z błędów architektonicznych i projektowych, a nie tylko implementacyjnych.
+    Np. brak modelowania zagrożeń, złe reguły logiki biznesowej.
+
+A05:2021 – Security Misconfiguration
+    Błędne ustawienia serwerów, frameworków, bibliotek czy kontenerów.
+    Typowe przykłady: włączone domyślne konta, niepotrzebne usługi, brak nagłówków bezpieczeństwa HTTP.
+
+A06:2021 – Vulnerable and Outdated Components
+    Korzystanie ze starych, dziurawych bibliotek, frameworków lub modułów.
+    Kluczowy problem w erze intensywnego użycia open source.
+
+A07:2021 – Identification and Authentication Failures (wcześniej: Broken Authentication)
+    Błędy w logowaniu i sesjach.
+    Przykłady: słabe hasła, brak MFA, tokeny sesji łatwe do przewidzenia.
+
+A08:2021 – Software and Data Integrity Failures (nowa kategoria w 2021)
+    Brak weryfikacji integralności kodu i danych.
+    Przykłady: ataki typu supply chain, brak weryfikacji podpisów cyfrowych przy aktualizacjach.
+
+A09:2021 – Security Logging and Monitoring Failures (wcześniej: Insufficient Logging & Monitoring)
+    Problemy z rejestrowaniem zdarzeń i monitorowaniem.
+    Brak logów bezpieczeństwa, brak alertów, brak korelacji incydentów.
+
+A10:2021 – Server-Side Request Forgery (SSRF) (nowa kategoria w 2021)
+    Atak, w którym aplikacja daje się nakłonić do wysłania żądania HTTP do wewnętrznego zasobu.
+    Może umożliwić atakującemu dostęp do usług chmurowych, baz danych czy sieci wewnętrznej.
+</pre>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow" style="background-color: #11A500;">
+            <div class="card-body">
+                <div><u><b>The Cybrary Training Framework:</b></u></div>
+<pre>
+
+Domains (Cybersecurity Functions) and skills (Topics):
+
+  - Foundations:
+    Network Fundamentals
+    Operating System Fundamentals
+    Cybersecurity Fundamentals
+    Scripting and Programming Fundamentals
+    AI Fundamentals
+
+  - Defensive Security:
+    Defensive Security Fundamentals
+    Log Analysis
+    Host-Based Analysis
+    Network-Based Analysis
+    Digital Forensics
+    Incident Response
+    Threat Intelligence
+    Threat Hunting
+
+  - Offensive Security
+    Offensive Security Fundamentals
+    Reconnaissance and Enumeration
+    Network Attacks
+    Application Attacks
+    Credential Attacks
+    Evasion
+    Red Teaming
+
+  - Engineering and Operations:
+    Security Engineering Fundamentals
+    Infrastructure and Operations Security
+    Application Security
+    Data Security
+    Cloud Infrastructure
+    System Administration
+
+  - Governance, Risk, and Compliance
+    Security Governance
+    Risk Management
+    Security Compliance
+
+  - Leadership and Management
+
+  - Threats and Vulnerabilities
+
+</pre>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4 box-shadow" style="background-color: #11A500;">
+            <div class="card-body">
+                <div><u><b>Job roles::</b></u></div>
+<pre>
+  - Security Analysts or SOC Analysts:
+
+
+</pre>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row mb-10">-->
+<!--    <div class="col-8">-->
+<!--    <br>-->
+<!--    <h2 style="font-size:40px;font-weight: bold;">Hashes:</h2>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+
+</body>
+</html>
+
+
