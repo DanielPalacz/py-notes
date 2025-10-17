@@ -245,7 +245,7 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
 </details>
 
 
-<hr></hr>
+<br>
 
 <details>
 <summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous.</summary>
@@ -387,23 +387,31 @@ importlib.reload(module_A)</pre>
                 </ul>
 </ol>
 </details>
-        <hr>
-        <hr>
 <br>
-<b style="background: #ADD8E6;">Python Call Stack / Python Frames:</b>
-<br>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python Call Stack / Python Frames.</summary>
 <br>
 <ol start="16">
-        <li>Cases when Python creates Frames objects? Function calls, importing modules, execution main script (__main__), execution classes call body. Also, eval/exec can cause additional Frames are created.</li>
+<li>Cases when Python creates Frames objects?</li>
+<pre>
+ - functions calls,
+ - importing modules,
+ - execution main script (__main__),
+ - execution classes call body.
+ - also, eval/exec calls can cause additional Frames are created.
+</pre>
         <br>
         <hr>
         <hr>
         <hr>
 
 </ol>
+</details>
 <br>
-<b style="background: #ADD8E6;">CLASSES:</b>
-<br>
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">CLASSES</summary>
+
 <br>
 <ol start="17">
         <li>Weak references, unpopular Python feature (class __weakref__ attribute that does almost nothing. Weak references logic is managed by Python interpreter). Advanced projects with critically important memory management aspect (for example: help for Garbage Collector).</li>
@@ -438,12 +446,15 @@ importlib.reload(module_A)</pre>
 <br>
 
 <li>The word about 'object' class - concretely instances - and when object() structure could be useful. object() doesnt have __dict__ and is immutable. (Sentinel, Locks)</li>
-
-
-
 </ol>
+</details>
+
+
 <br>
-<b style="background: #ADD8E6;">PROTOCOLS:</b>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">PROTOCOLS</summary>
+
 <br>
 <br>
 <ol start="29">
@@ -565,9 +576,13 @@ Other things:
   - it can be said that module objects use Attribute Lookup protocol too
   - Summary: Why Attribute Lookup is needed for Python?
         </pre>
+</details>
+
 
 <br>
-    <b style="background: #ADD8E6;">Functions Deep Dive:</b>
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Functions Deep Dive</summary>
+
     <br>
     <br>
 
@@ -603,10 +618,12 @@ Notes:
 </pre>
 
 </ol>
-
+</details>
 
 
 <br>
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Testing things:</summary>
 
 <b style="background: #ADD8E6;">Testing things:</b>
 <br>
@@ -654,8 +671,13 @@ Use MagicMock when:
         <li>Mocking vs patching? What is difference?</li>
         <br>
         </ol>
+</details>
+<br>
 
-<b style="background: #ADD8E6;">Concurrency things:</b>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Concurrency things:</summary>
+
 <br>
 <ol start="37">
         <li>When 'race condition' situation happens?</li>
@@ -669,8 +691,12 @@ Use MagicMock when:
 
 
 </ol>
+</details>
+<br>
 
-<b style="background: #ADD8E6;">TODO:</b>
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">TODO:</summary>
+
 <br>
 <pre>
  - fastapi, pydantic
@@ -678,11 +704,12 @@ Use MagicMock when:
  - Bigger project ideas
 </pre>
 
-
-
-
-<b style="background: #ADD8E6;">ITERABLES / ITERATORS / SEQUENCES:</b>
+</details>
 <br>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">ITERABLES / ITERATORS / SEQUENCES:</summary>
+
 <br>
 <ol start="101">
         <li>Iterator and Iterable objects implementing certain protocols. What are details of these protocols?</li>
@@ -767,6 +794,7 @@ False
 </pre>
 
 </ol>
+</details>
 
 </div>
 </div>
