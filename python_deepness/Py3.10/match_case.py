@@ -15,3 +15,4 @@
 
 # Konstrukcja match / case (tzw. Structural Pattern Matching) została wprowadzona w Pythonie 3.10 (wydanym w październiku 2021).
 # Źródłem jest PEP 634, który opisuje dokładnie zasady działania tego mechanizmu.
+# For the full specification see PEP 634. Motivation and rationale are in PEP 635, and a longer tutorial is in PEP 636.

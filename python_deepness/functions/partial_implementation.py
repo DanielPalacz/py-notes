@@ -5,7 +5,7 @@ def partial_funct(func, *fixed_args, **fixed_kwargs):
     def wrapper(*args, **kwargs):
         return func(*fixed_args, *args, **fixed_kwargs, **kwargs)
 
-    update_wrapper(wrapper, func)  # Copying metadata of original function (it will work on class methods nowa)
+    update_wrapper(wrapper, func)  # Copying metadata of original function (it will work on class methods)
     return wrapper  # New function
 
 

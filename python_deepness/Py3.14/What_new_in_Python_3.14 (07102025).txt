@@ -1,0 +1,15 @@
+Co nowego w Pythonie 3.14?
+Kilka z najważniejszych zmian:
+    Szybszy interpreter – dalsze ulepszenia w CPythonie (projekt Faster CPython).
+    Usprawnione typowanie (m.in. TypeIs, lepsza obsługa TypedDict i Protocol).
+    Nowe narzędzia do debugowania – lepsze tracebacks, diagnostyka GC.
+    Rozszerzenia w asyncio i nowy mechanizm zarządzania taskami.
+    Poprawki bezpieczeństwa i usunięcie kilku starych, przestarzałych modułów.
+
+
+
+3.14 lifespan
+    Python 3.14 will receive bugfix updates approximately every two months for approximately 24 months.
+    Around the time of the release of 3.16.0 final, the final 3.14 bugfix update will be released.
+    After that,
+        it is expected that security updates (source only) will be released until five years after the release of 3.14.0 final,so until approximately October 2030.

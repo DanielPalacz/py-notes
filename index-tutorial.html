@@ -103,7 +103,6 @@
 <br>
 <br>
 <br>
-<br>
 <div class="row">
     <div class="col-md-8">
             <div class="card mb-4 box-shadow" style="background: yellow;">
@@ -119,13 +118,8 @@
             <div class="card-body">
                 <img src="images/paradigms.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
                 <ul>
-<!--                    <li>...</li>-->
-<!--                    <li><a href="images/paradigms.png">Python - Wspierane paradygmaty.</a></li>-->
-<!--                    <img src="images/paradigms.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">-->
-
                     <br>
                     <li>Python jest językiem wysokiego poziomu (jego syntax jest zrozumiały dla ludzi).</li>
-                    <li>Python Data Model. Rules, design assumptions related to treating objects in Python.</li>
                     <li>Object oriented programming. "Duck-typing" is Python-like-way of doing things.</li>
                 </ul>
             </div>
@@ -277,8 +271,14 @@ Then:
         <br>
         <li>MappingProxy / FrozenSet / NamedTuple / Arrays / Deque / SimpleNamespace - why/when these structure can be useful?</li>
         <br>
-        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean? Unicode is universal symbol representation system - it contains all world alphabets and also other symbols like emojis. When UTF-8 is Unicode symbols coding system to bytes form.</li>
+        <li>Unicode and UTF-8 are default in Python 3, but what does it really mean?</li>
 <pre class="code">
+Unicode is universal symbol representation system
+ - it contains all world alphabets and also other symbols like emojis.
+When UTF-8 is Unicode symbols coding system to bytes form.
+UTF-8 is a variable-width encoding that supports all 1,112,064 valid Unicode code points using one to four bytes.
+ - UTF = Unicode Transformation Format
+
 Unicode / UTF-8 example:
     Unicode mapping:
       chr(300) => Return a Unicode string of one character with ordinal i; 0 <= i <= 0x10ffff.
@@ -292,8 +292,20 @@ Unicode / UTF-8 example:
         <li>Python float implements IEEE 754, so float64 precision (53 bit mantis). 2**53 is the biggest number represented accurately.</li>
         <br>
         <li>In Python str class there are maketrans (static method) and translate methods. It can be useful for converting text and removing specific symbols.</li>
+<pre>
+>>> sentence = "Ann has a great day! What about you?"
+>>> sentence_output = sentence.translate(str.maketrans("!", "."))
+>>> sentence_output
+'Ann has a great day. What about you?
+</pre>
         <br>
         <li>Ellipsis it is unique constant accessed globally in Python (instance of EllipsisType). When we can use ellipsis object?</li>
+        <pre>
+ - In slicing (advanced indexing)
+ - As a placeholder in code (“to be implemented later”)
+ - In type hints (PEP 484 / typing)
+ - For custom or creative uses</pre>
+
         <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
         <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
 
@@ -707,8 +719,27 @@ Use MagicMock when:
 </details>
 <br>
 
+
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">ITERABLES / ITERATORS / SEQUENCES:</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Python Data Model / Python Data Types.</summary>
+<br>
+<pre>
+Python Data Model:
+ - wewnętrzna architektura i zestaw zasad określających, jak obiekty w Pythonie zachowują się i współdziałają ze sobą.
+
+Python, rodzaje typów danych:
+ - typy proste
+ - typy sekwencyjne
+ - typy zbiorów
+ - typy słownikowo-mapujące
+ - typy binarne
+ - typy funkcjonalne i użytkownika
+</pre>
+</details>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Iterators, Iterables, Sequences.</summary>
 
 <br>
 <ol start="101">
@@ -1050,7 +1081,22 @@ Narzędzia lintujące (wymuszają dobre praktyki):
             <div class="card-body">
                 <a class="main-a" href="https://docs.python.org/3/tutorial/inputoutput.html">7. Input and Output</a>
                 <ul>
-                    <li class="todo">TODO</li>
+                    <li class="todo">
+                        <pre class="todo">
+'open' usage examples:
+
+with open(file=input_file, mode="r+b") as rb_file:
+    ...
+    # rb_file object has type: _io.BufferedReader
+    # r+ - otwórz plik do odczytu i zapisu, ale plik musi istnieć (nie zostanie utworzony)
+    # b  – otwórz w trybie binarnym, czyli bez konwersji znaków i końców linii
+
+with open(file=input_file, encoding="utf-8") as file:
+     ...
+     # file object has type: _io.TextIOWrapper
+     #  - __iter__, __next__
+     #  - mode="rt" (default)</pre>
+                    </li>
                 </ul>
 
             </div>
