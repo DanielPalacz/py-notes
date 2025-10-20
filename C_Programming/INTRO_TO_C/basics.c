@@ -99,7 +99,7 @@ int print_example6() {
     printf(" -> // wskaźnik ptr przechowuje adres x");
     printf("Adres x = %p\n", &x);
     printf("ptr (adres zmiennej x) = %p\n", ptr);
-    printf("&ptr (adres wskaźnika ptr) = %p\n", &ptr);
+    printf("&ptr (adres wskaźnika &ptr) = %p\n", &ptr);
     printf("Wartosc wskazywana przez ptr = %d\n", *ptr);
     printf("\n\n");
 

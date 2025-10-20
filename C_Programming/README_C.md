@@ -5,7 +5,7 @@
 
 ##### Flow budowania / uruchomienia programu
 ```
- - gcc -E hello_world.c -o hello_world.i (Preprocesor, cpp)
+ - gcc -E hello_world.c -o hello_world.i (Preprocesor, cpp, # - ten znak w kodzie C oznacza preprocesor)
  - gcc -S hello_world.c -o hello_world.s (Kompilacja (cc1)
  - gcc -c hello_world.c -o hello_world.o (Asemblacja, as)
  - gcc hello_world.c -o hello_world.o (ld, Linkowanie statyczne odbywa się w czasie kompilacji)
@@ -39,7 +39,19 @@ Typy złożone:
 W języku C: NULL i sentinele to konwencje, nie oddzielne typy danych.
 
 Czym różni się tablica od wskaźnika?
- - tablica jest ciągłym blokiem zarezerwowanej pamięci - nie jest wskaźnikiem
+ - tablica, typ złożony definiujący ciągły blok zarezerwowanej pamięci - nie wskaźnik.
+ - wskaźnik, typ złożony przechowujący adres w pamięci innej zmiennej
+
+Tablice:
+    char text[] = "Hello, C!"; // tablica elementów typu char
+    int liczby[5]; // tablica 5 elementów typu int
+
+Wskaźniki:
+    int a1 = 11;
+    int *p = &a1;
+        // *p - wartosc wskazywana przez wskaźnik, wartość 'a1'
+        // p - adres w pamięci, gdzie jest  ulokowana wskazywana zmienna 'a'
+        // &p - adres w pamięci, gdzie jest  ulokowany wskaźnik p
 ```
 
 #### Zakresy (scopes) w C:
