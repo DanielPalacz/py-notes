@@ -48,7 +48,7 @@ class CountCalls:
 
     def __call__(self, *args, **kwargs):
         self.num_calls += 1
-        print("[Dekorator call][CountCalls] __call__ [", "args: ", args, ", kwargs: ", kwargs, "]", sep="")
+        print("[Dekorator call][CountCalls] __call__ [", "args: ", args, ", kwargs: ", kwargs, ", num_calls: ", self.num_calls, "]", sep="")
         return self.func(*args, **kwargs)
 
 # [CountCalls] Class creation flow
@@ -61,6 +61,7 @@ def funct(text):
 # [Dekorator syntax][CountCalls] __new__
 # [Dekorator syntax][CountCalls] __init__
 
+funct("Now.")
 funct("Now.")
 # [Dekorator call][CountCalls] __call__ [args: ('Now.',), kwargs: {}]
 # Now.

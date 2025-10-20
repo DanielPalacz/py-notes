@@ -67,3 +67,4 @@ class X:
 
 print(X().f)
 print(X().g)
+print(X.g)

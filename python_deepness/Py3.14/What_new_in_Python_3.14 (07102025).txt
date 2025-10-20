@@ -1,15 +1,29 @@
-Co nowego w Pythonie 3.14?
-Kilka z najważniejszych zmian:
-    Szybszy interpreter – dalsze ulepszenia w CPythonie (projekt Faster CPython).
-    Usprawnione typowanie (m.in. TypeIs, lepsza obsługa TypedDict i Protocol).
-    Nowe narzędzia do debugowania – lepsze tracebacks, diagnostyka GC.
-    Rozszerzenia w asyncio i nowy mechanizm zarządzania taskami.
-    Poprawki bezpieczeństwa i usunięcie kilku starych, przestarzałych modułów.
+Co nowego w Pythonie 3.13?
 
+Python 3.13 – najważniejsze zmiany (wydany 7 października 2024):
 
+Interpreter i REPL
+    Całkowicie nowy interaktywny interpreter (REPL) oparty na kodzie PyPy: kolorowe prompt’y i tracebacki, edycja wieloliniowa,
+        tryby F1–F3 (pomoc, historia, paste mode).
+    Śledzenie zmian w module locals(), ułatwiające narzędziom debugowania
 
-3.14 lifespan
-    Python 3.14 will receive bugfix updates approximately every two months for approximately 24 months.
-    Around the time of the release of 3.16.0 final, the final 3.14 bugfix update will be released.
-    After that,
-        it is expected that security updates (source only) will be released until five years after the release of 3.14.0 final,so until approximately October 2030.
+Równoległość i wydajność
+    Eksperymentalny tryb free-threaded (bez GIL), wymagający specjalnego wykonawcy (python3.13t)
+    Wsparcie dla eksperymentalnego JIT (Just-In-Time) – nie jest włączony domyślnie
+
+Typowanie
+    Domyślne wartości dla parametrów typów (TypeVar, ParamSpec, TypeVarTuple) (PEP 696)
+    Dekorator warnings.deprecated() (PEP 702), „ReadOnly” w TypedDict (PEP 705) oraz TypeIs do zawężania typów (PEP 742)
+
+Standardowa biblioteka i usunięcia
+    Usunięcie wielu przestarzałych modułów („dead batteries”, PEP 594)
+        plus lib2to3, tkinter.tix, locale.resetlocale(), typing.io, typing.re, oraz inne
+    Nowe funkcje: PythonFinalizationError w obsłudze finalizacji, możliwości deprecacji w argparse,
+        nowy backend dbm.sqlite3, funkcje w os, CLI dla random, copy.replace() i inne
+    Docstringi tracą wiodące wcięcia, oszczędzając pamięć i zmniejszając .pyc
+
+Wrażenia społeczności
+    Nowy REPL doceniany jako znaczące usprawnienie:
+        „Block-level editing… Smart pasting… history mode…”
+    Przykład speed-upu: bez-GIL na laptopie z 4 rdzeniami 3,7× szybszy
+    JIT na razie wolniejszy niż zwykły interpreter – raczej ekspertyment niż użyteczne narzędzie

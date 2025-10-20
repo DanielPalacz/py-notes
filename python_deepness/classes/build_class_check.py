@@ -64,14 +64,10 @@ class ClassCreationFlowReview(metaclass=TypeDebug):
     print(" * locals() during Class body execution", locals())
     print(" * Executing code of Class body - end.")
     print()
-    # super().__dict__
 
 
-
-
-print()
 # print(ClassCreationFlowReview().prepare)
-print("Magic number is:", ClassCreationFlowReview().r)
+# print("Magic number is:", ClassCreationFlowReview().r)
 
 # class B(A):
 #     y = 20
@@ -83,19 +79,14 @@ print("Magic number is:", ClassCreationFlowReview().r)
 
 
 # Class creation protocol:
-# 1. builtins.__build_class__(*(A, "A"), **{'metaclass': <class '__main__.TypeDebug'>})
-#    - A is function type
+#  - builtins.__build_class__
+#  - [metaclass].__prepare__
+#  - executing code of the given Class body (like function type)
+#  - [the given class].__set_name__(cls, descr_name)
 
-# Here: [metaclass].__prepare__ is triggered
+#  - [the given class].__new__
+#  - [the given class].__init__
 
-# 2. Executing code of Class body (like function type)
-#    - triggering cls.__set_name__(cls, descr_name)
-
-# 3. type.__new__(class_name, (BaseClass1, ...), {'__module__': '__main__', '__qualname__': class_name, 'class_attr': class_attr_value})
-#    - it creates instance of class object that will be used by __init__ method
-
-# 4. type.__init__(cls, class_name, (BaseClass1, ...), {'__module__': '__main__', '__qualname__': class_name, 'class_attr': class_attr_value})
-#    - triggering hook: 'cls.__init_subclass__'
 
 # Hooks:
 #  - [metaclass].__prepare__

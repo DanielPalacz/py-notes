@@ -6,8 +6,11 @@ def funct():
 
     breakpoint()
 
-
-funct()
+print("dir(funct):", dir(funct))
+print("dir():", dir())
+# breakpoint()
+# exit()
+#funct()
 
 # (Pdb) dir(_frame)
 # [

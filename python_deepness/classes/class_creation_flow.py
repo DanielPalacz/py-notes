@@ -30,4 +30,4 @@ class MyClass(metaclass=CustomMetaclassType):
         print("[MyClass][__init__]Initializing the instance of MyClass.")
 
 # Create an instance of MyClass
-obj = MyClass()
+# obj = MyClass()
