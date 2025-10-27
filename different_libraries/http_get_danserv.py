@@ -195,6 +195,9 @@ def make_response(url_path: str, is_favicon: bool = False, incorrect_request: bo
         # resp_body = f"Emulating Web application. Response for: {url_path!r} page.".encode()
         with open("onePageHtmlWebsite_index.html") as html_page_file:
             text = html_page_file.read()
+            text = text.replace('<body>',
+                                '<body><a href="/file">Link to the pdf file (open doc).</a><br>'
+                                            '<a href="/file_download">Link to the pdf file (download doc).</a>')
             resp_body = text.encode()
 
         resp = b"HTTP/1.1 200 OK\r\n" \
@@ -203,6 +206,30 @@ def make_response(url_path: str, is_favicon: bool = False, incorrect_request: bo
                b"Connection: close\r\n\r\n" + \
                resp_body
         return resp
+    elif url_path == '/file':
+        with open("file.pdf", mode="rb") as pdf_file:
+            resp_body = pdf_file.read()
+
+        resp = b"HTTP/1.1 200 OK\r\n" \
+               b"Content-Type: application/pdf\r\n" \
+               b"Content-Disposition: inline; filename=file.pdf" + b"\r\n" \
+               b"Content-Length: " + str(len(resp_body)).encode() + b"\r\n" \
+               b"Connection: close\r\n\r\n" + \
+               resp_body
+        return resp
+    elif url_path == '/file_download':
+        with open("file.pdf", mode="rb") as pdf_file:
+            resp_body = pdf_file.read()
+
+        resp = b"HTTP/1.1 200 OK\r\n" \
+               b"Content-Type: application/pdf\r\n" \
+               b"Content-Disposition: attachment; filename=file.pdf" + b"\r\n" \
+               b"Content-Length: " + str(len(resp_body)).encode() + b"\r\n" \
+               b"Connection: close\r\n\r\n" + \
+               resp_body
+        return resp
+
+    # Other not-defined sub-pages:
     else:
         LOGGER.debug(f"[Server,{HOST}:{PORT}][{thread_name}] sub-pages are not supported, detected not supported sub-page {url_path}.")
         resp_body = "404 Page not found.".encode()
