@@ -1,4 +1,5 @@
 
+
 function runFibonacci(num) {
   let a = 0;
   let b = 1;
@@ -11,7 +12,7 @@ function runFibonacci(num) {
   return b
 }
 
-let x = runFibonacci(6);
+console.log("[DEBUG][basics_script_fibonacci.js][runFibonacci] triggering runFibonacci(6) function execution.");
+let x2 = runFibonacci(6);
 
-console.log("runFibonacci returned:", x);
-console.log('Checking this object in global context. This is:', this);
+//console.log("[DEBUG][basics_script_fibonacci.js][runFibonacci] runFibonacci(6) returned:", x);

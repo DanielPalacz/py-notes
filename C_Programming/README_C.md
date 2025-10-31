@@ -23,7 +23,6 @@ Compiling with debug symbols and gdb debugger usage:
 ### Typy danych w języku C:
 ```
 Typy podstawowe (scalar types):
-
  - int (i jego warianty: short, long, long long, ze znakiem/signed, bez znaku/unsigned).
  - char (signed char, unsigned char też istnieją).
  - float, double, long double.

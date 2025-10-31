@@ -110,43 +110,43 @@ int print_example6() {
 
 
 
-int repeat_knowledge_A() {
+int repetition1() {
       int x1 = 2;
       x1 = 3; // też na stosie
       // Kompilator C generuje kod odkładający zmienne lokalne i adresy powrotu właśnie na stosie.
 
-      printf("\n\nRepetition A (liczby int, scanf, printf, stos w C):");
+      printf("\n\nRepetition 1 (liczby int, scanf, printf, stos w C):");
       printf("\n * x1=%d\n", x1);
       int x2;
       printf(" * podaj wartosc x2: ");
       scanf("%d", &x2);
       printf(" * zatem x2=%d\n", x2);
 
-      if (x2 == 101) {
-            printf(" * funkcja repeat_knowledge_A zwróci %d\n", x2);
+      if (x2 == 1) {
+            printf(" * funkcja repetition1 zwróci %d\n", x2);
       }
       else {
-            printf(" * funkcja repeat_knowledge_A nie zwróci 101");
+            printf("Random text.");
       }
 
       return x2;
 }
 
 
-int repeat_knowledge_B() {
-      printf("\n\nRepetition B (przypisanie przez wskaźnik):\n");
+int repetition2() {
+      printf("\n\nRepetition 2 (przypisanie przez wskaźnik):\n");
       int y2;
       int *b2 = &y2;
       printf(" * podaj wartosc y2: ");
       scanf("%d", b2);
       printf(" * zatem y2=%d (wskaźnik b2 użyty)\n", y2);
 
-      return 102;
+      return 2;
 }
 
 
-int repeat_knowledge_C() {
-      printf("\n\nRepetition C (wskaźnik a tablica):\n");
+int repetition3() {
+      printf("\n\nRepetition 3 (wskaźnik a tablica):\n");
 
       // Na systemie 64-bitowym, gdzie sizeof(int) == 4 i wskaźnik ma 8 bajtów:
       int liczby[5];
@@ -168,9 +168,9 @@ int repeat_knowledge_C() {
       int size4 = sizeof(*liczby);
       //→ *liczby to dereferencja pierwszego elementu, czyli int
       //→ 4
-      printf(" * *liczby to dereferencja pierwszego elementu, czyli int, rozmiar: %d bajtów\n", size4);
+      printf(" * '*liczby' to dereferencja pierwszego elementu, czyli int, rozmiar: %d bajtów\n", size4);
 
-      return 103;
+      return 3;
 }
 
 // Dyrektywy preprocesora (działa zanim kod trafi do kompilatora).
@@ -182,19 +182,19 @@ const double PI2 = 3.14159; // prawdziwa zmienna globalna o typie double
 int licznik = 0;  //  prawdziwa zmienna globalna o typie int
 
 
-int repeat_knowledge_D() {
-      printf("\n\nRepetition D (preprocesor #define impact):\n");
+int repetition4() {
+      printf("\n\nRepetition 4 (preprocesor #define impact):\n");
 
       int tab[SIZE];   // tutaj kompilator naprawdę zobaczy int tab[5];
       printf("Rozmiar = %d\n", SIZE);
 
-      return 104;
+      return 4;
 }
 
 
 
-int repeat_knowledge_E() {
-      printf("\n\nRepetition E:\n");
+int repetition5() {
+      printf("\n\nRepetition 5:\n");
       printf(" * tablica jest ciągłym blokiem zarezerwowanej pamięci - nie jest wskaźnikiem\n");
       printf(" * int (*p)[3] = &numbers;  // wskaźnik na tablicę 3 int\n");
       int numbers[3];
@@ -204,26 +204,53 @@ int repeat_knowledge_E() {
       (*p)[2] = 22;
       printf(" * numbers[0],...: %d, %d, %d\n\n", numbers[0], numbers[1], numbers[2]);
 
-      return 105;
+      return 5;
 }
 
 
+int repetition6() {
+      printf("\nRepetition 6 (size of diff numbers):\n");
+      // Standard C (ISO C99 / C11 / C17) nie określa rozmiaru typów liczbowych w bajtach,
+      // tylko pewne relacje i minimalne zakresy
+        //short int  >= 16 bitów
+        //int        >= 16 bitów
+        //long int   >= 32 bitów
+        //long long  >= 64 bitów
 
-char* slice(const char *src, int start, int end) {
-    // obliczamy długość "wycinka"
-    int len = end - start;
-    if (len <= 0) return NULL;
+      short int number1 = 111;
+      int number2 = 111;
+      long int number3 = 111;
+      long long number4 = 111;
 
-    // rezerwujemy pamięć (len znaków + terminator '\0')
-    char *result = malloc(len + 1);
-    if (!result) return NULL;
+      int size1 = sizeof(number1);
+      int size2 = sizeof(number2);
+      int size3 = sizeof(number3);
+      int size4 = sizeof(number4);
 
-    // kopiujemy fragment ze src[start] przez len znaków
-    strncpy(result, src + start, len);
-    result[len] = '\0';  // ręczne zakończenie
+      printf(" * rozmiar zmiennej number (short int number1 = 111): %d bajtów\n", size1);
+      printf(" * rozmiar zmiennej number (int number2 = 111): %d bajtów\n", size2);
+      printf(" * rozmiar zmiennej number (long int number3): %d bajtów\n", size3);
+      printf(" * rozmiar zmiennej number (long long number4 = 111): %d bajtów\n", size4);
 
-    return result;
+      return 6;
 }
+
+
+//char* slice(const char *src, int start, int end) {
+//    // obliczamy długość "wycinka"
+//    int len = end - start;
+//    if (len <= 0) return NULL;
+//
+//    // rezerwujemy pamięć (len znaków + terminator '\0')
+//    char *result = malloc(len + 1);
+//    if (!result) return NULL;
+//
+//    // kopiujemy fragment ze src[start] przez len znaków
+//    strncpy(result, src + start, len);
+//    result[len] = '\0';  // ręczne zakończenie
+//
+//    return result;
+//}
 
 
 
@@ -238,17 +265,10 @@ int strlen_f(const char *word, bool debug) {
     return i;
 }
 
-//int strlen_f(const char *word, bool debug) {
-//    const char *p = word;   // wskaźnik startuje na początek napisu
-//
-//    while (*p != '\0') {    // dopóki nie trafimy na terminator
-//        if (debug) {
-//            printf("[strlen_f ptr]: Znak (%c)\n", *p);
-//        }
-//        p++;                // przesuwamy wskaźnik na kolejny znak
-//    }
-//
-//    return p - word;        // różnica adresów = liczba znaków
+
+//char* strcpy_funct(const char *src) {
+//    char text[] = "Hello1.";
+//    return text;
 //}
 
 
@@ -267,16 +287,16 @@ int main(void) {
       print_example5();
       print_example6();
 
-      repeat_knowledge_A();
-      repeat_knowledge_B();
-      repeat_knowledge_C();
+      repetition1();
+      repetition2();
+      repetition3();
+      repetition4();
+      repetition5();
+      repetition6();
 
-
-      // 04.09
-      repeat_knowledge_D();
-      repeat_knowledge_E();
-      printf("[strlen_f output]: %d\n\n\n", strlen_f("akdehwklhejher", false));
-
+      printf("---------------------------------------------------------------------------------------------------\n");
+      // printf("[strlen_f output]: %d\n\n\n", strlen_f("akdehwklhejher", false));
       // compiled program returns the following value to shell process, it can be read by 'echo $?'
+
       return 9;
 }

@@ -153,7 +153,7 @@
                 <pre>
 W ECMAScript/ES6:
  - możliwość użycia import i export
- - modułowy zakres zamiest globalnego (zmienne nie trafiają do window)
+ - modułowy zakres zamiast globalnego (zmienne nie trafiają do window)
  - domyślnie używany tryb strict (use scrict;)
  - skrypty są ładowane/wykonywane domyślnie w "trybie asynchroniczności" defer
  - syntax importu wymaga ścieżki względnej i rozszerzenia pliku (import { funkcja } from './modul.js';)</pre>
@@ -175,8 +175,8 @@ W ECMAScript/ES6:
             <br>
             <li>004. Globalny kontekst w JavaScript (przeglądarka). Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
             <ul>
-                <li>005a. Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).</li>
-                <li>005b. Wprowadzono 'globalThis', żeby to wszystko połączyć. Użycie 'globalThis' to teraz zalecany sposób na wymuszenie globalnego kontekstu - działa na wszystkich typach środowisk.</li>
+                <li>004a. Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).</li>
+                <li>004b. Wprowadzono 'globalThis', żeby to wszystko połączyć. Użycie 'globalThis' to teraz zalecany sposób na wymuszenie globalnego kontekstu - działa na wszystkich typach środowisk.</li>
                 <li><a href="index-javascript-files/basics_004.html">Odpowiedź</a></li>
             </ul>
             <br>
@@ -196,17 +196,20 @@ W ECMAScript/ES6:
                 <ul>
                     <li><a href="index-javascript-files/basics_014.html">Odpowiedź</a></li>
                 </ul>
-                <li>005f. Tworzenie obiektów w JavaScript - przegląd możliwości.</li>
+                <li>005f. Tworzenie obiektów w JavaScript - przegląd możliwości.<a href="index-javascript-files/basics_015.html"> [Odpowiedź]</a></li>
                 <ul>
-                    <li><a href="index-javascript-files/basics_015.html">Odpowiedź</a></li>
-                    <li>015a. W JavaScript klucze obiektów zawsze są traktowane jako łańcuchy znaków. Porównanie z Python Dict.</li>
+                    <li> - każdy obiekt ma ukryte odwołanie do innego obiektu (albo null), nazywane prototypem</li>
+                    <li> - klucze obiektów zawsze są traktowane jako łańcuchy znaków. Porównanie z Python Dict.</li>
+                    <li> - klasy w JS to tylko ładniejsza forma prototypów, nawet jeśli używamy 'class', to tylko cukier składniowy.</li>
                 </ul>
 
 
             </ul>
             <br>
+            <br>
             <li>006. camelCase, PascalCase, snake_case, UPPERCASE - co i kiedy się używa w JavaScript.</li>
             <li>007. Jaka jest różnica między == i === w JavaScript? Kiedy co stosować?</li>
+            <br>
             <li>008. Funkcje w JavaScript. Jak działają funkcje strzałkowe?</li>
             <ul>
                 <li><a href="index-javascript-files/basics_008.html">Odpowiedź</a></li>
@@ -243,91 +246,12 @@ W ECMAScript/ES6:
         <div><u>Nauka / powtórki:</u></div>
         <br>
         <a style="padding: 10px; background-color: #ffa500 !important; color: blue;" href="index-javascript-files/practising/questions.html">Colorful questions</a>
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-<pre>
-Ad_005) Typy danych w JavaScript
- - JavaScript posiada type prymitywne i referencyjne.
- - W JavaScript nie wszystko jest obiektem (w Pythonie wszystko).
-
-Typy prymitywne (Typy proste = prymitywy)
-Charakterystyka/rodzaje:
- - Nie mają prototypu, nie dziedziczą po Object, jest ich 7.
- - Prymitywy nie są obiektami, i nie mają właściwości ani metod.
- - undefined, symbol, bigint, number, string, null, boolean
-
- - Zazwyczaj są nieobiektowe - przechowują swoje wartości
-   bezpośrednio. Jednak, są od tego wyjątki, jeśli to konieczne.
- - W pewnych sytuacjach, np kiedy próbujemy wywołać metody
-   na tych typach (np. toUpperCase() na stringu), JavaScript
-   tymczasowo "opakowuje" te wartości w odpowiednie nowe obiekty.
-   Jest to tzw Auto-Boxing w JS, natomiast nie wszystkie typy prymitywne
-   posiadają obiektowe wersje (String, Number, Boolean, Symbol).
-
- - W JavaScript przypisanie prymitywu kopiowanie wartości,
-   nie referencji. Zawsze.
-
-Typy referencyjne (obiekty):
- - Object jest podstawowym typem referencyjnym.
-
-</pre>
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-        </ul>
+        <br>
+        <br>
         </div>
     </div>
 
-        </div>
+</div>
 </div>
 
 

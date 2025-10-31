@@ -105,8 +105,10 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-A. Gdzie w dokumencie HTML można deklarować/osadzać kod JS? B.Jakie są wszystkie możliwości osadzania kodu JS w HTML?
-C. Jak dodatkowo można sterować osadzaniem kodu JS w HTML? D. Kiedy skrypt jest 'blokujący' i co to oznacza?
+A. Gdzie w dokumencie HTML można deklarować/osadzać kod JS?
+B.Jakie są wszystkie możliwości osadzania kodu JS w HTML?
+C. Jak dodatkowo można sterować osadzaniem kodu JS w HTML?
+D. Kiedy skrypt jest 'blokujący' i co to oznacza?
 
 Ad.A)
     - w sekcji head (niezalecane), w sekcji body (zalecane na końcu)
@@ -118,7 +120,8 @@ Ad.B)
     B2. Wczytawanie kodu JS wykorzystując plik z kodem JS, np:
         &ltscript src="app.js"&gt&lt/script&gt
 
-    B3. Wczytawanie kodu JS jako modułu ES6 wykorzystując plik z kodem JS. Przykład:
+    B3. Wczytywanie kodu JS jako modułu ES6 wykorzystując plik z kodem JS.
+        Przykład:
         &ltscript type="module"&gt
             import { funkcja } from './modul.js';
             funkcja();

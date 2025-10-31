@@ -13,5 +13,6 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
 if __name__ == '__main__':
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, CORSRequestHandler)
+    # httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
     print("Serving with CORS at http://127.0.0.1:8000")
     httpd.serve_forever()

@@ -3,12 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <title>JS questions</title>
+
   <script>
-    console.log("[DEBUG 1] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
+
+    function preparePicker(picker_obj, picker_content_obj) {
+        picker_obj.addEventListener('input', function () {
+          picker_content_obj.style.backgroundColor = picker_obj.value;
+          let [r, g, b] = picker_content_obj.style.backgroundColor.match(/\d+/g).map(Number);
+          let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
+
+          console.log(`[DEBUG] picker_content_obj : ${picker_content_obj.style.backgroundColor}, luminosity: ${y}`)
+          if (y < 50) {
+            picker_content_obj.style.color = "#FFF";
+            console.log("Kolor jest bliski czarnego, biała czcionka");
+          }
+          else {
+            picker_content_obj.style.color = "#000";
+            console.log("Kolor NIE jest bliski czarnego");
+
+          }
+
+        });
+    }
+  </script>
+
+
+<script>
+    function getFibonacciElement(num) {
+      let a = 0;
+      let b = 1;
+
+
+      let counter = 0;
+
+      while (counter <= num) {
+
+        if (counter == 0 || counter == 1) {
+            b = counter;
+        }
+        else {
+            let temp = a; // Zapisujemy wartość `a` do zmiennej pomocniczej
+            a = b; // Przypisujemy `b` do `a` (przechodzimy na następną liczbę)
+            b = temp + b; // Przypisujemy sumę poprzednich dwóch liczb do `b`
+        }
+
+        let deep_log_message = '[DEBUG][getFibonacciElement] Subcalculations: calculated value for n-element: ' + counter + " of the Fibonacci order is: " + b + "."
+        console.log(deep_log_message);
+
+        counter += 1;
+      }
+
+      let log_message = '[INFO][getFibonacciElement] calculated value for n-element: ' + num + " of the Fibonacci order is: " + b + "."
+      console.log(log_message);
+      return b
+      }
+
+</script>
+    <script>
+    let x = getFibonacciElement(13);
+</script>
+
+  <script>
+    console.log("[DEBUG 1][no defer/async -> blocking mode] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
   </script>
 
   <script defer>
-    console.log("[DEBUG 2] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
+    console.log("[DEBUG 2][defer -> unblocking mode] JavaScript log code in <head> before everything related to styling (without 'type' script tag attribute).");
   </script>
 
   <script src="log3.js" defer>
@@ -19,11 +79,11 @@
 
 
   <script type="text/javascript" defer>
-    console.log("[DEBUG 5] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
+    console.log("[DEBUG 5][defer -> unblocking mode] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
   </script>
 
   <script type="text/javascript">
-    console.log("[DEBUG 6] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
+    console.log("[DEBUG 6][no defer/async -> blocking mode] JavaScript log code in <head> before everything related to styling (added type='text/javascript' script tag attribute).");
   </script>
 
 <style>
@@ -132,16 +192,61 @@
 
 <body>
 
+<!--<h1 style="text-decoration: underline">001</h1>-->
+<!--<h1 style="text-decoration: underline">001a</h1>-->
+<!--<h1 style="text-decoration: underline">001b</h1>-->
+<!--<h1 style="text-decoration: underline">001c</h1>-->
+<!--<h1 style="text-decoration: underline">001d</h1>-->
+<!--<h1 style="text-decoration: underline">001e</h1>-->
+<!--<h1 style="text-decoration: underline">001f</h1>-->
+<!--<br>-->
+<br>
+<br>
+
+
+
 <h1 style="text-decoration: underline">001</h1>
-<h1 style="text-decoration: underline">001a</h1>
-<h1 style="text-decoration: underline">001b</h1>
-<h1 style="text-decoration: underline">001c</h1>
-<h1 style="text-decoration: underline">001d</h1>
-<h1 style="text-decoration: underline">001e</h1>
-<h1 style="text-decoration: underline">001f</h1>
+
+<div class="outer" id="outer1">
+  <div class="main-content" id="content1">
+    <pre>JavaScript - characteristics:
+ - multi-paradigm, dynamic language
+    </pre>
+  </div>
+
+  <div class="side-block">
+    <label for="colorPicker" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker1" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker1 = document.getElementById('colorPicker1');
+    const content1 = document.getElementById('content1');
+
+    picker1.addEventListener('input', function () {
+      content2.style.backgroundColor = picker2.value;
+      let [r, g, b] = content2.style.backgroundColor.match(/\d+/g).map(Number);
+      let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
+
+      console.log(`[DEBUG] content2a : ${content2.style.backgroundColor}, luminosity: ${y}`)
+      if (y < 50) {
+        content2.style.color = "#FFF";
+        console.log("Kolor jest bliski czarnego, biała czcionka");
+      }
+      else {
+        content2.style.color = "#000";
+        console.log("Kolor NIE jest bliski czarnego");
+
+      }
+
+    });
+  </script>
+
+  </div>
+</div>
+
 <br>
-<br>
-<br>
+
 
 
 
@@ -152,7 +257,8 @@
 <div class="outer" id="outer2">
   <div class="main-content" id="content2">
     <pre>How to embed JS code to html? <a href="../basics_002.html">Odpowiedź</a>
- - there are few options to embed JS code into html/DOM document, it is kind of minimum basic knowledge for playing with JS</pre>
+ - there are few options to embed JS code into html/DOM document
+ - it is kind of knowledge about JavaScript environment</pre>
   </div>
 
   <div class="side-block">
@@ -195,12 +301,10 @@
 
 <h1 style="text-decoration: underline">002a</h1>
 
-<div class="outer" id="outer1">
+<div class="outer" id="outer2a">
   <div class="main-content" id="content2a">
-    <script type="text/javascript">
-      document.write("<span style='background-color: #ADD8E6'>The given text is written into DOM by embedding/executing Javascript code during loading/building process (there is used document.write).</span>");</script>
 
-    <pre>
+    <pre>JavaScript loading/embedding modes:
   - it will work correctly as none of defer/async modes (script tag asynchronous options) is used
   - then script will be executed synchronously in context of DOM building
   - going further, it can be said that we have here blocking script
@@ -218,30 +322,147 @@ And finally 'document.write' is old-fashioned and not recommended to use. There 
   <script>
     const picker2a = document.getElementById('colorPicker2a');
     const content2a = document.getElementById('content2a');
-
-    picker2a.addEventListener('input', function () {
-      content2a.style.backgroundColor = picker2a.value;
-      let [r, g, b] = content2a.style.backgroundColor.match(/\d+/g).map(Number);
-      let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
-
-      console.log(`[DEBUG] content2a : ${content2a.style.backgroundColor}, luminosity: ${y}`)
-      if (y < 50) {
-        content2a.style.color = "#FFF";
-        console.log("Kolor jest bliski czarnego, biała czcionka");
-      }
-      else {
-        content2a.style.color = "#000";
-        console.log("Kolor NIE jest bliski czarnego");
-
-      }
-
-    });
+    preparePicker(picker2a, content2a)
   </script>
 
   </div>
 </div>
 
 <br>
+
+
+<h1 style="text-decoration: underline">003</h1>
+
+<div class="outer" id="outer3">
+  <div class="main-content" id="content3">
+
+    <pre>Ranges/Namespaces in JavaScript.
+  - global, local function-like, block-like</pre>
+  </div>
+  <div class="side-block">
+    <label for="colorPicker3" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker3" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker3 = document.getElementById('colorPicker3');
+    const content3 = document.getElementById('content3');
+
+    preparePicker(picker3, content3);
+
+  </script>
+
+  </div>
+</div>
+
+
+<h1 style="text-decoration: underline">004</h1>
+
+<div class="outer" id="outer4">
+  <div class="main-content" id="content4">
+
+    <pre>Global context in JavaScript.
+  - window object, Window function, globalThis alias
+  - Web browser vs other environments (Node.js)</pre>
+
+  </div>
+  <div class="side-block">
+    <label for="colorPicker4" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker4" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker4 = document.getElementById('colorPicker3');
+    const content4 = document.getElementById('content3');
+
+    preparePicker(picker4, content4);
+
+  </script>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<h1 style="text-decoration: underline">005</h1>
+
+<div class="outer" id="outer5">
+  <div class="main-content" id="content5">
+
+    <pre>Typy w JavaScript: prymitywne i referencyjne (nie wszystko jest obiektem w Pythonie wszystko).
+
+Typy prymitywne (Typy proste = prymitywy)
+Charakterystyka/rodzaje:
+   s1 = "Text ....."; // prymityw
+   s2 = String("Text ....."); // prymityw
+   s3 = new String("Text ....."); // obiekt typu String, nie prymityw
+
+ - Nie mają prototypu, nie dziedziczą po Object, jest ich 7.
+ - Prymitywy nie są obiektami, i nie mają właściwości ani metod.
+ - undefined, symbol, bigint, number, string, null, boolean
+ - W JavaScript przypisanie prymitywu to zawsze kopiowanie wartości, nie referencji.
+
+ - Zazwyczaj są nieobiektowe i przechowują swoje wartości bezpośrednio. Jednak, są od tego wyjątki, jeśli to konieczne.
+ - W pewnych sytuacjach, np kiedy próbujemy wywołać metody na tych typach (np. toUpperCase() na stringu),
+   JS tymczasowo "opakowuje" te wartości w odpowiednie nowe obiekty - tj. autoboxing.
+   Nie wszystkie typy posiadają obiektowe wersje: String, Number, Boolean, Symbol.
+
+   Autoboxing flow: "abc".toUpperCase();
+       new String("abc");
+       toUpperCase();
+       delete temp String object
+       return "ABC"
+
+Ciekawostki:
+ - typeof NaN; // "number"
+ - NaN === NaN; // false
+ - Object.is(NaN, NaN); // true
+ - 0 === -0; // true
+ - Object.is(0, -0) // false
+ - BigInt(10) === 10  // false
+   falsy wartości:
+ - false, 0, -0, 0n, "", null, undefined, NaN
+ - Number(null) // 0
+ - Number(undefined) // NaN
+ - Number("10px") // NaN
+ - String(false) // "false"
+ - [] + [] // ""
+ - [] + {} // "[object Object]"
+
+
+
+Typy referencyjne (obiekty):
+ - Object jest podstawowym typem referencyjnym.
+ - Object, Array, Function, Date, Map itp.
+ - Typy obiektowe są przekazywane przez referencję.
+ - Każdy obiekt w JS ma tzw. prototyp — obiekt, z którego dziedziczy właściwości i metody.
+</pre>
+
+  </div>
+  <div class="side-block">
+    <label for="colorPicker" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker5" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker5 = document.getElementById('colorPicker5');
+    const content5 = document.getElementById('content5');
+    preparePicker(picker5, content5);
+
+  </script>
+
+
+
+  </div>
+</div>
+
 
 
 
@@ -392,28 +613,125 @@ And finally 'document.write' is old-fashioned and not recommended to use. There 
 </div>
 </div>
 
+</div>
+
+
+<div>
+
+
+  <script src="../basics_script.js"></script>
+  <script src="../basics_script.js" defer></script>
+  <script src="../basics_script.js" async></script>
+  <!--  <script src="basics_script_global_var_check.js" defer></script>-->
 
 </div>
 
-<!--  <script src="basics_script.js"></script>-->
-<!--  <script src="basics_script.js" defer></script>-->
-<!--  <script src="basics_script.js" async></script>-->
-<!--  <script src="basics_script_global_var_check.js" defer></script>-->
+<hr>
+
+<!--<script>-->
+<!--    function sleepSync(ms) {-->
+<!--      const start = Date.now();-->
+<!--      while (Date.now() - start < ms) {}-->
+<!--    }-->
+<!--    sleepSync(1);-->
+<!--    document.body.innerHTML += '<hr>';-->
+
+<!--</script>-->
+
+<!--<hr>-->
 
 
-<!-- The same directory and default http server run to handle it: -->
+<!-- The same directory and default file-based request approach will not handle it: -->
+<!--Cross-Origin Request Blocked: reason: usage of file protocol not http-->
+<!--<script type="module">-->
+<!--    import { generateRandomNumber } from './es6_ecma_script.js';-->
+<!--    generateRandomNumber();-->
+<!--</script>-->
 
+<!-- The same directory and default http server - again - will not to handle it: -->
+<!-- Cross-Origin Request Blocked:
+<--  The Same Origin Policy disallows reading the remote resource at http://127.0.0.1:8000/es6_ecma_script.js.
+<--  (Reason: CORS header ‘Access-Control-Allow-Origin’ missing) -->
+<!--<script type="module">-->
+<!--    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';-->
+<!--    generateRandomNumber();-->
+<!--</script>-->
+
+
+<!-- CORS allowing http server run to handle it: -->
 <script type="module">
     import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';
     generateRandomNumber();
 </script>
 
-<!-- CORS allowing http server run to handle it: -->
-<!--  <script type="module">-->
-<!--    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';-->
-<!--    generateRandomNumber();-->
-<!--  </script>-->
+<script src="../basics_script_fibonacci.js"></script>
+<script>console.log('[DEBUG][blocking script] Checking this object in global context. This is:', this);</script>
+<script>console.log('[DEBUG][blocking script] Checking this object in global context. window is:', window);</script>
+<script>console.log('[DEBUG][blocking script] Checking this object in global context. Window is:', Window);</script>
+
+<script type="module">
+    function sleepSync(ms) {
+      const start = Date.now();
+      while (Date.now() - start < ms) {}
+    }
+    sleepSync(2000);
+
+    import { objectSize } from 'http://127.0.0.1:8000/helpers.js';
+    import { f_sleep } from 'http://127.0.0.1:8000/helpers.js';
+
+    // f_sleep(1);
+    // f_sleep(3, f_sleep, 2);
+
+    let x1 = 22;
+    let x2 = 3.14;
+    let x3 = "a";
+    let x4 = "Text abc.";
+    console.log("[DEBUG][objectSize][let x1 = 22] x1 size:", objectSize(x1), "bytes.");
+    console.log("[DEBUG][objectSize][let x2 = 3.14] x2 size:", objectSize(x2), "bytes.");
+    console.log("[DEBUG][objectSize][let x3 = 'a'] x3 size:", objectSize(x3), "bytes.");
+    console.log("[DEBUG][objectSize][let x4 = 'Text abc.'] x4 size:", objectSize(x4), "bytes.");
+
+    import { dir } from 'http://127.0.0.1:8000/helpers.js';
+
+    class A {
+      methodA() {}
+      static staticA() {}
+    }
+
+    class B extends A {
+      methodB() {}
+    }
+
+    const b = new B();
+    b.foo = 123;
+
+    console.log("\n");
+    console.log("[DEBUG][dir-like] dir-like functions in JavaScript:"); // metody/właściwości (enumerable/odziedziczone), posortowane
+    console.log("[DEBUG][dir-like] dir(b):\n", dir(b)); // metody/właściwości (enumerable/odziedziczone), posortowane
+    console.log("[DEBUG][dir-like] dir(b, { includeNonEnumerable: true }):\n", dir(b, { includeNonEnumerable: true })); // with enumerable properties
+    console.log("[DEBUG][dir-like] dir(b, { includeNonEnumerable: true, includeSymbols: true }):\n", dir(b, { includeNonEnumerable: true, includeSymbols: true })); // with enumerable properties and symbols
+    console.log("[DEBUG][dir-like] Object.keys(b):\n", Object.keys(b)); // tylko enumerable własne: ['foo']
+    console.log("[DEBUG][dir-like] Object.getOwnPropertyNames(b):\n", Object.getOwnPropertyNames(b)); // własne, także nie-enumerable
+    console.log("[DEBUG][dir-like] Reflect.ownKeys(b):\n", Reflect.ownKeys(b)); // własne klucze + symbole
+    // console.dir(b); // interaktywnie w konsoli
 
 
+    import { prototypePresentation } from 'http://127.0.0.1:8000/helpers.js';
+    prototypePresentation();
+
+    console.log("\n");
+</script>
+
+
+
+<script type="module">
+
+    import { getRequest } from 'http://127.0.0.1:8000/helpers.js';
+    getRequest("http://127.0.0.1:7001/");
+
+    console.log('[DEBUG][blocking script][The latest before body] Ending.');
+</script>
+
+<!--<script>console.log('[DEBUG][blocking script][The latest before body] window object', window);</script>-->
 </body>
 </html>
