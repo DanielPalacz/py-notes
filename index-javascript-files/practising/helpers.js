@@ -113,16 +113,27 @@ export function prototypePresentation() {
 export function getRequest(url) {
     console.log("[DEBUG] Starting/Logging getRequest.");
 
+    let result_text;
+
     fetch(url, {
       method: 'GET', // opcjonalnie, bo GET jest domyślny
       headers: {
         // 'Content-Type': 'application/plain',
-        // 'X-Custom-Header': 'MojaWlasnaWartosc'
+        'X-Custom-Header': 'MojaWlasnaWartosc'
       }
     })
-    .then(response => response.text())
-    .then(data => console.log('Otrzymane dane:\n - ', data))
+    .then(response => {
+        console.log("[DEBUG] 12345", response);
+        return response.text();
+     })
+    .then(data => {
+        result_text = data;
+        document.body.innerHTML += `<p>response-result_text1: ${result_text}</p>`;
+        console.log('Otrzymane dane:\n - ', data);
+    })
     .catch(error => console.error('Błąd:', error));
 
+
+//    document.body.innerHTML += `<p>response-result_text2: ${result_text}</p>`;
     console.log("[DEBUG] Ending/Logging getRequest.");
 }

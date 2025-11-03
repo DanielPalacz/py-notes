@@ -8,7 +8,10 @@
 4. Jak działają wskaźniki? Jak np działa proste przypisanie przez wskaźnik?
 5. Tablica jest ciągłym blokiem zarezerwowanej pamięci - nie jest wskaźnikiem.
    Z tego wynikają niuanse podczas korzystania z tablic.
-6. Zmienna globalna a dyrektywa preprocesora?
+6. Zmienna globalna a dyrektywa '#define' preprocesora?
+7. Zakresy w C.
+8. Funckje w C.
+9. Struktury (Struct) w C.
 ```
 
 
@@ -90,4 +93,39 @@ int tab[MAKS]; // kompilator widział już tylko: int tab[100];
 Zmienna globalna - prawdziwa zmienna, czyli obiekt w pamięci programu.
     int licznik = 0;  // zmienna globalna, zdefiniowanie zmiennej globalnej — czyli stworzenie obiektu w pamięci.
     extern int licznik; // deklaracja zmiennej, nie definicja - Kompilator wie, że taka zmienna istnieje gdzieś, ale nie rezerwuje pamięci.
+
+Ad.7)
+Zakresy w C:
+ - Globalny zakres
+ - Zakres funkcji (lokalny)
+ - Zakres bloków { ... }
+ 
+Ad.8)
+Funcje w C - postać ogólna:
+
+typ_zwracany nazwa_funkcji(typ1 arg1, typ2 arg2, ...) {
+    // ciało funkcji
+    return wartość; // jeśli typ_zwracany ≠ void
+}
+
+// Argumenty przekazywane są przez wartość (kopiowane).
+// Aby zmodyfikować wartość zmiennej z funkcji, przekazuje się wskaźnik:
+
+void zwieksz(int *x) {
+    (*x)++;
+}
+    zwieksz(&a); // przekazanie adresu
+...
+
+Najlepsze praktyki pisania funkcji:
+ - Funkcje powinny być krótkie i wykonywać jedno logiczne zadanie.
+ - Nazwy funkcji powinny jasno opisywać ich działanie (obliczSume, wczytajDane). 
+ - Typy i liczba argumentów powinny być dobrze przemyślane.
+ - Unikaj efektów ubocznych (np. modyfikowania globalnych zmiennych, jeśli nie jest to potrzebne).
+ - Stosuj komentarze opisujące cel funkcji.
+ - Umieszczaj prototypy funkcji w plikach nagłówkowych (.h), a implementacje w .c.
+
+
+Ad.9)
+Struktury (Struct) w C.
 ```
