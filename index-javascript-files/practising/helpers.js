@@ -123,17 +123,31 @@ export function getRequest(url) {
       }
     })
     .then(response => {
-        console.log("[DEBUG] 12345", response);
+        console.log("[DEBUG] getRequest fetch response object:", response);
         return response.text();
      })
     .then(data => {
         result_text = data;
         document.body.innerHTML += `<p>response-result_text1: ${result_text}</p>`;
-        console.log('Otrzymane dane:\n - ', data);
+        console.log('[DEBUG] [getRequest fetch response] Otrzymane dane:\n - ', data);
     })
     .catch(error => console.error('Błąd:', error));
 
 
 //    document.body.innerHTML += `<p>response-result_text2: ${result_text}</p>`;
     console.log("[DEBUG] Ending/Logging getRequest.");
+}
+
+export function getRequestXHR(url) {
+    console.log("[DEBUG] [getRequestXHR] Starting/Logging getRequestXHR.");
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log("[DEBUG][getRequestXHR] Otrzymane dane:\n - ", xhr.responseText);
+            console.log("[DEBUG] getRequest XHR request object:", xhr);
+        }
+    };
+    // xhr.send();
+    console.log("[DEBUG][getRequestXHR] Ending/Logging getRequestXHR.", xhr.send());
 }

@@ -6,4 +6,5 @@ export function generateRandomNumber() {
   document.addEventListener("DOMContentLoaded", function () {
     document.body.innerHTML += `<p>[JS script external file] Hi. Random number is: ${randomNumber}</p>`;
   });
+
 }

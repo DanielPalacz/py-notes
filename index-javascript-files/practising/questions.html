@@ -210,7 +210,8 @@
 <div class="outer" id="outer1">
   <div class="main-content" id="content1">
     <pre>JavaScript - characteristics:
- - multi-paradigm, dynamic language
+ - multi-paradigm, dynamically and weakly typed language
+ - these type of operations are possible: 1 + "2" (weakly typed)
     </pre>
   </div>
 
@@ -249,16 +250,24 @@
 
 
 
-
-
-
 <h1 style="text-decoration: underline">002</h1>
 
 <div class="outer" id="outer2">
   <div class="main-content" id="content2">
     <pre>How to embed JS code to html? <a href="../basics_002.html">Odpowiedź</a>
- - there are few options to embed JS code into html/DOM document
- - it is kind of knowledge about JavaScript environment</pre>
+ - there are few options to embed JS code into html/DOM document with <b>script tag</b>
+ - other options, not using script tag exist, but these are considered as "alternative"</pre>
+
+<pre>
+JavaScript script tag asynchronous modes:
+ - defer/async, different behaviour
+ - But by default when none of defer/async is used then JS script will be executed synchronous way.
+   <b>Blocking script</b> (in context of DOM building).
+
+Titbit - document.write behaviour:
+ - It is important to know that <i>document.write</i> can behave unpredictably when used inappropriately.
+ - For example when we use defer/async we cant be sure that code will be executed (browser decides and can ignore this code).
+ - And finally 'document.write' is old-fashioned and not recommended to use. There are alternatives.</pre>
   </div>
 
   <div class="side-block">
@@ -295,39 +304,6 @@
 <br>
 
 
-
-
-
-
-<h1 style="text-decoration: underline">002a</h1>
-
-<div class="outer" id="outer2a">
-  <div class="main-content" id="content2a">
-
-    <pre>JavaScript loading/embedding modes:
-  - it will work correctly as none of defer/async modes (script tag asynchronous options) is used
-  - then script will be executed synchronously in context of DOM building
-  - going further, it can be said that we have here blocking script
-
-It is important to know that <i>document.write</i> can behave unpredictably when used inappropriately.
-For example when we use defer/async we cant be sure that code will be executed (browser decides and can ignore this code).
-And finally 'document.write' is old-fashioned and not recommended to use. There are alternatives.</pre>
-
-  </div>
-  <div class="side-block">
-    <label for="colorPicker" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
-      <br>
-  <input type="color" id="colorPicker2a" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
-
-  <script>
-    const picker2a = document.getElementById('colorPicker2a');
-    const content2a = document.getElementById('content2a');
-    preparePicker(picker2a, content2a)
-  </script>
-
-  </div>
-</div>
-
 <br>
 
 
@@ -341,7 +317,7 @@ And finally 'document.write' is old-fashioned and not recommended to use. There 
   </div>
   <div class="side-block">
     <label for="colorPicker3" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
-      <br>
+    <br>
   <input type="color" id="colorPicker3" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
 
   <script>
@@ -664,6 +640,7 @@ Typy referencyjne (obiekty):
     generateRandomNumber();
 </script>
 
+
 <script src="../basics_script_fibonacci.js"></script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. This is:', this);</script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. window is:', window);</script>
@@ -729,6 +706,8 @@ Typy referencyjne (obiekty):
     import { getRequest } from 'http://127.0.0.1:8000/helpers.js';
     getRequest("http://127.0.0.1:7001/");
 
+    import { getRequestXHR } from 'http://127.0.0.1:8000/helpers.js';
+    getRequestXHR("http://127.0.0.1:8000/test");
     console.log('[DEBUG][blocking script][The latest before body] Ending.');
 </script>
 

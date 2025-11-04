@@ -104,11 +104,14 @@
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
+<b><h2>Pytania:</h2></b>
     <pre>
-A. Gdzie w dokumencie HTML można deklarować/osadzać kod JS?
+A. Gdzie w dokumencie HTML można deklarować/osadzać kod JS? (tag script)
 B.Jakie są wszystkie możliwości osadzania kodu JS w HTML?
 C. Jak dodatkowo można sterować osadzaniem kodu JS w HTML?
 D. Kiedy skrypt jest 'blokujący' i co to oznacza?
+
+E. Jakie są inne niż 'tag script' sposoby wywoływania/deklarowania/osadzania kodu JS?
 
 Ad.A)
     - w sekcji head (niezalecane), w sekcji body (zalecane na końcu)
@@ -149,8 +152,19 @@ Ponadto, w tagu 'script' osadzaniem kodu JS steruje się poprzez konfigurację "
 
 Ad.D)
     Mówi się, że skrypt jest blokujący, gdy tag script nie używa "trybu asynchroniczności" - defer / async nie jest ustawiony.
+
+Ad.E)
+    Niektóre elementy HTML mają atrybuty, które pozwalają na wstrzyknięcie kodu JS:
+        Atrybuty / zdarzenia DOM:
+         - onclick, onmouseover, onchange, itp. - button, a, form, input, select
+         - W HTML5 praktycznie każdy element może mieć atrybuty zdarzeń — nawet zwykły div czy span.
+         - To działa, bo przeglądarka implementuje zdarzenia DOM dla wszystkich elementów, nawet nieinteraktywnych.
+
+        Rzadziej stosowane:
+         - &lt;a href=&quot;javascript:JS_CODE&quot;&gt;Kliknij link&lt;/a&gt;
+         - <a href="javascript:alert('Hej!')">Kliknij link</a>
 </pre>
-        <b><a class="m-4" href="basics_example.html">Przykłady</a></b>
+        <b><h2><a class="m-4" href="basics_example.html">Przykłady</a></h2></b>
     </div>
     </div>
     </div>
