@@ -12,7 +12,7 @@
           let [r, g, b] = picker_content_obj.style.backgroundColor.match(/\d+/g).map(Number);
           let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
 
-          console.log(`[DEBUG] picker_content_obj : ${picker_content_obj.style.backgroundColor}, luminosity: ${y}`)
+          console.log(`[DEBUG] picker_content_obj : ${picker_content_obj.style.backgroundColor}, luminosity: ${y}`);
           if (y < 50) {
             picker_content_obj.style.color = "#FFF";
             console.log("Kolor jest bliski czarnego, biała czcionka");
@@ -20,9 +20,7 @@
           else {
             picker_content_obj.style.color = "#000";
             console.log("Kolor NIE jest bliski czarnego");
-
           }
-
         });
     }
   </script>
@@ -106,6 +104,13 @@
 
   body {
     margin: 1;
+  }
+
+  code {
+    // background-color: #0044cc;
+    color: green;
+    font-style: italic;
+
   }
 
   .outer {
@@ -192,15 +197,7 @@
 
 <body>
 
-<!--<h1 style="text-decoration: underline">001</h1>-->
-<!--<h1 style="text-decoration: underline">001a</h1>-->
-<!--<h1 style="text-decoration: underline">001b</h1>-->
-<!--<h1 style="text-decoration: underline">001c</h1>-->
-<!--<h1 style="text-decoration: underline">001d</h1>-->
-<!--<h1 style="text-decoration: underline">001e</h1>-->
-<!--<h1 style="text-decoration: underline">001f</h1>-->
-<!--<br>-->
-<br>
+<h1 style="text-decoration: underline; font-size: 40px;">JavaScript questions.</h1>
 <br>
 
 
@@ -263,6 +260,7 @@ JavaScript script tag asynchronous modes:
  - defer/async, different behaviour
  - But by default when none of defer/async is used then JS script will be executed synchronous way.
    <b>Blocking script</b> (in context of DOM building).
+ - Also, <b>type=&quot;module&quot;</b> causes deferred-like execution: <code>&lt;script type=&quot;module&quot;&gt;</code>
 
 Titbit - document.write behaviour:
  - It is important to know that <i>document.write</i> can behave unpredictably when used inappropriately.
@@ -332,6 +330,8 @@ Titbit - document.write behaviour:
 </div>
 
 
+<br>
+
 <h1 style="text-decoration: underline">004</h1>
 
 <div class="outer" id="outer4">
@@ -348,8 +348,8 @@ Titbit - document.write behaviour:
   <input type="color" id="colorPicker4" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
 
   <script>
-    const picker4 = document.getElementById('colorPicker3');
-    const content4 = document.getElementById('content3');
+    const picker4 = document.getElementById('colorPicker4');
+    const content4 = document.getElementById('content4');
 
     preparePicker(picker4, content4);
 
@@ -361,7 +361,7 @@ Titbit - document.write behaviour:
 
 
 
-
+<br>
 
 
 
@@ -385,34 +385,15 @@ Charakterystyka/rodzaje:
  - undefined, symbol, bigint, number, string, null, boolean
  - W JavaScript przypisanie prymitywu to zawsze kopiowanie wartości, nie referencji.
 
- - Zazwyczaj są nieobiektowe i przechowują swoje wartości bezpośrednio. Jednak, są od tego wyjątki, jeśli to konieczne.
- - W pewnych sytuacjach, np kiedy próbujemy wywołać metody na tych typach (np. toUpperCase() na stringu),
+ - W pewnych sytuacjach, np kiedy próbujemy wywołać metody na prymitywnych typach (np. toUpperCase() na stringu),
    JS tymczasowo "opakowuje" te wartości w odpowiednie nowe obiekty - tj. autoboxing.
-   Nie wszystkie typy posiadają obiektowe wersje: String, Number, Boolean, Symbol.
+   Nie wszystkie typy posiadają obiektowe wersje: String, Number, Boolean, Symbol posiadają.
 
    Autoboxing flow: "abc".toUpperCase();
        new String("abc");
        toUpperCase();
        delete temp String object
        return "ABC"
-
-Ciekawostki:
- - typeof NaN; // "number"
- - NaN === NaN; // false
- - Object.is(NaN, NaN); // true
- - 0 === -0; // true
- - Object.is(0, -0) // false
- - BigInt(10) === 10  // false
-   falsy wartości:
- - false, 0, -0, 0n, "", null, undefined, NaN
- - Number(null) // 0
- - Number(undefined) // NaN
- - Number("10px") // NaN
- - String(false) // "false"
- - [] + [] // ""
- - [] + {} // "[object Object]"
-
-
 
 Typy referencyjne (obiekty):
  - Object jest podstawowym typem referencyjnym.
@@ -438,6 +419,67 @@ Typy referencyjne (obiekty):
 
   </div>
 </div>
+
+<br>
+<h1 style="text-decoration: underline">006, 007</h1>
+
+<div class="outer" id="outer6">
+  <div class="main-content" id="content6">
+
+    <pre>
+ - Styl-konwencje, camelCase, PascalCase, snake_case, UPPERCASE - co i kiedy się używa w JavaScript?
+ - Jaka jest różnica między == i === w JavaScript? Kiedy co stosować?
+</pre>
+
+  </div>
+  <div class="side-block">
+    <label for="colorPicker6" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker6" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker6 = document.getElementById('colorPicker6');
+    const content6 = document.getElementById('content6');
+
+    preparePicker(picker6, content6);
+
+  </script>
+
+  </div>
+</div>
+
+
+
+<br>
+<h1 style="text-decoration: underline">008</h1>
+
+<div class="outer" id="outer8">
+  <div class="main-content" id="content8">
+
+    <pre>Functions.
+  - classic vs arrow-like functions</pre>
+
+  </div>
+  <div class="side-block">
+    <label for="colorPicker4" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker8" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker8 = document.getElementById('colorPicker8');
+    const content8 = document.getElementById('content8');
+
+    preparePicker(picker4, content4);
+
+  </script>
+
+  </div>
+</div>
+
+
+
+
+<br>
 
 
 
@@ -702,14 +744,32 @@ Typy referencyjne (obiekty):
 
 
 <script type="module">
-
     import { getRequest } from 'http://127.0.0.1:8000/helpers.js';
     getRequest("http://127.0.0.1:7001/");
 
     import { getRequestXHR } from 'http://127.0.0.1:8000/helpers.js';
+
     getRequestXHR("http://127.0.0.1:8000/test");
-    console.log('[DEBUG][blocking script][The latest before body] Ending.');
 </script>
+
+<script type="module">
+    import { someFunc } from 'http://127.0.0.1:8000/helpers.js';
+    someFunc();
+
+    const x1 = () => 17;
+    const x2 = () => {return 18};
+    console.log('[DEBUG][type module] Arrow-like function call x1() - x2(): ', x1(), "-", x2());
+
+</script>
+
+<!--  <script defer>-->
+<!--    function sayBye(user) {-->
+<!--        alert(`Bye, ${user}!`);-->
+<!--    }-->
+
+<!--    sayBye("Daniel");-->
+<!--    console.log('[DEBUG][type module][The latest before body] Ending.');-->
+<!--  </script>-->
 
 <!--<script>console.log('[DEBUG][blocking script][The latest before body] window object', window);</script>-->
 </body>

@@ -23,7 +23,8 @@ Model typów w Pythonie – w skrócie:
  - Wszystko jest obiektem (nawet liczby i None).
  - Brak typów prostych = spójny, obiektowy model danych.
  - Typ jest własnością wartości, nie zmiennej.
- - Python jest silnie i dynamicznie typowany. Silne typowanie oznacza, że interpreter nie konwertuje typów „po cichu” (np. nie połączy int z str bez jawnego przekształcenia).
+ - Python jest silnie i dynamicznie typowany.
+   Silne typowanie oznacza, że interpreter nie konwertuje typów „po cichu” (np. nie połączy int z str bez jawnego przekształcenia).
    Natomiast np. JavaScript jest słabo i dynamicznie typowany a C jest statycznie i silnie typowanym językiem (choć z pewnymi niuansami).
    W praktyce C jest czasem określany jako „średnio silnie typowany” — bo pozwala na jawne i niekiedy niebezpieczne konwersje typów (rzutowania, czyli casts).
    

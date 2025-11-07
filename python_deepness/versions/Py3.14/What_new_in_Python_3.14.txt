@@ -1,3 +1,5 @@
+Python 3.14 – wydany 7 października 2025.
+
 Co nowego w Pythonie 3.14?
 Kilka z najważniejszych zmian:
     Szybszy interpreter – dalsze ulepszenia w CPythonie (projekt Faster CPython).
@@ -5,7 +7,6 @@ Kilka z najważniejszych zmian:
     Nowe narzędzia do debugowania – lepsze tracebacks, diagnostyka GC.
     Rozszerzenia w asyncio i nowy mechanizm zarządzania taskami.
     Poprawki bezpieczeństwa i usunięcie kilku starych, przestarzałych modułów.
-
 
 
 3.14 lifespan

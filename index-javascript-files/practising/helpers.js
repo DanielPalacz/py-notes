@@ -1,4 +1,14 @@
 
+import { getPrimes } from "/additional_methods.js";
+import { logAnything } from "/additional_methods.js";
+
+export function someFunc() {
+  let nums = getPrimes(39);
+  console.log("[someFunc][getPrimes] Prime numbers till 39: ", nums);
+
+  logAnything();
+}
+
 export function objectSize(obj) {
   const objectString = JSON.stringify(obj);
   return new TextEncoder().encode(objectString).length; // bajty UTF-8
@@ -139,7 +149,7 @@ export function getRequest(url) {
 }
 
 export function getRequestXHR(url) {
-    console.log("[DEBUG] [getRequestXHR] Starting/Logging getRequestXHR.");
+    console.log("[DEBUG][getRequestXHR] Starting/Logging getRequestXHR.");
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.onload = function() {
@@ -148,6 +158,9 @@ export function getRequestXHR(url) {
             console.log("[DEBUG] getRequest XHR request object:", xhr);
         }
     };
-    // xhr.send();
-    console.log("[DEBUG][getRequestXHR] Ending/Logging getRequestXHR.", xhr.send());
+
+    xhr.send();
+
+    console.log("[DEBUG][getRequestXHR] debugging start.");
+    console.log("[DEBUG][getRequestXHR] Ending/Logging getRequestXHR.");
 }

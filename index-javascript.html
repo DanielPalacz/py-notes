@@ -215,7 +215,10 @@ W ECMAScript/ES6:
             <ul>
                 <li><a href="index-javascript-files/basics_008.html">Odpowiedź</a></li>
             </ul>
+            <br>
+
             <li>009. Operatory, Instrukcje warunkowe, Pętle - JavaScript.</li>
+            <br>
             <li>010. Jak działa słowo kluczowe 'this' w JavaScript?</li>
             <ul>
                 <li><a href="index-javascript-files/basics_011.html">Odpowiedź</a></li>
@@ -234,6 +237,26 @@ W ECMAScript/ES6:
 
             <br>
             <li>014. <a href="images/JS__dom_introspection_methods.png">Metody introspekcji DOM</a></li>
+
+            <br>
+            <li>015. Typy - łamigłówki/ciekawostki.</a></li>
+            <pre>
+ - typeof NaN; // "number"
+ - NaN === NaN; // false
+ - Object.is(NaN, NaN); // true
+ - 0 === -0; // true
+ - Object.is(0, -0) // false
+ - BigInt(10) === 10  // false
+   falsy wartości:
+ - false, 0, -0, 0n, "", null, undefined, NaN
+ - Number(null) // 0
+ - Number(undefined) // NaN
+ - Number("10px") // NaN
+ - String(false) // "false"
+ - [] + [] // ""
+ - [] + {} // "[object Object]"
+            </pre>
+
         </ul>
 
     </div>
