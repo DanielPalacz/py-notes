@@ -1,0 +1,11 @@
+Kodowania Unicode (kluczowe w praktyce)
+
+Najważniejsze kodowania Unicode:
+    UTF-8 – zmienna długość (1–4 bajty), standard de facto
+    UTF-16 – 2 lub 4 bajty
+    UTF-32 – zawsze 4 bajty
+
+W praktyce:
+    Internet → UTF-8
+    Linux, macOS → UTF-8
+    Python → UTF-8 (domyślnie)

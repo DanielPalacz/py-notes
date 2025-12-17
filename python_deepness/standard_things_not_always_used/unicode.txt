@@ -1,0 +1,36 @@
+Czym nie jest i czym jest Unicode
+
+Unicode nie jest kodowaniem bajtowym.
+Unicode to standard mapowania znak → punkt kodowy (code point).
+
+Przykłady:
+    'A' → U+0041
+    'ą' → U+0105
+    '😀' → U+1F600
+
+Unicode mówi:
+    „Ten znak ma taki numer”.
+
+Nie mówi:
+    „Jak ten numer zapisać w bajtach”. Od tego są kodowania Unicode.
+
+
+
+Czy Unicode jest „jedynym” systemem?
+
+
+Formalnie: nie. Wciąż istnieją inne systemy/standardy:
+    ASCII
+    ISO-8859-1 / Latin-1
+    Windows-1250
+    Shift-JIS
+    GBK
+
+Praktycznie: tak.
+    ASCII ⟶ jest podzbiorem Unicode
+    ISO-8859-1 ⟶ każdy znak ma odpowiednik w Unicode
+    Nowe systemy nie powstają poza Unicode
+    Nowe oprogramowanie zakłada Unicode
+    Dlatego w nowoczesnym programowaniu mówi się:
+    „Wszystko jest Unicode, różni się tylko kodowanie”.
+

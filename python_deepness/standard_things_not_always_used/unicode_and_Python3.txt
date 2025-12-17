@@ -1,0 +1,51 @@
+Unicode w Pythonie (to najważniejsze dla programisty Python)
+
+Obiekt str w Pythonie:
+    Łańcuch/obiekt str to ciąg znaków Unicode, Nie bajtów, niezależnie od platformy
+    Python przechowuje znaki jako punkty kodowe Unicode
+    (wewnętrzna reprezentacja jest abstrakcyjna i zoptymalizowana).
+
+    s = "zażółć gęślą jaźń"
+    type(s)  # <class 'str'>
+    # s to ciąg znaków Unicode (czyli punktów kodowych Unicode)
+
+
+Obiekt bytes ≠ str
+    bytes to surowe bajty
+    str to znaki Unicode
+
+    b = b"abc" # bytes
+    s = "abc"  # Unicode (str)
+
+
+Konwersja:
+
+    s.encode("utf-8")  # str -> bytes
+    b.decode("utf-8")  # bytes -> str
+
+
+Większość problemów z Unicode w Pythonie to pomylenie str z bytes.
+
+
+Pliki
+    open("plik.txt", encoding="utf-8")
+        Jeżeli nie podasz encoding, Python:
+        domyślnie użyje UTF-8 (w nowych wersjach, zależnie od systemu)
+        albo systemowego kodowania (starsze Windows)
+        Dobra praktyka: zawsze jawnie podawać encoding.
+
+
+Najczęstsze nieporozumienie:
+
+    „Ten string jest w UTF-8” -> Nie.
+        String (str) nie jest „w UTF-8”.
+        UTF-8 dotyczy bajtów, nie znaków.
+
+    Poprawnie:
+        str → Unicode (abstrakcyjne znaki)
+        bytes → zakodowane (np. UTF-8)
+
+
+Unicode nie „zawiera wszystkich alfabetów świata” w sensie absolutnym, ale zawiera wszystkie powszechnie używane systemy pisma, jest systemem ciągle rozszerzanym.
+W Pythonie str przechowuje sekwencję znaków Unicode (punktów kodowych), a nie bajtów; bajty są reprezentowane przez typ bytes
+ASCII „działa” w Unicode, ponieważ pierwsze 128 punktów kodowych Unicode (U+0000–U+007F) są identyczne z ASCII, więc każdy tekst ASCII jest poprawnym tekstem Unicode i UTF-8.
