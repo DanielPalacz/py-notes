@@ -847,26 +847,27 @@ Narzędzia lintujące (wymuszają dobre praktyki):
            jakości kodu
   mypy — sprawdzanie poprawności typów
 
-
-1. Stosuj PEP 8, PEP 20
-2. Czytelność ważniejsza niż spryt
-3. Używaj typów i adnotacji
-4. List/dict/set comprehensions
-   zamiast pętli budujących listy
-5. Enumerate zamiast ręcznego licznika
-6. Zip do łączenia list
-7. Unpacking
-8. Context manager (with)
-   zamiast ręcznego otwierania/zamykania
-9. Małe, czytelne funkcje –
-   każda powinna robić jedną rzecz.
-10. Docstringi, PEP-257
-11. „DRY” – don’t repeat yourself.
-12. Testy jednostkowe (moduł unittest/pytest).
-13. Zasada EAFP:
-    „Easier to Ask for Forgiveness than
-    Permission”
-</pre>
+Zalecenia:
+  1. Stosuj PEP 8, PEP 20
+  2. Czytelność ważniejsza niż spryt
+  3. Używaj typów i adnotacji
+  4. List/dict/set comprehensions
+     zamiast pętli budujących listy
+  5. Enumerate zamiast ręcznego licznika
+  6. Zip do łączenia list
+  7. Unpacking
+  8. Context manager (with)
+     zamiast ręcznego otwierania/zamykania
+  9. Małe, czytelne funkcje –
+     każda powinna robić jedną rzecz.
+  10. Docstringi, PEP-257
+  11. „DRY” – don’t repeat yourself.
+  12. Testy jednostkowe
+      (moduł unittest/pytest).
+  13. Zasada EAFP:
+      „Easier to Ask for Forgiveness than
+      Permission”
+  14. Zasada SOLID</pre>
 </div>
 </div>
 </div>
@@ -1622,7 +1623,6 @@ Bytecode w CPythonie to:
         </div>
     </div>
 </div>
-<br>
 
 
 
@@ -1631,86 +1631,15 @@ Bytecode w CPythonie to:
     <div class="col-md-9">
         <div class="card mb-4 box-shadow">
             <div class="card-body">
-                <a class="main-a" href="https://code.tutsplus.com/tutorials/understand-how-much-memory-your-python-objects-use--cms-25609">Measuring the Memory Usage of Python Objects</a>
-                <div>sys module provides the getsizeof() function calculating the actual memory usage for Python objects:</div>
+                <u><h1>Python memory usage</h1></u>
 
-            <div class="col">
-                <ul>
-                    <li>int</li>
-                    <div class="code">sys.getsizeof(5)</div>
-                    <div class="shell">28</div>
-                    <li>float</li>
-                    <div class="code">sys.getsizeof(5.3)</div>
-                    <div class="shell">24</div>
-                    <li>Decimal</li>
-                    <div class="code">from decimal import Decimal</div>
-                    <div class="code">sys.getsizeof(Decimal(5.3))</div>
-                    <div class="shell">104</div>
-                    <li>Python strings:</li>
-                    <div class="code">sys.getsizeof('')</div>
-                    <div class="shell">49</div>
-                    <div class="code">sys.getsizeof('1')</div>
-                    <div class="shell">50</div>
-                    <div class="code">sys.getsizeof('1234')</div>
-                    <div class="shell">53</div>
-                    <div class="code">sys.getsizeof(u'1234')</div>
-                    <div class="shell">53</div>
-                    <li>Bytes:</li>
-                    <div class="code">sys.getsizeof(bytes())</div>
-                    <div class="shell">33</div>
-                    <div class="code">sys.getsizeof(bytes(1))</div>
-                    <div class="shell">34</div>
-                    <li>Boolean values and None:</li>
-                    <div class="code">sys.getsizeof(False)</div>
-                    <div class="shell">24</div>
-                    <div class="code">sys.getsizeof(True)</div>
-                    <div class="shell">28</div>
-                    <div class="code">sys.getsizeof(None)</div>
-                    <div class="shell">16</div>
-                </ul>
-            </div>
-                <div class="col">
-                    <ul>
-                    <li>Python lists:</li>
-                    <div class="code">sys.getsizeof([])</div>
-                    <div class="shell">56</div>
-                    <div class="code">sys.getsizeof([1])</div>
-                    <div class="shell">64</div>
-                    <div class="code">sys.getsizeof([1,2])</div>
-                    <div class="shell">72</div>
-                    <div class="code">sys.getsizeof(["long string"])</div>
-                    <div class="shell">64</div>
-                    <li>Python tuples:</li>
-                    <div class="code">sys.getsizeof(tuple())</div>
-                    <div class="shell">40</div>
-                    <div class="code">sys.getsizeof((1,))</div>
-                    <div class="shell">48</div>
-                    <div class="code">sys.getsizeof((1,2))</div>
-                    <div class="shell">56</div>
-                    <li>Python sets:</li>
-                    <div class="code">sys.getsizeof(set())</div>
-                    <div class="code">sys.getsizeof((1,))</div>
-                    <div class="code">sys.getsizeof((1,2))</div>
-                    <div class="shell">216</div>
-                    <li>Python dictionaries:</li>
-                    <div class="code">sys.getsizeof(dict())</div>
-                    <div class="shell">216</div>
-                    <div class="code">sys.getsizeof({"a": 1})</div>
-                    <div class="code">sys.getsizeof(dict(a=1, b=2, c=3))</div>
-                    <div class="shell">232</div>
-                    </ul>
-                </div>
+<br>
 
-      <p>CPython uses a lot of memory for its objects and because of this it uses various tricks and optimizations for memory management. By keeping track of your object’s memory usage and being aware of the memory management model, you can significantly reduce the memory footprint of your program.</p>
-      <br>
-      <h4>"being aware of the memory management model" - but what does it mean?</h4>
 <pre>
-Being aware of the memory management model is to know how Python uses memory : ) But not only.
-
 In Linux it proceeds to understanding below notions / aspects:
     - all resources are eventually provided by kernel
     - virtual memory and other memory management functions
-    - multithreading and multiprocessing
+    - concurrency in Python from perspective of memory management
     - Call Stack in Python, Heap memory in Python / processor stack
 
     - OS level memory optimizations - like using processor cache memory for often used objects:
