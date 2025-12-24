@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>JS questions</title>
+
+  <script>
+
+    function preparePicker(picker_obj, picker_content_obj) {
+        picker_obj.addEventListener('input', function () {
+          picker_content_obj.style.backgroundColor = picker_obj.value;
+          let [r, g, b] = picker_content_obj.style.backgroundColor.match(/\d+/g).map(Number);
+          let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
+
+          console.log(`[DEBUG] picker_content_obj : ${picker_content_obj.style.backgroundColor}, luminosity: ${y}`);
+          if (y < 70) {
+            picker_content_obj.style.color = "#FFF";
+            console.log("Kolor jest bliski czarnego, biała czcionka");
+          }
+          else {
+            picker_content_obj.style.color = "#000";
+            console.log("Kolor NIE jest bliski czarnego");
+          }
+        });
+    }
+  </script>
+
+
+    <style>
+      .color-option {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        border: 2px solid #ccc;
+        cursor: pointer;
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      input[type="radio"]:checked + label {
+        border: 2px solid black;
+      }
+
+      body {
+        margin: 1;
+      }
+
+      code {
+        // background-color: #0044cc;
+        color: green;
+        font-style: italic;
+
+      }
+
+      .outer {
+        display: flex;
+    <!--    border: solid 4px black;-->
+        box-sizing: border-box;
+      }
+
+      .main-content {
+        flex: 1; /* zajmij resztę szerokości */
+        padding: 10px;
+        border: solid 4px black;
+        font-size: 16px;
+      }
+
+      .side-block {
+        width: 420px;
+        padding: 10px;
+    <!--    margin-left: 10px;-->
+    <!--    border-left: solid 4px black;-->
+        box-sizing: border-box;
+      }
+
+      .input_examples {
+        display: inline-block;       /* pozwala na ustawianie szerokości/wysokości i układanie w linii */
+        margin: 5px;                 /* odstęp na zewnątrz */
+        border: solid 2px black;     /* ramka */
+        box-sizing: border-box;      /* szerokość/wysokość zawiera padding + border */
+        padding: 10px;
+        width: 350px;
+        height: 70px;
+      }
+
+    /* Stylowanie modala */
+    #customAlert {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ADD8E6;
+      padding: 20px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      text-align: center;
+      width: 300px;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Animacja dla modala */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Przycisk zamknięcia */
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0044cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .close-btn:hover {
+      background-color: #0033aa;
+    }
+
+    /* Ikona przycisku */
+    .icon {
+      font-size: 30px;
+      color: #005b99;
+      margin-bottom: 15px;
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1 style="text-decoration: underline; font-size: 40px;">JavaScript questions.</h1>
+<br>
+
+
+
+<h1 style="text-decoration: underline">001</h1>
+
+<div class="outer" id="outer1">
+
+
+  <div class="main-content" id="content1">
+      <a href="generate_js_questions">Ask AI to generate JavaScript question.</a>
+
+  </div>
+
+  <div class="side-block">
+    <label for="colorPicker" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+      <br>
+  <input type="color" id="colorPicker1" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
+
+  <script>
+    const picker1 = document.getElementById('colorPicker1');
+    const content1 = document.getElementById('content1');
+    preparePicker(picker1, content1);
+  </script>
+
+  </div>
+</div>
+
+<br>
+<br>
+
+</body>

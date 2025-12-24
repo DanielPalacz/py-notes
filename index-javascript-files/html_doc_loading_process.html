@@ -109,22 +109,50 @@
     <div class="card-body">
         <div><u>Nauka / powtórki:</u></div>
         <br>
-<pre>
-Ad_001d) Ładowanie pliku HTML w przeglądarce:
- - wysłanie żądania HTTP (GET /index.html)
- - odebranie odpowiedzi HTTP (w tym treść dokumentu HTMl)
- - analiza/parsowanie HTML (budowa DOM)
- - pobieranie zasobów zewnętrznych (tagi: link, script, img, itp)
-   wysyłanie nowych żądań HTTP
- - parsowanie CSS (stworzenie CSSOM)
- - tworzenie drzewa renderowania (połączenie DOM i CSSOM)
- - layout
-   przeliczenie elementów na stronie, położenie, rozmiar
- - pomalowanie elementów
-   na podstawie drzewa renderowania
- - composite
-   uwzględnienie dodatkowych warstw, np transformacji CSS
+
+
+<pre id="output">Ad_001d) Ładowanie pliku HTML w przeglądarce:
+
 </pre>
+
+<!-- - wysłanie żądania HTTP (GET /index.html)-->
+<!-- - odebranie odpowiedzi HTTP (w tym treść dokumentu HTMl)-->
+<!-- - analiza/parsowanie HTML (budowa DOM)-->
+<!-- - pobieranie zasobów zewnętrznych (tagi: link, script, img, itp)-->
+<!--   wysyłanie nowych żądań HTTP-->
+<!-- - parsowanie CSS (stworzenie CSSOM)-->
+<!-- - tworzenie drzewa renderowania (połączenie DOM i CSSOM)-->
+<!-- - layout-->
+<!--   przeliczenie elementów na stronie, położenie, rozmiar-->
+<!-- - pomalowanie elementów-->
+<!--   na podstawie drzewa renderowania-->
+<!-- - composite-->
+<!--   uwzględnienie dodatkowych warstw, np transformacji CSS-->
+        <script>
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const output = document.getElementById("output");
+
+async function showLines(lines) {
+  for (const line of lines) {
+    const p = document.createElement("p");
+    p.textContent = line;
+    output.appendChild(p);
+    await sleep(2000);
+  }
+}
+
+showLines([
+" - wysłanie żądania HTTP (GET /index.html)",
+" - odebranie odpowiedzi HTTP (w tym treść dokumentu HTMl)",
+" - analiza/parsowanie HTML (budowa DOM)",
+" - pobieranie zasobów zewnętrznych (tagi: link, script, img, itp)",
+"   wysyłanie nowych żądań HTTP",
+" - parsowanie CSS (stworzenie CSSOM)",
+" - tworzenie drzewa renderowania (połączenie DOM i CSSOM)",
+" - layout, przeliczenie elementów na stronie, położenie, rozmiar",
+" - pomalowanie elementów, na podstawie drzewa renderowania",
+" - composite, uwzględnienie dodatkowych warstw, np transformacji CSS"
+]);</script>
 
             <br>
         </ul>
