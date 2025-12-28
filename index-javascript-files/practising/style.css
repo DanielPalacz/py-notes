@@ -1,0 +1,101 @@
+  .color-option {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  input[type="radio"]:checked + label {
+    border: 2px solid black;
+  }
+
+  body {
+    margin: 1px;
+  }
+
+  code {
+    color: green;
+    font-style: italic;
+
+  }
+
+  .outer {
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .main-content {
+    flex: 1; /* zajmij resztę szerokości */
+    padding: 10px;
+    border: solid 4px black;
+    font-size: 16px;
+  }
+
+  .side-block {
+    width: 420px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .input_examples {
+    display: inline-block;       /* pozwala na ustawianie szerokości/wysokości i układanie w linii */
+    margin: 5px;                 /* odstęp na zewnątrz */
+    border: solid 2px black;     /* ramka */
+    box-sizing: border-box;      /* szerokość/wysokość zawiera padding + border */
+    padding: 10px;
+    width: 350px;
+    height: 70px;
+  }
+
+    /* Stylowanie modala */
+    #customAlert {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ADD8E6;
+      padding: 20px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      text-align: center;
+      width: 300px;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Animacja dla modala */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Przycisk zamknięcia */
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0044cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .close-btn:hover {
+      background-color: #0033aa;
+    }
+
+    /* Ikona przycisku */
+    .icon {
+      font-size: 30px;
+      color: #005b99;
+      margin-bottom: 15px;
+    }

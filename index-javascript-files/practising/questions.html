@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>JS questions</title>
 
-  <script>
+    <script>
 
     function preparePicker(picker_obj, picker_content_obj) {
         picker_obj.addEventListener('input', function () {
@@ -13,7 +13,7 @@
           let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
 
           console.log(`[DEBUG] picker_content_obj : ${picker_content_obj.style.backgroundColor}, luminosity: ${y}`);
-          if (y < 50) {
+          if (y < 70) {
             picker_content_obj.style.color = "#FFF";
             console.log("Kolor jest bliski czarnego, biała czcionka");
           }
@@ -21,10 +21,10 @@
             picker_content_obj.style.color = "#000";
             console.log("Kolor NIE jest bliski czarnego");
           }
-        });
+        }
+      );
     }
   </script>
-
 
 <script>
     function getFibonacciElement(num) {
@@ -115,7 +115,6 @@
 
   .outer {
     display: flex;
-<!--    border: solid 4px black;-->
     box-sizing: border-box;
   }
 
@@ -129,8 +128,6 @@
   .side-block {
     width: 420px;
     padding: 10px;
-<!--    margin-left: 10px;-->
-<!--    border-left: solid 4px black;-->
     box-sizing: border-box;
   }
 
@@ -209,7 +206,10 @@
     <pre>JavaScript - characteristics:
  - multi-paradigm, dynamically and weakly typed language
  - these type of operations are possible: 1 + "2" (weakly typed)
-    </pre>
+
+Other JS paradigms:
+ * Procedural (Imperative), OOP, Functional, Event-driven
+</pre>
   </div>
 
   <div class="side-block">
@@ -217,33 +217,19 @@
       <br>
   <input type="color" id="colorPicker1" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
 
+
   <script>
     const picker1 = document.getElementById('colorPicker1');
     const content1 = document.getElementById('content1');
-
-    picker1.addEventListener('input', function () {
-      content2.style.backgroundColor = picker2.value;
-      let [r, g, b] = content2.style.backgroundColor.match(/\d+/g).map(Number);
-      let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
-
-      console.log(`[DEBUG] content2a : ${content2.style.backgroundColor}, luminosity: ${y}`)
-      if (y < 50) {
-        content2.style.color = "#FFF";
-        console.log("Kolor jest bliski czarnego, biała czcionka");
-      }
-      else {
-        content2.style.color = "#000";
-        console.log("Kolor NIE jest bliski czarnego");
-
-      }
-
-    });
+    preparePicker(picker1, content1);
   </script>
+
 
   </div>
 </div>
 
 <br>
+
 
 
 
@@ -276,24 +262,8 @@ Titbit - document.write behaviour:
   <script>
     const picker2 = document.getElementById('colorPicker2');
     const content2 = document.getElementById('content2');
+    preparePicker(picker2, content2);
 
-    picker2.addEventListener('input', function () {
-      content2.style.backgroundColor = picker2.value;
-      let [r, g, b] = content2.style.backgroundColor.match(/\d+/g).map(Number);
-      let y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Obliczenie luminancji Y
-
-      console.log(`[DEBUG] content2a : ${content2.style.backgroundColor}, luminosity: ${y}`)
-      if (y < 50) {
-        content2.style.color = "#FFF";
-        console.log("Kolor jest bliski czarnego, biała czcionka");
-      }
-      else {
-        content2.style.color = "#000";
-        console.log("Kolor NIE jest bliski czarnego");
-
-      }
-
-    });
   </script>
 
   </div>
@@ -321,7 +291,6 @@ Titbit - document.write behaviour:
   <script>
     const picker3 = document.getElementById('colorPicker3');
     const content3 = document.getElementById('content3');
-
     preparePicker(picker3, content3);
 
   </script>
@@ -461,7 +430,7 @@ Typy referencyjne (obiekty):
 
   </div>
   <div class="side-block">
-    <label for="colorPicker4" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+    <label for="colorPicker8" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
       <br>
   <input type="color" id="colorPicker8" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
 
@@ -469,7 +438,7 @@ Typy referencyjne (obiekty):
     const picker8 = document.getElementById('colorPicker8');
     const content8 = document.getElementById('content8');
 
-    preparePicker(picker4, content4);
+    preparePicker(picker8, content8);
 
   </script>
 
@@ -487,19 +456,13 @@ Typy referencyjne (obiekty):
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
+<br>
+<hr>
+
+<br>
+<br>
+<br>
 
 
 <h3 style="text-decoration: underline">Examples of informative buttons:</h3>
@@ -508,7 +471,6 @@ Typy referencyjne (obiekty):
 
 <!--<button onclick="alert('Witaj! Tutaj wyczyśćić zawartość danej strony.');document.write('<html><body style=&quot;background-color: #ADD8E6;&quot;></p></body></html>');console.log('JavaScript osadzony w atrybucie HTML.');">Kliknij, wtedy uruchomisz kod JS osadzony tutaj.</button>-->
 <button onclick="alert('Click OK to get more information.');document.write('<html><body style=&quot;background-color: #ADD8E6;&quot;><br><p>... more information</p></body></html>');console.log('JavaScript code embedded in HTML attribute is running.');">Click to get more information [Alert component].</button>
-<br>
 
   <!-- Modal -->
   <div id="customAlert">
@@ -540,8 +502,9 @@ Typy referencyjne (obiekty):
   </script>
 
 </div>
-<br>
-<br>
+
+
+
 
 
 
@@ -620,73 +583,30 @@ Typy referencyjne (obiekty):
 
 </div>
 
-<div style="margin: 4px; border: 2px solid; width: 350px; padding: 10px;">
 
-<div style="max-width: 320px; margin: auto; padding: 20px; border: solid 1px gray;">
+
+
+
+<div style="max-width: 320px; margin: 3px; padding: 20px; border: solid 1px gray;">
   <input type="text"
          placeholder="Twoje imię"
-         style="width: 100%; padding: 10px; font-size: 1rem; box-sizing: border-box; margin-bottom: 10px;" />
+         style="width: 100%; padding: 6px; font-size: 1rem; box-sizing: border-box; margin-bottom: 10px;" />
 
-  <button style="width: 100%; padding: 12px; font-size: 1rem;">Wyślij</button>
+  <button style="width: 100%; padding: 6px; font-size: 1rem;">Wyślij</button>
 </div>
 </div>
 
-</div>
 
-
-<div>
-
-
-  <script src="../basics_script.js"></script>
-  <script src="../basics_script.js" defer></script>
-  <script src="../basics_script.js" async></script>
-  <!--  <script src="basics_script_global_var_check.js" defer></script>-->
-
-</div>
-
+<br>
 <hr>
 
-<!--<script>-->
-<!--    function sleepSync(ms) {-->
-<!--      const start = Date.now();-->
-<!--      while (Date.now() - start < ms) {}-->
-<!--    }-->
-<!--    sleepSync(1);-->
-<!--    document.body.innerHTML += '<hr>';-->
-
-<!--</script>-->
-
-<!--<hr>-->
-
-
-<!-- The same directory and default file-based request approach will not handle it: -->
-<!--Cross-Origin Request Blocked: reason: usage of file protocol not http-->
-<!--<script type="module">-->
-<!--    import { generateRandomNumber } from './es6_ecma_script.js';-->
-<!--    generateRandomNumber();-->
-<!--</script>-->
-
-<!-- The same directory and default http server - again - will not to handle it: -->
-<!-- Cross-Origin Request Blocked:
-<--  The Same Origin Policy disallows reading the remote resource at http://127.0.0.1:8000/es6_ecma_script.js.
-<--  (Reason: CORS header ‘Access-Control-Allow-Origin’ missing) -->
-<!--<script type="module">-->
-<!--    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';-->
-<!--    generateRandomNumber();-->
-<!--</script>-->
-
-
-<!-- CORS allowing http server run to handle it: -->
-<script type="module">
-    import { generateRandomNumber } from 'http://127.0.0.1:8000/es6_ecma_script.js';
-    generateRandomNumber();
-</script>
 
 
 <script src="../basics_script_fibonacci.js"></script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. This is:', this);</script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. window is:', window);</script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. Window is:', Window);</script>
+
 
 <script type="module">
     function sleepSync(ms) {
@@ -761,6 +681,11 @@ Typy referencyjne (obiekty):
     console.log('[DEBUG][type module] Arrow-like function call x1() - x2(): ', x1(), "-", x2());
 
 </script>
+
+
+
+
+
 
 <!--  <script defer>-->
 <!--    function sayBye(user) {-->
