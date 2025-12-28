@@ -26,6 +26,8 @@
 #   - binding constructors to the class rather than the instance,
 #   - enabling alternative constructors (`from_*`, `load_*`, etc.),
 #   - and centralizing invariants without inflating `__init__`.
+# - @classmethod is not limited to multiple constructors—it’s a general tool for any method that
+#   logically operates at the class level
 
 
 from json import load as json_load
@@ -42,8 +44,8 @@ class A:
         return cls(data)
 
     @classmethod
-    def from_json(cls, fillename, *, json_key=None):
-        with open(fillename) as f:
+    def from_json(cls, filename, *, json_key=None):
+        with open(filename) as f:
             data = json_load(f)
             if json_key is not None:
                 data = data[json_key]

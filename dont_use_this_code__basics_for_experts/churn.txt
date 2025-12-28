@@ -1,0 +1,5 @@
+Code Churn (Rework)
+    Definition: How often a specific piece of code (file, function) is changed or rewritten shortly after being merged.
+
+Why it matters:
+    Excessive code churn often signals underlying problems like unclear requirements, bugs, or inefficient development, impacting quality and velocity.
