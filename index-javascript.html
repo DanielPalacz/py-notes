@@ -10,6 +10,7 @@
     * {
       box-sizing: border-box;
       font-family: 'Montserrat', sans-serif;
+      margin: 3px 3px 3px 3px;
     }
 
     table, th, td {
@@ -26,6 +27,11 @@
     }
     .row {
         margin: 20px 20px 20px 20px
+    }
+
+    li, ul {
+        margin: 20px 2px 2px 2px;
+        padding: 4px 2px 2px 2px;
     }
 
 
@@ -129,12 +135,13 @@
 
 <h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">JavaScript podstawy:</h1>
 
-
 <div class="row mb-10">
     <div class="col-8">
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
+        <details>
+        <summary style="margin: 8px; padding: 4px;">001</summary>
         <ul>
             <li style="background-color: green; color: white;">001. Co to jest JavaScript i do czego służy? <a href="index-javascript-files/basics_001.html" style="background-color: green; color: white;">Odpowiedź</a></li>
             Różne:
@@ -166,6 +173,13 @@
                 <br>
             </ul>
             <br>
+    </details>
+
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">002</summary>
+
+
             <li style="background-color: green; color: white;">002. Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?</li>
             <ul style="background-color: green; color: white;">
                 <li style="background-color: green; color: white;"><a href="index-javascript-files/basics_002.html" style="background-color: green; color: white;">Odpowiedź</a></li>
@@ -194,7 +208,10 @@ W ECMAScript/ES6:
 </ul>
 
 <br>
+            </details>
 
+        <details>
+        <summary style="margin: 8px; padding: 4px;">003</summary>
             <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy? Jakie są inne zakresy w JS?</li>
             <ul>
                 <ul>
@@ -207,6 +224,10 @@ W ECMAScript/ES6:
                 <li>003d. W Pythonie brak deklaracji działa bardziej intuicyjnie – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).</li>
             </ul>
             <br>
+            </details>
+        <details>
+        <summary style="margin: 8px; padding: 4px;">004</summary>
+
             <li>004. Globalny kontekst w JavaScript (przeglądarka). Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
             <ul>
                 <li>004a. Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).</li>
@@ -214,6 +235,9 @@ W ECMAScript/ES6:
                 <li><a href="index-javascript-files/basics_004.html">Odpowiedź</a></li>
             </ul>
             <br>
+        </details>
+                <details>
+        <summary style="margin: 8px; padding: 4px;">005</summary>
             <li>005. Typy danych w JavaScript. <a href="index-javascript-files/basics_005.html">Odpowiedź</a></li>
             <ul>
                 <li>005a. Typy prymitywne, jest ich 7, nie mają prototypu i nie dziedziczą po Object.</li>
@@ -241,38 +265,80 @@ W ECMAScript/ES6:
             </ul>
             <br>
             <br>
-            <li>006. camelCase, PascalCase, snake_case, UPPERCASE - co i kiedy się używa w JavaScript.</li>
-            <li>007. Jaka jest różnica między == i === w JavaScript? Kiedy co stosować?</li>
-            <br>
-            <li>008. Funkcje w JavaScript. Jak działają funkcje strzałkowe?</li>
-            <ul>
+                </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">006: camelCase, ... Co i kiedy się używa w JavaScript?</summary>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">007: == i === w JavaScript.</summary>
+                <pre>
+    == → porównanie z konwersją typów (type coercion)
+    === → porównanie bez konwersji (ten sam typ i ta sama wartość)
+
+    Dlatego === nazywa się strict equality.
+
+                </pre>
+                <br>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">008: Funkcje w JavaScript. Jak działają funkcje strzałkowe?</summary>
+
+            <ul style="margin-left: 10px">
                 <li><a href="index-javascript-files/basics_008.html">Odpowiedź</a></li>
             </ul>
             <br>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">009</summary>
 
             <li>009. Operatory, Instrukcje warunkowe, Pętle - JavaScript.</li>
             <br>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">010</summary>
             <li>010. Jak działa słowo kluczowe 'this' w JavaScript?</li>
             <ul>
                 <li><a href="index-javascript-files/basics_011.html">Odpowiedź</a></li>
             </ul>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">011</summary>
             <li>011. Podstawy OOP w JavaScript - podsumowanie.</li>
             <ul>
                 <li><a href="index-javascript-files/basics_012.html">Odpowiedź</a></li>
             </ul>
             <br>
+            </details>
+
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">012</summary>
             <li>012. Co to jest hoisting i jak działa hoisting dla różnych sposobów definiowania funkcji? Zmienne również są hoistowane, ale jak dokładnie?</li>
             <ul>
                 <li><a href="index-javascript-files/basics_016.html">Odpowiedź</a></li>
             </ul>
             <br>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">013</summary>
             <li>013. Prototypy to wbudowany sposób dziedziczenia, który pozwala obiektom na dziedziczenie funkcji i właściwości z innych obiektów.</li>
-
             <br>
+            </details>
+
+            <details>
+            <summary style="margin: 8px; padding: 4px;">014</summary>
             <li>014. <a href="images/JS__dom_introspection_methods.png">Metody introspekcji DOM</a></li>
-
             <br>
-            <li>015. Typy - łamigłówki/ciekawostki.</a></li>
+            </details>
+            <details>
+            <summary style="margin: 8px; padding: 4px;">015 - Typy - łamigłówki/ciekawostki.</summary>
             <pre>
  - typeof NaN; // "number"
  - NaN === NaN; // false
@@ -289,7 +355,7 @@ W ECMAScript/ES6:
  - [] + [] // ""
  - [] + {} // "[object Object]"
             </pre>
-
+            </details>
         </ul>
 
     </div>
