@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Budzik</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div>
+	  <div class="container">
+		<h1>Budzik</h1>
+		<p id="timer">15:00</p>
+		<button id="start">Start</button>
+
+	  </div>
+	</div>
+
+
+
+	<script>
+
+		const timerEl = document.getElementById("timer");
+		const startBtn = document.getElementById("start");
+
+		let minutes = Number(timerEl.textContent.split(':')[0])
+		let time = minutes * 60; // sekundy
+		let intervalId = null;
+
+		function updateTimer() {
+		  const minutes = Math.floor(time / 60);
+		  const seconds = time % 60;
+
+		  timerEl.textContent =
+			`${minutes}:${seconds.toString().padStart(2, "0")}`;
+		}
+
+		startBtn.addEventListener("click", () => {
+		  if (intervalId !== null) return; // żeby nie odpalić kilku interwałów
+
+		  intervalId = setInterval(() => {
+			if (time <= 0) {
+			  clearInterval(intervalId);
+			  intervalId = null;
+
+			  const sound = new Audio("audio.wav");
+			  function playSound() {
+				sound.currentTime = 0; // od początku
+				sound.play();
+			  }
+
+			  playSound();
+			  return;
+			}
+
+			time--;
+			updateTimer();
+
+		  }, 1000);
+		});
+
+	</script>
+
+
+
+<!--<pre>-->
+<!--meta tag:-->
+<!--	viewport-->
+<!--	definicja obszaru wyświetlania strony (logiczny „ekran”, na którym przeglądarka renderuje stronę)-->
+
+<!--	width=device-width-->
+<!--	szerokość viewportu (logicznego ekranu) = szerokość urządzenia-->
+
+<!--	initial-scale=1.0-->
+<!--	początkowy zoom = 100%”-->
+<!--</pre>-->
+</body>
+</html>
