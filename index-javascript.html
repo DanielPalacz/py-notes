@@ -146,7 +146,7 @@
     <div class="card-body">
 
         <details>
-        <summary style="margin: 8px; padding: 4px;">001</summary>
+        <summary style="margin: 8px; padding: 4px;">001. JavaScript - wstęp.</summary>
         <ul>
             <li style="background-color: green; color: white;">001. Co to jest JavaScript i do czego służy? <a href="index-javascript-files/basics_001.html" style="background-color: green; color: white;">Odpowiedź</a></li>
             Różne:
@@ -182,7 +182,7 @@
 
 
             <details>
-            <summary style="margin: 8px; padding: 4px;">002</summary>
+            <summary style="margin: 8px; padding: 4px;">002. Osadzanie kodu JavaScript na stronie (tag script).</summary>
 
 
             <li style="background-color: green; color: white;">002. Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?</li>
@@ -216,58 +216,74 @@ W ECMAScript/ES6:
             </details>
 
         <details>
-        <summary style="margin: 8px; padding: 4px;">003</summary>
-            <li>003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działa zakres blokowy? Jakie są inne zakresy w JS?</li>
-            <ul>
-                <ul>
-                    <li><a href="index-javascript-files/basics_003.html">Odpowiedź</a></li>
-                </ul>
-                <li>003a. Domyślnie (bez użycia: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.</li>
-                <br>
-                <li>003b. Czy w Python istnieje podobny do 'const' mechanizm wymuszania, by zmienna była stała?</li>
-                <li>003c. W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak. </li>
-                <li>003d. W Pythonie brak deklaracji działa bardziej intuicyjnie – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).</li>
-            </ul>
+        <summary style="margin: 8px; padding: 4px;">003. Deklaracja zmiennych: let, const, var lub domyślna. Jak działają zakresy?</summary>
+        <a href="index-javascript-files/basics_003.html">Odpowiedź</a>
+<pre>
+
+3.1)
+Domyślnie (bez: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.
+W Pythonie brak deklaracji działa bardziej intuicyjnie
+    – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).
+
+3.2)
+W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak.
+
+3.3)
+Podsumowanie – zakresy w JS:
+    Global Scope – dostępny wszędzie w kodzie.
+    Function Scope – dostępny tylko w obrębie funkcji.
+    Block Scope – dostępny tylko w obrębie if, for, while, lub innych bloków.
+    Lexical Scope – zależy od tego, gdzie funkcja została zadeklarowana, a nie wywołana.
+    this Scope – zależy od kontekstu wywołania funkcji.
+</pre>
             <br>
             </details>
         <details>
-        <summary style="margin: 8px; padding: 4px;">004</summary>
+        <summary style="margin: 8px; padding: 4px;">004. Globalny kontekst w JavaScript (przeglądarka)</summary>
 
-            <li>004. Globalny kontekst w JavaScript (przeglądarka). Kontekst globalny a obiekt window - jaka jest relacja między nimi?</li>
-            <ul>
-                <li>004a. Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).</li>
-                <li>004b. Wprowadzono 'globalThis', żeby to wszystko połączyć. Użycie 'globalThis' to teraz zalecany sposób na wymuszenie globalnego kontekstu - działa na wszystkich typach środowisk.</li>
-                <li><a href="index-javascript-files/basics_004.html">Odpowiedź</a></li>
-            </ul>
+            <pre><a href="index-javascript-files/basics_004.html">Odpowiedź</a>
+
+4.1)
+Kontekst globalny a obiekt window - jaka jest relacja między nimi?
+Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).
+
+4.2)
+Wprowadzono 'globalThis', żeby to wszystko połączyć  - działa na wszystkich typach środowisk.
+Użycie 'globalThis' to teraz zalecany sposób odwołanie się do globalnego kontekstu.
+</pre>
             <br>
         </details>
-                <details>
+
+
+        <details>
         <summary style="margin: 8px; padding: 4px;">005. Typy danych w JavaScript.</summary>
             <a style="margin: 1px 1px 1px 20px; padding: 1px 1px 1px 1px;" href="index-javascript-files/basics_005.html">Odpowiedź</a>
+            <br>
+            <br>
 
+<pre>
+    5.1)
+    Typy prymitywne, jest ich 7, nie mają prototypu i nie dziedziczą po Object.
+    JS ma 1 główny typ referencyjny: Object. Poza typami prymitywnymi, prawie wszystko dziedziczy po Object.
+    Obiekty 'document' i 'window' to 'host objects' (środowisko przeglądarki), ale też dziedziczą po Object.
+    Jedyny „obiekt”, który naprawdę nie dziedziczy po Object, to 'null'.
 
-            <ul style="margin: 1px 1px 1px 20px; padding: 1px 1px 1px 1px;">
-                <li>005a. Typy prymitywne, jest ich 7, nie mają prototypu i nie dziedziczą po Object.</li>
-                <li>005b. JS ma 1 główny typ referencyjny: Object. Poza typami prymitywnymi, prawie wszystko w JS dziedziczy po Object.</li>
-                <br>
+    5.2)
+    Tworzenie obiektów wbudowanych, literały obiektów - przykłady.
+    <a href="index-javascript-files/basics_013.html">Odpowiedź</a>
 
-                <li>005c. Obiekty document i window w kontekście DOM. Inne globalne obiekty przeglądarki.</li>
+    5.3)
+    Zwykły obiekt '{}' nie implementuje interfejsu Iterable - jak sobie z tym radzić?
+    <a href="index-javascript-files/basics_014.html">Odpowiedź</a>
 
-                <li>005d. Tworzenie obiektów wbudowanych, literały obiektów - przykłady.</li>
-                <ul>
-                    <li><a href="index-javascript-files/basics_013.html">Odpowiedź</a></li>
-                </ul>
-                <li>005e. Zwykły obiekt '{}' nie implementuje interfejsu Iterable - jak sobie z tym radzić?</li>
-                <ul>
-                    <li><a href="index-javascript-files/basics_014.html">Odpowiedź</a></li>
-                </ul>
-                <li>005f. Tworzenie obiektów w JavaScript - przegląd możliwości.<a href="index-javascript-files/basics_015.html"> [Odpowiedź]</a></li>
-                <ul>
-                    <li> - każdy obiekt ma ukryte odwołanie do innego obiektu (albo null), nazywane prototypem</li>
-                    <li> - klucze obiektów zawsze są traktowane jako łańcuchy znaków. Porównanie z Python Dict.</li>
-                    <li> - klasy w JS to tylko ładniejsza forma prototypów, nawet jeśli używamy 'class', to tylko cukier składniowy.</li>
-                </ul>
+    5.4)
+    Tworzenie obiektów w JavaScript - przegląd możliwości.
+    <a href="index-javascript-files/basics_015.html"> [Odpowiedź]</a>
 
+     - każdy obiekt ma ukryte odwołanie do innego obiektu (albo null), nazywane prototypem
+     - klucze obiektów zawsze są traktowane jako łańcuchy znaków. Porównanie z Python Dictionary
+     - klasy w JS to tylko ładniejsza forma prototypów, nawet 'class', to tylko cukier składniowy
+</pre>
 
             </ul>
             <br>
@@ -276,17 +292,16 @@ W ECMAScript/ES6:
 
             <details>
             <summary style="margin: 8px; padding: 4px;">006: camelCase, ... Co i kiedy się używa w JavaScript?</summary>
+                <br>
             </details>
 
             <details>
             <summary style="margin: 8px; padding: 4px;">007: == i === w JavaScript.</summary>
-                <pre>
+                <pre>Wytłumaczenie:
     == → porównanie z konwersją typów (type coercion)
     === → porównanie bez konwersji (ten sam typ i ta sama wartość)
 
-    Dlatego === nazywa się strict equality.
-
-                </pre>
+    Dlatego === nazywa się strict equality.</pre>
                 <br>
             </details>
 
@@ -309,7 +324,7 @@ W ECMAScript/ES6:
             <details>
             <summary style="margin: 8px; padding: 4px;">010. Syntax słowa 'this' w JavaScript - jak to działa?</summary>
             <div style="margin: 1px 1px 1px 20px; padding: 1px 1px 1px 1px;">
-                <a href="index-javascript-files/basics_011.html">Odpowiedź</a>
+                <a href="index-javascript-files/basics_010.html">Odpowiedź</a>
             </div>
 
             <br>
@@ -318,7 +333,7 @@ W ECMAScript/ES6:
             <details>
             <summary style="margin: 8px; padding: 4px;">011. Podstawy OOP w JavaScript - podsumowanie.</summary>
             <div style="margin: 1px 1px 1px 20px; padding: 1px 1px 1px 1px;">
-                <a href="index-javascript-files/basics_012.html">Odpowiedź</a>
+                <a href="index-javascript-files/basics_011.html">Odpowiedź</a>
             </div>
 
             <br>
@@ -378,8 +393,8 @@ W ECMAScript/ES6:
 <pre>
 AJAX (Asynchronous JavaScript and XML):
  - techniki programowania webowego do tworzenia asynchronicznych aplikacji
- - XMLHttpRequest (starsze API, skomplikowane w użyciu),
- - fetch (bardziej nowoczesnym API, które ma na celu zastąpienie starszego)
+   XMLHttpRequest (starsze API, skomplikowane w użyciu),
+   fetch (bardziej nowoczesnym API, które ma na celu zastąpienie starszego)
 </pre>
             </details>
 

@@ -99,8 +99,8 @@
 </head>
 <body style="color:black;background-color:powderblue;">
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">Jak działa słowo kluczowe 'this' w JavaScript?</h1>
-
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">OOP w JavaScript:</h1>
+<br>
 
 <div class="row mb-10">
     <div class="col-8">
@@ -109,34 +109,165 @@
     <div class="card-body">
 
     <pre>
-this:
-    - słowo kluczowe odnoszące się się do obiektu, który wywołuje aktualnie wykonaną funkcję
-    - wskazywany obiekt zależy od kontekstu wywołania funkcji
-    - wartość this zmienia się w zależności od tego, w jaki sposób i gdzie funkcja jest wywoływana
 
-Różne Use Cases:
+Podsumowanie podstaw OOP w JavaScript:
+    1. Obiekty: Zbiór właściwości i metod, które reprezentują pewne dane i funkcje.
+    2. Funkcje konstruktorowe: Używane do tworzenia nowych instancji obiektów.
+    3. Prototypy: Mechanizm dziedziczenia metod i właściwości.
+    4. Klasy: Wprowadzenie do bardziej strukturalnego podejścia do OOP, bazującego na funkcjach konstruktorach.
+    5. Dziedziczenie: Możliwość tworzenia nowych klas na podstawie już istniejących.
+    6. Metody statyczne: Metody, które operują na klasie, a nie na instancjach obiektów.
+    7. Gettery i Settery: Umożliwiają kontrolowanie odczytu i zapisu wartości właściwości.
 
-    1. this w funkcjach globalnych
-        - console.log(this);  // W przeglądarkach 'this' odnosi się do obiektu window
 
-    2. this w funkcjach zwykłych
-        - funkcja jest wywoływana w sposób globalny (bez przypisania jej do jakiegoś obiektu), this odnosi się do obiektu globalnego
-          (czyli window w przeglądarkach).
+Ad1)
+    // Tworzenie obiektu
+    const person = {
+      name: 'Alice',
+      age: 25,
+      greet() {
+        return `Hello, my name is ${this.name}`;
+      }
+    };
 
-    3. this w metodach obiektów
-        - Kiedy funkcja jest wywoływana jako metoda obiektu, this odnosi się do obiektu, który wywołuje tę metodę.
+    console.log(person.name);   // 'Alice'
+    console.log(person.greet()); // 'Hello, my name is Alice'
 
-    4. this w funkcjach strzałkowych
-        - Funkcje strzałkowe różnią się od zwykłych funkcji, bo nie mają własnego this i dziedziczą this z otaczającego kontekstu.
 
-Inne Use Cases:
-    5. this w konstruktorach i klasach
-    6. this w zdarzeniach (event handlers)
-    7. this w call(), apply() i bind()
-    8. this w trybach ścisłych ('strict mode', np. w Node.js, ES Modules w przeglądarkach)
-        - każdy plik JavaScript jest traktowany jako moduł, a moduły mają własny kontekst
-        - moduł w Node.js działa w trybie "strict mode" z definicji i this nie jest przypisane do globalnego obiektu (global w Node.js).
-</pre>
+Ad2)
+    // Funkcja konstruktorowa:
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+      this.greet = function() {
+        return `Hello, my name is ${this.name}`;
+      };
+    }
+
+    // Tworzenie obiektów (instancji) na podstawie funkcji konstruktora
+    const alice = new Person('Alice', 25);
+    const bob = new Person('Bob', 30);
+
+    console.log(alice.greet()); // 'Hello, my name is Alice'
+    console.log(bob.greet());   // 'Hello, my name is Bob'
+
+Ad3)
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    // Dodanie metody do prototypu
+    Person.prototype.greet = function() {
+      return `Hello, my name is ${this.name}`;
+    };
+
+    const alice = new Person('Alice', 25);
+    const bob = new Person('Bob', 30);
+
+    console.log(alice.greet()); // 'Hello, my name is Alice'
+    console.log(bob.greet());   // 'Hello, my name is Bob'
+
+
+Ad4)
+    // Tworzenie klasy
+    class Person {
+      // Konstruktor klasy
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      // Metoda instancji
+      greet() {
+        return `Hello, my name is ${this.name}`;
+      }
+    }
+
+    // Tworzenie obiektów na podstawie klasy
+    const alice = new Person('Alice', 25);
+    const bob = new Person('Bob', 30);
+
+    console.log(alice.greet()); // 'Hello, my name is Alice'
+    console.log(bob.greet());   // 'Hello, my name is Bob'
+
+
+Ad5)
+    // Klasa bazowa
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      greet() {
+        return `Hello, my name is ${this.name}`;
+      }
+    }
+
+    // Klasa dziedzicząca (klasa pochodna)
+    class Employee extends Person {
+      constructor(name, age, jobTitle) {
+        super(name, age); // Wywołanie konstruktora klasy bazowej
+        this.jobTitle = jobTitle;
+      }
+
+      // Nadpisanie metody greet
+      greet() {
+        return `Hello, my name is ${this.name} and I am a ${this.jobTitle}`;
+      }
+    }
+
+    const alice = new Employee('Alice', 25, 'Software Engineer');
+    console.log(alice.greet()); // 'Hello, my name is Alice and I am a Software Engineer'
+
+
+Ad6)
+    Metody statyczne (Static Methods)
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+
+      // Metoda instancji
+      greet() {
+        return `Hello, my name is ${this.name}`;
+      }
+
+      // Metoda statyczna
+      static species() {
+        return 'Human';
+      }
+    }
+
+    console.log(Person.species()); // 'Human' - wywołanie metody statycznej na klasie
+
+
+Ad7)
+    # Getter i Setter
+    class Person {
+      constructor(name) {
+        this._name = name;
+      }
+
+      // Getter
+      get name() {
+        return this._name;
+      }
+
+      // Setter
+      set name(newName) {
+        this._name = newName;
+      }
+    }
+
+    const person = new Person('Alice');
+    console.log(person.name); // 'Alice' - użycie getter'a
+
+    person.name = 'Bob';      // użycie setter'a
+    console.log(person.name); // 'Bob'
+
+    </pre>
     </div>
     </div>
     </div>

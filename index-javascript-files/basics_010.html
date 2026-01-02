@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .main-a {
+      font-size: 30px;
+<!--      color: #000;-->
+    }
+    .row {
+        margin: 20px 20px 20px 20px
+    }
+
+
+    .button-link-custom {
+        font-size:30px;
+    }
+
+    .button-link-custom:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+        color: yellow;
+    }
+
+
+
+    .card {
+        background-color: #d0e7f7;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #000;
+    }
+
+    .card:hover {
+        transform: scale(1.02); /* Slightly enlarge the brand */
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+		padding: 0px;            /* Internal padding */
+		margin: 10px;            /* Internal margin */
+		color: #000;
+    }
+
+    .card-body a {
+		color: #000;
+		text-decoration: underline;
+    }
+
+    .shell {
+    	color: #555;
+    }
+
+    .code {
+    	color: green;
+    	font-style: italic;
+    }
+
+    .todo {
+        color: yellow;
+        background-color: #000;
+    }
+    .yellow-this {
+        background-color: yellow;
+    }
+
+    .notion {
+    	color: #9370DB;
+    	font-style: italic;
+<!--    	font-weight: bold;-->
+    }
+
+    .notion-explanation {
+    	color: #9370DB;
+    	font-style: italic;
+    }
+
+
+</style>
+
+</head>
+<body style="color:black;background-color:powderblue;">
+
+<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">Jak działa słowo kluczowe 'this' w JavaScript?</h1>
+
+
+<div class="row mb-10">
+    <div class="col-8">
+
+    <div class="card mb-4 box-shadow" style="background-color: yellow;">
+    <div class="card-body">
+
+    <pre>
+this:
+    - słowo kluczowe odnoszące się się do obiektu, który wywołuje aktualnie wykonaną funkcję
+    - wskazywany obiekt zależy od kontekstu wywołania funkcji
+    - wartość this zmienia się w zależności od tego, w jaki sposób i gdzie funkcja jest wywoływana
+
+Różne Use Cases:
+
+    1. this w funkcjach globalnych
+        - console.log(this);  // W przeglądarkach 'this' odnosi się do obiektu window
+
+    2. this w funkcjach zwykłych
+        - funkcja jest wywoływana w sposób globalny (bez przypisania jej do jakiegoś obiektu), this odnosi się do obiektu globalnego
+          (czyli window w przeglądarkach).
+
+    3. this w metodach obiektów
+        - Kiedy funkcja jest wywoływana jako metoda obiektu, this odnosi się do obiektu, który wywołuje tę metodę.
+
+    4. this w funkcjach strzałkowych
+        - Funkcje strzałkowe różnią się od zwykłych funkcji, bo nie mają własnego this i dziedziczą this z otaczającego kontekstu.
+
+Inne Use Cases:
+    5. this w konstruktorach i klasach
+    6. this w zdarzeniach (event handlers)
+    7. this w call(), apply() i bind()
+    8. this w trybach ścisłych ('strict mode', np. w Node.js, ES Modules w przeglądarkach)
+        - każdy plik JavaScript jest traktowany jako moduł, a moduły mają własny kontekst
+        - moduł w Node.js działa w trybie "strict mode" z definicji i this nie jest przypisane do globalnego obiektu (global w Node.js).
+</pre>
+    </div>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
