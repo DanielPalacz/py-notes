@@ -1,92 +1,5 @@
 
 
-
-# Dynamic lookups
-
-
-import os
-
-class DirectorySize:
-
-    def __get__(self, obj, objtype=None):
-        print(locals())
-        return len(os.listdir(obj.dirname))
-
-class Directory:
-
-    size = DirectorySize()              # Descriptor instance
-
-    def __init__(self, dirname):
-        self.dirname = dirname          # Regular instance attribute
-
-
-# Managed attributes - A popular use for descriptors is managing access to instance data
-
-import logging
-
-logging.basicConfig(level=logging.INFO)
-
-class LoggedAccess:
-
-    def __set_name__(self, owner, name):
-        self.public_name = name
-        self.private_name = '_' + name
-
-    def __get__(self, obj, objtype=None):
-        value = getattr(obj, self.private_name)
-        logging.info('Accessing %r giving %r', self.public_name, value)
-        return value
-
-    def __set__(self, obj, value):
-        logging.info('Updating %r to %r', self.public_name, value)
-        setattr(obj, self.private_name, value)
-
-class Person:
-
-    name = LoggedAccess()                # First descriptor instance
-    age = LoggedAccess()                 # Second descriptor instance
-
-    def __init__(self, name, age):
-        self.name = name                 # Calls the first descriptor
-        self.age = age                   # Calls the second descriptor
-
-    def birthday(self):
-        self.age += 1
-
-#     @classmethod
-#     @property
-#     def hihi(cls):
-#         return "X111"
-#
-# Person.hihi = "1"
-
-#####################################################
-
-# Custom validators
-
-from abc import ABC, abstractmethod
-
-class Validator(ABC):
-
-    def __set_name__(self, owner, name):
-        self.private_name = '_' + name
-
-    def __get__(self, obj, objtype=None):
-        return getattr(obj, self.private_name)
-
-    def __set__(self, obj, value):
-        self.validate(value)
-        setattr(obj, self.private_name, value)
-
-    @abstractmethod
-    def validate(self, value):
-        pass
-
-
-#####################################################
-
-
-
 class AccessCounter:
     class DescriptorWrapper:
         """ Opakowanie wartości umożliwiające dostęp do metod deskryptora """
@@ -158,20 +71,20 @@ class Test:
 
 
 # Testujemy działanie
-t = Test()
+# t = Test()
+#
+# if t.counter:  # Sprawdza, czy wartość jest ustawiona
+#     print("Counter has a value")
+# else:
+#     print("Returning descriptor itself:", t.counter)  # Powinno zwrócić deskryptor
 
-if t.counter:  # Sprawdza, czy wartość jest ustawiona
-    print("Counter has a value")
-else:
-    print("Returning descriptor itself:", t.counter)  # Powinno zwrócić deskryptor
-
-t.counter = 42  # Pierwszy zapis
-print(t.counter.get_value())  # Odczyt wartości (teraz zwiększa licznik)
-print(t.counter.get_value())  # Kolejny odczyt wartości
-
-# Sprawdzamy licznik (Działa poprawnie!)
-print(t.counter.get_counts())  # {'reads': 2, 'writes': 1}
-
-# Kolejne odczyty
-print(t.counter.get_value())
-print(t.counter.get_counts())  # Licznik odczytów powinien być 3, a nie 5+
+# t.counter = 42  # Pierwszy zapis
+# print(t.counter.get_value())  # Odczyt wartości (teraz zwiększa licznik)
+# print(t.counter.get_value())  # Kolejny odczyt wartości
+#
+# # Sprawdzamy licznik (Działa poprawnie!)
+# print(t.counter.get_counts())  # {'reads': 2, 'writes': 1}
+#
+# # Kolejne odczyty
+# print(t.counter.get_value())
+# print(t.counter.get_counts())  # Licznik odczytów powinien być 3, a nie 5+
