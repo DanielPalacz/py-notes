@@ -132,9 +132,10 @@
 
 </head>
 <body style="color:black;background-color:powderblue;">
+<script src="index-javascript-files/basics_script_sleep_2s.js"></script>
 
 
-<h1 class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">JavaScript podstawy:</h1>
+<h1 id="intro" class="m-4" style="font-size:30px;text-decoration: underline;font-weight: bold;">JavaScript podstawy:</h1>
 
 
 
@@ -147,71 +148,47 @@
 
         <details>
         <summary style="margin: 8px; padding: 4px;">001. JavaScript - wstęp.</summary>
-        <ul>
-            <li style="background-color: green; color: white;">001. Co to jest JavaScript i do czego służy? <a href="index-javascript-files/basics_001.html" style="background-color: green; color: white;">Odpowiedź</a></li>
-            Różne:
-            <br>
-            <ul style="background-color: green; color: white;">
-                <li>001a. Warunek if-else w JavaScript.</li>
-                <ul>
-                    <li style="background-color: green; color: white;"><a href="index-javascript-files/basics_script1a.js" style="background-color: green; color: white;">Odpowiedź</a></li>
-                    <script src="index-javascript-files/basics_script1a.js" defer></script>
-                </ul>
-                <li>001b. Średniki na koncu linii. Dobrą praktyką jest dodawanie ich (chociaż JS ma mechanizm automatycznego wstawiania średników).</li>
-                <br>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;">Co to jest JavaScript i do czego służy? <a href="index-javascript-files/basics_001.html" style="background-color: green; color: white;">Odpowiedź</a></div>
 
-                <li style="background-color: red; color: white;">001c. Przyszłość JavaScript, rozwój standardów ECMAScript i innowacje za tym idące (np moduły ES6). Wersjonowanie JS.</li>
-                <ul>
-                    <listyle="background-color: red; color: white;"><a href="index-javascript-files/images/Python_vs_JS__versioning_difference.png" style="background-color: red; color: white;">JavaScript ≠ Python (wersjonowanie).</a></li>
-                </ul>
-                <br>
-                <li style="background-color: red; color: white;">001d. Jak wygląda proces ładowania pliku HTML w przeglądarce?</li>
-                <ul>
-                    <li><a href="index-javascript-files/html_doc_loading_process.html" style="background-color: red; color: white;">Odpowiedź</a></li>
-                </ul>
-                <br>
-                <li style="background-color: red; color: white;">001e. Załadowanie kodu JS do sesji JS przeglądarki (custom Bookmarklet, CSP i ograniczenia).</li>
-                <br>
-                <li style="background-color: orange; color: white;">001f. typeof notDefined - typeof to specjalny operator, który jako jedyny w JS nie rzuci błędu, nawet jeśli zmienna nie istnieje.  Zamiast ReferenceError daje "undefined". Reguła: Jeśli nie masz pewności, czy zmienna istnieje, użyj typeof – to bezpieczne.</li>
-                <br>
-                <li style="background-color: orange; color: white;">001g. Tryb ścisły w JavaScript, to konfiguracja wprowadzająca bardziej rygorystyczne zasady programowania ("use strict";).</li>
-                <br>
-            </ul>
-            <br>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001a. Warunek if-else w JavaScript.<a href="index-javascript-files/basics_script1a.js" style="background-color: green; color: white;">Odpowiedź</a></div>
+            <script src="index-javascript-files/basics_script1a.js" defer></script>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001b. Średniki na koncu linii. Dobrą praktyką jest dodawanie ich (chociaż JS ma mechanizm automatycznego wstawiania średników).</div>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001c. Jak wygląda proces ładowania pliku HTML w przeglądarce? <a href="index-javascript-files/html_doc_loading_process.html" style="background-color: red; color: white;">Odpowiedź</a></div>
+
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001d. typeof notDefined - specjalny operator, który jako jedyny w JS nie rzuci błędu, nawet jeśli zmienna nie istnieje.</div>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001e. Tryb ścisły w JavaScript - konfiguracja wprowadzająca rygorystyczne zasady programowania ("use strict";).</div>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001f. Przyszłość JavaScript, rozwój standardów ECMAScript i innowacje za tym idące (np moduły ES6).</div>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001g. Wersjonowanie JS. <a href="index-javascript-files/images/Python_vs_JS__versioning_difference.png" style="background-color: red; color: white;">JavaScript ≠ Python (wersjonowanie).</a></div>
+        <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;"> - 001h. Załadowanie kodu JS do sesji JS przeglądarki (custom Bookmarklet, CSP i ograniczenia).</div>
+
+        <br>
     </details>
 
 
-            <details>
-            <summary style="margin: 8px; padding: 4px;">002. Osadzanie kodu JavaScript na stronie (tag script).</summary>
+<details>
+<summary style="margin: 8px; padding: 4px;">002. Osadzanie kodu JavaScript na stronie (tag script).</summary>
 
-
-            <li style="background-color: green; color: white;">002. Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?</li>
-            <ul style="background-color: green; color: white;">
-                <li style="background-color: green; color: white;"><a href="index-javascript-files/basics_002.html" style="background-color: green; color: white;">Odpowiedź</a></li>
-                <br>
-                <li>002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa - dlaczego?</li>
+    <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;">Jak osadzać kod JavaScript na stronie (tag script)? Kiedy skrypt jest 'blokujący' i co to oznacza? Co z JS w atrybutach tagów HTML?<a href="index-javascript-files/basics_002.html" style="background-color: green; color: white;">Odpowiedź</a></div>
+    <br>
+    <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;">002a. Funkcja document.write zastosowana w różnych trybach osadzania kodu JS nie zawsze działa - dlaczego?</div>
 <pre>
- - document.write używane w nieodpowiednich momentach może mieć destrukcyjny wpływ na zawartość strony html
- - defer i async mają różne działanie, natomiast w obu przypadkach wykonanie <i>document.write()</i> może być zignorowane (nie musi)
-   to zależy od środowiska czy tak zdecyduje (np. przez blokadę przeglądarki ze względów bezpieczeństwa albo optymalizacji)
- - jedyny bezpieczny kontekst dla <i>document.write()</i> to, gdy skrypt jest wstawiony bez async ani defer, czyli „zwykły” &lt;script&gt;
-
- - zamiast document.write() lepsze jest użycie innerHTML lub manipulowanie DOM-em przez appendChild, createElement itd
-   przykład innerHTML:
-   <i>document.body.innerHTML += "&lt;p&gt;Nowy tekst&lt;/p&gt;";</i>
-
+     - document.write używane nieodpowiednio ma destrukcyjny wpływ na zawartość strony html
+     - defer i async mają różne działanie, natomiast w obu przypadkach wykonanie <i>document.write()</i>
+       może być zignorowane - nie musi, ale to zależy od środowiska - (np. przez blokadę przeglądarki
+       ze względów bezpieczeństwa albo optymalizacji)
+     - jedyny bezpieczny kontekst dla <i>document.write()</i> to, gdy skrypt jest wstawiony bez async/defer
+     - zamiast document.write lepiej używać innerHTML lub manipulowanie DOM-em przez appendChild, itp ...
+       przykład innerHTML: <i>document.body.innerHTML += "&lt;p&gt;Nowy tekst&lt;/p&gt;";</i>
 </pre>
 
-                <li>002b. Jakie są różnice między osadzeniem zwykłego pliku js a osadzeniem pliku js jako modułu ECMAScript/ES6 (type="module")?</li>
+                <div style="margin: 2px 2px 2px 18px; padding: 2px 2px 2px 8px;">002b. Jakie są różnice między osadzeniem zwykłego pliku js a osadzeniem pliku js jako modułu ECMAScript/ES6 (type="module")?</div>
                 <pre>
-W ECMAScript/ES6:
- - możliwość użycia import i export
- - modułowy zakres zamiast globalnego (zmienne nie trafiają do window)
- - domyślnie używany tryb strict (use scrict;)
- - skrypty są ładowane/wykonywane domyślnie w "trybie asynchroniczności" defer
- - syntax importu wymaga ścieżki względnej i rozszerzenia pliku (import { funkcja } from './modul.js';)</pre>
-</ul>
-
+   W ECMAScript/ES6:
+     - możliwość użycia import i export
+     - modułowy zakres zamiast globalnego (zmienne nie trafiają do window)
+     - domyślnie używany tryb strict (use scrict;)
+     - skrypty są ładowane/wykonywane domyślnie w "trybie asynchroniczności" defer
+     - syntax importu wymaga ścieżki względnej i rozszerzenia pliku (import { funkcja } from './modul.js';)</pre>
 <br>
             </details>
 
@@ -220,21 +197,21 @@ W ECMAScript/ES6:
         <a href="index-javascript-files/basics_003.html">Odpowiedź</a>
 <pre>
 
-3.1)
-Domyślnie (bez: let, const, var) zmienne trafiają do zakresu globalnego - chyba, że używamy trybu ścisłego.
-W Pythonie brak deklaracji działa bardziej intuicyjnie
-    – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).
+    3.1)
+    Domyślnie (bez: let, const, var) zmienne trafiają do zakresu globalnego chyba, że używamy trybu ścisłego.
+    W Pythonie brak deklaracji działa bardziej intuicyjnie
+        – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).
 
-3.2)
-W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak.
+    3.2)
+    W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak.
 
-3.3)
-Podsumowanie – zakresy w JS:
-    Global Scope – dostępny wszędzie w kodzie.
-    Function Scope – dostępny tylko w obrębie funkcji.
-    Block Scope – dostępny tylko w obrębie if, for, while, lub innych bloków.
-    Lexical Scope – zależy od tego, gdzie funkcja została zadeklarowana, a nie wywołana.
-    this Scope – zależy od kontekstu wywołania funkcji.
+    3.3)
+    Podsumowanie – zakresy w JS:
+        Global Scope – dostępny wszędzie w kodzie.
+        Function Scope – dostępny tylko w obrębie funkcji.
+        Block Scope – dostępny tylko w obrębie if, for, while, lub innych bloków.
+        Lexical Scope – zależy od tego, gdzie funkcja została zadeklarowana, a nie wywołana.
+        this Scope – zależy od kontekstu wywołania funkcji.
 </pre>
             <br>
             </details>
@@ -243,13 +220,13 @@ Podsumowanie – zakresy w JS:
 
             <pre><a href="index-javascript-files/basics_004.html">Odpowiedź</a>
 
-4.1)
-Kontekst globalny a obiekt window - jaka jest relacja między nimi?
-Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).
+    4.1)
+    Kontekst globalny a obiekt window - jaka jest relacja między nimi?
+    Globalny kontekst w JavaScript zależy od środowiska (przeglądarka, Node.js, Web Workers).
 
-4.2)
-Wprowadzono 'globalThis', żeby to wszystko połączyć  - działa na wszystkich typach środowisk.
-Użycie 'globalThis' to teraz zalecany sposób odwołanie się do globalnego kontekstu.
+    4.2)
+    Wprowadzono 'globalThis', żeby to wszystko połączyć  - działa na wszystkich typach środowisk.
+    Użycie 'globalThis' to teraz zalecany sposób odwołanie się do globalnego kontekstu.
 </pre>
             <br>
         </details>

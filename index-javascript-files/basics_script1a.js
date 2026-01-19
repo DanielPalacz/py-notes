@@ -11,12 +11,12 @@ if (window.x == 101) {
 
 
 // 2. for ... of
-
-ABC = 1;
-
-for (const elem of Object.keys(globalThis)) {
-    console.log(elem, "-", globalThis[elem]);
-}
+//
+//ABC = 1;
+//
+//for (const elem of Object.keys(globalThis)) {
+//    console.log("[basics_script1a.js] -", elem, "-", globalThis[elem]);
+//}
 
 
 // 3. for ... in
@@ -24,5 +24,5 @@ for (const elem of Object.keys(globalThis)) {
 const obj = { a: 11, b: 12, c: 13 };
 
 for (const property in obj) {
-  console.log(`${property}: ${obj[property]}`);
+  console.log(`[basics_script1a.js] - ${property}: ${obj[property]}`);
 }
