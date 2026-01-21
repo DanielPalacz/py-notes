@@ -108,11 +108,12 @@
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
     <pre>
-W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie. Obiekt window reprezentuje globalny kontekst w przeglądarkach.
-    - window jest specyficzny dla przeglądarek - inne środowiska (np. Node.js) mają swój globalny obiekt (np. global w Node.js)
-    - Każda zmienna zadeklarowana w globalnym zakresie za pomocą var (lub bez słowa kluczowego) staje się właściwością obiektu window.
-    - Zmienne zadeklarowane przez let lub const również są globalne, jeśli znajdują się poza funkcją lub blokiem, ale
-      nie są przypisywane do obiektu window.
+W JavaScript kod osadzony w przeglądarce działa w globalnym zakresie.
+
+Obiekt <b>window</b> reprezentuje globalny kontekst w przeglądarkach:
+    - <b>window</b> jest obiektem specyficznym dla przeglądarek, inne środowiska np. Node.js mają swój globalny obiekt (global w Node.js)
+    - każda zmienna zadeklarowana w globalnym zakresie za pomocą var (lub bez słowa kluczowego) staje się właściwością obiektu <b>window</b>.
+    - zmienne z let/const również są globalne, jeśli znajdują się poza funkcją lub blokiem, ale nie są przypisywane do obiektu <b>window</b>.
 
 Po co 'globalny kontekst' został tak zaimplementowany w JavaScript (w taki sposób)?
     - JavaScript został zaprojektowany jako język dla stron internetowych, który pierwotnie działał wyłącznie w przeglądarce.
@@ -128,10 +129,21 @@ W JavaScript nazwy obiektów są rozróżniane pod względem wielkości liter, w
     Podsumowując: w kontekście przeglądarki obiekt globalny to window, a Window to jego konstruktor.
 
 
-Użycie globalThis (zalecany sposób)
+Użycie globalThis (zalecany sposób):
     globalThis to uniwersalny sposób na dostęp do globalnego zakresu, działa zarówno w przeglądarce, Node.js i Web Workers
     globalThis.globalVar = "Dostępne globalnie";
     console.log(globalThis.globalVar); // "Dostępne globalnie"</pre>
+
+    <script>
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        async function demo() {
+            console.log("Czekam 2 sekundy...");
+            await sleep(2000); // Program tutaj "pauzuje"
+            console.log("Gotowe!");
+            document.body.innerHTML += "<p style='font-size:30px; margin: 2px 2px 2px 40px;'>Nowy tekst 1.</p>";
+        }
+        demo();
+    </script>
 
     </div>
     </div>
