@@ -5,7 +5,7 @@
   <title>JS questions</title>
   <link rel="stylesheet" href="style.css">
 
-    <script>
+  <script>
 
     function preparePicker(picker_obj, picker_content_obj) {
         picker_obj.addEventListener('input', function () {
@@ -25,6 +25,8 @@
         }
       );
     }
+
+
   </script>
 
 <script>
@@ -58,7 +60,8 @@
       }
 
 </script>
-    <script>
+
+<script>
     let x = getFibonacciElement(13);
 </script>
 
@@ -88,6 +91,7 @@
 
 </head>
 
+
 <body>
 
 <h1 style="text-decoration: underline; font-size: 40px;">JavaScript questions.</h1>
@@ -109,7 +113,7 @@ Other JS paradigms:
   </div>
 
   <div class="side-block">
-    <label for="colorPicker" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
+    <label for="colorPicker1" style="margin: 3px;"><i>Pick a color describing self-evaluated understanding of the given section:</i></label>
       <br>
   <input type="color" id="colorPicker1" value="#ffff00" style="width: 350px; margin: 5px; height: 50px; font-size: 16px;" autocomplete="off" />
 
@@ -237,7 +241,7 @@ Titbit - document.write behaviour:
 <div class="outer" id="outer5">
   <div class="main-content" id="content5">
 
-    <pre>Typy w JavaScript: prymitywne i referencyjne (nie wszystko jest obiektem w Pythonie wszystko).
+    <pre>Typy w JavaScript: prymitywne i referencyjne (nie wszystko jest obiektem tutaj - w Pythonie wszystko).
 
 Typy prymitywne (Typy proste = prymitywy)
 Charakterystyka/rodzaje:
@@ -341,17 +345,53 @@ Typy referencyjne (obiekty):
   </div>
 </div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
-
+<hr>
 <br>
 
 
 
+<h3 style="text-decoration: underline;"><b>Scripts inside html:</b></h3>
+<div>
+
+<table style="border: 1px solid;">
+  <tr>
+    <th>Number</th>
+    <th>Place</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>------</td>
+    <td>------</td>
+    <td>------</td>
+  </tr>
+  <tr>
+    <td>------</td>
+    <td>------</td>
+    <td>------</td>
+  </tr>
+</table>
+
+
+</div>
+
+
+
+
 
 <br>
 <br>
+<hr>
 <br>
+
+
+<h1 style="text-decoration: underline; color: orange;"><b>Run CORS-accepting http server!!!</b></h1>
+
 
 <br>
 <hr>
@@ -360,15 +400,15 @@ Typy referencyjne (obiekty):
 <br>
 <br>
 
-<div style="margin: 2px; padding: 10px;>
+<div style="margin: 2px; padding: 10px;">
 <br>
 
 <h3 style="text-decoration: underline;"><b>Examples of informative buttons:</b></h3>
 
 <div style="margin: 4px; border: 2px solid; width: 400px; padding: 10px;">
 
-<!--<button onclick="alert('Witaj! Tutaj wyczyśćić zawartość danej strony.');document.write('<html><body style=&quot;background-color: #ADD8E6;&quot;></p></body></html>');console.log('JavaScript osadzony w atrybucie HTML.');">Kliknij, wtedy uruchomisz kod JS osadzony tutaj.</button>-->
-<button onclick="alert('Click OK to get more information.');document.write('<html><body style=&quot;background-color: #ADD8E6;&quot;><br><p>... more information</p></body></html>');console.log('JavaScript code embedded in HTML attribute is running.');">Click to get more information [Alert component].</button>
+  <button onclick="alert('Click OK to get more information.');document.write('<html><body style=&quot;background-color: #ADD8E6;&quot;><br><p>... more information</p></body></html>');console.log('JavaScript code embedded in HTML attribute is running.');">Click to get more information [Alert component].</button>
+
 
   <!-- Modal -->
   <div id="customAlert">
@@ -377,7 +417,6 @@ Typy referencyjne (obiekty):
     <button class="close-btn" onclick="closeModal()">OK</button>
   </div>
 
-<!--style="background-color: #0044cc !important;"-->
 
   <!-- Przycisk, który otwiera modal -->
   <button style="border: 2px solid; border-radius: 5px;" onclick="openModal()">Click to get more information [Custom Modal component].</button>
@@ -487,6 +526,7 @@ Typy referencyjne (obiekty):
 
 
 <script src="../basics_script_fibonacci.js"></script>
+
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. This is:', this);</script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. window is:', window);</script>
 <script>console.log('[DEBUG][blocking script] Checking this object in global context. Window is:', Window);</script>
@@ -495,7 +535,8 @@ Typy referencyjne (obiekty):
 <script type="module">
     function sleepSync(ms) {
       const start = Date.now();
-      while (Date.now() - start < ms) {}
+      while (Date.now() - start < ms) {
+      }
     }
     sleepSync(2000);
 
@@ -547,14 +588,15 @@ Typy referencyjne (obiekty):
 
 
 
-<!--<script type="module">-->
-<!--    import { getRequest } from 'http://127.0.0.1:8000/helpers.js';-->
-<!--    getRequest("http://127.0.0.1:7001/");-->
+-<!--    import { getRequestFetch } from 'http://127.0.0.1:8000/helpers.js';-->
+-<!--    getRequestFetch("http://127.0.0.1:7001/");-->
 
-<!--    import { getRequestXHR } from 'http://127.0.0.1:8000/helpers.js';-->
+<script type="module">
 
-<!--    getRequestXHR("http://127.0.0.1:8000/test");-->
-<!--</script>-->
+    import { getRequestXHR } from 'http://127.0.0.1:8000/helpers.js';
+    getRequestXHR("http://127.0.0.1:8000/test");
+
+</script>
 
 <script type="module">
     import { someFunc } from 'http://127.0.0.1:8000/helpers.js';
@@ -565,8 +607,6 @@ Typy referencyjne (obiekty):
     console.log('[DEBUG][type module] Arrow-like function call x1() - x2(): ', x1(), "-", x2());
 
 </script>
-
-
 
 
 

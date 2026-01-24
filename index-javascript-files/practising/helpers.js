@@ -120,7 +120,7 @@ export function prototypePresentation() {
     console.log("\nEnding/Logging prototypePresentation.");
 }
 
-export function getRequest(url) {
+export function getRequestFetch(url) {
     console.log("[DEBUG] Starting/Logging getRequest.");
 
     let result_text;

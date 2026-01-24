@@ -16,7 +16,12 @@
   }
 
   body {
-    margin: 1px;
+    padding: 10px;
+	margin: 20px;
+  }
+
+  th, td {
+    border: 2px solid;
   }
 
   code {
