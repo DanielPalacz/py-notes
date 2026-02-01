@@ -38,6 +38,7 @@ button {
 
 }
 
+
 #start:active {
   transform: scale(0.95);
   box-shadow: 0 0 0 #388e3c;
@@ -46,3 +47,28 @@ button {
 #start {
   transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
+
+
+#start_alarm {
+  padding: 10px 20px;
+  font-size: 16px;
+  /* background: #4caf50; */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  /* box-shadow: 0 4px 0 #388e3c; */
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+
+}
+
+
+#start_alarm:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 0 #388e3c;
+}
+
+#start_alarm {
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+

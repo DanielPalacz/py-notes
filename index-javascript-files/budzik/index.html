@@ -10,9 +10,11 @@
 	<div>
 	  <div class="container">
 		<h1>Budzik</h1>
-		<p id="timer">21:00</p>
+		<p id="timer">21:10</p>
 		<button id="start">Start</button>
-
+	  </div>
+	  <div class="container">
+	  	<button id="start_alarm">Start alarm</button>
 	  </div>
 	</div>
 
@@ -24,7 +26,8 @@
 		const startBtn = document.getElementById("start");
 
 		let minutes = Number(timerEl.textContent.split(':')[0])
-		let time = minutes * 60; // sekundy
+		let secs = Number(timerEl.textContent.split(':')[1])
+		let time = minutes * 60 + secs; // sekundy
 		let intervalId = null;
 
 		function updateTimer() {
@@ -61,6 +64,26 @@
 
 	</script>
 
+	<script>
+
+		const startAlarm = document.getElementById("start_alarm");
+
+		startAlarm.addEventListener("click", () => {
+
+			if (intervalId !== null) return; // żeby nie odpalić kilku interwałów
+
+			const sound = new Audio("audio.wav");
+			
+			function playSound() {
+				sound.currentTime = 0; // od początku
+				sound.play();
+			}
+
+			playSound();
+			return;
+		});
+
+	</script>
 
 <!--meta tag:-->
 <!--	viewport-->
