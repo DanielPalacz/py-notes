@@ -744,7 +744,7 @@ Python, rodzaje typów danych:
 <br>
 <ol start="101">
         <li>Iterator and Iterable objects implementing certain protocols. What are details of these protocols?</li>
-        <pre class="code">
+        <pre class="notion">
 Iterator protocol:
  - Iterator object needs to implement __iter__ and __next__.
    Main feature of Iterators is allowing for sequence access of data stream - no need to maintain all data in memory.
@@ -753,28 +753,22 @@ Iterable protocol:
  - Iterable object should implement __iter__, but not it is not requirement if there is no __iter__ then __getitem__ is required.
    In the other words iter(Iterable_object) should always produce valid Iterator object.
 
-Dict objects are Iterable, but are not Iterators:
->>> hasattr(dict(), "__iter__")
-True
->>>
->>> hasattr(dict(), "__next__")
-False
->>>
->>> hasattr(dict(), "__getitem__")
-True # However it is not implementing Indexing/Slicing
->>>
->>> iter(dict())
-dict_keyiterator object at 0x7d7e055eba10
-    => dict objects are Iterables (but are not Iterators and Sequences)</pre>
+Also, there are 2 different contracts about Iterator/Iterable protocols:
+1. Iterable
+   Always, when Client calls 'iter()' I will give "new iterator" object.
+2. Iterator
+   I am Iterator already, I maintain state - dont copy me.
+
+</pre>
 
 
-<pre class="code">
-"__getitem__ edge case":
-    In Python 3 builtin collections are generally implement __iter__. However:
-     - Still it is possible to create a class that have only __getitem__ and not __iter__ and such object will be Iterable.
-     - It is rather hack than common practice, but handling __getitem__ in Iterable protocol still works.</pre>
+<pre class="notion">
+[!!!] __getitem__ edge case:
+ - Still it is possible to create a class that have only __getitem__ and not __iter__ and such object will be Iterable.
+ - It is rather hack than common practice, but handling __getitem__ in Iterable protocol still works.
+</pre>
 <ul>
-    <li><a href="python_deepness/protocols/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
+    <li><a href="python_deepness/iterable_without_iter_dunder_method.py">example (iterable_without_iter_dunder_method.py)</a></li>
 </ul>
 
         <br>
@@ -799,7 +793,7 @@ False
 </pre>
 
         <li>What are details of sequence protocol in Python?</li>
-            <pre class="code">
+            <pre class="notion">
 Sequence objects in the most basic version need to implement two dunder methods: __getitem__, __len__:
  - __getitem__, __len__ are base for Indexing and slicing functionalities.
  - __getitem__ from dict doesnt allow Indexing and Slicing, so having __getitem__ is not enough, implementation matters.
