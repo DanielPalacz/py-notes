@@ -178,14 +178,14 @@
 
  - Trzy przykłady przepływów w Generatorach:
     1)
-        * x = yield
+        * x = yield (<---)
         * Ta forma oznacza "czekaj na wartość z send(value)".
           coroutine zostaje uruchomiona i napotka 'x = yield', wtedy "zawiesza się" i oczekuje na dane z GEN_OBJ.send(value).
     2)
-        * yield x
+        * yield x (--->)
         * Ta forma oznacza: Zwróć wartość x na zewnątrz — to właśnie wynik next() lub send(...)
     3)
-        * y = yield x
+        * y = yield x (<--->)
         * Mix 1 i 2.
 
 
@@ -317,13 +317,13 @@ Unicode / UTF-8 example:
 <details>
 <summary style="font-weight: bold;text-decoration: underline;">Python Execution model view (with importing modules system). More details attached.</summary>
 <ol start="15">
-        <li>Python 'import module_A' and Python Execution model. In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime? What if there is second the same import?</li>
+        <li>Python <i>'import module_A'</i> and <i>Python Execution model</i>.<br> - In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?<br> - What if there is second the same import?</li>
         <pre>
 
  1. Parsing Stage
         - Najpierw Python czyta kod źródłowy uruchamianego / głównego pliku np 'script.py'
           (na tym etapie nawet jeśli istnieje aktualny bytecode / plik .pyc to nie jest brany pod uwagę).
-        - Na tym etapie nie wykonuje import module_A tzn NIE wczytuje module_A.py i nawet nie sprawdza, czy ten plik istnieje.
+        - Na tym etapie nie wykonuje <i>'import module_A'</i> tzn NIE wczytuje module_A.py i nawet nie sprawdza, czy ten plik istnieje.
           Tj. domyślne zachowanie w CPython, ale przy innych implementach lub bardziej skomplikowanych importach może być inaczej.
         - Linia import module_A po prostu zostaje zapisana w AST (potem bytecode) jako instrukcja do późniejszego wykonania.
 
