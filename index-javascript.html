@@ -203,15 +203,19 @@
         – przypisanie zmiennej automatycznie umieszcza ją w odpowiednim zakresie (lokalnym lub globalnym).
 
     3.2)
-    W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - a w JavaScript tak.
+    W Pythonie bloki takie jak if, for czy while nie tworzą nowego zakresu zmiennej - <b>a w JavaScript tak.</b>
 
     3.3)
-    Podsumowanie – zakresy w JS:
+    Podsumowanie – zakresy w JavaScript:
         Global Scope – dostępny wszędzie w kodzie.
         Function Scope – dostępny tylko w obrębie funkcji.
-        Block Scope – dostępny tylko w obrębie if, for, while, lub innych bloków.
+                         Dotyczy zmiennych zadeklarowanych przez var (oraz parametrów funkcji).
+        Block Scope – dostępny tylko w obrębie if, for, while, lub innych bloków (let / const i class).
+                      Dostępny tylko w obrębie bloku { }.
         Lexical Scope – zależy od tego, gdzie funkcja została zadeklarowana, a nie wywołana.
-        this Scope – zależy od kontekstu wywołania funkcji.
+
+        Jest też 'this' - osobny mechanizm wiązania kontekstu (zależy od sposobu wywołania funkcji).
+                          this nie jest zakresem.
 </pre>
             <br>
             </details>
@@ -439,24 +443,24 @@ AJAX (Asynchronous JavaScript and XML):
     <pre>
 
 1. Poznaj podstawy JavaScript
-    Co to jest JavaScript i do czego służy?
-    Jak osadzać JS na stronie (np. script w HTML)?
-    Zmienne (let, const, var)
-    Typy danych (string, number, boolean, array, object)
-    Operatory (arytmetyczne, logiczne, porównania)
-    Instrukcje warunkowe (if, else if, switch)
-    Pętle (for, while, do...while)
+    <s>Co to jest JavaScript i do czego służy?</s>
+    <s>Jak osadzać JS na stronie (np. script w HTML)?</s>
+    <s>Zmienne (let, const, var - a domyślne zachowanie)</s>
+    <s>Typy danych (string, number, boolean, array, object)</s>
+    <i>Operatory (arytmetyczne, logiczne, porównania)</i>
+    <i>Instrukcje warunkowe (if, else if, switch)</i>
+    <i>Pętle (for, while, do...while)</i>
     Funkcje (definiowanie, wywoływanie, funkcje strzałkowe)
 
 
 2. Narzędzia i środowisko pracy
     Edytor kodu: Pobierz edytor jak Visual Studio Code (VS Code).
-    Konsola w przeglądarce: Otwórz narzędzie programistyczne w swojej przeglądarce (zwykle F12) i używaj zakładki "Console".
+    Konsola w przeglądarce: Otwórz 'Dev Tools' w swojej przeglądarce (zwykle F12) - zakładka "Console".
     Naucz się korzystać z debuggera.
 
 
 3. Manipulacja DOM
-Dowiedz się, jak JavaScript może wpływać na HTML i CSS:
+    Dowiedz się, jak JavaScript może wpływać na HTML i CSS:
     Wybieranie elementów: document.querySelector, getElementById
     Zmiana zawartości HTML: .innerHTML, .textContent
     Zmiana stylów CSS: .style
