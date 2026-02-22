@@ -1,0 +1,105 @@
+1. Sprawdzenie IP i interfejsów
+ip a              # adresy IP i interfejsy
+ip route          # trasa domyślna (gateway)
+hostname -I       # moje IP
+
+2. Czy host działa?
+ping google.com           # test dostępności
+ping -c 4 google.com      # 4 pakiety i koniec
+
+3. Trasa do hosta
+traceroute google.com
+mtr google.com            # lepsza wersja (jeśli zainstalowane)
+
+4. DNS
+dig google.com
+nslookup google.com
+
+Sprawdzenie konkretnego typu rekordu:
+
+dig google.com A
+dig google.com MX
+
+5. Czy aplikacja nasłuchuje na porcie?
+ss -tuln            # wszystkie porty w trybie listen
+ss -tulnp           # + który proces
+
+6. Kto używa portu?
+sudo lsof -i :8000
+
+7. Test API / HTTP (najważniejsze)
+GET
+curl http://localhost:8000
+
+POST JSON
+curl -X POST http://localhost:8000 \
+     -H "Content-Type: application/json" \
+     -d '{"name":"Jan"}'
+
+Tylko nagłówki
+curl -I https://example.com
+
+Pełny debug requestu
+curl -v http://localhost:8000
+
+
+8. Czy port jest otwarty?
+nc -zv google.com 443
+
+
+lub:
+
+telnet google.com 80
+
+
+
+---------------------------------------------------------------------------
+
+Scenariusz debugowania backendu
+❌ „API nie działa”
+
+1️⃣ Czy serwer działa?
+
+ss -tulnp | grep 8000
+
+
+2️⃣ Czy odpowiada lokalnie?
+
+curl localhost:8000
+
+
+3️⃣ Czy DNS działa?
+
+dig twojadomena.pl
+
+
+4️⃣ Czy port jest otwarty z zewnątrz?
+
+nc -zv twojadomena.pl 8000
+
+
+5️⃣ Czy firewall nie blokuje?
+
+sudo ufw status
+
+🧰 Instalacja brakujących narzędzi
+sudo apt install traceroute
+sudo apt install dnsutils
+sudo apt install mtr
+
+🎯 Minimalny zestaw do zapamiętania
+ip a
+ss -tulnp
+lsof -i :PORT
+curl -v
+dig
+ping
+
+
+
+
+
+
+
+
+

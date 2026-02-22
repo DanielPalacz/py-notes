@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript exercises</title>
+</head>
+
+<body>
+    <button onclick="console.log('I am here. It is super fun.');">Log</button>
+
+    <script type="module">
+        import { generateRandomNumber } from "http://127.0.0.1:8000/es_modules.js";
+        generateRandomNumber()
+    </script>
+
+
+<script>
+    function genRandomNumber() {
+        randomNumber = Math.floor(Math.random() * 100);
+        return randomNumber
+    }
+    r = genRandomNumber();
+    console.log("genRandomNumber, r:", r)
+</script>
+
+
+<script>
+    const dodaj = (a, b) => a + b
+    console.log("funkcja strzałkowa 'dodaj(101, 102)':", dodaj(101, 102))
+
+    y = 5;
+
+    while (y > 0) {
+        console.log("y:", y);
+        y--;
+    }
+
+    for (let i = 3; i < 8; i++) {
+        console.log("for loop - i:", i)
+    }
+
+</script>
+
+
+
+
+</body>
+</html>

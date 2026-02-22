@@ -1,0 +1,83 @@
+
+1. W osobnym pliku JS napisz i wyeksportuj funkcję do generowania losowych liczb (od 1 do 100).
+ --- import / export (ES Modules)
+
+2. Co to znaczy, że JavaScript to język 'wysokiego poziomu', a także dynamicznie i słabo typowany?
+
+3. Warunek if w JavaScript, jak wygląda? Co ma specyficznego?
+
+4. Średniki na końcu linii. Dobrą praktyka, czy mus?
+
+5. Jak wygląda proces ładowania pliku HTML w przeglądarce? (poniżej)
+
+6. Co powoduje użycie trybu ścisłego: "use strict;"?
+
+7. Moduły ECMAScript/ES6 (type="module") - jak ich używać?
+
+8. Osadzanie kodu JavaScript na stronie - tagiem 'script'.
+ --- defer i async (tryb asynchroniczności)
+ --- "tzw skrypt blokujący", (bez trybu asynchroniczności, bez defer/async)
+
+9. Deklaracja zmiennych: let, const, var lub domyślna.
+
+10. Jakie są zakresy w JavaScript?
+ --- Globalny, Blokowy, Funkcyjny
+ --- Lexical, this
+
+11. Zmienna domyślnie - tj. bez let, const, var - idzie do zakresu globalnego. Widać to w poniższym przykładzie:
+
+    x = 11;
+    function test() {
+        x = 10; // Brak 'let', 'const' lub 'var' → x staje się globalne!
+    }
+    test();
+    console.log(x); // 10 nie 11!
+
+
+12. Window, window, globalThis - różnice?
+
+13. Wymienić typy prymitywne, jest ich 7.
+ --- JS ma 1 główny typ referencyjny? Object
+
+14. Strict equality (===), czyli porównanie bez konwersji typów. Jak to działa?
+
+15. Funkcje i funkcje strzałkowe w JavaScript.
+
+
+
+
+
+
+
+
+
+
+Ad. 5)
+
+Przeglądarka wysyła HTTP request. Serwer zwraca HTML.
+I dalej przeglądarka (uproszczona perspektywa):
+  analiza/parsing HTML → tworzenie DOM
+  pobiera CSS → tworzy CSSOM
+  łączy DOM + CSSOM → tworzy Render Tree
+  wykonuje layout (reflow) i paint
+
+
+
+
+
+
+
+
+
+
+
+JavaScript może:
+  blokować parser (domyślnie)
+  modyfikować DOM
+  reagować na zdarzenia (DOMContentLoaded, load)
+
+Junior powinien wiedzieć:
+  czym jest DOM
+  różnicę między DOMContentLoaded a window.onload
+  czym jest defer i async
+  że <script> bez atrybutów blokuje parsowanie HTML
