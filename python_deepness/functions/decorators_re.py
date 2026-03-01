@@ -51,6 +51,14 @@ class CountCalls:
         print("[Dekorator call][CountCalls] __call__ [", "args: ", args, ", kwargs: ", kwargs, ", num_calls: ", self.num_calls, "]", sep="")
         return self.func(*args, **kwargs)
 
+    def __get__(self, instance, owner):
+
+        out = self.func.__get__(owner, owner)
+        print("[__get__] Getting descriptor data-value dynamically:", out)
+
+        return out
+
+
 # [CountCalls] Class creation flow
 
 
@@ -67,4 +75,14 @@ funct("Now.")
 # Now.
 
 
+class A:
+    @CountCalls
+    def funct(self):
+        pass
 
+    def __getattr__(self, item):
+        print("[__getattr__] - '", item, "' item doesn't exist.", sep="")
+
+a = A()
+a.funct()
+a.a
