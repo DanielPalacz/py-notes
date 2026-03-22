@@ -5,7 +5,9 @@
 
 ##### Flow budowania / uruchomienia programu
 ```
- - gcc -E hello_world.c -o hello_world.i (Preprocesor, cpp, # - ten znak w kodzie C oznacza preprocesor)
+ - gcc -E hello_world.c -o hello_world.i
+   (Preprocesor, cpp, # - ten znak w kodzie C oznacza preprocesor)
+   
  - gcc -S hello_world.c -o hello_world.s (Kompilacja (cc1)
  - gcc -c hello_world.c -o hello_world.o (Asemblacja, as)
  - gcc hello_world.c -o hello_world.o (ld, Linkowanie statyczne odbywa się w czasie kompilacji)

@@ -319,8 +319,19 @@ Unicode / UTF-8 example:
 <ol start="15">
         <li>Python <i>'import module_A'</i> and <i>Python Execution model</i>.<br> - In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?<br> - What if there is second the same import?</li>
         <pre>
+ 1. Python binary startup stage
+        - Uruchomienie procesu/programu CPython w OS (np. Linuxie)
+        - sprawdzenie/pobranie zmiennych środowiskowych i przełączników (PYTHONPATH, "-i", itd)
+        - import modułów wewnętrznych (wkompilowanych w binarkę CPython-a, ale też Frozen modułów)
 
- 1. Parsing Stage
+ 2. Parsing phase (kod źródłowy Pythona -> obiekt/drzewo AST)
+        - Co tutaj się dzieje?
+          Najpierw wykonywane jest parsowanie "python code" na części zwykle nazywane tokenami. (Tokenizer/tokenizer.c)
+          ...
+          Ostatecznie, finalna AST struktura jest generowana
+
+        - Komponenty fazy parsowania: Tokenizer / Lexer, Parser
+
         - Najpierw Python czyta kod źródłowy uruchamianego / głównego pliku np 'script.py'
           (na tym etapie nawet jeśli istnieje aktualny bytecode / plik .pyc to nie jest brany pod uwagę).
         - Na tym etapie nie wykonuje <i>'import module_A'</i> tzn NIE wczytuje module_A.py i nawet nie sprawdza, czy ten plik istnieje.
@@ -330,12 +341,17 @@ Unicode / UTF-8 example:
         - Podsumowując, na tym etapie Python NIE parsuje kodu module_A.py podczas parsowania script.py.
           Parsowanie każdego modułu dzieje się dopiero, gdy interpreter faktycznie wykona instrukcję import w czasie Runtime.
 
- 2. Compilation Time/Stage
+ 2. Compilation phase
         - Import nie jest wykonywany podczas kompilacji script.py — tylko zostaje przygotowany do wykonania.
           Python traktuje import module_A jak zwykłą instrukcję.
-          W AST jest reprezentowana jako np. 'ast.Import'. W bytecode pojawi się instrukcja typu IMPORT_NAME.
+          W AST jest reprezentowana jako np. 'ast.Import'.
+          W bytecode pojawi się instrukcja typu IMPORT_NAME.
 
- 3. Runtime
+ 3. Execution context preparation
+          module Frame, frame links, globals, locals, Python stack
+          namespace model (LEGB) — to logiczna część kontekstu
+
+ 4. Runtime
        - Gdy interpreter napotyka instrukcję 'import module_A', to wtedy jest wykonywana pełna obsługa importu modułu module_A.
          Jej przebieg:
          Runtime(import flow 1) - Python sprawdza sys.modules czy dany moduł jest już załadowany
@@ -470,74 +486,23 @@ importlib.reload(module_A)</pre>
 <br>
 <br>
 <ol start="29">
-        <li>Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
+
+        <li style="color: green;">Python as protocol oriented language. There is set of behaviours implemented as Protocols in Python, but to be Protocol oriented language? It is probably not enough.</li>
 
         <br>
 
-        <li>[Descriptors protocol]: Python Descriptor object is class attribute self-defining way of accessing it in instance level scope (using: __get__, __set__, __delete__).</li>
+        <li style="color: blue;"><b>[Protokół Deskryptorów]:</b> Python Deskryptor obiekt - to jest Pythonowy obiekt, który implementuje Protokół Deskryptorów i jest przy okazji atrybutem klasowym innej klasy (kontekst).</li>
         <ul>
-            <li>Python is deeply equipped with Descriptors (fe: functions, methods, properties, class methods, static methods, super).</li>
-            <li>Descriptors have effects when defined as class variables and when called from instance scope. When created in instances, they have no effect. But also descriptors logic is not triggered from classes scope.</li>
-                <li>Python Descriptors Nature is by design being "properties" (they are "attached" to instances). Descriptors control instance attributes. Metaclasses control class attributes.</li>
+            <li>Obiekt ten (Python Deskryptor obiekt) może posiadać różnoraką implementację jego dynamicznych zdolności zdolności, ale wymaga implementacji przynajmniej '__get__'.</li>
+            <li>Gdy Deskryptor implementuje tylko "__get__" to mówimy o Non-Data Descriptorze.</li>
+            <li>Gdy Deskryptor implementuje "__get__" i "__set__/__delete__" to mówimy o Data Descriptorze.</li>
+            <li>Python jest głęboko związany z Desktryptorami (fe: functions, methods, properties, class methods, static methods, super).</li>
             <ul>
-                <li>The mechanism for descriptors is embedded in the __getattribute__() methods for object, type, and super(). There are nuances in terms of descriptor invocation logic in these implementations. For example, Instance lookup scans through a chain of namespaces giving data descriptors the highest priority, followed by instance variables, then non-data descriptors, then class variables, and lastly __getattr__() if it is provided.</li>
-                <li>__set_name__ hook is called during class creation extends capability of descriptor objects.</li>
+                <li>The mechanizm deskryptorów jest schowany w __getattribute__ methodach (object, type, and super). Dodatkowo __getattr__ jest użyty, gdy atrybut/deskryptor rzuca AtributeError wyjątkiem.</li>
+                <li>__set_name__ hook jest wołany podczas "tworzenia obiektu klasy" i rozszerza możliwości deskryptorów.</li>
             </ul>
-        <pre>
-
-[***]
-Alternatywne nazewnictwo deskryptorów:
-1)
-Architekt Atrybutu
- - dla deskryptorów jako bytów stworzonych specjalnie po to, by kontrolować zachowanie atrybutów
-   głównie dedykowane nowo-napisane deskryptory, ale też dekorator/funkcja property z biblioteki standardowej
-2)
-Inne opisowe nazwy:
- - pewne byty w Pythonie implementują protokół deskryptora, ale jest to tylko mniejszy element ich natury
-</pre>
 
 
-<table border="1" cellpadding="6" cellspacing="0">
-  <thead>
-    <tr>
-      <th>BYT</th>
-      <th>NAZWA</th>
-      <th>OPIS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><br><br>Własny deskryptor<br><br><br></td>
-      <td>Architekt Atrybutu<br> - Zarządca Atrybutu<br> - Modyfikator Atrybutu</td>
-      <td>Świadomie zaprojektowany jako deskryptor</td>
-    </tr>
-    <tr>
-      <td>Funkcja zdefiniowana w klasie<br>(klasa function)</td>
-      <td>Zwykła funkcja<br> - z wbudowaną funkcjonalnością:<br>&nbsp;&nbsp;'konwertowania funkcji w metodę'</td>
-      <td>Klasa function:<br> - implementuje protokół deskryptorów<br> - realizuje konwertowanie funkcji w metodę<br> - deskryptor jedynie w celu wiązania: funkcja-obiekt klasy</td>
-    </tr>
-    <tr>
-      <td>@property</td>
-      <td>Architekt Atrybutu</td>
-      <td>Tworzy całe zachowanie get/set/del</td>
-    </tr>
-    <tr>
-      <td>@classmethod</td>
-      <td>Konwerter metody (w metodę klasy)</td>
-      <td>Deskryptor wiążący metodę z klasą</td>
-    </tr>
-    <tr>
-      <td>@staticmethod</td>
-      <td>Wyłącznik wiązania obiekt-metoda/ <br>Konwerter metody (spowrotem w funkcje)</td>
-      <td>Deskryptor wyłączający wiązanie obiekt-metoda</td>
-    </tr>
-    <tr>
-      <td>Obiekty: int, str, list itd</td>
-      <td>Brak (nie są deskryptorami)</td>
-      <td>Nie mają __get__, więc są bierne</td>
-    </tr>
-  </tbody>
-</table>
         </ul>
         <br>
         <br>

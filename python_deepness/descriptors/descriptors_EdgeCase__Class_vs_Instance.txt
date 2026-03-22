@@ -1,0 +1,32 @@
+
+
+class D:
+    ...
+
+class A:
+    x = D()
+
+
+
+a.x
+D.__get__(descriptor, a, type(a))
+
+obj = a
+objtype = A
+
+
+A.x
+D.__get__(descriptor, None, type(A))
+
+obj = None
+objtype = type
+
+
+Dlaczego to ważne?
+   To cały fundament 'descriptor protocol'.
+   Deskryptor może rozróżnić:
+    - dostęp przez instancję
+    - dostęp przez klasę
+
+D.__get__(descriptor, a,    type(a))    a
+D.__get__(descriptor, None, type(A))    A

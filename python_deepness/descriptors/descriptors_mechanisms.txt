@@ -1,0 +1,8 @@
+Poprawna lista przykładowych mechanizmów:
+
+Mechanizm	        Typ deskryptora	    Dlaczego
+funkcje w klasie	non-data	        mają tylko __get__
+property	        data	            mają __get__ i __set__
+classmethod	        non-data            implementuje __get__
+staticmethod	    non-data	        tylko __get__
+slot descriptor	    data                kontroluje dostęp do pamięci (ma __get__ i __set__)

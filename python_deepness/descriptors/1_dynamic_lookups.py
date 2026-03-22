@@ -11,8 +11,6 @@ class DirectorySize:
         if obj is None:
             return self
 
-        print(locals())
-
         return len(os.listdir(obj.dirname))
 
 class Directory:
@@ -24,7 +22,9 @@ class Directory:
 
 
 # Edge case:
-Directory.size
+print("Edge Case, 'Directory.size':", Directory.size)
+print()
+
 
 d = Directory(".")
 n = d.size

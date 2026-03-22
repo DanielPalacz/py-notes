@@ -17,7 +17,7 @@ int print_example1() {
 }
 
 int print_example2() {
-    printf("\n\n2) Obwód prostokąta (rzutowanie float na int).\n");
+    printf("\n\n2) (Liczymy) Obwód prostokąta.\n");
 
     float dlugosc, szerokosc, obwod;
 
@@ -34,7 +34,7 @@ int print_example2() {
     if (dziesietna > 0) {
         printf("Obwod prostokata: %.2f\n", obwod);
     } else {
-        printf("Obwod prostokata: %.1f\n", obwod);
+        printf("Obwod prostokata: %d\n", calkowita);
     }
 
     return 0;
@@ -44,13 +44,25 @@ int print_example2() {
 
 int print_example3() {
     printf("\n\n3) Tablice, tablica liczb\n");
-    printf("inicjalizacja samej tablicy liczby[5]...\n");
+    printf("Inicjalizacja samej tablicy: liczby[5]\n");
     int liczby[5]; // tablica 5 elementów typu int
     int mem_size = sizeof(liczby);
-    printf("'liczby' ilość bajtów w pamięci: %d\n", mem_size);
+    printf("'liczby' ilość bajtów w pamięci: %d", mem_size);
+
+
+    printf("\n");
+    char c;
+    scanf("%c", &c);
+    if (c == '\n') {
+        printf("Napisz cokolwiek, np. Enter.");
+        scanf("%c", &c);
+//        if (c == '\n') {
+//            printf("Naciśnięto Enter\n");
+//        }
+    }
 
     // przypisanie elementów
-    printf("przypisanie elementów do tablicy liczby...\n");
+    printf("Przypisanie elementów do tablicy liczby:\n");
     for (int i = 0; i < 5; i++) {
         liczby[i] = i + i + i;
     }
@@ -58,7 +70,7 @@ int print_example3() {
     // liczby[5] = 55; // undefined behavior w C - brak błędu
     // liczby[6] = 66; // stack smashing
 
-    printf("wypisanie elementów:\n");
+    printf("\nWypisanie elementów:\n");
     // wypisanie elementów
     for (int i = 0; i < 5; i++) {
         printf("liczby[%d] = %d\n", i, liczby[i]);
@@ -68,12 +80,45 @@ int print_example3() {
 }
 
 
-int print_size_f() {
-    printf("\n\n4) Rozmiar struktur:\n");
-    printf("Rozmiar int: %zu bajtów\n", sizeof(int));
-    printf("Rozmiar tablicy 5 elementów: %zu bajtów\n", sizeof(int)*5);
+
+int print_example4() {
+    printf("\n\n4) Powtórka, tablice, liczby.\n");
+    printf("Zainicjujesz teraz tablicę liczb (int) o pewnym rozmiarze - jakim? Zdecyduj teraz?\n");
+
+    int rozmiar;
+    printf("Podaj rozmiar tablicy: ");
+    scanf("%d", &rozmiar);
+
+    int liczby[rozmiar];
+    int mem_size = sizeof(liczby);
+    printf("Tablica 'liczby' - ilość bajtów w pamięci: %d\n", mem_size);
+
+
+    // Przypisanie elementów
+    printf("Przypisanie elementów do tablicy liczby.\n");
+    for (int i = 0; i < rozmiar; i++) {
+        liczby[i] = i + i + i + i;
+    }
+
+    printf("\nWypisanie elementów:\n");
+    // wypisanie elementów
+    for (int i = 0; i < rozmiar; i++) {
+        printf("liczby[%d] = %d\n", i, liczby[i]);
+    }
+
     return 0;
+
 }
+
+
+
+//int print_size_f() {
+//    printf("\n\n4) Rozmiar struktur:\n");
+//    printf("Rozmiar int: %zu bajtów\n", sizeof(int));
+//    printf("Rozmiar tablicy 5 elementów: %zu bajtów\n", sizeof(int)*5);
+//    return 0;
+//}
+
 
 int print_example5() {
     printf("\n\n5) Iteracja po znakach aż do \\0.\n");
@@ -280,21 +325,23 @@ int strlen_f(const char *word, bool debug) {
 int main(void) {
       printf("\nPodstawy w C:\n");
 
-      print_example1();
-      print_example2();
-      print_example3();
-      print_size_f();
-      print_example5();
-      print_example6();
+        print_example1();
+        print_example2();
+        print_example3();
+        print_example4();
 
-      repetition1();
-      repetition2();
-      repetition3();
-      repetition4();
-      repetition5();
-      repetition6();
-
-      printf("---------------------------------------------------------------------------------------------------\n");
+//      print_size_f();
+//      print_example5();
+//      print_example6();
+//
+//      repetition1();
+//      repetition2();
+//      repetition3();
+//      repetition4();
+//      repetition5();
+//      repetition6();
+//
+//      printf("---------------------------------------------------------------------------------------------------\n");
       // printf("[strlen_f output]: %d\n\n\n", strlen_f("akdehwklhejher", false));
       // compiled program returns the following value to shell process, it can be read by 'echo $?'
 
