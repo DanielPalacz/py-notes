@@ -786,6 +786,44 @@ False
 </ol>
 </details>
 
+<br>
+<br>
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">LEGB advanced (closure functions, early/late binding):</summary>
+
+<br>
+<ol start="201">
+        <li>LEGB closure </li>
+<pre>
+ - domknięcie (closure) w Pythonie wiąże się z zmienną (kontenerem/cell),
+   a nie z wartością, którą ta zmienna miała w momencie definiowania funkcji.
+ - Zwykłe domknięcie: Wiąże się z nazwą/celą (późne wiązanie – late binding).
+ - Argument domyślny: Wiąże się z wartością w momencie definicji (early binding).
+
+def f():
+    x = 1
+    def foo():
+        return x
+    x = 10  # Zmiana po definicji foo, ale przed zwróceniem
+    return foo
+
+g = f()
+print([cl.cell_contents for cl in g.__closure__]) # Wypisze [10]
+
+# Jak "zamrozić" 1? (Domyślny argument)? Wtedy x staje się dla foo zmienną lokalną (L w LEGB) ...
+
+def f():
+    x = 1
+    def foo(x=x):  #  !!! Tutaj x po prawej stronie jest oceniane TERAZ (wynik: 1)
+        return x
+    x = 10
+    return foo
+
+g = f()
+print(g())  # Wypisze 1</pre></ol>
+</details>
+<br>
 </div>
 </div>
 </div>
