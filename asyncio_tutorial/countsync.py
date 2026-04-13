@@ -16,4 +16,4 @@ if __name__ == "__main__":
     s = time.perf_counter()
     main()
     elapsed = time.perf_counter() - s
-    print(f"{__file__} executed in {elapsed:0.3f} seconds.")
+    print(f"{__file__} executed in {elapsed:0.6f} seconds.")

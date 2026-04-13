@@ -7,16 +7,17 @@ import asyncio
 
 
 async def print_something1():
-    print("print_something1")
+    print("[1] print_something1")
+    return "[1] print_something1 returned"
 
 
 async def print_something2():
-    print("print_something2")
-    something = print_something1()
-    print(something)
+    print("[2] print_something2")
+    something = await print_something1()
+    print("[2]", something)
 
 # print_something()
 
 
-asyncio.run(print_something1())
+# asyncio.run(print_something1())
 asyncio.run(print_something2())
