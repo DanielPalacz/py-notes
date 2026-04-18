@@ -2,7 +2,7 @@ import socket
 
 # Konfiguracja połączenia
 HOST = "localhost"  # lub "127.0.0.1"
-PORT = 9000 # port, na którym działa Twój serwer
+PORT = 9003 # port, na którym działa Twój serwer
 
 
 # Tworzymy gniazdo TCP (IPv4, stream)
