@@ -1,0 +1,225 @@
+Summary – Release highlights
+
+Python 3.14 is the latest stable release of the Python programming language, with a mix of changes:
+ - to the language,
+ - the implementation
+ - and the standard library.
+
+The biggest changes include:
+ - template string literals,
+ - deferred evaluation of annotations,
+ - and support for subinterpreters in the standard library (PEP 734, concurrent.interpreters module).
+
+
+   Subinterpretery:
+   to nie jest feature „do wszystkiego”, w większości przypadków nadal używasz multiprocessing albo asyncio.
+   Subinterpretery są bardziej niszowym, ale bardzo ciekawym narzędziem.
+
+   W jednym procesie możesz mieć kilka niezależnych interpreterów Pythona:
+   każdy ma własny: GIL (docelowo – per interpreter), przestrzeń globalną (globals()), moduły (osobne importy!)
+   ale dzielą ten sam proces i pamięć systemową.
+   To coś pomiędzy: threading (lekki, ale współdzieli wszystko) i multiprocessing (izolacja, ale ciężki)
+
+
+Kiedy to ma sens?
+ - Równoległość CPU bez multiprocessing - Najważniejszy use-case:
+   klasyczny problem: GIL blokuje CPU-bound taski
+
+    Subinterpretery dają:
+        realny parallelism
+        bez forkowania procesu
+        mniejszy overhead niż multiprocessing
+
+    szczególnie dobre dla:
+        przetwarzania danych
+        obliczeń
+        batch processing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🧠 Kiedy to ma sens?
+1. 🔥 Równoległość CPU bez multiprocessing
+
+Najważniejszy use-case:
+
+klasyczny problem: GIL blokuje CPU-bound taski
+rozwiązania:
+❌ threading – nie pomaga
+✅ multiprocessing – działa, ale kosztowny
+
+Subinterpretery dają:
+
+realny parallelism
+bez forkowania procesu
+mniejszy overhead niż multiprocessing
+
+👉 szczególnie dobre dla:
+
+przetwarzania danych
+obliczeń
+batch processing
+2. 🧩 Izolacja kodu (np. pluginy)
+
+Możesz odpalać różne kawałki kodu w izolacji:
+
+każdy interpreter ma własne:
+sys.modules
+stan globalny
+brak przypadkowego „zanieczyszczenia”
+
+👉 use-case:
+
+system pluginów
+sandboxowanie (częściowe!)
+uruchamianie kodu użytkownika
+3. 🧪 Embedding Pythona (C / C++)
+
+To jest ogromny use-case, ale mniej widoczny z poziomu Pythona:
+
+aplikacja hostująca (np. gra, silnik, backend)
+wiele interpreterów dla różnych klientów / skryptów
+
+👉 np.:
+
+serwer obsługujący wielu użytkowników
+każdy user → osobny interpreter
+4. ⚡ Lżejsza alternatywa dla procesów
+
+multiprocessing ma koszty:
+
+fork/spawn
+IPC (pickle, pipe, queue)
+kopiowanie danych
+
+Subinterpretery:
+
+działają w jednym procesie
+potencjalnie szybsza komunikacja (choć nadal ograniczona)
+🚫 Kiedy to NIE ma sensu?
+
+To ważniejsze niż kiedy ma.
+
+❌ 1. Standardowy backend webowy
+używasz:
+Django
+FastAPI
+
+👉 subinterpretery raczej:
+
+niepotrzebne
+skomplikują życie
+❌ 2. Gdy potrzebujesz łatwego współdzielenia danych
+
+Subinterpretery:
+
+nie współdzielą obiektów Pythonowych
+komunikacja jest ograniczona (channels, kopiowanie)
+
+To NIE jest threading.
+
+❌ 3. Jeśli biblioteki nie są kompatybilne
+
+Wiele bibliotek:
+
+nie jest jeszcze gotowych na subinterpretery
+trzyma globalny stan w C
+
+👉 może powodować bugi
+
+⚠️ Największy „haczyk”
+
+Subinterpretery są trudne, bo:
+
+brak shared mutable state
+trzeba myśleć jak przy:
+multiprocessing
+actor model
+
+Czyli:
+
+komunikacja zamiast współdzielenia
+
+🧠 Jak o tym myśleć (mental model)
+
+To nie jest:
+
+„lepszy threading”
+
+To jest raczej:
+
+„lżejszy multiprocessing w jednym procesie”
+
+🧩 TL;DR
+
+Subinterpretery są przydatne gdy:
+
+✅ chcesz parallel CPU bez procesów
+✅ potrzebujesz izolacji (pluginy, sandbox)
+✅ embedujesz Pythona w większym systemie
+
+Nie są przydatne gdy:
+
+❌ robisz zwykły backend
+❌ potrzebujesz łatwego shared state
+❌ chcesz prostoty
