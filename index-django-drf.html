@@ -100,13 +100,24 @@
 <body style="color:black;background-color:powderblue;">
 
 
+
 <div class="row mb-10">
+
+
+
+
     <div class="col-8">
-    <h1 style="font-size:30px;text-decoration: underline;font-weight: bold;">Inżynieria wymagań / diagramy:</h1>
+
     <br>
+
 
     <div class="card mb-4 box-shadow" style="background-color: yellow;">
     <div class="card-body">
+        <h4><b>Inżynieria wymagań.</b></h4>
+
+        <details>
+        <summary style="margin: 8px; padding: 4px;"><b>...rozwiń...</b></summary>
+
     <div>W modelowaniu systemów i inżynierii wymagań korzysta się z różnych rodzajów diagramów, w zależności od potrzeb i etapu projektowania.</div>
     <br>
     <div>1. Diagramy UML:</div>
@@ -166,8 +177,10 @@
         <li>Na poziomie architektury i projektowania: Diagram klas, diagramy architektury, diagramy wdrożenia.</li>
         <li>Na poziomie analizy przepływów: Diagram sekwencji, diagram aktywności, diagram stanów.</li>
     </ul>
+    </details>
     </div>
-    </div>
+
+</div>
 </div>
 </div>
 
@@ -176,9 +189,54 @@
 <br>
 <div class="row mb-10">
     <div class="col-8">
-    <h1 style="font-size:40px;text-decoration: underline;font-weight: bold;">Django modele:</h1>
+    <h1 style="font-size:40px;text-decoration: underline;font-weight: bold;">Django:</h1>
 </div>
 </div>
+
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card mb-4 box-shadow" style="background-color: light-blue;>
+            <div class="card-body">
+                <div style="font-weight: bold;">Wstęp:</div>
+<pre>
+
+django-admin startproject firstsite
+
+python manage.py runserver
+    # http://127.0.0.1:8000/
+
+python manage.py startapp website
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
+    # app registration
+    # url linking
+    # django template usage
+
+
+
+  Django uses Model-View-Template (<b>MVT</b>) pattern in its implementation.
+  It means the data (model), request processes (view), and the presentation (template) is separated into different aspects.
+  This is similar to Model-View-Controller (MVC), only in MVT case, the controller is the whole framework that:
+  process HTTP requests and routes it to the correct view function.
+</pre>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
 <div class="row">
     <div class="col-md-9">
