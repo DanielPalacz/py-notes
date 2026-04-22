@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+    {% block title %}
+    Index page
+    {% endblock %}
+
+    {% block content %}
+
+
+    {% for post in posts %}
+        <div class="col-md-4">
+          <div class="single-post-content">
+          <div class="col-md-8">
+              <a href="{{post.get_absolute_url}}">{{post.slug}}</a>
+
+          </div>
+          </div>
+        </div>
+    {% endfor %}
+
+    {% endblock %}

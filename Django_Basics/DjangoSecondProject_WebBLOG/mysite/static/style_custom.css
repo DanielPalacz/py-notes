@@ -1,0 +1,16 @@
+
+body {
+    background-color: blanchedalmond;
+}
+
+
+
+
+.single-post-content {
+    padding: 10px;
+    margin: 20px;
+    border: solid 4px black;
+    font-size: 22px;
+
+    background-color: mistyrose;
+}
