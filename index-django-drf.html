@@ -245,6 +245,10 @@ python manage.py createsuperuser
         # Additional directories to look for static files (optional)
         STATICFILES_DIRS = [BASE_DIR / "static"]
 
+    # Url in Django template:
+        href="{% url 'blog:homepage' %}"
+        blog - namespace
+        homepage - name
 
 </pre>
                 </ul>
