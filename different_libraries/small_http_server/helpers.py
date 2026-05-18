@@ -48,6 +48,7 @@ def configure_logger(logger_name: str) -> logging.Logger:
 
     return logger
 
+
 def release_process(port):
     for conn in psutil.net_connections(kind='inet'):
         if conn.laddr.port == port:
