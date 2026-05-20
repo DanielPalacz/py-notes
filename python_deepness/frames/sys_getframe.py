@@ -13,13 +13,14 @@ funct()
 
 # Stos Pythonowy:
 
-    # +---------------------------------+
-    # |  Ramka funct()                  |  <-- _frame (ramka funkcji.f_code.)
+    # +---------------------------------+      _frame [..., 'f_back', 'f_builtins', 'f_code', 'f_globals', 'f_lasti', 'f_lineno', 'f_locals', 'f_trace', 'f_trace_lines', 'f_trace_opcodes']
+    # |  f_code                         |  <-- _frame.f_code
     # |   - co_name: 'funct'            |
     # |   - co_varnames: ('a', 'b', 'c')|
     # |   - co_names: ('sys', '_frame') |
     # +---------------------------------+
-    #         ↓ f_back
+
+
     # +---------------------------------+
     # |  Ramka <module>                 |  <-- _frame.f_back (kod globalny.f_code.)
     # |   - co_name: <module>           |
