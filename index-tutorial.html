@@ -824,6 +824,48 @@ g = f()
 print(g())  # Wypisze 1</pre></ol>
 </details>
 <br>
+
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous (more difficult):</summary>
+
+<br>
+
+<p><b>+=, __iadd__</b></p>
+<pre>
+ - += nie zawsze tworzy nowy obiekt.
+   Dla mutowalnych typów, takich jak list, zwykle modyfikuje obiekt in-place przez __iadd__.
+   Natomiast + wywołuje __add__ i zwraca nowy obiekt, który następnie jest przypisywany do zmiennej.
+ - typy niemodyfikowalne (np. Liczby, Stringi, Tuple) – NIE MOGĄ użyć __iadd__
+
+</pre>
+
+<p><b>UnboundLocalError</b></p>
+<pre>
+ - Python podczas kompilacji funkcji wykrywa przypisanie do x, więc traktuje ją jako zmienną lokalną.
+   Następnie print(x) próbuje odczytać tę lokalną zmienną przed przypisaniem wartości, co skutkuje UnboundLocalError.
+   To nie jest problem samego LEGB, tylko klasyfikacji nazwy jako lokalnej na etapie kompilacji funkcji.
+
+</pre>
+
+<p><b>RuntimeError: dictionary changed size during iteration</b></p>
+<pre>
+ - data.keys() nie tworzy kopii kluczy. Zwraca tzw. dictionary view (widok na aktualny stan słownika)
+ - gdy podczas iteracji zmienisz liczbę elementów słownika, to iterator wykrywa zmianę i przerywa działanie wyjątkiem
+
+</pre>
+
+
+
+
+
+
+
+
+</details>
+<br>
+
 </div>
 </div>
 </div>
