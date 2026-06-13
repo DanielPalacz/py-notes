@@ -502,6 +502,37 @@ importlib.reload(module_A)</pre>
                 <li>__set_name__ hook jest wołany podczas "tworzenia obiektu klasy" i rozszerza możliwości deskryptorów.</li>
             </ul>
 
+            <pre>
+
+Podsumowując/rozszerzając:
+ - funkcje w klasach są non-data descriptorami,
+ - staticmethod i classmethod są zbudowane na deskryptorach,
+ - większość ORM-ów używa deskryptorów do przechwytywania dostępu do pól,
+ - cały mechanizm bindingu metod opiera się na deskryptorach.
+
+Dla odczytu przez instancję "obj.attr"
+ - descriptor.__get__(obj, type(obj))
+
+
+Data descriptor reprezentuje zwykle:
+ - walidowane pole
+ - ORM field
+ - computed property
+ - lazy loader
+ - proxy do zewnętrznego zasobu
+ *** czyli coś, czego semantyka jest ważniejsza niż przypadkowy stan instancji.
+
+
+Natomiast non-data descriptor reprezentuje najczęściej:
+ - funkcję/metodę
+ - cache
+ - mechanizm, który może zostać świadomie przesłonięty
+
+Dlatego Python pozwala:
+ - obj.method = ...
+   przesłonić metodę instancji.
+
+</pre>
 
         </ul>
         <br>
