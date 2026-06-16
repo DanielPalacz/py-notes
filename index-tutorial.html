@@ -93,6 +93,10 @@
     	font-style: italic;
     }
 
+.rectangle {
+    border: 2px solid black;
+    padding: 4px;
+}
 
 </style>
 
@@ -100,8 +104,6 @@
 <body style="color:black;background-color:powderblue;">
 
 <h2 class="m-2"><b><u>Python questions / observations:</u></b></h2>
-<br>
-<br>
 <br>
 <div class="row">
     <div class="col-md-8">
@@ -159,11 +161,12 @@
 
 <hr></hr>
 <hr></hr>
+<hr></hr>
 
 
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">Generators.</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Generators:</summary>
         <ol start="1">
         <li><b>The truth about generators, when they are really useful and when not?</b> How generators cooperate with Python Frame based Stack? Do Class-based Iterators use Python Frame based Stack?</li>
 <pre class="notion">
@@ -242,7 +245,7 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
 <br>
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous.</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous:</summary>
 <ol start="4">
         <li>What are main differences in Functions/Classes nature?</li>
 <pre class="notion">
@@ -253,13 +256,13 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
  - Python classes are highly dynamic (add, remove, modify attributes at runtime). This flexibility comes at performance cost.
  - Classes due protocols/hooks are very modifiable during creation time. It also costs.
 Then:
- - In Classes Nature is to be very modifiable containers/blueprints. When Functions Nature is to be lightweight set of instructions.</pre>
+ - In Classes Nature is to be very modifiable containers/blueprints when Function Nature is to be lightweight set of instructions.</pre>
 
 <li>It was possible to compare some very specific solutions in terms of speed (by not realistic micro-benchmarking, but at least something). First solution based on functions and second based on classes. In the result class-based solution was 100 times slower. Why classes could be so slow? What are the biggest factors here? Additionally, in tests were seen that __slot__ classes feature did not improve speed, but tests were limited so this result could be not reliable.</li>
 <pre class="notion">
  - Creating a function is a simpler operation than creating a class. Python's interpreter is optimized for function creation.
  - Classes, even empty ones, have more overhead due to their inherent complexity.
- - Class creation flow is much more complex: Metaclass handling, namespace creation or executing class body code. It all takes time.</pre>
+ - Class creation flow is more complex: Metaclass handling, namespace creation or executing class body code. It all takes time.</pre>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
         <li>What are cases in Python where internal state (implementation details) are hidden from users?</li>
@@ -315,7 +318,7 @@ Unicode / UTF-8 example:
 <br>
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">Python Execution model view (with importing modules system). More details attached.</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Python Execution model view. More details attached.</summary>
 <ol start="15">
         <li>Python <i>'import module_A'</i> and <i>Python Execution model</i>.<br> - In terms of module importing what happens during Parsing Stage, Compilation Time and Runtime?<br> - What if there is second the same import?</li>
         <pre>
@@ -418,7 +421,7 @@ importlib.reload(module_A)</pre>
 <br>
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">Python Call Stack / Python Frames.</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Python Call Stack / Python Frames:</summary>
 <br>
 <ol start="16">
 <li>Cases when Python creates Frames objects?</li>
@@ -438,7 +441,7 @@ importlib.reload(module_A)</pre>
 </details>
 <br>
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">CLASSES</summary>
+<summary style="font-weight: bold;text-decoration: underline;">CLASSES:</summary>
 
 <br>
 <ol start="17">
@@ -481,7 +484,7 @@ importlib.reload(module_A)</pre>
 <br>
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">PROTOCOLS (Descriptors, Attribute lookup)</summary>
+<summary style="font-weight: bold;text-decoration: underline;">PROTOCOLS (Descriptors, Attribute lookup):</summary>
 
 <br>
 <br>
@@ -589,7 +592,7 @@ Other things:
 
 <br>
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">Functions Deep Dive</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Functions Deep Dive:</summary>
 
     <br>
     <br>
@@ -702,18 +705,6 @@ Use MagicMock when:
 </details>
 <br>
 
-<details>
-<summary style="font-weight: bold;text-decoration: underline;">TODO:</summary>
-
-<br>
-<pre>
- - fastapi, pydantic
- - Django simple personal website
- - Bigger project ideas
-</pre>
-
-</details>
-<br>
 
 
 <details>
@@ -818,14 +809,54 @@ False
 </details>
 
 <br>
-<br>
+
+
 
 <details>
-<summary style="font-weight: bold;text-decoration: underline;">LEGB advanced (closure functions, early/late binding):</summary>
+<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous (more difficult):</summary>
 
 <br>
-<ol start="201">
-        <li>LEGB closure </li>
+
+<div class="rectangle">
+<p><b>+=, __iadd__</b></p>
+<pre>
+ - += nie zawsze tworzy nowy obiekt.
+   Dla mutowalnych typów, takich jak list, zwykle modyfikuje obiekt in-place przez __iadd__.
+   Natomiast + wywołuje __add__ i zwraca nowy obiekt, który następnie jest przypisywany do zmiennej.
+ - typy niemodyfikowalne (np. Liczby, Stringi, Tuple) – NIE MOGĄ użyć __iadd__
+
+</pre>
+</div>
+
+<br>
+
+<div class="rectangle">
+<p><b>UnboundLocalError</b></p>
+<pre>
+ - Python podczas kompilacji funkcji wykrywa przypisanie do x, więc traktuje ją jako zmienną lokalną.
+   Następnie print(x) próbuje odczytać tę lokalną zmienną przed przypisaniem wartości, co skutkuje UnboundLocalError.
+   To nie jest problem samego LEGB, tylko klasyfikacji nazwy jako lokalnej na etapie kompilacji funkcji.
+
+</pre>
+</div>
+
+<br>
+
+<div class="rectangle">
+<p><b>RuntimeError: dictionary changed size during iteration</b></p>
+<pre>
+ - data.keys() nie tworzy kopii kluczy. Zwraca tzw. dictionary view (widok na aktualny stan słownika)
+ - gdy podczas iteracji zmienisz liczbę elementów słownika, to iterator wykrywa zmianę i przerywa działanie wyjątkiem
+
+</pre>
+</div>
+
+<br>
+
+
+
+<div class="rectangle">
+<p><b>closure functions, early/late binding):</b></p>
 <pre>
  - domknięcie (closure) w Pythonie wiąże się z zmienną (kontenerem/cell),
    a nie z wartością, którą ta zmienna miała w momencie definiowania funkcji.
@@ -852,42 +883,25 @@ def f():
     return foo
 
 g = f()
-print(g())  # Wypisze 1</pre></ol>
-</details>
-<br>
+print(g())  # Wypisze 1
+</pre>
+</div>
 
-
-
-<details>
-<summary style="font-weight: bold;text-decoration: underline;">Python miscellaneous (more difficult):</summary>
 
 <br>
 
-<p><b>+=, __iadd__</b></p>
+<div class="rectangle">
+<p><b>late-binding example</b></p>
 <pre>
- - += nie zawsze tworzy nowy obiekt.
-   Dla mutowalnych typów, takich jak list, zwykle modyfikuje obiekt in-place przez __iadd__.
-   Natomiast + wywołuje __add__ i zwraca nowy obiekt, który następnie jest przypisywany do zmiennej.
- - typy niemodyfikowalne (np. Liczby, Stringi, Tuple) – NIE MOGĄ użyć __iadd__
+funcs = []
+
+for i in range(3):
+    funcs.append(lambda x: x + i)
+
+print(funcs[0](9))  # 11
 
 </pre>
-
-<p><b>UnboundLocalError</b></p>
-<pre>
- - Python podczas kompilacji funkcji wykrywa przypisanie do x, więc traktuje ją jako zmienną lokalną.
-   Następnie print(x) próbuje odczytać tę lokalną zmienną przed przypisaniem wartości, co skutkuje UnboundLocalError.
-   To nie jest problem samego LEGB, tylko klasyfikacji nazwy jako lokalnej na etapie kompilacji funkcji.
-
-</pre>
-
-<p><b>RuntimeError: dictionary changed size during iteration</b></p>
-<pre>
- - data.keys() nie tworzy kopii kluczy. Zwraca tzw. dictionary view (widok na aktualny stan słownika)
- - gdy podczas iteracji zmienisz liczbę elementów słownika, to iterator wykrywa zmianę i przerywa działanie wyjątkiem
-
-</pre>
-
-
+</div>
 
 
 
