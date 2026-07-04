@@ -31,8 +31,9 @@ Na tym etapie jest cienką warstwą (ang. thin wrapper). I to jest całkowicie n
 Po co więc on jest? Bo z czasem zacznie robić coraz więcej.
 To, że obecnie Twój Broker jest tylko delegatem: nie oznacza, że jest źle zaprojektowany.
     Wręcz przeciwnie. To częsty sposób rozwijania architektury.
-    Tworzysz miejsce, w którym w przyszłości będzie skupiona logika zarządzania wiadomościami, ale nie wymyślasz tej logiki na zapas.
-    Dzięki temu projekt rośnie razem z wymaganiami, zamiast zaczynać od rozbudowanej architektury, która jeszcze nie jest potrzebna.
+    Tworzysz miejsce, w którym w przyszłości będzie skupiona logika zarządzania wiadomościami, ale
+    nie wymyślasz tej logiki na zapas. Dzięki temu projekt rośnie razem z wymaganiami,
+    zamiast zaczynać od rozbudowanej architektury, która jeszcze nie jest potrzebna.
 
 
 

@@ -1,34 +1,22 @@
 from .queue import Queue
 from .message import Message
-from typing import Optional
 
 
 class Broker:
 
-    def __init__(self, queue_obj: Queue):
-        self._queues = {"default": queue_obj}
+    def __init__(self):
+        self._queues = {}
 
-    def publish(self, message: Message, queue_name: Optional[str] = None) -> None:
+    def publish(self, message_obj: Message, queue_name: str) -> None:
+        self._queues[queue_name].publish(message_obj)
 
-        if queue_name is None:
-            queue_name = "default"
-
-        self._queues[queue_name].publish(message)
-
-    def consume(self, queue_name: Optional[str] = None) -> Message:
-
-        if queue_name is None:
-            queue_name = "default"
+    def consume(self, queue_name: str) -> Message:
 
         return self._queues[queue_name].consume()
 
-
-    def create_queue(self, queue_name: str) -> None:
-
-        self._queues[queue_name] = Queue()
-
+    def add_queue(self, queue_obj: Queue) -> None:
+        self._queues[queue_obj.name] = queue_obj
         return None
-
 
 
     # def ack(self):

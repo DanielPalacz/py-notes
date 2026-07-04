@@ -1,7 +1,8 @@
 from collections import deque
 
 class Queue:
-    def __init__(self):
+    def __init__(self, queue_name: str):
+        self.name = queue_name
         self._messages = deque()
 
     def consume(self):
