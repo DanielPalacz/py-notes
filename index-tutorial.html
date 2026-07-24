@@ -201,9 +201,12 @@ Dwa główne sposoby patrzenia na generatory?
       Właśnie na tym mechanizmie oparto async/await (to tylko rozszerzona składnia do korutyn).
 
 Ale można też dołożyć perspektywę "ramek" i tego, że generatory to nie są tylko wyjątkowe funkcje:
-    Na pocztku normalny obiekt funkcji kiedy się go wywoła zwraca obiekt generatora (nie generorwaną wartość od razu).
+    Na początku normalny obiekt funkcji kiedy się go wywoła zwraca obiekt generatora (nie generorwaną wartość od razu).
     Ten obiekt generatora to właściwie "zatrzymana" ramka stosu, która może być wznowiona.
 </pre>
+
+<br>
+<br>
 
         <li><b>yield from ITERABLE_OBJECT</b></li>
  <pre>
@@ -254,9 +257,11 @@ gen.send(10)  # ❌ TypeError: can't send non-None value to a just-started gener
  - While you can inspect the bytecode of class methods, the class object doesnt have bytecode associated to be disassembled.
     * That code can be disassembled, but it's part of the higher-level object and it is not attached to the final class object
  - Python classes are highly dynamic (add, remove, modify attributes at runtime). This flexibility comes at performance cost.
- - Classes due protocols/hooks are very modifiable during creation time. It also costs.
+ - Classes due protocols/hooks are very modifiable during creation time. But it also costs.
 Then:
  - In Classes Nature is to be very modifiable containers/blueprints when Function Nature is to be lightweight set of instructions.</pre>
+
+<br>
 
 <li>It was possible to compare some very specific solutions in terms of speed (by not realistic micro-benchmarking, but at least something). First solution based on functions and second based on classes. In the result class-based solution was 100 times slower. Why classes could be so slow? What are the biggest factors here? Additionally, in tests were seen that __slot__ classes feature did not improve speed, but tests were limited so this result could be not reliable.</li>
 <pre class="notion">
@@ -265,6 +270,7 @@ Then:
  - Class creation flow is more complex: Metaclass handling, namespace creation or executing class body code. It all takes time.</pre>
         <br>
         <li>Why immutable types were created in Python? There can be mentioned few reasons, but one can be that "it was needed for more complex data structures". The word about Hash maps, dictionaries, scopes/namespaces.</li>
+<br>
         <li>What are cases in Python where internal state (implementation details) are hidden from users?</li>
 <pre class="code">
  - lru_cache / cached_property
@@ -310,6 +316,7 @@ Unicode / UTF-8 example:
  - For custom or creative uses</pre>
 
         <li>Why Python/CPython is so slow? Many reasons? One is that PVM interprets bytecode line by line - there are no native CPU instructions (like for example in JVM).</li>
+<br>
         <li>Running object creation in infinite loop, but without assigning to reference. Memory consumption did not increase. Garbage collector doesn't show any symptoms of working behaviour. This is edge case when Python potentially ignored such object memory allocations. But spotted possible GC related Memory leak when running object creation in infinite loop, with constantly re-assigning reference (gc_objects = gc.get_objects()). Memory consumption increases. GC tracked objects increases.</li>
 
 </ol>
