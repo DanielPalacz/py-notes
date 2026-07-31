@@ -924,6 +924,46 @@ print(funcs[0](9))  # 11
 
 
 
+<br>
+
+<div class="rectangle">
+<p><b>moduł 'weakref'</b></p>
+<pre>
+Do czego służą słabe referencje (moduł weakref) w Pythonie?
+
+    - pozwalają na odwoływanie się do obiektu bez zwiększania jego licznika referencji,
+      dzięki czemu nie blokują jego usunięcia przez GC (Garbage Collector)
+    - weakref stosuje się m.in. do tworzenia pamięci podręcznej (cache) lub powiązań
+      w strukturach grafowych, zapobiegając wyciekom pamięci i utrzymywaniu zbędnych obiektów
+
+</pre>
+</div>
+
+<br>
+
+<div class="rectangle">
+<p><b>@dataclass - field(default_factory=list)</b></p>
+<pre>
+Dlaczego do ustawienia pustej listy jako atrybutu w klasie @dataclass trzeba 'field(default_factory=list)' zamiast items: list = []?
+(domyślnej pustej listy)
+
+'field(default_factory=list)' tworzy nową instancję listy przy każdym tworzeniu obiektu, zapobiegając współdzieleniu
+tej samej listy między instancjami.
+Użycie 'items: list = []' w dataclass zgłosi błąd ValueError, ponieważ domyślne argumentu modyfikowalne (mutowalne)
+byłyby współdzielone przez wszystkie instancje.
+
+    @dataclass
+    class Example:
+        items: list = []   # ValueError
+
+
+Natomiast jeśli współdzielenie jest zamierzone:
+    @dataclass
+    class Example:
+        items: ClassVar[list] = []
+
+</pre>
+</div>
 
 
 
