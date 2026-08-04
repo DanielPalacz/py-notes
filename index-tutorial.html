@@ -967,6 +967,80 @@ Natomiast jeśli współdzielenie jest zamierzone:
 
 
 
+<br>
+
+<div class="rectangle">
+<p><b>__slots__ i dziedziczenie</b></p>
+
+<pre>
+W Pythonie ograniczenie __slots__ nie jest dziedziczone automatycznie. Słownik instancji __dict__ zostaje utworzony
+automatycznie jeśli nie zadeklarowano __slots__ w klasie pochodnej.
+</pre>
+</div>
+
+
+
+
+
+
+
+<br>
+
+<div class="rectangle">
+<p><b>locals() wewnątrz funkcji w CPythonie</b></p>
+
+<pre>
+def foo():
+    x = 10
+    locals()['x'] = 99
+    print(x)
+foo()
+
+    - 'print(x)' wypisze 10, ponieważ w CPythonie słownik 'locals()' wewnątrz funkcji jest jednokierunkową migawką
+      i jego modyfikacja nie zmienia zmiennych lokalnych.
+
+</pre>
+</div>
+
+
+<br>
+
+<div class="rectangle">
+<p><b>'typing.ParamSpec' wprowadzony w Pythonie 3.10</b></p>
+
+<pre>
+    - ParamSpec pozwala na przechwytywanie i przekazywanie pełnej sygnatury parametrów funkcji w adnotacjach typów.
+    - Dzięki temu można tworzyć dekoratory i funkcje wyższego rzędu, które zachowują pełną informację o sygnaturze wywołania.
+    - W połączeniu z Callable[P, R], P.args, P.kwargs oraz Concatenate umożliwia bardzo precyzyjne opisywanie API funkcji,
+      co znacząco poprawia jakość statycznego sprawdzania typów przez narzędzia takie jak mypy czy pyright.
+
+</pre>
+</div>
+
+
+
+
+<br>
+
+<div class="rectangle">
+    <img src="images/raiseKeyErrorFromNone.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+
+</div>
+<br>
+
+
+<div class="rectangle">
+    <img src="images/arraysMainFeature.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+
+</div>
+<br>
+
+
+
 </details>
 <br>
 
