@@ -13,6 +13,7 @@ d = c.defaultdict(int)
 # int()
 # czyli 0
 d["a"] += 1
+d["c1"] += 1
 d["b"] += 1
 d["c"] += 1
 d["d"] += 1
