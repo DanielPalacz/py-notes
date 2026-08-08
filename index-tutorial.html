@@ -1040,9 +1040,76 @@ foo()
 <br>
 
 
+<div class="rectangle">
+<p><b>'banker`s rounding' w Pythonie 3</b></p>
+
+<pre>
+    - czym jest zaokrąglenie do najbliższej liczby parzystej używane w Pythonie 3?
+      round(2.5) -> 2
+      round(3.5) -> 4
+      round(4.5) -> 4
+</pre>
+</div>
+
+
+<br>
+<br>
+
+<br>
+<br>
+
+<div class="rectangle">
+    <img src="images/asyncio_cooperative_concurrency1.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+
+</div>
+<br>
+
+<div class="rectangle">
+<p><b>bool([]) oraz all([])? (vacuous truth)</b></p>
+
+<pre>
+    - False i True
+</pre>
+</div>
+
+
+<br>
+<br>
+
+<div class="rectangle">
+<p><b>Modele: wywłaszczający i niewywłaszczający</b></p>
+
+<pre>
+Przykład z życia
+Wyobraź sobie dwie osoby korzystające z jednej drukarki.
+
+    a)
+    Model niewywłaszczający (cooperative concurrency)
+    Osoba A mówi:
+        "Skończę drukować i dopiero wtedy pozwolę komuś innemu."
+        Jeżeli A drukuje 30 minut...
+
+    b)
+    Jest ochroniarz (system operacyjny), który mówi:
+        "Minęły 4 ms. Teraz drukuje osoba B."
+    Po kilku milisekundach:
+        "Teraz znowu osoba A."
+    Nikt nie pyta A o zgodę. → wszyscy czekają.
+
+    Dlaczego nazywa się "wywłaszczający"?
+    Bo wątek zostaje pozbawiony procesora, mimo że sam nie chciał go oddać.
+
+</pre>
+</div>
+
 
 </details>
-<br>
+
+
+
+
 
 </div>
 </div>
