@@ -33,11 +33,13 @@ a)
 
 b)
  - gcc -S hello_world.c -o hello_world.s (Kompilacja/kompilator, cc1)
-   Kod w C zostaje przetłumaczony na asembler (czyli niskopoziomowe instrukcje dla procesora). Rezultat: plik .s
+   Kod w C zostaje przetłumaczony na asembler (czyli niskopoziomowe instrukcje dla procesora). 
+   Rezultat: plik .s
 
 c)
  - gcc -c hello_world.c -o hello_world.o (Asemblacja, as)
-   Asembler tłumaczy plik .s na kod maszynowy (bajty zrozumiałe dla CPU). Rezultat: plik obiektowy .o (np. hello_world.o).
+   Asembler tłumaczy plik .s na kod maszynowy (bajty zrozumiałe dla CPU). 
+   Rezultat: plik obiektowy .o (np. hello_world.o).
 
 
 d)
@@ -54,9 +56,44 @@ e)
    Po zakończeniu, wynik (return 0;) jest przekazywany do systemu operacyjnego jako kod wyjścia procesu.
 ```
 
-##### [Listen to the recording](audio-file1.mp3)
+
+Ad.2)
+```
+Cecha	        Stos (stack)	                        Sterta (heap)
+Zarządzanie	    Automatyczne	                        Ręczne (malloc, free)
+Typowe dane	    Zmienne lokalne, parametry funkcji	    Dane alokowane dynamicznie
+Czas życia	    Zwykle do końca zakresu/funkcji	        Do momentu free()
+Rozmiar	        Zwykle ograniczony	                    Zwykle większy
+Szybkość	    Bardzo szybki	                        Wolniejszy
+Przykład	    int x = 10;	                            int *p = malloc(sizeof(int));
 
 
+
+Stos
+Stos jest używany m.in. do przechowywania zmiennych lokalnych i informacji potrzebnych podczas wywołań funkcji:
+
+void foo(void) {
+    int x = 10;
+    char tab[100];
+}
+
+Stos działa w przybliżeniu według zasady LIFO — Last In, First Out.
+Przy wywołaniu funkcji tworzona jest jej ramka stosu (stack frame), a po powrocie jest ona usuwana.
+
+
+Sterta
+Sterta służy do dynamicznej alokacji pamięci, gdy rozmiar lub czas życia danych nie jest znany podczas kompilacji albo gdy dane mają przetrwać wyjście z bieżącej funkcji.
+void foo(void) {
+    int *p = malloc(sizeof(int));
+
+    *p = 10;
+
+    free(p);
+}
+
+malloc() przydziela pamięć ze sterty, a free() ją zwalnia.
+
+```
 
 ```
 Ad.3)

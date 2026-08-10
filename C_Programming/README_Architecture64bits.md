@@ -12,4 +12,8 @@ Ale jest ważny praktyczny szczegół:
     Procesory x86-64 (czyli np. AMD64, Intel 64) nie wykorzystują wszystkich 64 bitów do adresowania.
     Obecnie zwykle implementowane jest 48 lub 57 bitów przestrzeni adresowej (np. w tzw. canonical addresses).
     Reszta bitów musi mieć określone wartości, żeby adres był ważny.
+
+I jeszcze jedna rzecz: 64-bitowość nie oznacza po prostu „procesor wykonuje operacje na 64-bitowych liczbach”.
+Istotna jest cała architektura ISA — rejestry, instrukcje, model adresowania itd.
+
 ```
