@@ -1023,6 +1023,7 @@ foo()
 <br>
 
 <div class="rectangle">
+    <p><b>Tłumienie pierwotnego wyjątku (from None)</b></p>
     <img src="images/raiseKeyErrorFromNone.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
     <br>
     <br>
@@ -1032,6 +1033,18 @@ foo()
 
 
 <div class="rectangle">
+    <p><b>__missing__ i słowniki</b></p>
+    <img src="images/missing_dict.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+
+</div>
+<br>
+
+
+
+<div class="rectangle">
+    <p><b>arrays - ciągły blok surowych bajtów</b></p>
     <img src="images/arraysMainFeature.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
     <br>
     <br>
@@ -1039,6 +1052,14 @@ foo()
 </div>
 <br>
 
+<div class="rectangle">
+    <p><b>Jaka jest rola dekoratorów ParamSpec i Concatenate z modułu typing (PEP 612)?</b></p>
+    <img src="images/typing__ParamSpec_Concatenate.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+
+</div>
+<br>
 
 <div class="rectangle">
 <p><b>'banker`s rounding' w Pythonie 3</b></p>
@@ -1059,6 +1080,8 @@ foo()
 <br>
 
 <div class="rectangle">
+    <p><b>asyncio i współbieżność kooperatywna</b></p>
+
     <img src="images/asyncio_cooperative_concurrency1.png" alt="Python - Wspierane paradygmaty." style="max-width: 100%; height: auto;">
     <br>
     <br>
@@ -1110,7 +1133,83 @@ Wyobraź sobie dwie osoby korzystające z jednej drukarki.
 
 
 
+<br>
 
+<div>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">pickle moduł:</summary>
+<div class="rectangle">
+<p><b>pickle</b></p>
+
+<pre>
+pickle służy do serializacji obiektów Pythona — czyli zamiany obiektu na postać bajtową, którą można później odtworzyć:
+
+import pickle
+
+data = {
+    "name": "Daniel",
+    "numbers": [1, 2, 3],
+}
+
+serialized = pickle.dumps(data)
+
+restored = pickle.loads(serialized)
+
+print(restored)
+# {'name': 'Daniel', 'numbers': [1, 2, 3]}
+
+
+Python object
+     │
+     │ pickle.dumps()
+     ▼
+bytes
+     │
+     │ pickle.loads()
+     ▼
+Python object
+
+------------------------------------------------------------------------
+
+Dlaczego pickle jest ciekawy?
+ - Bo potrafi serializować rzeczy, których np. JSON nie potrafi:
+
+class User:
+    def __init__(self, name):
+        self.name = name
+
+
+user = User("Adam")
+
+data = pickle.dumps(user)
+user2 = pickle.loads(data)
+
+print(user2.name)
+
+--------------------------------------------------------------------------
+
+Gdzie pickle faktycznie występuje?
+
+Jest używany m.in. w ekosystemie Pythona do:
+    cache'owania obiektów,
+    zapisywania stanu,
+    komunikacji między procesami,
+    multiprocessing,
+    niektórych mechanizmach frameworków,
+    zapisywania modeli/struktur danych w Pythonowych narzędziach.
+
+Jest też powiązany z modułem copyreg, o który pytałeś wcześniej.
+copyreg pozwala definiować mechanizm redukcji/odtwarzania obiektów wykorzystywany przez pickle.
+
+</pre>
+</div>
+
+
+</details>
+
+</div>
 </div>
 </div>
 </div>
@@ -1157,6 +1256,147 @@ Zalecenia:
 </div>
 </div>
 
+
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-11">
+        <div class="card mb-4 box-shadow" style="background-color: orange;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;text-decoration: underline;">CPython:</h4>
+
+<a href="https://github.com/python/cpython">https://github.com/python/cpython (implementacja języka Python napisana głównie w C)</a>
+<pre class="code">
+-----------------------------------------------------------------------------------------------------------------------------------------
+</pre>
+
+<div>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Inne implementacje Pythona:</summary>
+<div class="rectangle">
+<!--<p><b>note-1</b></p>-->
+
+<pre>
+ - CPython
+ - PyPy
+ - Jython
+ - IronPython
+
+</pre>
+</div>
+
+
+</details>
+            </div>
+
+
+<div>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Architektura Pythona, schemat:</summary>
+<div class="rectangle">
+<!--<p><b>note-1</b></p>-->
+
+<pre>
+    Kod źródłowy (.py)
+            │
+            ▼
+          Parser
+            │
+            ▼
+           AST
+            │
+            ▼
+        Kompilator
+            │
+            ▼
+         Bytecode
+            │
+            ▼
+      Python VM
+            │
+            ▼
+          Wynik
+
+</pre>
+</div>
+
+
+</details>
+            </div>
+
+
+
+<div>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">Katalogi w repozytorium CPython:</summary>
+<div class="rectangle">
+<!--<p><b>note-1</b></p>-->
+
+<pre>
+
+Include/ — definicje i API (nagłówki).
+           Python.h (praktycznie najważniejszy plik nagłówkowy całego projektu)
+           object.h (Object i type object interfejs)
+           ....
+
+Objects/ — implementacje core’owych typów w C.
+Lib/ — standardowa biblioteka w Pythonie (czysty Python).
+Modules/ — standardowa biblioteka w C (moduły specjalne i wydajnościowe).
+Python/ — zawiera kod wykonawczy interpretera (parser, kompilator bajtkodu, eval loop),
+          ceval.c, compile.c
+Parser/ - ..
+
+
+Zatem:
+    Core języka (Objects + Include),
+    biblioteka użytkowa (Lib + Modules),
+    kod wykonawczy interpretera (Python).
+
+Inne:
+    Parser/ — parser gramatyki i generator AST,
+    PCbuild/, Tools/, Misc/ — narzędzia pomocnicze i konfiguracje.
+</pre>
+</div>
+
+
+</details>
+            </div>
+
+
+
+<br>
+
+
+<div>
+
+
+<details>
+<summary style="font-weight: bold;text-decoration: underline;">note-1:</summary>
+<div class="rectangle">
+<!--<p><b>note-1</b></p>-->
+
+<pre>
+123
+    456
+        789
+</pre>
+</div>
+
+
+</details>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
 
 <br>
 <br>
