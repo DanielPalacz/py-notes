@@ -17,6 +17,7 @@ struct Point {
 
 struct Point p1; // W C zwykle musisz pisać struct Point, bo Point sam w sobie nie jest typem – dopóki nie użyjesz typedef.
 
+
 void setPointValues(struct Point *p) {
     p->x = 101;
     p->y = 102;

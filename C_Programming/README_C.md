@@ -5,6 +5,8 @@
 
 ##### Flow budowania / uruchomienia programu
 ```
+plik .c → preprocessing → kompilacja → assembly → linking → executable
+
  - gcc -E hello_world.c -o hello_world.i
    (Preprocesor, cpp, # - ten znak w kodzie C oznacza preprocesor)
    
