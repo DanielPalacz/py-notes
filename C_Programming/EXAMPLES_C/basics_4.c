@@ -71,5 +71,16 @@ int main(void)
     //  - ob_type mówi, jaki konkretnie typ Pythona reprezentuje obiekt.
     //  - A później możemy użyć tej informacji, żeby odpowiednio potraktować dalszą część pamięci.
 
+
+    int a = 100;
+    int *w = &a;
+    int temp = *w;
+
+    printf("Examples:\n");
+
+    printf(" - a = %d\n", a);
+    printf(" - *w = %d\n", *w);
+    printf(" - temp = %d\n", temp);
+
     return 0;
 }
