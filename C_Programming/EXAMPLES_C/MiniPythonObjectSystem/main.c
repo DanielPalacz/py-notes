@@ -3,16 +3,6 @@
 #include <stdlib.h>
 
 
-typedef struct TypeObject {
-    const char *name;
-} TypeObject;
-
-
-TypeObject IntType = {
-    .name = "int"
-};
-
-
 typedef struct {
     size_t refcnt;
     struct TypeObject *type;
@@ -23,6 +13,19 @@ typedef struct {
     Object base;
     long value;
 } IntObject;
+
+
+typedef struct TypeObject {
+    const char *name;
+    size_t basicsize;
+} TypeObject;
+
+
+TypeObject IntType = {
+    .name = "int",
+    .basicsize = sizeof(IntObject)
+};
+
 
 
 
@@ -65,7 +68,7 @@ void Py_INCREF(Object *obj)
 
 int main(void)
 {
-    printf("Mini Python Object System:\n");
+    printf("\nMini Python Object System:\n");
     printf("\n");
 
     IntObject *a = new_int(101);
@@ -78,6 +81,8 @@ int main(void)
 
     printf(" - a->base.refcnt = %zu\n", a->base.refcnt);
     printf(" - a->value = %ld\n", a->value);
+    printf(" - a->base.type = %s\n", a->base.type->name);
+    printf("\n");
 
 
     Py_INCREF((Object *)b);
@@ -87,27 +92,28 @@ int main(void)
     printf(" - a->base.type = %s\n", a->base.type->name);
     printf("\n");
 
+    Py_DECREF((Object *)b);
     // Py_DECREF((Object *)b);
-    Py_DECREF((Object *)b);
-    Py_DECREF((Object *)b);
     Py_DECREF((Object *)a);
+    a->value = 102;
 
 
     printf(" - a->base.refcnt = %zu\n", a->base.refcnt);
-//     printf(" - a->base.type = %s\n", a->base.type->name);
-    printf(" - a->value = %ld\n", a->value);
-
+    printf(" - a->value = %ld\n\n   ", a->value);
 
     // free_mem((Object *)b);
     // free_mem((IntObject *)b);
     // free_mem((IntObject *)a);
 
 
-//     printf("\n");
-//     printf("Use-after-free!!!\n");
-//     printf(" - a->base.refcnt = %zu\n", a->base.refcnt);
-//     printf(" - a->value = %ld\n", a->value);
+    Py_DECREF((Object *)b);
+    Py_DECREF((Object *)a);
 
+
+    printf("\n");
+    printf("Use-after-free!!! Dont do it!!!\n");
+    printf(" - a->base.refcnt = %zu\n", a->base.refcnt);
+    printf(" - a->value = %ld\n", a->value);
 
     return 0;
 }

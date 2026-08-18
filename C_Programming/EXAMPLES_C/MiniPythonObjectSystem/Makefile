@@ -1,8 +1,5 @@
-program: main.o
-	gcc main.o -o program.exe
-
-main.o: main.c
-	gcc -c main.c
+program:
+	gcc main.c -o main.exe
 
 clean:
-	rm main.o
+	rm -f main.o main.exe
