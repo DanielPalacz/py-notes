@@ -18,3 +18,5 @@ class CustomCounter:
 
 for i in CustomCounter(1, 5):
     print(i)
+
+

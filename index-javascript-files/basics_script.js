@@ -13,7 +13,7 @@ function generateRandomNumber() {
   let randomNumber = Math.floor(Math.random() * 100);
   console.log(`[DEBUG][basics_script.js][${currentScriptMode} mode][generateRandomNumber] Running JavaScript script by loading external JS file - [${Date.now()}][randomNumber=${randomNumber}]`);
   document.addEventListener("DOMContentLoaded", function () {
-    document.body.innerHTML += `<p>[JS script external file] H! Random number is: ${randomNumber}</p>`;
+    document.body.innerHTML += `<p>[JS script external file] Hi! Random number is: ${randomNumber}</p>`;
   });
 }
 
