@@ -26,4 +26,19 @@ Złożoność pamięciowa:
    chociaż w niektórych przypadkach jest bliżej O(1) (w praktyce implementacja robi niewielkie bufory, ale nie zmienia to asymptoty)
  - pop() i sum() nie wymagają dodatkowych struktur poza istniejącą listą
  - łącznie: O(n) + O(1) + O(1)
+
+
+
+Nie — Timsort nie wymaga zawsze O(n).
+
+Dla Pythona (list.sort() / sorted()):
+
+najlepszy przypadek: O(n) — gdy dane są już lub prawie posortowane,
+średni przypadek: O(n log n),
+najgorszy przypadek: O(n log n).
+
+Czyli standardowo przyjmujesz:
+
+czas: O(n log n)
+dodatkowa pamięć: O(n) w najgorszym przypadku.
 ```
