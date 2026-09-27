@@ -1,0 +1,12 @@
+
+1. Do you really need a dictionary?
+    - Dictionaries are typically used for key lookups more often than they're used for looping.
+    - If you care about looping, but you don't care about key lookups, you probably don't need a dictionary.
+      If looping is all you need, a list of tuples might be a better way to store your data.
+
+2. How to continue code on the next line?
+    - An implicit line continuation happens whenever Python gets to the end of a line of code and sees that
+      there's more to come because a parenthesis ((), square bracket ([) or curly brace ({) has been left open.
+    - Alignment is a personal preference - strange spacing works because this isn't indentation, it's alignment.
+      Implicit line continuations work for all kinds of brackets and braces: [, ( o{.
+
