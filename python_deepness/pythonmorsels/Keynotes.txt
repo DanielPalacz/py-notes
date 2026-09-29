@@ -10,3 +10,12 @@
     - Alignment is a personal preference - strange spacing works because this isn't indentation, it's alignment.
       Implicit line continuations work for all kinds of brackets and braces: [, ( o{.
 
+3. Python code style ideas:
+    - Easier to Ask For Forgiveness Than Permission (EAFP).
+    - Look Before You Leap (LBYL).
+    - Duck Typing in Python:
+      it is the idea that instead of checking the type of something, we tend to check what behavior it supports
+    - Monkey Patching
+
+4. Remove whitespaces characters from a string
+    - all, extra, from the beginning and end of a string
