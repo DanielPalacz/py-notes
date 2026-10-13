@@ -8,13 +8,18 @@
 
 <body>
 	<div>
+	<div class="container">
 	  <div class="container">
 		<h1>Budzik</h1>
-		<p id="timer">25:00</p>
+		<p id="timer">25:10</p>
 		<button id="start">Start</button>
 	  </div>
 	  <div class="container">
 	  	<button id="start_alarm">Start alarm</button>
+	  </div>
+	  <div class="container">
+	  	<button id="stop_alarm">Stop alarm</button>
+	  </div>
 	  </div>
 	</div>
 
@@ -67,12 +72,12 @@
 	<script>
 
 		const startAlarm = document.getElementById("start_alarm");
+		const stopAlarm = document.getElementById("stop_alarm");
+		const sound = new Audio("audio.wav");
 
 		startAlarm.addEventListener("click", () => {
 
 			if (intervalId !== null) return; // żeby nie odpalić kilku interwałów
-
-			const sound = new Audio("audio.wav");
 			
 			function playSound() {
 				sound.currentTime = 0; // od początku
@@ -81,6 +86,21 @@
 
 			playSound();
 		});
+
+		stopAlarm.addEventListener("click", () => {
+
+			if (intervalId !== null) return; // żeby nie odpalić kilku interwałów
+
+			// const sound = new Audio("audio.wav");
+
+			function stopSound() {
+				sound.currentTime = 0; // od początku
+				sound.pause();
+			}
+
+			stopSound();
+		});
+
 
 	</script>
 
